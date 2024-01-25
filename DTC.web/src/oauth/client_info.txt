@@ -1,0 +1,5 @@
+client id
+449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com
+
+client secret
+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
