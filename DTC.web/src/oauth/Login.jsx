@@ -1,18 +1,18 @@
-import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 
 const clientId = "449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com";
 
 function LoginButton() {
 
-  const handleSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+  const handleSuccess = (res) => {
     console.log("LOGIN SUCCESS! Current user: ", getProfile(res));
   }
 
-  const handleFailure = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+  const handleFailure = (res) => {
     console.log("LOGIN FAILED! res: ", res);
   }
 
-  const getProfile = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+  const getProfile = (res) => {
     // Check if 'profileObj' exists (type guard)
     if ('profileObj' in res) {
       return res.profileObj;

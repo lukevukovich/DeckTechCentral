@@ -1,0 +1,182 @@
+body {
+  background-color: rgb(255, 251, 234);
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  }
+
+#header {
+  font-family: "Arial";
+  width: 100%;
+  margin-top: -120px;
+  position: fixed;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(27, 0, 78);
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+  
+#search-panel {
+  position: static;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 140px;
+}
+  
+text {
+  color: rgb(245, 245, 245);
+}
+  
+#heading {
+  font-size: 30px;
+  padding: 15px;
+  background-color: rgb(59, 27, 121);
+  border-radius: 25px;
+  text-wrap: nowrap;
+  position: static;
+  margin-left: 8px;
+}
+  
+#num-cards {
+  font-size: 15px;
+  margin-right: 60px;
+  text-wrap: nowrap;
+  width: 100px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+}
+
+input {
+  color: white;
+  font-size: 20px;
+  background-color: rgb(59, 27, 121);
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  width: 400px;
+  height: 35px;
+  text-indent: 12px;
+}
+
+button {
+  font-size: 18px;
+  border-radius: 20px;
+  border: none;
+  width: 40px;
+  height: 35px;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-color: transparent;
+  color: rgb(245, 245, 245);
+  text-align: center;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(78, 48, 139);
+}
+
+button:active {
+  background-color: rgb(113, 77, 185);
+}
+
+#image-list {
+  margin-top: 120px; /* Adjusted margin based on the height of #search-panel */
+  width: 940px;
+  margin-left: auto; /* Center the grid horizontally */
+  margin-right: auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.card-image {
+  width: 225px;
+  border-radius: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+#modal-header {
+  font-family: "Arial";
+  position: fixed;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(27, 0, 78);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 792px;
+  margin-left: -21px;
+  margin-top: -22px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#modal-heading {
+  font-size: 18px;
+  padding: 15px;
+  background-color: rgb(59, 27, 121);
+  border-radius: 25px;
+  text-wrap: nowrap;
+  position: static;
+  margin-left: 15px;
+}
+
+#modal-heading-mana {
+  margin-left: 10px;
+  color: rgb(164, 134, 167);
+}
+
+#modal-button {
+  font-family: "Arial";
+  margin-right: 20px;
+}
+
+#modal-info {
+  display: flex;
+}
+
+#modal-card {
+  width: 290px;
+  margin-top: 92px;
+  margin-left: 5px;
+}
+
+#modal-stats {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 435px;
+  margin-top: 95px;
+  gap: 22px;
+  white-space: pre-line;
+}
+
+#modal-stats text {
+  font-family: "Serif";
+  font-size: 17px;
+  color: black;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(107, 88, 114); /* Change thumb color */
+  border-radius: 4px; /* Round the corners of the thumb */
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(13, 0, 37); /* Change track color */
+}
