@@ -1,20 +1,20 @@
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from "react-google-login";
 
-const clientId = "449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com";
+const clientId =
+  "449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com";
 
 function LoginButton() {
-
   const handleSuccess = (res) => {
     console.log("LOGIN SUCCESS! Current user: ", getProfile(res));
-  }
+  };
 
   const handleFailure = (res) => {
     console.log("LOGIN FAILED! res: ", res);
-  }
+  };
 
   const getProfile = (res) => {
     // Check if 'profileObj' exists (type guard)
-    if ('profileObj' in res) {
+    if ("profileObj" in res) {
       return res.profileObj;
     } else {
       return null; // Handle the case where 'profileObj' doesn't exist
@@ -28,7 +28,7 @@ function LoginButton() {
         buttonText="Login"
         onSuccess={handleSuccess}
         onFailure={handleFailure}
-        cookiePolicy={'single_host_origin'}
+        cookiePolicy={"single_host_origin"}
         isSignedIn={true}
       />
     </div>
