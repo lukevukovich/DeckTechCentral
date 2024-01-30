@@ -1,4 +1,4 @@
-export default function Profile() {
+export default function DeckSearch() {
     return (
         <div>
         </div>

@@ -7,9 +7,9 @@ body {
 #header-db {
     font-family: "Arial";
     width: 100%;
-    position: fixed;
     height: 100px;
     display: flex;
+    position: fixed;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -24,7 +24,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: 140px;
+    margin-right: 185px;
 }
 
 text {
@@ -39,6 +39,7 @@ text {
     text-wrap: nowrap;
     position: static;
     margin-left: 8px;
+    user-select: none;
 }
 
 #placeholder-db {
@@ -77,23 +78,54 @@ button {
     cursor: pointer;
 }
 
+#checkbox-db {
+    display: none;
+}
+
+#checkbox-toggle-db {
+    width: 42px;
+    height: 22px;
+    background-color: rgb(92, 53, 170);
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+#checkbox-toggle-db::before {
+    position: absolute;
+    content: "";
+    background-color: rgb(255, 251, 234);
+    width: 16px;
+    height: 16px;
+    border-radius: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    transition: 0.2s;
+}
+
+#checkbox-db:checked + #checkbox-toggle-db::before {
+    transform: translate(20px);
+}
+
+#welcome-db {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92vh;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to left, rgb(90, 53, 163), rgb(225, 101, 250));
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 75px;
+    text-wrap: nowrap;
+}
+
 button:hover {
     background-color: rgb(78, 48, 139);
 }
 
 button:active {
     background-color: rgb(113, 77, 185);
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgb(107, 88, 114); /* Change thumb color */
-    border-radius: 4px; /* Round the corners of the thumb */
-}
-
-::-webkit-scrollbar-track {
-    background-color: rgb(13, 0, 37); /* Change track color */
 }

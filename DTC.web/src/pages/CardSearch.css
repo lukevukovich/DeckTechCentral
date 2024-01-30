@@ -2,10 +2,9 @@ body {
   background-color: rgb(255, 251, 234);
   margin: 0;
   padding: 0;
-  user-select: none;
   }
 
-#header {
+#header-cs {
   font-family: "Arial";
   width: 100%;
   margin-top: -120px;
@@ -20,20 +19,20 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
   
-#search-panel {
+#search-panel-cs {
   position: static;
   height: 100px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 140px;
+  margin-right: 185px;
 }
   
 text {
   color: rgb(245, 245, 245);
 }
   
-#heading {
+#heading-cs {
   font-size: 30px;
   padding: 15px;
   background-color: rgb(59, 27, 121);
@@ -41,6 +40,7 @@ text {
   text-wrap: nowrap;
   position: static;
   margin-left: 8px;
+  user-select: none;
 }
   
 #num-cards {
@@ -77,6 +77,35 @@ button {
   color: rgb(245, 245, 245);
   text-align: center;
   cursor: pointer;
+}
+
+#checkbox-cs {
+  display: none;
+}
+
+#checkbox-toggle-cs {
+  width: 42px;
+  height: 22px;
+  background-color: rgb(92, 53, 170);
+  border-radius: 50px;
+  cursor: pointer;
+  margin-right: 2px;
+}
+
+#checkbox-toggle-cs::before {
+  position: absolute;
+  content: "";
+  background-color: rgb(255, 251, 234);
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  margin-left: 23px;
+  margin-top: 3px;
+  transition: 0.2s;
+}
+
+#checkbox-cs:checked + #checkbox-toggle-cs::before {
+  transform: translate(-20px);
 }
 
 button:hover {
@@ -166,17 +195,4 @@ button:active {
   font-family: "Serif";
   font-size: 17px;
   color: black;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(107, 88, 114); /* Change thumb color */
-  border-radius: 4px; /* Round the corners of the thumb */
-}
-
-::-webkit-scrollbar-track {
-  background-color: rgb(13, 0, 37); /* Change track color */
 }

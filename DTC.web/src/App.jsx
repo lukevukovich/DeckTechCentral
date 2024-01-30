@@ -10,6 +10,8 @@ import RootLayout from './layouts/RootLayout'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
 import CardSearch from './pages/CardSearch'
+import DeckSearch from './pages/DeckSearch'
+import "./App.css"
 
 import { useEffect } from 'react'
 import { gapi } from 'gapi-script'
@@ -22,6 +24,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Dashboard />} />
       <Route path="cardsearch" element={<CardSearch />} />
+      <Route path="decksearch" element={<DeckSearch />} />
       <Route path="profile" element={<Profile />} />
     </Route>
   )
