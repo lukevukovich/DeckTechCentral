@@ -1,0 +1,115 @@
+body {
+    background-color: rgb(255, 251, 234);
+    margin: 0;
+    padding: 0;
+}
+
+text {
+    color: rgb(245, 245, 245);
+}
+
+.heading {
+    font-size: 30px;
+    padding: 15px;
+    background-color: rgb(59, 27, 121);
+    border-radius: 25px;
+    text-wrap: nowrap;
+    position: static;
+    margin-left: 8px;
+    user-select: none;
+}
+
+.search-panel {
+    position: static;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.num-cards {
+    font-size: 15px;
+    text-wrap: nowrap;
+    width: 700px;
+    flex-direction: row-reverse;
+    text-align: left;
+    margin-left: -15px;
+}
+
+input {
+    color: white;
+    font-size: 18px;
+    background-color: rgb(59, 27, 121);
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    width: 400px;
+    height: 35px;
+    text-indent: 12px;
+    padding-right: 58px;
+}
+
+button {
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    width: 40px;
+    height: 35px;
+    margin-right: 5px;
+    margin-left: 5px;
+    background-color: transparent;
+    color: rgb(245, 245, 245);
+    text-align: center;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(78, 48, 139);
+    content: "test";
+}
+
+button:active {
+    background-color: rgb(113, 77, 185);
+}
+
+.button-clear {
+    position: relative;
+    right: 42px;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkbox-toggle {
+    width: 42px;
+    height: 22px;
+    background-image: linear-gradient(to right, rgb(163, 53, 157), rgb(107, 64, 194));
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    right: 50px;
+}
+
+.checkbox-toggle::before {
+    position: absolute;
+    background-color: rgb(255, 251, 234);
+    width: 16px;
+    height: 16px;
+    border-radius: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    transition: 0.2s;
+
+    content: "D";
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.checkbox:checked + .checkbox-toggle::before {
+    transform: translate(20px);
+    content: "C";
+}

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import "./CardSearch.css";
-import { faSearch, faMultiply } from "@fortawesome/free-solid-svg-icons";
+import "./Pages.css";
+import {
+  faSearch,
+  faMultiply,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +20,7 @@ export default function CardSearch() {
   const searchParams = new URLSearchParams(url.search);
 
   //Use state for search toggle
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(true);
 
   //Set initial search text based on dashboard
   const [searchText, setSearchText] = useState(searchParams.get("q"));
@@ -50,7 +55,7 @@ export default function CardSearch() {
     setIsToggled(!isToggled);
 
     const searchBar = document.getElementById("search-bar-cs");
-    if (!isToggled) {
+    if (isToggled) {
       searchBar.placeholder = "Search deck list...";
     } else {
       searchBar.placeholder = "Search card...";
@@ -59,8 +64,8 @@ export default function CardSearch() {
 
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
-    if (cardName != "" && cardName.length <= 100) {
-      if (isToggled) {
+    if (cardName != "" && cardName.length <= 40) {
+      if (!isToggled) {
         navigate(`/decksearch?q=${cardName}`);
       } else {
         searchCard();
@@ -70,9 +75,8 @@ export default function CardSearch() {
 
   useEffect(() => {
     // Call searchCard when searchText changes
-    if (searchText != "" && searchText != null) {
-      searchCard(searchText);
-      setSearchText("");
+    if (searchText != null) {
+      searchCard();
     }
   }, [searchText]);
 
@@ -122,9 +126,7 @@ export default function CardSearch() {
 
   //Handle card seach to Scryfall API
   const searchCard = async () => {
-    if (searchText == "") {
-      navigate(`/cardsearch?q=${cardName}`);
-    }
+    navigate(`/cardsearch?q=${cardName}`);
 
     setData([]);
     setImageList([]);
@@ -160,10 +162,7 @@ export default function CardSearch() {
 
   //Clear search and image list
   function clearSearch() {
-    navigate(`/cardsearch`);
     setCardName("");
-    setImageList([]);
-    setNumCards("");
   }
 
   //Create image components based on imageList
@@ -217,7 +216,9 @@ export default function CardSearch() {
         <div id="modal-header">
           <div id="modal-heading">
             <text id="modal-heading-name">
-              {selectedCard.name.replace(new RegExp("//", "g"), "|")}
+              {selectedCard.name
+                .replace(new RegExp("//", "g"), "|")
+                .substring(0, 66)}
             </text>
             <text id="modal-heading-mana">
               {selectedCard.mana_cost.replace(new RegExp("//", "g"), "|")}
@@ -255,18 +256,18 @@ export default function CardSearch() {
       <CardModal />
       <div id="header-cs">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <text id="heading-cs">DeckTechCentral</text>
+          <text id="heading-cs" className="heading">
+            DeckTechCentral
+          </text>
         </Link>
-        <div id="search-panel-cs">
-          <input type="checkbox" id="checkbox-cs"></input>
-          <label
-            id="checkbox-toggle-cs"
-            htmlFor="checkbox-cs"
-            checked={isToggled}
-            onChange={toggleSearch}
-            onClick={() => toggleSearch()}
-            isToggled="false"
-          ></label>
+        <div id="search-panel-cs" className="search-panel">
+          <button
+            id="profile-cs"
+            className="button"
+            onClick={() => navigate("/profile")}
+          >
+            <FontAwesomeIcon icon={faUser} />
+          </button>
           <button id="go-cs" onClick={() => checkSearchToggle()}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
@@ -274,7 +275,6 @@ export default function CardSearch() {
             id="search-bar-cs"
             placeholder="Search card..."
             autoComplete="off"
-            onClick={() => setCardName("")}
             onKeyDown={(e) => {
               if (e.key == "Enter") {
                 checkSearchToggle();
@@ -283,11 +283,31 @@ export default function CardSearch() {
             value={cardName}
             onChange={(e) => setCardName(e.target.value)}
           ></input>
-          <button id="clear-cs" onClick={() => clearSearch()}>
+          <input
+            type="checkbox"
+            id="checkbox-cs"
+            className="checkbox"
+            checked={isToggled}
+            onChange={() => {}}
+          ></input>
+          <label
+            id="checkbox-toggle-cs"
+            htmlFor="checkbox-cs"
+            className="checkbox-toggle"
+            onChange={toggleSearch}
+            onClick={() => toggleSearch()}
+          ></label>
+          <button
+            id="clear-cs"
+            className="button-clear"
+            onClick={() => clearSearch()}
+          >
             <FontAwesomeIcon icon={faMultiply} />
           </button>
         </div>
-        <text id="num-cards">{numCards}</text>
+        <text id="num-cards" className="num-cards">
+          {numCards}
+        </text>
       </div>
       <ImageList value={imageList}></ImageList>
     </div>
