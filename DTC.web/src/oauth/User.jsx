@@ -1,13 +1,16 @@
-//Determine if user is signed in
-export function isUserSignedIn() {
-  return gapi.auth2.getAuthInstance().isSignedIn.get();
-}
+import { gapi } from "gapi-script";
 
-//Return user profile
-export function getUserProfile() {
-  if (isSignedIn()) {
-    return gapi.auth2.currentUser.get().getBasicProfile();
-  } else {
-    return null;
-  }
+//Returns if user is signed in or not
+export function isSignedIn() {
+  let signedIn = false;
+
+  try {
+    let auth2 = gapi.auth2.getAuthInstance();
+
+    if (auth2 != null) {
+      signedIn = auth2.isSignedIn.get();
+    }
+  } catch (error) {}
+
+  return signedIn;
 }

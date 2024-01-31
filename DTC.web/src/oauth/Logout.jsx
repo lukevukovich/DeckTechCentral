@@ -5,7 +5,7 @@ const clientId =
 
 function LogoutButton() {
   const handleLogoutSuccess = () => {
-    console.log("Log out successful!");
+    console.log("LOGOUT SUCCESS!");
   };
 
   return (

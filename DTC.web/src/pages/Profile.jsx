@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Login from "../oauth/Login";
 import Logout from "../oauth/Logout";
-import { gapi } from "gapi-script";
+import { isSignedIn } from "../oauth/User";
+import { useEffect } from "react";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="oauth">
-        <Login id="login"></Login>
+        <Login id="login" isSignedIn={true}></Login>
         <Logout id="logout" className="oauth"></Logout>
       </div>
     </div>

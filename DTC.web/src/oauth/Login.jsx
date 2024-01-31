@@ -4,21 +4,12 @@ const clientId =
   "449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com";
 
 function LoginButton() {
-  const handleSuccess = (res) => {
-    console.log("LOGIN SUCCESS! Current user: ", getProfile(res));
+  const handleSuccess = () => {
+    console.log("LOGIN SUCCESS!");
   };
 
-  const handleFailure = (res) => {
-    console.log("LOGIN FAILED! res: ", res);
-  };
-
-  const getProfile = (res) => {
-    // Check if 'profileObj' exists (type guard)
-    if ("profileObj" in res) {
-      return res.profileObj;
-    } else {
-      return null; // Handle the case where 'profileObj' doesn't exist
-    }
+  const handleFailure = () => {
+    console.log("LOGIN FAILED!");
   };
 
   return (
