@@ -120,7 +120,7 @@ export default function DeckSearch() {
             <FontAwesomeIcon icon={faMultiply} />
           </button>
         </div>
-        <text id="num-decks" className="num-cards">
+        <text id="num-decks" className="num-results">
           {numDecks}
         </text>
       </div>

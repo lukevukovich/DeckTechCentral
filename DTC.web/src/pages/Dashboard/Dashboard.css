@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 92vh;
+    height: 95vh;
     background-clip: text;
     color: transparent;
     background-image: linear-gradient(to left, rgb(90, 53, 163), rgb(225, 101, 250));

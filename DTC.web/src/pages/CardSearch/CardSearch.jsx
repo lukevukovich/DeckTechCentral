@@ -305,7 +305,7 @@ export default function CardSearch() {
             <FontAwesomeIcon icon={faMultiply} />
           </button>
         </div>
-        <text id="num-cards" className="num-cards">
+        <text id="num-cards" className="num-results">
           {numCards}
         </text>
       </div>

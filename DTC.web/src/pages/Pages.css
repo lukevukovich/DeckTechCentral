@@ -28,13 +28,13 @@ text {
     margin-left: 15px;
 }
 
-.num-cards {
+.num-results {
     font-size: 15px;
     text-wrap: nowrap;
     width: 700px;
     flex-direction: row-reverse;
     text-align: left;
-    margin-left: -15px;
+    margin-left: -25px;
 }
 
 input {
@@ -62,6 +62,7 @@ button {
     color: rgb(245, 245, 245);
     text-align: center;
     cursor: pointer;
+    outline: none;
 }
 
 button:hover {
