@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./CardSearch.css";
-import "./Pages.css";
+import "../Pages.css";
 import {
   faSearch,
   faMultiply,

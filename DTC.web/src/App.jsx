@@ -7,17 +7,11 @@ import {
 
 // layouts and pages
 import RootLayout from "./layouts/RootLayout";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import CardSearch from "./pages/CardSearch";
-import DeckSearch from "./pages/DeckSearch";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Profile from "./pages/Profile/Profile";
+import CardSearch from "./pages/CardSearch/CardSearch";
+import DeckSearch from "./pages/DeckSearch/DeckSearch";
 import "./App.css";
-
-import { useEffect } from "react";
-import { gapi } from "gapi-script";
-
-const clientId =
-  "449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com";
 
 // router and routes
 const router = createBrowserRouter(
@@ -32,17 +26,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    }
-
-    gapi.load("client:auth2", start);
-  }, []);
-
   return <RouterProvider router={router} />;
 }
 

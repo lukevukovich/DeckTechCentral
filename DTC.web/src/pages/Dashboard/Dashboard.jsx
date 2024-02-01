@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Dashboard.css";
-import "./Pages.css";
+import "../Pages.css";
 import {
   faSearch,
   faMultiply,

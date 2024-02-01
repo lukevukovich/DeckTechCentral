@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Profile.css";
-import "./Pages.css";
+import "../Pages.css";
 import {
   faSearch,
   faMultiply,
@@ -9,10 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Login from "../oauth/Login";
-import Logout from "../oauth/Logout";
-import { isSignedIn } from "../oauth/User";
-import { useEffect } from "react";
+import { isSignedIn, googleLogin, googleLogout } from "../../oauth/User"
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -24,7 +21,6 @@ export default function Profile() {
   const [isToggled, setIsToggled] = useState(true);
 
   function search() {
-    z;
     if (input != "" && input.length <= 40) {
       if (isToggled) {
         navigate(`/decksearch?q=${input}`);
@@ -104,8 +100,9 @@ export default function Profile() {
         </div>
       </div>
       <div className="oauth">
-        <Login id="login" isSignedIn={true}></Login>
-        <Logout id="logout" className="oauth"></Logout>
+        <button id="login-button" onClick={() => {googleLogin()}}>Login</button>
+        <button id="logout-button" onClick={() => {googleLogout()}}>Logout</button>
+        <button id="test-button" onClick={() => {console.log("Logged in: " + isSignedIn())}}>Logged In?</button>
       </div>
     </div>
   );
