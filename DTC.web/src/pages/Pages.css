@@ -110,6 +110,6 @@ button:active {
 }
 
 .checkbox:checked + .checkbox-toggle::before {
-    transform: translate(19px);
+    transform: translate(20px);
     content: "C";
 }

@@ -1,36 +1,64 @@
 import { gapi } from "gapi-script";
 
-const clientId =
+//O-Auth client ID
+export const clientId =
   "449883430868-j3aom1pndrf721cv5f1tblpce43lthqi.apps.googleusercontent.com";
 
-// Load the Google API client library
-gapi.load('auth2', function () {
-  gapi.auth2.init({
-    client_id: clientId,
-  });
-});
-
-// Function to handle Google Sign-In
-export function googleLogin() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signIn().then(function (googleUser) {
-    // Handle the signed-in user (send to server, etc.)
-    console.log('Google User:', googleUser);
-  });
-}
-
-// Function to handle Google Sign-Out
-export function googleLogout() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
+// Function to await Google Sign-In
+export function awaitGoogleLogin() {
+  return new Promise((resolve) => {
+    gapi.load("auth2", function () {
+      gapi.auth2
+        .init({
+          client_id: clientId,
+        })
+        .then(function (auth2) {
+          auth2.signIn().then(function (googleUser) {
+            resolve(googleUser);
+          });
+        });
+    });
   });
 }
 
-// Returns whether there is a user signed in or not
-export function isSignedIn() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  const signedIn = auth2.isSignedIn.get();
+// Function to await Google Sign-Out
+export function awaitGoogleLogout() {
+  return new Promise((resolve) => {
+    gapi.load("auth2", function () {
+      gapi.auth2
+        .init({
+          client_id: clientId,
+        })
+        .then(function (auth2) {
+          auth2.signOut().then(function (googleUser) {
+            resolve(googleUser);
+          });
+        });
+    });
+  });
+}
 
-  return signedIn;
+//Await sign it status as
+export function awaitLoginStatus() {
+  return new Promise((resolve) => {
+    gapi.load("auth2", function () {
+      gapi.auth2
+        .init({
+          client_id: clientId,
+        })
+        .then(function (auth2) {
+          const signedIn = auth2.isSignedIn.get();
+          resolve(signedIn);
+        });
+    });
+  });
+}
+
+//Get Google user information
+//Must pre-check that user is signed in
+export function getUserInfo() {
+  const auth2 = gapi.auth2.getAuthInstance();
+  const user = auth2.currentUser.get();
+
+  return user;
 }

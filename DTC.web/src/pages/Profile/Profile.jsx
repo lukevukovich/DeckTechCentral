@@ -9,7 +9,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { isSignedIn, googleLogin, googleLogout } from "../../oauth/User"
+import {
+  awaitGoogleLogin,
+  awaitGoogleLogout,
+  awaitLoginStatus,
+  getUserInfo,
+} from "../../oauth/User";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -19,6 +24,55 @@ export default function Profile() {
 
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(true);
+
+  //Set label content to user info
+  function setUserInfo(user) {
+    const user_id = document.getElementById("user-id");
+    const user_email = document.getElementById("user-email");
+    const user_name = document.getElementById("user-name");
+    if (user != null) {
+      const basicProfile = user.getBasicProfile();
+      const id = user.getId();
+      const name = basicProfile.getName();
+      const email = basicProfile.getEmail();
+
+      user_id.textContent = "User ID: " + id;
+      user_email.textContent = "User Email: " + email;
+      user_name.textContent = "User Name: " + name;
+    } else {
+      user_id.textContent = "No user logged in.";
+      user_email.textContent = "";
+      user_name.textContent = "";
+    }
+  }
+
+  async function checkLogin() {
+    const s = await awaitLoginStatus();
+    console.log("Is loggged in: " + s);
+
+    if (s) {
+      const u = getUserInfo();
+      setUserInfo(u);
+    } else {
+      setUserInfo(null);
+    }
+  }
+
+  async function login() {
+    const u = await awaitGoogleLogin();
+    console.log("Logged in");
+    setUserInfo(u);
+  }
+
+  async function logout() {
+    await awaitGoogleLogout();
+    console.log("Logged out");
+    setUserInfo(null);
+  }
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
 
   function search() {
     if (input != "" && input.length <= 40) {
@@ -87,7 +141,6 @@ export default function Profile() {
             htmlFor="checkbox-pf"
             className="checkbox-toggle"
             checked={isToggled}
-            onChange={toggleSearch}
             onClick={() => toggleSearch()}
           ></label>
           <button
@@ -100,9 +153,35 @@ export default function Profile() {
         </div>
       </div>
       <div className="oauth">
-        <button id="login-button" onClick={() => {googleLogin()}}>Login</button>
-        <button id="logout-button" onClick={() => {googleLogout()}}>Logout</button>
-        <button id="test-button" onClick={() => {console.log("Logged in: " + isSignedIn())}}>Logged In?</button>
+        <button
+          id="login-button"
+          onClick={() => {
+            login();
+          }}
+        >
+          Login
+        </button>
+        <button
+          id="logout-button"
+          onClick={() => {
+            logout();
+          }}
+        >
+          Logout
+        </button>
+        <button
+          id="status-button"
+          onClick={() => {
+            checkLogin();
+          }}
+        >
+          Status
+        </button>
+        <div id="user-info">
+          <text id="user-id">User ID:</text>
+          <text id="user-email">User Email:</text>
+          <text id="user-name">User Name:</text>
+        </div>
       </div>
     </div>
   );
