@@ -179,13 +179,13 @@ export default function CardSearch() {
 
       //Set num cards
       if (cards == 1) {
-        setNumCards(cards + " card found for '" + cardName + "'");
+        setNumCards(cards + " card found for '" + cardName.toLowerCase() + "'");
       } else {
-        setNumCards(cards + " cards found for '" + cardName + "'");
+        setNumCards(cards + " cards found for '" + cardName.toLowerCase() + "'");
       }
     } catch (error) {
       //Set num cards to none
-      setNumCards("No cards found for '" + cardName + "'");
+      setNumCards("No cards found for '" + cardName.toLowerCase() + "'");
     }
   };
 
@@ -290,13 +290,6 @@ export default function CardSearch() {
           </text>
         </Link>
         <div id="search-panel-cs" className="search-panel">
-          <button
-            id="profile-cs"
-            className="button"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
           <button id="go-cs" onClick={() => checkSearchToggle()}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
@@ -332,6 +325,13 @@ export default function CardSearch() {
             onClick={() => clearSearch()}
           >
             <FontAwesomeIcon icon={faMultiply} />
+          </button>
+          <button
+            id="profile-cs"
+            className="button-profile"
+            onClick={() => navigate("/profile")}
+          >
+            <FontAwesomeIcon icon={faUser}/>
           </button>
         </div>
         <text id="num-cards" className="num-results">

@@ -18,6 +18,7 @@ text {
     position: static;
     margin-left: 8px;
     user-select: none;
+    letter-spacing: 1px;
 }
 
 .search-panel {
@@ -30,12 +31,13 @@ text {
 }
 
 .num-results {
+    color: rgb(29, 14, 41);
     font-size: 15px;
     text-wrap: nowrap;
-    width: 700px;
-    flex-direction: row-reverse;
+    position: fixed;
     text-align: left;
-    margin-left: -30px;
+    left: 10px;
+    top: 128px;
 }
 
 input {
@@ -79,6 +81,36 @@ button:active {
     right: 42px;
 }
 
+.button-profile {
+    position: fixed;
+    right: 20px;
+    font-size: 24px;
+    height: 40px;
+    width: 45px;
+}
+
+.user-popup {
+    color: transparent;
+    background-color: transparent;
+    position: fixed;
+    font-family: "Arial";
+    border-radius: 20px;
+    padding: 8px;
+    transition: 0.2s;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    right: 8px;
+}
+
+@media (max-width: 948px) {
+    .button-profile{
+      position: static;
+      margin-left: -25px;
+    }
+  }
+
 .checkbox {
     display: none;
 }
@@ -114,18 +146,4 @@ button:active {
 .checkbox:checked + .checkbox-toggle::before {
     transform: translate(20px);
     content: "C";
-}
-
-.user-popup {
-    color: transparent;
-    background-color: transparent;
-    position: fixed;    font-family: "Arial";
-    margin-left: 8px;
-    border-radius: 20px;
-    padding: 8px;
-    transition: 0.2s;
-    font-size: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-weight: bold;
 }

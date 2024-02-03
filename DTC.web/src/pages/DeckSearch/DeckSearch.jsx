@@ -85,7 +85,8 @@ export default function DeckSearch() {
   }, [searchText]);
 
   const searchDeck = async () => {
-    setNumDecks("Deck search for '" + deckName + "'");
+    navigate(`/decksearch?q=${deckName}`);
+    setNumDecks("Deck search for '" + deckName.toLowerCase() + "'");
   };
 
   //Clear search and image list
@@ -103,13 +104,6 @@ export default function DeckSearch() {
           </text>
         </Link>
         <div id="search-panel-ds" className="search-panel">
-          <button
-            id="profile-ds"
-            className="button"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
           <button id="go-ds" onClick={() => checkSearchToggle()}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
@@ -145,6 +139,13 @@ export default function DeckSearch() {
             onClick={() => clearSearch()}
           >
             <FontAwesomeIcon icon={faMultiply} />
+          </button>
+          <button
+            id="profile-ds"
+            className="button-profile"
+            onClick={() => navigate("/profile")}
+          >
+            <FontAwesomeIcon icon={faUser} />
           </button>
         </div>
         <text id="num-decks" className="num-results">

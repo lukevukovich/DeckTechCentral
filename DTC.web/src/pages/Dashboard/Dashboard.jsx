@@ -89,13 +89,6 @@ export default function Dashboard() {
           </text>
         </Link>
         <div id="search-panel-db" className="search-panel">
-          <button
-            id="profile-db"
-            className="button"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
           <button id="go-db" onClick={() => search()}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
@@ -126,6 +119,13 @@ export default function Dashboard() {
             onClick={() => clearSearch()}
           >
             <FontAwesomeIcon icon={faMultiply} />
+          </button>
+          <button
+            id="profile-db"
+            className="button-profile"
+            onClick={() => navigate("/profile")}
+          >
+            <FontAwesomeIcon icon={faUser}/>
           </button>
         </div>
       </div>

@@ -116,13 +116,6 @@ export default function Profile() {
           </text>
         </Link>
         <div id="search-panel-pf" className="search-panel">
-          <button
-            id="profile-pf"
-            className="button"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
           <button id="go-pf" onClick={() => search()}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
@@ -152,6 +145,13 @@ export default function Profile() {
             onClick={() => clearSearch()}
           >
             <FontAwesomeIcon icon={faMultiply} />
+          </button>
+          <button
+            id="profile-pf"
+            className="button-profile"
+            onClick={() => navigate("/profile")}
+          >
+            <FontAwesomeIcon icon={faUser} />
           </button>
         </div>
       </div>
