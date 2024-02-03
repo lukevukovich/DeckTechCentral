@@ -36,9 +36,9 @@ export default function Profile() {
       const name = basicProfile.getName();
       const email = basicProfile.getEmail();
 
-      user_id.textContent = "User ID: " + id;
-      user_email.textContent = "User Email: " + email;
-      user_name.textContent = "User Name: " + name;
+      user_id.textContent = "User ID | " + id;
+      user_email.textContent = "User Email | " + email;
+      user_name.textContent = "User Name | " + name;
     } else {
       user_id.textContent = "No user logged in.";
       user_email.textContent = "";
@@ -46,10 +46,12 @@ export default function Profile() {
     }
   }
 
+  //Check to see if user is logged in
   async function checkLogin() {
     const s = await awaitLoginStatus();
     console.log("Is loggged in: " + s);
 
+    //Set user info based on flag
     if (s) {
       const u = getUserInfo();
       setUserInfo(u);
@@ -58,19 +60,20 @@ export default function Profile() {
     }
   }
 
+  //Google login
   async function login() {
     const u = await awaitGoogleLogin();
-    console.log("Logged in");
     setUserInfo(u);
   }
 
+  //Logout from signed in user
   async function logout() {
     await awaitGoogleLogout();
-    console.log("Logged out");
     setUserInfo(null);
   }
 
   useEffect(() => {
+    //Check login, set user info
     checkLogin();
   }, []);
 
@@ -168,14 +171,6 @@ export default function Profile() {
           }}
         >
           Logout
-        </button>
-        <button
-          id="status-button"
-          onClick={() => {
-            checkLogin();
-          }}
-        >
-          Status
         </button>
         <div id="user-info">
           <text id="user-id">User ID:</text>

@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { awaitLoginStatus, getUserInfo } from "../../oauth/User";
 
 Modal.setAppElement("#root");
 
@@ -49,6 +50,34 @@ export default function CardSearch() {
     mana_cost: "",
     flavor_text: "",
   });
+
+  //Set content of user popup info
+  function setUserPopup(user) {
+    const popup = document.getElementById("user-popup-cs");
+    if (user != null) {
+      const basicProfile = user.getBasicProfile();
+      const username = basicProfile.getEmail();
+      popup.textContent = "User | " + username;
+    } else {
+      popup.textContent = "Guest | Login required";
+    }
+  }
+
+  //Check for Google login, set popup
+  async function checkLogin() {
+    const s = await awaitLoginStatus();
+    if (s) {
+      const u = getUserInfo();
+      setUserPopup(u);
+    } else {
+      setUserPopup(null);
+    }
+  }
+
+  useEffect(() => {
+    //Check for login and set popup
+    checkLogin();
+  }, []);
 
   //Set toggle and search setting
   function toggleSearch() {
@@ -309,6 +338,7 @@ export default function CardSearch() {
           {numCards}
         </text>
       </div>
+      <label id="user-popup-cs" className="user-popup"></label>
       <ImageList value={imageList}></ImageList>
     </div>
   );

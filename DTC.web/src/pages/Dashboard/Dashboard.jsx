@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import "../Pages.css";
 import {
@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { awaitLoginStatus, getUserInfo } from "../../oauth/User";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -18,6 +19,36 @@ export default function Dashboard() {
 
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(true);
+
+  //Set content of user popup info
+  function setUserPopup(user) {
+    const popup = document.getElementById("user-popup-db");
+    if (user != null) {
+      const basicProfile = user.getBasicProfile();
+      const username = basicProfile.getEmail();
+      popup.textContent = "User | " + username;
+    } else {
+      popup.textContent = "Guest | Login required";
+    }
+  }
+
+  //Check for Google login, set popup
+  async function checkLogin() {
+    const s = await awaitLoginStatus();
+    console.log("Is loggged in: " + s);
+
+    if (s) {
+      const u = getUserInfo();
+      setUserPopup(u);
+    } else {
+      setUserPopup(null);
+    }
+  }
+
+  useEffect(() => {
+    //Check for login and set popup
+    checkLogin();
+  }, []);
 
   function search() {
     if (input != "" && input.length <= 40) {
@@ -98,6 +129,7 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
+      <label id="user-popup-db" className="user-popup"></label>
       <text id="welcome-db">Welcome to DeckTechCentral.</text>
     </div>
   );

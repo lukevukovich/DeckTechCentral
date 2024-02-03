@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { awaitLoginStatus, getUserInfo } from "../../oauth/User";
 
 export default function DeckSearch() {
   //Set working variables
@@ -26,6 +27,29 @@ export default function DeckSearch() {
   const [deckName, setDeckName] = useState(searchText);
 
   const [numDecks, setNumDecks] = useState("");
+
+  //Set content of user popup info
+  function setUserPopup(user) {
+    const popup = document.getElementById("user-popup-ds");
+    if (user != null) {
+      const basicProfile = user.getBasicProfile();
+      const email = basicProfile.getEmail();
+      popup.textContent = "User | " + email;
+    } else {
+      popup.textContent = "Guest | Login required";
+    }
+  }
+
+  //Check for Google login, set popup
+  async function checkLogin() {
+    const s = await awaitLoginStatus();
+    if (s) {
+      const u = getUserInfo();
+      setUserPopup(u);
+    } else {
+      setUserPopup(null);
+    }
+  }
 
   //Set toggle and search setting
   function toggleSearch() {
@@ -51,6 +75,9 @@ export default function DeckSearch() {
   }
 
   useEffect(() => {
+    //Check for login and set popup
+    checkLogin();
+
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchDeck();
@@ -124,6 +151,7 @@ export default function DeckSearch() {
           {numDecks}
         </text>
       </div>
+      <label id="user-popup-ds" className="user-popup"></label>
     </div>
   );
 }

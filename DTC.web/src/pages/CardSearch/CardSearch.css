@@ -12,6 +12,16 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+.user-popup {
+  top: 128px
+}
+
+#header-cs:hover + .user-popup {
+  color: rgb(219, 179, 223);
+  background-color: rgb(48, 22, 99);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
 #image-list {
   margin-top: 120px; /* Adjusted margin based on the height of #search-panel */
   width: 940px;

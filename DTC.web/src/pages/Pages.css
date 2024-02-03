@@ -9,6 +9,7 @@ text {
 }
 
 .heading {
+    font-weight: bold;
     font-size: 30px;
     padding: 15px;
     background-color: rgb(59, 27, 121);
@@ -34,7 +35,7 @@ text {
     width: 700px;
     flex-direction: row-reverse;
     text-align: left;
-    margin-left: -25px;
+    margin-left: -30px;
 }
 
 input {
@@ -107,9 +108,24 @@ button:active {
     font-size: 13px;
     font-weight: bolder;
     text-align: center;
+
 }
 
 .checkbox:checked + .checkbox-toggle::before {
     transform: translate(20px);
     content: "C";
+}
+
+.user-popup {
+    color: transparent;
+    background-color: transparent;
+    position: fixed;    font-family: "Arial";
+    margin-left: 8px;
+    border-radius: 20px;
+    padding: 8px;
+    transition: 0.2s;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
 }
