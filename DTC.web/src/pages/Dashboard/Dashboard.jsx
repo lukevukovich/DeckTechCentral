@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo } from "../../oauth/User";
+import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -20,28 +20,14 @@ export default function Dashboard() {
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(true);
 
-  //Set content of user popup info
-  function setUserPopup(user) {
-    const popup = document.getElementById("user-popup-db");
-    if (user != null) {
-      const basicProfile = user.getBasicProfile();
-      const username = basicProfile.getEmail();
-      popup.textContent = "User | " + username;
-    } else {
-      popup.textContent = "Guest | Login required";
-    }
-  }
-
   //Check for Google login, set popup
   async function checkLogin() {
     const s = await awaitLoginStatus();
-    console.log("Is loggged in: " + s);
-
     if (s) {
       const u = getUserInfo();
-      setUserPopup(u);
+      setUserPopup(u, "db");
     } else {
-      setUserPopup(null);
+      setUserPopup(null, "db");
     }
   }
 
@@ -89,7 +75,7 @@ export default function Dashboard() {
           </text>
         </Link>
         <div id="search-panel-db" className="search-panel">
-          <button id="go-db" onClick={() => search()}>
+          <button id="go-db" onClick={search}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
           <input
@@ -111,12 +97,12 @@ export default function Dashboard() {
             className="checkbox-toggle"
             checked={isToggled}
             onChange={toggleSearch}
-            onClick={() => toggleSearch()}
+            onClick={toggleSearch}
           ></label>
           <button
             id="clear-db"
             className="button-clear"
-            onClick={() => clearSearch()}
+            onClick={clearSearch}
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>

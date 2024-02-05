@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo } from "../../oauth/User";
+import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 
 export default function DeckSearch() {
   //Set working variables
@@ -28,26 +28,14 @@ export default function DeckSearch() {
 
   const [numDecks, setNumDecks] = useState("");
 
-  //Set content of user popup info
-  function setUserPopup(user) {
-    const popup = document.getElementById("user-popup-ds");
-    if (user != null) {
-      const basicProfile = user.getBasicProfile();
-      const email = basicProfile.getEmail();
-      popup.textContent = "User | " + email;
-    } else {
-      popup.textContent = "Guest | Login required";
-    }
-  }
-
   //Check for Google login, set popup
   async function checkLogin() {
     const s = await awaitLoginStatus();
     if (s) {
       const u = getUserInfo();
-      setUserPopup(u);
+      setUserPopup(u, "ds");
     } else {
-      setUserPopup(null);
+      setUserPopup(null, "ds");
     }
   }
 
@@ -104,7 +92,7 @@ export default function DeckSearch() {
           </text>
         </Link>
         <div id="search-panel-ds" className="search-panel">
-          <button id="go-ds" onClick={() => checkSearchToggle()}>
+          <button id="go-ds" onClick={checkSearchToggle}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
           <input
@@ -131,12 +119,12 @@ export default function DeckSearch() {
             htmlFor="checkbox-ds"
             className="checkbox-toggle"
             onChange={toggleSearch}
-            onClick={() => toggleSearch()}
+            onClick={toggleSearch}
           ></label>
           <button
             id="clear-ds"
             className="button-clear"
-            onClick={() => clearSearch()}
+            onClick={clearSearch}
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>

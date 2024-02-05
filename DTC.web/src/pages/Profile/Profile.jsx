@@ -49,9 +49,6 @@ export default function Profile() {
   //Check to see if user is logged in
   async function checkLogin() {
     const s = await awaitLoginStatus();
-    console.log("Is loggged in: " + s);
-
-    //Set user info based on flag
     if (s) {
       const u = getUserInfo();
       setUserInfo(u);
@@ -116,7 +113,7 @@ export default function Profile() {
           </text>
         </Link>
         <div id="search-panel-pf" className="search-panel">
-          <button id="go-pf" onClick={() => search()}>
+          <button id="go-pf" onClick={search}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
           <input
@@ -137,12 +134,12 @@ export default function Profile() {
             htmlFor="checkbox-pf"
             className="checkbox-toggle"
             checked={isToggled}
-            onClick={() => toggleSearch()}
+            onClick={toggleSearch}
           ></label>
           <button
             id="clear-pf"
             className="button-clear"
-            onClick={() => clearSearch()}
+            onClick={clearSearch}
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>
@@ -158,17 +155,13 @@ export default function Profile() {
       <div className="oauth">
         <button
           id="login-button"
-          onClick={() => {
-            login();
-          }}
+          onClick={login}
         >
           Login
         </button>
         <button
           id="logout-button"
-          onClick={() => {
-            logout();
-          }}
+          onClick={logout}
         >
           Logout
         </button>

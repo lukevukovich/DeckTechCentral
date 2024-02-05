@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo } from "../../oauth/User";
+import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 
 Modal.setAppElement("#root");
 
@@ -51,26 +51,14 @@ export default function CardSearch() {
     flavor_text: "",
   });
 
-  //Set content of user popup info
-  function setUserPopup(user) {
-    const popup = document.getElementById("user-popup-cs");
-    if (user != null) {
-      const basicProfile = user.getBasicProfile();
-      const username = basicProfile.getEmail();
-      popup.textContent = "User | " + username;
-    } else {
-      popup.textContent = "Guest | Login required";
-    }
-  }
-
   //Check for Google login, set popup
   async function checkLogin() {
     const s = await awaitLoginStatus();
     if (s) {
       const u = getUserInfo();
-      setUserPopup(u);
+      setUserPopup(u, "cs");
     } else {
-      setUserPopup(null);
+      setUserPopup(null, "cs");
     }
   }
 
@@ -290,7 +278,7 @@ export default function CardSearch() {
           </text>
         </Link>
         <div id="search-panel-cs" className="search-panel">
-          <button id="go-cs" onClick={() => checkSearchToggle()}>
+          <button id="go-cs" onClick={checkSearchToggle}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
           <input
@@ -317,12 +305,12 @@ export default function CardSearch() {
             htmlFor="checkbox-cs"
             className="checkbox-toggle"
             onChange={toggleSearch}
-            onClick={() => toggleSearch()}
+            onClick={toggleSearch}
           ></label>
           <button
             id="clear-cs"
             className="button-clear"
-            onClick={() => clearSearch()}
+            onClick={clearSearch}
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>

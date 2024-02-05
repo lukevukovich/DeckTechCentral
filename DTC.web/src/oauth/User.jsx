@@ -62,3 +62,15 @@ export function getUserInfo() {
 
   return user;
 }
+
+//Set info for user popup
+export function setUserPopup(user, id) {
+  const popup = document.getElementById(`user-popup-${id}`);
+  if (user != null) {
+    const basicProfile = user.getBasicProfile();
+    const email = basicProfile.getEmail();
+    popup.textContent = "User | " + email;
+  } else {
+    popup.textContent = "Guest | Login required";
+  }
+}
