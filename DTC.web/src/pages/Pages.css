@@ -104,7 +104,7 @@ button:active {
     right: 8px;
 }
 
-@media (max-width: 978px) {
+@media (max-width: 968px) {
     .button-profile{
       position: static;
       margin-left: -25px;

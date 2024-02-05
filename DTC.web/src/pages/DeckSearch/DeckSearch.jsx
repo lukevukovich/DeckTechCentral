@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
 import "./DeckSearch.css";
 import "../Pages.css";
-import {
-  faSearch,
-  faMultiply,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import DTCHeader from "../DTCHeader";
 
 export default function DeckSearch() {
   //Set working variables
@@ -84,63 +78,19 @@ export default function DeckSearch() {
 
   //Create all components
   return (
-    <div id="ds">
-      <div id="header-ds">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <text id="heading-ds" className="heading">
-            DeckTechCentral
-          </text>
-        </Link>
-        <div id="search-panel-ds" className="search-panel">
-          <button id="go-ds" onClick={checkSearchToggle}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-          <input
-            id="search-bar-ds"
-            placeholder="Search deck list..."
-            autoComplete="off"
-            onKeyDown={(e) => {
-              if (e.key == "Enter") {
-                checkSearchToggle();
-              }
-            }}
-            value={deckName}
-            onChange={(e) => setDeckName(e.target.value)}
-          ></input>
-          <input
-            type="checkbox"
-            id="checkbox-ds"
-            className="checkbox"
-            checked={isToggled}
-            onChange={() => {}}
-          ></input>
-          <label
-            id="checkbox-toggle-ds"
-            htmlFor="checkbox-ds"
-            className="checkbox-toggle"
-            onChange={toggleSearch}
-            onClick={toggleSearch}
-          ></label>
-          <button
-            id="clear-ds"
-            className="button-clear"
-            onClick={clearSearch}
-          >
-            <FontAwesomeIcon icon={faMultiply} />
-          </button>
-          <button
-            id="profile-ds"
-            className="button-profile"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
-        </div>
-        <text id="num-decks" className="num-results">
-          {numDecks}
-        </text>
-      </div>
-      <label id="user-popup-ds" className="user-popup"></label>
+    <div id="ds-all">
+      <DTCHeader
+        id="ds"
+        inputText="Search deck list..."
+        inputValue={deckName}
+        inputOnChange={setDeckName}
+        isToggled={isToggled}
+        search={checkSearchToggle}
+        toggleSearch={toggleSearch}
+        clearSearch={clearSearch}
+        numResults={numDecks}
+        navigate={navigate}
+      ></DTCHeader>
     </div>
   );
 }

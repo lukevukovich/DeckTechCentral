@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import "./Profile.css";
 import "../Pages.css";
-import {
-  faSearch,
-  faMultiply,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import {
   awaitGoogleLogin,
   awaitGoogleLogout,
   awaitLoginStatus,
   getUserInfo,
+  setUserPopup,
 } from "../../oauth/User";
+import DTCHeader from "../DTCHeader";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -52,8 +47,10 @@ export default function Profile() {
     if (s) {
       const u = getUserInfo();
       setUserInfo(u);
+      setUserPopup(u, "pf");
     } else {
       setUserInfo(null);
+      setUserPopup(null, "pf");
     }
   }
 
@@ -61,12 +58,14 @@ export default function Profile() {
   async function login() {
     const u = await awaitGoogleLogin();
     setUserInfo(u);
+    setUserPopup(u, "pf");
   }
 
   //Logout from signed in user
   async function logout() {
     await awaitGoogleLogout();
     setUserInfo(null);
+    setUserPopup(null, "pf");
   }
 
   useEffect(() => {
@@ -105,64 +104,24 @@ export default function Profile() {
 
   // Create all components
   return (
-    <div id="pf">
-      <div id="header-pf">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <text id="heading-pf" className="heading">
-            DeckTechCentral
-          </text>
-        </Link>
-        <div id="search-panel-pf" className="search-panel">
-          <button id="go-pf" onClick={search}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-          <input
-            id="search-bar-pf"
-            placeholder="Search deck list..."
-            autoComplete="off"
-            onKeyDown={(e) => {
-              if (e.key == "Enter") {
-                search();
-              }
-            }}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          ></input>
-          <input type="checkbox" id="checkbox-pf" className="checkbox"></input>
-          <label
-            id="checkbox-toggle-pf"
-            htmlFor="checkbox-pf"
-            className="checkbox-toggle"
-            checked={isToggled}
-            onClick={toggleSearch}
-          ></label>
-          <button
-            id="clear-pf"
-            className="button-clear"
-            onClick={clearSearch}
-          >
-            <FontAwesomeIcon icon={faMultiply} />
-          </button>
-          <button
-            id="profile-pf"
-            className="button-profile"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
-        </div>
-      </div>
+    <div id="pf-all">
+      <DTCHeader
+        id="pf"
+        inputText="Search deck list..."
+        inputValue={input}
+        inputOnChange={setInput}
+        isToggled={isToggled}
+        search={search}
+        toggleSearch={toggleSearch}
+        clearSearch={clearSearch}
+        numResults={""}
+        navigate={navigate}
+      ></DTCHeader>
       <div className="oauth">
-        <button
-          id="login-button"
-          onClick={login}
-        >
+        <button id="login-button" onClick={login}>
           Login
         </button>
-        <button
-          id="logout-button"
-          onClick={logout}
-        >
+        <button id="logout-button" onClick={logout}>
           Logout
         </button>
         <div id="user-info">

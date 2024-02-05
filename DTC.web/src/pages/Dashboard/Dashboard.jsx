@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import "../Pages.css";
-import {
-  faSearch,
-  faMultiply,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import DTCHeader from "../DTCHeader";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -18,7 +12,7 @@ export default function Dashboard() {
   const [input, setInput] = useState("");
 
   //Use state for search toggle
-  const [isToggled, setIsToggled] = useState(true);
+  const [isToggled, setIsToggled] = useState(false);
 
   //Check for Google login, set popup
   async function checkLogin() {
@@ -38,7 +32,7 @@ export default function Dashboard() {
 
   function search() {
     if (input != "" && input.length <= 40) {
-      if (isToggled) {
+      if (!isToggled) {
         navigate(`/decksearch?q=${input}`);
         setInput("");
       } else {
@@ -58,7 +52,7 @@ export default function Dashboard() {
     setIsToggled(!isToggled);
 
     const searchBar = document.getElementById("search-bar-db");
-    if (!isToggled) {
+    if (isToggled) {
       searchBar.placeholder = "Search deck list...";
     } else {
       searchBar.placeholder = "Search card...";
@@ -67,55 +61,19 @@ export default function Dashboard() {
 
   // Create all components
   return (
-    <div id="db">
-      <div id="header-db">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <text id="heading-db" className="heading">
-            DeckTechCentral
-          </text>
-        </Link>
-        <div id="search-panel-db" className="search-panel">
-          <button id="go-db" onClick={search}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-          <input
-            id="search-bar-db"
-            placeholder="Search deck list..."
-            autoComplete="off"
-            onKeyDown={(e) => {
-              if (e.key == "Enter") {
-                search();
-              }
-            }}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          ></input>
-          <input type="checkbox" id="checkbox-db" className="checkbox"></input>
-          <label
-            id="checkbox-toggle-db"
-            htmlFor="checkbox-db"
-            className="checkbox-toggle"
-            checked={isToggled}
-            onChange={toggleSearch}
-            onClick={toggleSearch}
-          ></label>
-          <button
-            id="clear-db"
-            className="button-clear"
-            onClick={clearSearch}
-          >
-            <FontAwesomeIcon icon={faMultiply} />
-          </button>
-          <button
-            id="profile-db"
-            className="button-profile"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser}/>
-          </button>
-        </div>
-      </div>
-      <label id="user-popup-db" className="user-popup"></label>
+    <div id="db-all">
+      <DTCHeader
+        id="db"
+        inputText="Search deck list..."
+        inputValue={input}
+        inputOnChange={setInput}
+        isToggled={isToggled}
+        search={search}
+        toggleSearch={toggleSearch}
+        clearSearch={clearSearch}
+        numResults={""}
+        navigate={navigate}
+      ></DTCHeader>
       <text id="welcome-db">Welcome to DeckTechCentral.</text>
     </div>
   );

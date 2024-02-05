@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import DTCHeader from "../DTCHeader";
 
 Modal.setAppElement("#root");
 
@@ -169,7 +170,9 @@ export default function CardSearch() {
       if (cards == 1) {
         setNumCards(cards + " card found for '" + cardName.toLowerCase() + "'");
       } else {
-        setNumCards(cards + " cards found for '" + cardName.toLowerCase() + "'");
+        setNumCards(
+          cards + " cards found for '" + cardName.toLowerCase() + "'"
+        );
       }
     } catch (error) {
       //Set num cards to none
@@ -269,64 +272,20 @@ export default function CardSearch() {
 
   //Create all components
   return (
-    <div id="cs">
+    <div id="cs-all">
       <CardModal />
-      <div id="header-cs">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <text id="heading-cs" className="heading">
-            DeckTechCentral
-          </text>
-        </Link>
-        <div id="search-panel-cs" className="search-panel">
-          <button id="go-cs" onClick={checkSearchToggle}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-          <input
-            id="search-bar-cs"
-            placeholder="Search card..."
-            autoComplete="off"
-            onKeyDown={(e) => {
-              if (e.key == "Enter") {
-                checkSearchToggle();
-              }
-            }}
-            value={cardName}
-            onChange={(e) => setCardName(e.target.value)}
-          ></input>
-          <input
-            type="checkbox"
-            id="checkbox-cs"
-            className="checkbox"
-            checked={isToggled}
-            onChange={() => {}}
-          ></input>
-          <label
-            id="checkbox-toggle-cs"
-            htmlFor="checkbox-cs"
-            className="checkbox-toggle"
-            onChange={toggleSearch}
-            onClick={toggleSearch}
-          ></label>
-          <button
-            id="clear-cs"
-            className="button-clear"
-            onClick={clearSearch}
-          >
-            <FontAwesomeIcon icon={faMultiply} />
-          </button>
-          <button
-            id="profile-cs"
-            className="button-profile"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser}/>
-          </button>
-        </div>
-        <text id="num-cards" className="num-results">
-          {numCards}
-        </text>
-      </div>
-      <label id="user-popup-cs" className="user-popup"></label>
+      <DTCHeader
+        id="cs"
+        inputText="Search card..."
+        inputValue={cardName}
+        inputOnChange={setCardName}
+        isToggled={isToggled}
+        search={checkSearchToggle}
+        toggleSearch={toggleSearch}
+        clearSearch={clearSearch}
+        numResults={numCards}
+        navigate={navigate}
+      ></DTCHeader>
       <ImageList value={imageList}></ImageList>
     </div>
   );
