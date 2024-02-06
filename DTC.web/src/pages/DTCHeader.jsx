@@ -7,7 +7,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-
 export default function DTCHeader({
   id,
   inputText,
@@ -42,11 +41,13 @@ export default function DTCHeader({
                 search();
               } else if (e.key == "ArrowLeft" && isToggled) {
                 setIsToggled(!isToggled);
-                inputText = "Search card..."
-                document.getElementById(`search-bar-${id}`).placeholder = "Search deck list...";
+                inputText = "Search card...";
+                document.getElementById(`search-bar-${id}`).placeholder =
+                  "Search deck list...";
               } else if (e.key == "ArrowRight" && !isToggled) {
                 setIsToggled(!isToggled);
-                document.getElementById(`search-bar-${id}`).placeholder = "Search card...";
+                document.getElementById(`search-bar-${id}`).placeholder =
+                  "Search card...";
               }
             }}
             value={inputValue}
