@@ -73,6 +73,7 @@ export default function Profile() {
     checkLogin();
   }, []);
 
+  //Search deck/card based on toggle
   function search() {
     if (input != "" && input.length <= 40) {
       if (!isToggled) {

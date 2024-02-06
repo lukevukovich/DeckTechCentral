@@ -98,6 +98,7 @@ export default function CardSearch() {
     }
   }, [searchText]);
 
+  //Process card JSON result
   const processData = (jsonData) => {
     const images = [];
     const removeCards = [];
@@ -212,7 +213,7 @@ export default function CardSearch() {
     setModal(false);
   }
 
-  //Create card modal
+  //Create card modal/popup for when card is selected
   const CardModal = () => {
     return (
       <Modal

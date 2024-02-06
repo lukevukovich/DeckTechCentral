@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
+//DTC Header that appears on every page
 export default function DTCHeader({
   id,
   inputText,
