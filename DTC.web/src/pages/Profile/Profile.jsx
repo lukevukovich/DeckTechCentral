@@ -111,6 +111,7 @@ export default function Profile() {
         inputValue={input}
         inputOnChange={setInput}
         isToggled={isToggled}
+        setIsToggled={setIsToggled}
         search={search}
         toggleSearch={toggleSearch}
         clearSearch={clearSearch}

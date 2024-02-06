@@ -68,6 +68,7 @@ export default function Dashboard() {
         inputValue={input}
         inputOnChange={setInput}
         isToggled={isToggled}
+        setIsToggled={setIsToggled}
         search={search}
         toggleSearch={toggleSearch}
         clearSearch={clearSearch}

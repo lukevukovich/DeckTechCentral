@@ -14,6 +14,7 @@ export default function DTCHeader({
   inputValue,
   inputOnChange,
   isToggled,
+  setIsToggled,
   search,
   toggleSearch,
   clearSearch,
@@ -39,6 +40,13 @@ export default function DTCHeader({
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 search();
+              } else if (e.key == "ArrowLeft" && isToggled) {
+                setIsToggled(!isToggled);
+                inputText = "Search card..."
+                document.getElementById(`search-bar-${id}`).placeholder = "Search deck list...";
+              } else if (e.key == "ArrowRight" && !isToggled) {
+                setIsToggled(!isToggled);
+                document.getElementById(`search-bar-${id}`).placeholder = "Search card...";
               }
             }}
             value={inputValue}

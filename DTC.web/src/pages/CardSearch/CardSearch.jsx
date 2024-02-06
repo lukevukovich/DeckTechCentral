@@ -280,6 +280,7 @@ export default function CardSearch() {
         inputValue={cardName}
         inputOnChange={setCardName}
         isToggled={isToggled}
+        setIsToggled={setIsToggled}
         search={checkSearchToggle}
         toggleSearch={toggleSearch}
         clearSearch={clearSearch}

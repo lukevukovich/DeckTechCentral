@@ -85,6 +85,7 @@ export default function DeckSearch() {
         inputValue={deckName}
         inputOnChange={setDeckName}
         isToggled={isToggled}
+        setIsToggled={setIsToggled}
         search={checkSearchToggle}
         toggleSearch={toggleSearch}
         clearSearch={clearSearch}
