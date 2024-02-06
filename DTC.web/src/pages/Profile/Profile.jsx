@@ -18,7 +18,7 @@ export default function Profile() {
   const [input, setInput] = useState("");
 
   //Use state for search toggle
-  const [isToggled, setIsToggled] = useState(true);
+  const [isToggled, setIsToggled] = useState(false);
 
   //Set label content to user info
   function setUserInfo(user) {
@@ -75,7 +75,7 @@ export default function Profile() {
 
   function search() {
     if (input != "" && input.length <= 40) {
-      if (isToggled) {
+      if (!isToggled) {
         navigate(`/decksearch?q=${input}`);
         setInput("");
       } else {
@@ -95,7 +95,7 @@ export default function Profile() {
     setIsToggled(!isToggled);
 
     const searchBar = document.getElementById("search-bar-pf");
-    if (!isToggled) {
+    if (isToggled) {
       searchBar.placeholder = "Search deck list...";
     } else {
       searchBar.placeholder = "Search card...";
