@@ -9,7 +9,7 @@ import {
   getUserInfo,
   setUserPopup,
 } from "../../oauth/User";
-import DTCHeader from "../DTCHeader";
+import DTCHeader from "../../assets/DTCHeader";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -91,18 +91,6 @@ export default function Profile() {
     setInput("");
   }
 
-  //Set toggle and search setting
-  function toggleSearch() {
-    setIsToggled(!isToggled);
-
-    const searchBar = document.getElementById("search-bar-pf");
-    if (isToggled) {
-      searchBar.placeholder = "Search deck list...";
-    } else {
-      searchBar.placeholder = "Search card...";
-    }
-  }
-
   // Create all components
   return (
     <div id="pf-all">
@@ -114,7 +102,6 @@ export default function Profile() {
         isToggled={isToggled}
         setIsToggled={setIsToggled}
         search={search}
-        toggleSearch={toggleSearch}
         clearSearch={clearSearch}
         numResults={""}
         navigate={navigate}

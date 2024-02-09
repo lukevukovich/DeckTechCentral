@@ -9,9 +9,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
-import DTCHeader from "../DTCHeader";
+import DTCHeader from "../../assets/DTCHeader";
 
 Modal.setAppElement("#root");
 
@@ -67,18 +66,6 @@ export default function CardSearch() {
     //Check for login and set popup
     checkLogin();
   }, []);
-
-  //Set toggle and search setting
-  function toggleSearch() {
-    setIsToggled(!isToggled);
-
-    const searchBar = document.getElementById("search-bar-cs");
-    if (isToggled) {
-      searchBar.placeholder = "Search deck list...";
-    } else {
-      searchBar.placeholder = "Search card...";
-    }
-  }
 
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
@@ -283,7 +270,6 @@ export default function CardSearch() {
         isToggled={isToggled}
         setIsToggled={setIsToggled}
         search={checkSearchToggle}
-        toggleSearch={toggleSearch}
         clearSearch={clearSearch}
         numResults={numCards}
         navigate={navigate}

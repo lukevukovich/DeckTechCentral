@@ -3,7 +3,7 @@ import "./DeckSearch.css";
 import "../Pages.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
-import DTCHeader from "../DTCHeader";
+import DTCHeader from "../../assets/DTCHeader";
 
 export default function DeckSearch() {
   //Set working variables
@@ -30,18 +30,6 @@ export default function DeckSearch() {
       setUserPopup(u, "ds");
     } else {
       setUserPopup(null, "ds");
-    }
-  }
-
-  //Set toggle and search setting
-  function toggleSearch() {
-    setIsToggled(!isToggled);
-
-    const searchBar = document.getElementById("search-bar-ds");
-    if (isToggled) {
-      searchBar.placeholder = "Search deck list...";
-    } else {
-      searchBar.placeholder = "Search card...";
     }
   }
 
@@ -87,7 +75,6 @@ export default function DeckSearch() {
         isToggled={isToggled}
         setIsToggled={setIsToggled}
         search={checkSearchToggle}
-        toggleSearch={toggleSearch}
         clearSearch={clearSearch}
         numResults={numDecks}
         navigate={navigate}

@@ -1,11 +1,13 @@
-import "./Pages.css";
+import "../pages/Pages.css";
 import {
   faSearch,
   faMultiply,
   faUser,
+  faScrewdriverWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { awaitLoginStatus } from "../oauth/User";
 
 //DTC Header that appears on every page
 export default function DTCHeader({
@@ -16,11 +18,45 @@ export default function DTCHeader({
   isToggled,
   setIsToggled,
   search,
-  toggleSearch,
   clearSearch,
   numResults,
   navigate,
 }) {
+  //Set toggle and search setting
+  function toggleSearch() {
+    setIsToggled(!isToggled);
+
+    const searchBar = document.getElementById(`search-bar-${id}`);
+    if (isToggled) {
+      searchBar.placeholder = "Search deck list...";
+    } else {
+      searchBar.placeholder = "Search card...";
+    }
+  }
+
+  //Handle onKeyDown for input/searchbar component
+  function inputOnKeyDown(e) {
+    if (e.key === "Enter") {
+      search();
+    } else if (e.key == "ArrowLeft" && isToggled) {
+      toggleSearch();
+    } else if (e.key == "ArrowRight" && !isToggled) {
+      toggleSearch();
+    }
+  }
+
+  //Check for Google login, set popup
+  async function handleCreateDeckButton() {
+    const status = await awaitLoginStatus();
+    if (status) {
+      console.log("Can create deck");
+      navigate("/createdeck");
+    } else {
+      console.log("Cannot create deck");
+      navigate("/profile");
+    }
+  }
+
   return (
     <div id={id}>
       <div id={`header-${id}`}>
@@ -38,18 +74,7 @@ export default function DTCHeader({
             placeholder={inputText}
             autoComplete="off"
             onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                search();
-              } else if (e.key == "ArrowLeft" && isToggled) {
-                setIsToggled(!isToggled);
-                inputText = "Search card...";
-                document.getElementById(`search-bar-${id}`).placeholder =
-                  "Search deck list...";
-              } else if (e.key == "ArrowRight" && !isToggled) {
-                setIsToggled(!isToggled);
-                document.getElementById(`search-bar-${id}`).placeholder =
-                  "Search card...";
-              }
+              inputOnKeyDown(e);
             }}
             value={inputValue}
             onChange={(e) => inputOnChange(e.target.value)}
@@ -75,13 +100,22 @@ export default function DTCHeader({
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>
-          <button
-            id={`profile-${id}`}
-            className="button-profile"
-            onClick={() => navigate("/profile")}
-          >
-            <FontAwesomeIcon icon={faUser} />
-          </button>
+          <div id={`profile-panel-${id}`} className="profile-panel">
+            <button
+              id={`create-deck-${id}`}
+              className="create-deck-button"
+              onClick={handleCreateDeckButton}
+            >
+              <FontAwesomeIcon icon={faScrewdriverWrench} />
+            </button>
+            <button
+              id={`profile-${id}`}
+              className="profile-button"
+              onClick={() => navigate("/profile")}
+            >
+              <FontAwesomeIcon icon={faUser} />
+            </button>
+          </div>
         </div>
         <text id="num-decks" className="num-results">
           {numResults}

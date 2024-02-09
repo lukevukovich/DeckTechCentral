@@ -81,12 +81,24 @@ button:active {
     right: 42px;
 }
 
-.button-profile {
+.profile-panel {
+    flex-direction: column;
     position: fixed;
     right: 20px;
-    font-size: 24px;
-    height: 40px;
-    width: 45px;
+}
+
+.profile-button {
+    font-size: 25px;
+    height: 45px;
+    width: 48px;
+    border-radius: 30px;
+}
+
+.create-deck-button {
+    font-size: 23px;
+    height: 45px;
+    width: 48px;
+    border-radius: 30px;
 }
 
 .user-popup {
@@ -104,10 +116,10 @@ button:active {
     right: 8px;
 }
 
-@media (max-width: 968px) {
-    .button-profile{
+@media (max-width: 1018px) {
+    .profile-panel{
       position: static;
-      margin-left: -25px;
+      margin-left: -40px;
     }
   }
 
