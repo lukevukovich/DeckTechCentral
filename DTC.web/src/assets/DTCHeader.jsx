@@ -45,7 +45,7 @@ export default function DTCHeader({
     }
   }
 
-  //Check for Google login, set popup
+  //Check for Google login, determine if user can create deck
   async function handleCreateDeckButton() {
     const status = await awaitLoginStatus();
     if (status) {
