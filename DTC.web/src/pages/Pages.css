@@ -128,7 +128,8 @@ button:active {
 }
 
 .checkbox-toggle {
-    width: 42px;
+    max-width: 42px;
+    min-width: 42px;
     height: 22px;
     background-image: linear-gradient(to right, rgb(163, 53, 157), rgb(107, 64, 194));
     border-radius: 50px;
