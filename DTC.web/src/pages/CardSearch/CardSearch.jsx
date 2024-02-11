@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { maxSearchLength } from "../../assets/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader";
 
 Modal.setAppElement("#root");
@@ -69,7 +70,7 @@ export default function CardSearch() {
 
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
-    if (cardName != "" && cardName.length <= 40) {
+    if (cardName != "" && cardName.length <= maxSearchLength) {
       if (!isToggled) {
         navigate(`/decksearch?q=${cardName}`);
       } else {

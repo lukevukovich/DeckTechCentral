@@ -9,6 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { awaitLoginStatus } from "../oauth/User";
 
+//Max length of search
+export const maxSearchLength = 40;
+
 //DTC Header that appears on every page
 export default function DTCHeader({
   id,

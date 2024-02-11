@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import "../Pages.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { maxSearchLength } from "../../assets/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader";
 
 export default function Dashboard() {
@@ -31,7 +32,7 @@ export default function Dashboard() {
   }, []);
 
   function search() {
-    if (input != "" && input.length <= 40) {
+    if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
         navigate(`/decksearch?q=${input}`);
         setInput("");

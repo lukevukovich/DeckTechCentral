@@ -3,6 +3,7 @@ import "./DeckSearch.css";
 import "../Pages.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { maxSearchLength } from "../../assets/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader";
 
 export default function DeckSearch() {
@@ -35,7 +36,7 @@ export default function DeckSearch() {
 
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
-    if (deckName != "" && deckName.length <= 40) {
+    if (deckName != "" && deckName.length <= maxSearchLength) {
       if (isToggled) {
         navigate(`/cardsearch?q=${deckName}`);
       } else {

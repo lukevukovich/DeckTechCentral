@@ -9,6 +9,7 @@ import {
   getUserInfo,
   setUserPopup,
 } from "../../oauth/User";
+import { maxSearchLength } from "../../assets/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader";
 
 export default function Profile() {
@@ -75,7 +76,7 @@ export default function Profile() {
 
   //Search deck/card based on toggle
   function search() {
-    if (input != "" && input.length <= 40) {
+    if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
         navigate(`/decksearch?q=${input}`);
         setInput("");
