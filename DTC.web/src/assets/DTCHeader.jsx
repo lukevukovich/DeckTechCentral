@@ -25,6 +25,8 @@ export default function DTCHeader({
   numResults,
   navigate,
 }) {
+  let timeoutId;
+
   //Set toggle and search setting
   function toggleSearch() {
     setIsToggled(!isToggled);
@@ -52,12 +54,31 @@ export default function DTCHeader({
   async function handleCreateDeckButton() {
     const status = await awaitLoginStatus();
     if (status) {
-      console.log("Can create deck");
       navigate("/createdeck");
     } else {
-      console.log("Cannot create deck");
       navigate("/profile");
     }
+  }
+
+  //Show tool tip after mouse enter. Allows for dynamic text and tooltips
+  function showTooltip(e, tooltip_text) {
+    const x = e.clientX + 8;
+    const y = e.clientY + 8;
+    const tooltip = document.getElementById(`tooltip-${id}`);
+
+    timeoutId = setTimeout(() => {
+      tooltip.style.left = x + "px";
+      tooltip.style.top = y + "px";
+      tooltip.textContent = tooltip_text;
+      tooltip.style.visibility = "visible";
+    }, 600);
+  }
+
+  //Hide tooltip after mouse exit
+  function hideTooltip() {
+    clearTimeout(timeoutId);
+    const tooltip = document.getElementById(`tooltip-${id}`);
+    tooltip.style.visibility = "hidden";
   }
 
   return (
@@ -69,7 +90,15 @@ export default function DTCHeader({
           </text>
         </Link>
         <div id={`search-panel-${id}`} className="search-panel">
-          <button id={`go-${id}`} onClick={search}>
+          <button
+            id={`go-${id}`}
+            onClick={() => {
+              clearTimeout(timeoutId);
+              search();
+            }}
+            onMouseEnter={(e) => showTooltip(e, "Search")}
+            onMouseLeave={hideTooltip}
+          >
             <FontAwesomeIcon icon={faSearch} />
           </button>
           <input
@@ -94,12 +123,24 @@ export default function DTCHeader({
             htmlFor={`checkbox-${id}`}
             className="checkbox-toggle"
             onChange={toggleSearch}
-            onClick={toggleSearch}
+            onClick={() => {
+              clearTimeout(timeoutId);
+              toggleSearch();
+            }}
+            onMouseEnter={(e) =>
+              showTooltip(e, "Toggle search mode by deck (D) or card (C)")
+            }
+            onMouseLeave={hideTooltip}
           ></label>
           <button
             id={`clear-${id}`}
             className="button-clear"
-            onClick={clearSearch}
+            onClick={() => {
+              clearTimeout(timeoutId);
+              clearSearch();
+            }}
+            onMouseEnter={(e) => showTooltip(e, "Clear search")}
+            onMouseLeave={hideTooltip}
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>
@@ -107,14 +148,26 @@ export default function DTCHeader({
             <button
               id={`create-deck-${id}`}
               className="create-deck-button"
-              onClick={handleCreateDeckButton}
+              onClick={() => {
+                clearTimeout(timeoutId);
+                handleCreateDeckButton();
+              }}
+              onMouseEnter={(e) =>
+                showTooltip(e, "Create a deck (login required)")
+              }
+              onMouseLeave={hideTooltip}
             >
               <FontAwesomeIcon icon={faScrewdriverWrench} />
             </button>
             <button
               id={`profile-${id}`}
               className="profile-button"
-              onClick={() => navigate("/profile")}
+              onClick={() => {
+                clearTimeout(timeoutId);
+                navigate("/profile");
+              }}
+              onMouseEnter={(e) => showTooltip(e, "Profile")}
+              onMouseLeave={hideTooltip}
             >
               <FontAwesomeIcon icon={faUser} />
             </button>
@@ -125,6 +178,9 @@ export default function DTCHeader({
         </text>
       </div>
       <label id={`user-popup-${id}`} className="user-popup"></label>
+      <label id={`tooltip-${id}`} className="tooltip">
+        test
+      </label>
     </div>
   );
 }
