@@ -62,8 +62,8 @@ export default function DTCHeader({
 
   //Show tool tip after mouse enter. Allows for dynamic text and tooltips
   function showTooltip(e, tooltip_text) {
-    const x = e.clientX + 8;
-    const y = e.clientY + 8;
+    const x = e.clientX - tooltip_text.length * 3;
+    const y = e.clientY + 10;
     const tooltip = document.getElementById(`tooltip-${id}`);
 
     timeoutId = setTimeout(() => {

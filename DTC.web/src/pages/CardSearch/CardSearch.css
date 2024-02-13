@@ -26,27 +26,22 @@
   gap: 10px;
 }
 
-@media (max-width: 1022px) {
+@media (max-width: 1200px) {
   #image-list {
     width: 940px;
-    margin-left: 0px;
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 786px) {
+@media (max-width: 965px) {
   #image-list {
-    width: 701px;
-    margin-left: 0px;
+    width: 705px;
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-@media (max-width: 550px) {
-  #image-list {
-    width: 465px;
-    margin-left: 0px;
-    grid-template-columns: repeat(2, 1fr);
+  input {
+    transition: 0.5s;
+    width: 200px;
   }
 }
 

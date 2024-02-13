@@ -51,10 +51,11 @@ input {
   border-radius: 50px;
   border: none;
   outline: none;
-  width: 400px;
+  width: 350px;
   height: 35px;
   text-indent: 12px;
   padding-right: 58px;
+  transition: 0.5s;
 }
 
 button {
@@ -127,7 +128,7 @@ button:active {
   right: 8px;
 }
 
-@media (max-width: 1018px) {
+@media (max-width: 818px) {
   .profile-panel {
     position: static;
     margin-left: -40px;
