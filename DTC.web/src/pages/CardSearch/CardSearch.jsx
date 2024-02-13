@@ -272,9 +272,13 @@ export default function CardSearch() {
         setIsToggled={setIsToggled}
         search={checkSearchToggle}
         clearSearch={clearSearch}
-        numResults={numCards}
         navigate={navigate}
       ></DTCHeader>
+      <div id="num-decks">
+        <text className="num-results">
+          {numCards}
+        </text>
+      </div>
       <ImageList value={imageList}></ImageList>
     </div>
   );

@@ -77,9 +77,13 @@ export default function DeckSearch() {
         setIsToggled={setIsToggled}
         search={checkSearchToggle}
         clearSearch={clearSearch}
-        numResults={numDecks}
         navigate={navigate}
       ></DTCHeader>
+      <div id="num-decks">
+        <text className="num-results">
+            {numDecks}
+        </text>
+      </div>
     </div>
   );
 }

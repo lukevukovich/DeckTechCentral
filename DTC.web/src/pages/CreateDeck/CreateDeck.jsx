@@ -60,7 +60,6 @@ export default function CreateDeck() {
         setIsToggled={setIsToggled}
         search={search}
         clearSearch={clearSearch}
-        numResults={""}
         navigate={navigate}
       ></DTCHeader>
     </div>
