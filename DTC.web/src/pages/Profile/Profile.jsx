@@ -104,7 +104,6 @@ export default function Profile() {
         setIsToggled={setIsToggled}
         search={search}
         clearSearch={clearSearch}
-        numResults={""}
         navigate={navigate}
       ></DTCHeader>
       <div className="oauth">

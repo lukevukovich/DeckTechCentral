@@ -30,14 +30,17 @@ text {
   margin-left: 15px;
 }
 
+#num-decks {
+  display: flex;
+  justify-content: center;
+  padding-top: 140px;
+}
+
 .num-results {
   color: rgb(29, 14, 41);
-  font-size: 15px;
+  font-size: 20px;
   text-wrap: nowrap;
-  position: fixed;
-  text-align: left;
   left: 10px;
-  top: 128px;
 }
 
 input {
@@ -92,6 +95,12 @@ button:active {
   height: 45px;
   width: 48px;
   border-radius: 30px;
+}
+
+.profile-button:hover + .user-popup {
+  color: rgb(219, 179, 223);
+  background-color: rgb(48, 22, 99);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .create-deck-button {

@@ -22,7 +22,6 @@ export default function DTCHeader({
   setIsToggled,
   search,
   clearSearch,
-  numResults,
   navigate,
 }) {
   //Manage timeout for tooltip
@@ -172,13 +171,10 @@ export default function DTCHeader({
             >
               <FontAwesomeIcon icon={faUser} />
             </button>
+            <label id={`user-popup-${id}`} className="user-popup"></label>
           </div>
         </div>
-        <text id="num-decks" className="num-results">
-          {numResults}
-        </text>
       </div>
-      <label id={`user-popup-${id}`} className="user-popup"></label>
       <label id={`tooltip-${id}`} className="tooltip"></label>
     </div>
   );

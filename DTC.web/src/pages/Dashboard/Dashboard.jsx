@@ -60,7 +60,6 @@ export default function Dashboard() {
         setIsToggled={setIsToggled}
         search={search}
         clearSearch={clearSearch}
-        numResults={""}
         navigate={navigate}
       ></DTCHeader>
       <text id="welcome-db">Welcome to DeckTechCentral.</text>
