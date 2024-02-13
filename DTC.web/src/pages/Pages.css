@@ -13,12 +13,24 @@ text {
   font-size: 30px;
   padding: 15px;
   background-color: rgb(59, 27, 121);
-  border-radius: 25px;
-  text-wrap: nowrap;
+  border-radius: 20px;
   position: static;
   margin-left: 8px;
   user-select: none;
   letter-spacing: 1px;
+  transition: 0.5s;
+}
+
+@media (max-width: 815px) {
+  .heading {
+    font-size: 12px;
+    padding: 10px;
+    margin-right: -10px;
+    margin-left: 5px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 12px;
+  }
 }
 
 .search-panel {
@@ -58,6 +70,13 @@ input {
   transition: 0.5s;
 }
 
+@media (max-width: 965px) {
+  input {
+    transition: 0.5s;
+    width: 200px;
+  }
+}
+
 button {
   font-size: 18px;
   border-radius: 20px;
@@ -90,6 +109,13 @@ button:active {
   flex-direction: column;
   position: fixed;
   right: 20px;
+}
+
+@media (max-width: 650px) {
+  .profile-panel {
+    position: static;
+    margin-left: -40px;
+  }
 }
 
 .profile-button {
@@ -126,13 +152,6 @@ button:active {
   padding-right: 10px;
   font-weight: bold;
   right: 8px;
-}
-
-@media (max-width: 818px) {
-  .profile-panel {
-    position: static;
-    margin-left: -40px;
-  }
 }
 
 .checkbox {
