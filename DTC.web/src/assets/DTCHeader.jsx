@@ -25,6 +25,7 @@ export default function DTCHeader({
   numResults,
   navigate,
 }) {
+  //Manage timeout for tooltip
   let timeoutId;
 
   //Set toggle and search setting
@@ -178,9 +179,7 @@ export default function DTCHeader({
         </text>
       </div>
       <label id={`user-popup-${id}`} className="user-popup"></label>
-      <label id={`tooltip-${id}`} className="tooltip">
-        test
-      </label>
+      <label id={`tooltip-${id}`} className="tooltip"></label>
     </div>
   );
 }
