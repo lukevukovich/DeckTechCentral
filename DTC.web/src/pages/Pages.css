@@ -40,7 +40,8 @@ text {
   color: rgb(29, 14, 41);
   font-size: 20px;
   text-wrap: nowrap;
-  left: 10px;
+  margin-top: -3px;
+  margin-bottom: -3px;
 }
 
 input {

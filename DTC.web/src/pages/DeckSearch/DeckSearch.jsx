@@ -37,6 +37,7 @@ export default function DeckSearch() {
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
     if (deckName != "" && deckName.length <= maxSearchLength) {
+      setNumDecks("");
       if (isToggled) {
         navigate(`/cardsearch?q=${deckName}`);
       } else {

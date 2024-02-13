@@ -71,6 +71,7 @@ export default function CardSearch() {
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
     if (cardName != "" && cardName.length <= maxSearchLength) {
+      setNumCards("");
       if (!isToggled) {
         navigate(`/decksearch?q=${cardName}`);
       } else {
@@ -275,9 +276,7 @@ export default function CardSearch() {
         navigate={navigate}
       ></DTCHeader>
       <div id="num-decks">
-        <text className="num-results">
-          {numCards}
-        </text>
+        <text className="num-results">{numCards}</text>
       </div>
       <ImageList value={imageList}></ImageList>
     </div>

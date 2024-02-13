@@ -17,13 +17,37 @@
 
 #image-list {
   margin-top: 10px; /* Adjusted margin based on the height of #search-panel */
-  width: 940px;
+  width: 1175px;
   margin-left: auto; /* Center the grid horizontally */
   margin-right: auto;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+}
+
+@media (max-width: 1022px) {
+  #image-list {
+    width: 940px;
+    margin-left: 0px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 786px) {
+  #image-list {
+    width: 701px;
+    margin-left: 0px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  #image-list {
+    width: 465px;
+    margin-left: 0px;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .card-image {
