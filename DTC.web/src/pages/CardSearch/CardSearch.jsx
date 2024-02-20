@@ -1,17 +1,12 @@
 import { useState, useEffect } from "react";
 import "./CardSearch.css";
 import "../Pages.css";
-import {
-  faSearch,
-  faMultiply,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader";
+import CardModal from "../../assets/CardModal/CardModal";
+import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
@@ -197,73 +192,15 @@ export default function CardSearch() {
     setModal(true);
   }
 
-  //Close card details
-  function closeCardDetails() {
-    setModal(false);
-  }
-
-  //Create card modal/popup for when card is selected
-  const CardModal = () => {
-    return (
-      <Modal
-        id="card-modal"
-        isOpen={modal}
-        onRequestClose={() => closeCardDetails()}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
-          },
-          content: {
-            width: "750px",
-            height: "500px",
-            margin: "auto",
-            borderRadius: "10px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            backgroundColor: "rgb(255, 251, 234)",
-          },
-        }}
-      >
-        <div id="modal-header">
-          <div id="modal-heading">
-            <text id="modal-heading-name">
-              {selectedCard.name
-                .replace(new RegExp("//", "g"), "|")
-                .substring(0, 66)}
-            </text>
-            <text id="modal-heading-mana">
-              {selectedCard.mana_cost.replace(new RegExp("//", "g"), "|")}
-            </text>
-          </div>
-          <button id="modal-button" onClick={() => closeCardDetails()}>
-            <FontAwesomeIcon icon={faMultiply} />
-          </button>
-        </div>
-        <div id="modal-info">
-          <img
-            id="modal-card"
-            className="card-image"
-            src={selectedCard.image_uris.normal}
-          />
-          <div id="modal-stats">
-            <text>
-              {selectedCard.type_line.replace(new RegExp("//", "g"), "|")}
-            </text>
-            <text>
-              {selectedCard.oracle_text.replace(new RegExp("\n", "g"), "\n\n")}
-            </text>
-            <text>
-              {selectedCard.flavor_text.replace(new RegExp("\n", "g"), "\n\n")}
-            </text>
-          </div>
-        </div>
-      </Modal>
-    );
-  };
-
   //Create all components
   return (
     <div id="cs-all">
-      <CardModal />
+      <CardModal
+        id="cs"
+        modal={modal}
+        selectedCard={selectedCard}
+        setModal={setModal}
+      ></CardModal>
       <DTCHeader
         id="cs"
         inputText="Search card..."

@@ -12,7 +12,7 @@
 }
 
 .user-popup {
-  top: 128px
+  top: 128px;
 }
 
 #image-list {
@@ -38,74 +38,4 @@
     width: 705px;
     grid-template-columns: repeat(3, 1fr);
   }
-}
-
-.card-image {
-  width: 225px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-#modal-header {
-  font-family: "Arial";
-  position: fixed;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgb(27, 0, 78);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  width: 792px;
-  margin-left: -21px;
-  margin-top: -22px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-#modal-heading {
-  font-size: 18px;
-  padding: 15px;
-  background-color: rgb(59, 27, 121);
-  border-radius: 25px;
-  text-wrap: nowrap;
-  position: static;
-  margin-left: 15px;
-}
-
-#modal-heading-mana {
-  margin-left: 8px;
-  color: rgb(164, 134, 167);
-}
-
-#modal-button {
-  font-family: "Arial";
-  margin-right: 20px;
-}
-
-#modal-info {
-  display: flex;
-}
-
-#modal-card {
-  width: 290px;
-  margin-top: 92px;
-  margin-left: 5px;
-}
-
-#modal-stats {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  width: 435px;
-  margin-top: 95px;
-  gap: 22px;
-  white-space: pre-line;
-}
-
-#modal-stats text {
-  font-family: "Serif";
-  font-size: 17px;
-  color: black;
 }

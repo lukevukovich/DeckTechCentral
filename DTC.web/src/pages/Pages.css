@@ -147,7 +147,7 @@ button:active {
   padding: 8px;
   transition: 0.2s;
   font-size: 14.5px;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   padding-left: 10px;
   padding-right: 10px;
   font-weight: bold;
@@ -205,4 +205,11 @@ button:active {
   padding: 4px;
   font-size: 11px;
   outline: 1px solid rgb(194, 194, 194);
+}
+
+.card-image {
+  width: 225px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
