@@ -43,10 +43,6 @@ export default function DTCHeader({
   function inputOnKeyDown(e) {
     if (e.key === "Enter") {
       search();
-    } else if (e.key == "ArrowLeft" && isToggled) {
-      toggleSearch();
-    } else if (e.key == "ArrowRight" && !isToggled) {
-      toggleSearch();
     }
   }
 

@@ -40,7 +40,7 @@ export default function CardSearch() {
   //Use state for selected card
   const [selectedCard, setSelectedCard] = useState({
     name: "",
-    image_uris: { normal: "" },
+    image_uris: { large: "" },
     type_line: "",
     oracle_text: "",
     mana_cost: "",
@@ -89,28 +89,33 @@ export default function CardSearch() {
 
     for (let i = 0; i < jsonData.data.length; i++) {
       try {
-        // Test if oracle_text is present
-        try {
-          jsonData.data[i].oracle_text.split("\n");
-        } catch (error) {
-          // If not present, go through all card faces and add to oracle_text
-          const faces = jsonData.data[i].card_faces.length;
-          jsonData.data[i].oracle_text = "";
-          for (let j = 0; j < faces; j++) {
-            let face_text = jsonData.data[i].card_faces[j].oracle_text;
-            jsonData.data[i].oracle_text += " | " + face_text;
+        // Check if card_faces is present
+        if (jsonData.data[i].hasOwnProperty("card_faces")) {
+          // If present, check if two images or one image
+          const faces = jsonData.data[i].card_faces;
+          if (faces[0].hasOwnProperty("image_uris")) {
+            // Two images
+            jsonData.data.splice(i, 1);
+            jsonData.data.splice(i, 0, faces[1]);
+            jsonData.data.splice(i, 0, faces[0]);
+          } else {
+            // One image
+            const numFaces = jsonData.data[i].card_faces.length;
+            jsonData.data[i].oracle_text = "";
+            for (let j = 0; j < numFaces; j++) {
+              let face_text = jsonData.data[i].card_faces[j].oracle_text;
+              jsonData.data[i].oracle_text += " | " + face_text;
+            }
+            jsonData.data[i].oracle_text =
+              jsonData.data[i].oracle_text.substring(3);
           }
-          jsonData.data[i].oracle_text =
-            jsonData.data[i].oracle_text.substring(3);
         }
 
-        //Text is flavor_text is present
-        try {
-          jsonData.data[i].flavor_text.split("\n");
-        } catch (error) {
+        // Test is flavor_text is present
+        if (!jsonData.data[i].hasOwnProperty("flavor_text")) {
           jsonData.data[i].flavor_text = "";
         }
-        images.push(jsonData.data[i].image_uris.normal);
+        images.push(jsonData.data[i].image_uris.large);
       } catch (error) {
         removeCards.push(i);
       }
@@ -198,8 +203,8 @@ export default function CardSearch() {
       <CardModal
         id="cs"
         modal={modal}
-        selectedCard={selectedCard}
         setModal={setModal}
+        selectedCard={selectedCard}
       ></CardModal>
       <DTCHeader
         id="cs"

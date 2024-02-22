@@ -3,7 +3,7 @@ import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CardModal.css";
 
-export default function CardModal({ id, modal, selectedCard, setModal }) {
+export default function CardModal({ id, modal, setModal, selectedCard }) {
   //Close card modal
   function closeCardDetails() {
     setModal(false);
@@ -51,7 +51,7 @@ export default function CardModal({ id, modal, selectedCard, setModal }) {
         <img
           id={`modal-card-${id}`}
           className="card-image modal-card"
-          src={selectedCard.image_uris.normal}
+          src={selectedCard.image_uris.large}
         />
         <div id={`modal-stats-${id}`} className="modal-stats">
           <text>
