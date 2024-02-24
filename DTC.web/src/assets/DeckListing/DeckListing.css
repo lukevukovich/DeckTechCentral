@@ -1,0 +1,65 @@
+.deck-listing {
+  width: 400px;
+  height: 250px;
+  border-radius: 12px;
+  position: relative; /* Add this to position children absolutely within */
+  overflow: hidden; /* Ensures children do not overflow rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+/* Add this for the hover effect */
+.deck-listing:hover {
+  outline: 3px solid rgb(116, 53, 243); /* Example outline color and width */
+}
+
+.deck-listing text {
+  font-family: arial;
+}
+
+.cover-image {
+  width: 130%; /* Make it responsive to the container's width */
+  height: 250px;
+  object-fit: cover;
+  object-position: -6cap -8cap;
+}
+
+.overlay {
+  position: absolute; /* Change to absolute */
+  top: 0;
+  left: 0;
+  width: 100%; /* Make it fill the container */
+  height: 100%; /* Make it fill the container */
+  background: rgba(0, 0, 0, 0.75); /* Black with opacity */
+}
+
+.deck-name {
+  position: absolute; /* Change to absolute */
+  top: 12px;
+  left: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-wrap: nowrap;
+}
+
+.format {
+  position: absolute; /* Change to absolute */
+  top: 40px;
+  left: 15px;
+  font-size: 16px;
+  color: rgb(160, 160, 160);
+  font-style: italic;
+}
+
+.format::first-letter {
+  text-transform: uppercase;
+}
+
+.creator {
+  position: absolute; /* Change to absolute */
+  top: 220px;
+  left: 15px;
+  font-size: 16px;
+  letter-spacing: 0.02cap;
+}

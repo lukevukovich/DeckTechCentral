@@ -1,0 +1,19 @@
+[
+  {
+    "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+    "name": "Luke's OP Deck",
+    "cover_image": "https://cards.scryfall.io/large/back/a/2/a21b1734-a773-4107-95c1-b44d5ccdfd82.jpg?1682203576",
+    "likes": 0,
+    "dislikes": 0,
+    "views": 0,
+    "format": "standard",
+    "editors": [
+      {
+        "id": "string",
+        "username": "lukevuke",
+        "email": "john@email.com",
+        "userStatus": "moderator"
+      }
+    ]
+  }
+]

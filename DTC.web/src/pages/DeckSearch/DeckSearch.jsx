@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader";
+import deckJson from "../../test/exdeck.json"
+import DeckListing from "../../assets/DeckListing/DeckListing"
 
 export default function DeckSearch() {
   //Set working variables
@@ -85,6 +87,7 @@ export default function DeckSearch() {
             {numDecks}
         </text>
       </div>
+      <DeckListing deckJson={deckJson[0]}></DeckListing>
     </div>
   );
 }
