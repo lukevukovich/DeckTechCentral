@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import "./DeckSearch.css";
-import "../Pages.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
-import { maxSearchLength } from "../../assets/DTCHeader";
-import DTCHeader from "../../assets/DTCHeader";
-import deckJson from "../../test/exdeck.json"
-import DeckListing from "../../assets/DeckListing/DeckListing"
+import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
+import DTCHeader from "../../assets/DTCHeader/DTCHeader";
+import deckJson from "../../test/deck.json";
+import DeckListing from "../../assets/DeckListing/DeckListing";
 
 export default function DeckSearch() {
   //Set working variables
@@ -83,9 +82,7 @@ export default function DeckSearch() {
         navigate={navigate}
       ></DTCHeader>
       <div id="num-decks">
-        <text className="num-results">
-            {numDecks}
-        </text>
+        <text className="num-results">{numDecks}</text>
       </div>
       <DeckListing deckJson={deckJson[0]}></DeckListing>
     </div>

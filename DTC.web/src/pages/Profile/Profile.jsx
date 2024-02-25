@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./Profile.css";
-import "../Pages.css";
 import { useNavigate } from "react-router-dom";
 import {
   awaitGoogleLogin,
@@ -9,8 +8,8 @@ import {
   getUserInfo,
   setUserPopup,
 } from "../../oauth/User";
-import { maxSearchLength } from "../../assets/DTCHeader";
-import DTCHeader from "../../assets/DTCHeader";
+import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
+import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 
 export default function Profile() {
   const navigate = useNavigate();

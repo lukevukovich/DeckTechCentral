@@ -15,6 +15,18 @@
   top: 128px;
 }
 
+.card-image {
+  width: 225px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+/* Add this for the hover effect */
+.card-image:hover {
+  outline: 3px solid rgb(116, 53, 243); /* Example outline color and width */
+}
+
 #image-list {
   margin-top: 10px; /* Adjusted margin based on the height of #search-panel */
   width: 1175px;

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "./CardSearch.css";
-import "../Pages.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
-import { maxSearchLength } from "../../assets/DTCHeader";
-import DTCHeader from "../../assets/DTCHeader";
+import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
+import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import CardModal from "../../assets/CardModal/CardModal";
 import Modal from "react-modal";
 

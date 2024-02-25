@@ -2,16 +2,15 @@
   width: 400px;
   height: 250px;
   border-radius: 12px;
-  position: relative; /* Add this to position children absolutely within */
-  overflow: hidden; /* Ensures children do not overflow rounded corners */
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   margin-left: 20px;
 }
 
-/* Add this for the hover effect */
 .deck-listing:hover {
-  outline: 3px solid rgb(116, 53, 243); /* Example outline color and width */
+  outline: 3px solid rgb(116, 53, 243);
 }
 
 .deck-listing text {
@@ -19,47 +18,66 @@
 }
 
 .cover-image {
-  width: 130%; /* Make it responsive to the container's width */
+  width: 130%;
   height: 250px;
   object-fit: cover;
   object-position: -6cap -8cap;
 }
 
 .overlay {
-  position: absolute; /* Change to absolute */
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Make it fill the container */
-  height: 100%; /* Make it fill the container */
-  background: rgba(0, 0, 0, 0.75); /* Black with opacity */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
 }
 
 .deck-name {
-  position: absolute; /* Change to absolute */
+  position: absolute;
   top: 12px;
   left: 15px;
   font-size: 20px;
   font-weight: bold;
   text-wrap: nowrap;
+  color: white;
 }
 
 .format {
-  position: absolute; /* Change to absolute */
+  position: absolute;
   top: 40px;
   left: 15px;
   font-size: 16px;
-  color: rgb(160, 160, 160);
+  color: rgb(172, 172, 172);
   font-style: italic;
+  letter-spacing: 0.02cap;
 }
 
 .format::first-letter {
   text-transform: uppercase;
 }
 
-.creator {
-  position: absolute; /* Change to absolute */
+.icon {
+  margin-right: 4px;
+  font-size: 12px;
+  margin-bottom: 1px;
+  color: white;
+}
+
+.creator-likes-views {
+  text-wrap: nowrap;
+  position: absolute;
   top: 220px;
-  left: 15px;
-  font-size: 16px;
+  right: 15px;
+  font-size: 14px;
   letter-spacing: 0.02cap;
+}
+
+.creator-likes-views text {
+  margin-left: 14px;
+  color: white;
+}
+
+.creator {
+  letter-spacing: 0.05cap;
 }

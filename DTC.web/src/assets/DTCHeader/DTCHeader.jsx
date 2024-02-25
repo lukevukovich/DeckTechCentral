@@ -1,4 +1,4 @@
-import "../pages/Pages.css";
+import "./DTCHeader.css";
 import {
   faSearch,
   faMultiply,
@@ -7,7 +7,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { awaitLoginStatus } from "../oauth/User";
+import { awaitLoginStatus } from "../../oauth/User";
+import { useEffect } from "react";
 
 //Max length of search
 export const maxSearchLength = 40;
@@ -76,6 +77,13 @@ export default function DTCHeader({
     const tooltip = document.getElementById(`tooltip-${id}`);
     tooltip.style.visibility = "hidden";
   }
+
+  //Hide tooltip after page load
+  useEffect(() => {
+    timeoutId = setTimeout(() => {
+      hideTooltip();
+    }, 600);
+  }, []);
 
   return (
     <div id={id}>
