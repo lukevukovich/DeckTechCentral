@@ -73,7 +73,10 @@ export default function CardSearch() {
   useEffect(() => {
     //Check for login and set popup
     checkLogin();
-    
+
+    //Go to top of page
+    window.scrollTo(0, 0);
+
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchCard();
