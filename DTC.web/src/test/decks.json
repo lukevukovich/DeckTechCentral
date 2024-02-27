@@ -1,0 +1,226 @@
+[
+  {
+    "id": "2a2575f2-1aca-40f6-90f1-46421e7eb874",
+    "name": "Luke's Mega Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/e/1/e11103a3-95dc-4453-a3f3-975fcff5fba0.jpg?1681158369",
+    "likes": 152,
+    "dislikes": 33,
+    "views": 74354,
+    "format": "standard",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "ebb88ffa-7862-4018-b56c-effb9c32d825",
+    "name": "Adam's Mega Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/a/a/aa8f58f1-4843-4926-b3c4-98898201c216.jpg?1562791329",
+    "likes": 80,
+    "dislikes": 19,
+    "views": 124301,
+    "format": "commander",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "5e001419-377e-4ae4-9a66-5c8c2fa58f20",
+    "name": "Luke's Mega Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/6/e/6e372f2d-92dd-487e-bb69-3dce1110dac1.jpg?1681158592",
+    "likes": 108,
+    "dislikes": 30,
+    "views": 151974,
+    "format": "standard",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "18636101-ff2d-4b69-8727-d37178ed00a1",
+    "name": "Adam's Mega Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/a/e/ae8024ce-12c9-4139-934d-fb230103daa1.jpg?1681158590",
+    "likes": 93,
+    "dislikes": 44,
+    "views": 113726,
+    "format": "modern",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "53ce1974-913c-4e05-9e28-884fdec89866",
+    "name": "Max's Ultra Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/6/7/67a76010-d932-4727-8b5e-b8e2d14e1362.jpg?1627708716",
+    "likes": 27,
+    "dislikes": 5,
+    "views": 58026,
+    "format": "legacy",
+    "editors": [
+      {
+        "username": "cardconnoisseur",
+        "email": "connoisseur@cards.com",
+        "userStatus": "admin"
+      }
+    ]
+  },
+  {
+    "id": "b6e2f8e6-3280-4c5d-9aea-05cc596d691f",
+    "name": "Eve's Mega Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/a/5/a5cbda07-53a0-4526-9955-36f902073cf1.jpg?1681158642",
+    "likes": 30,
+    "dislikes": 18,
+    "views": 59767,
+    "format": "pioneer",
+    "editors": [
+      {
+        "username": "cardconnoisseur",
+        "email": "connoisseur@cards.com",
+        "userStatus": "admin"
+      }
+    ]
+  },
+  {
+    "id": "9f44e588-d1a3-4068-a875-2b7ed93aaa09",
+    "name": "Eve's Mega Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/f/7/f7d0e041-ec44-4d6c-9a35-173340f1bed7.jpg?1681158659",
+    "likes": 144,
+    "dislikes": 12,
+    "views": 61559,
+    "format": "vintage",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "dcee2b02-135e-42b1-a5fe-0126c7d3c7bc",
+    "name": "Max's Powerful Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/5/e/5ece9da7-7116-4b59-a37c-6f295204970a.jpg?1681158970",
+    "likes": 91,
+    "dislikes": 7,
+    "views": 151088,
+    "format": "legacy",
+    "editors": [
+      {
+        "username": "cardconnoisseur",
+        "email": "connoisseur@cards.com",
+        "userStatus": "admin"
+      }
+    ]
+  },
+  {
+    "id": "077b6506-a842-4d61-93e9-75b3911e0ce0",
+    "name": "Luke's Powerful Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/3/a/3a2fcc23-ac09-4ada-b194-424739c9c734.jpg?1562800274",
+    "likes": 106,
+    "dislikes": 8,
+    "views": 125799,
+    "format": "modern",
+    "editors": [
+      {
+        "username": "lukevuke",
+        "email": "john@email.com",
+        "userStatus": "moderator"
+      }
+    ]
+  },
+  {
+    "id": "0063f42d-f99d-4455-8fb1-9c1c61cea38e",
+    "name": "Max's Powerful Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/c/e/cea79097-b56a-4cbf-9c80-2dfe0c67368b.jpg?1681158996",
+    "likes": 126,
+    "dislikes": 3,
+    "views": 171501,
+    "format": "commander",
+    "editors": [
+      {
+        "username": "lukevuke",
+        "email": "john@email.com",
+        "userStatus": "moderator"
+      }
+    ]
+  },
+  {
+    "id": "f96d51e1-cdb1-446c-9e08-8180ed09a92d",
+    "name": "Adam's OP Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/5/e/5e56a516-d71a-49c4-a929-9a8973125d3c.jpg?1674136941",
+    "likes": 46,
+    "dislikes": 7,
+    "views": 122587,
+    "format": "commander",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "45feb252-59e2-4360-b661-cce2bd70da44",
+    "name": "Eve's OP Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/5/7/57adbd6e-88ec-4472-a9c9-90b679fa881f.jpg?1674136418",
+    "likes": 173,
+    "dislikes": 2,
+    "views": 160451,
+    "format": "commander",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  },
+  {
+    "id": "63e03c09-8008-4b8c-b8da-bf65e017c2db",
+    "name": "Adam's Ultra Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/9/b/9ba9d1f0-a864-490c-b258-6bf9de251c4b.jpg?1681724431",
+    "likes": 134,
+    "dislikes": 5,
+    "views": 11207,
+    "format": "standard",
+    "editors": [
+      {
+        "username": "lukevuke",
+        "email": "john@email.com",
+        "userStatus": "moderator"
+      }
+    ]
+  },
+  {
+    "id": "ceb1e58c-7da1-47e7-95e0-0aa2dd6ac0d5",
+    "name": "Eve's Ultra Deck",
+    "cover_image": "https://cards.scryfall.io/large/front/6/4/6430c61b-407d-471d-9012-07f1ddef28aa.jpg?1674135945",
+    "likes": 73,
+    "dislikes": 24,
+    "views": 103606,
+    "format": "vintage",
+    "editors": [
+      {
+        "username": "magicmax",
+        "email": "max@magic.com",
+        "userStatus": "user"
+      }
+    ]
+  }
+]

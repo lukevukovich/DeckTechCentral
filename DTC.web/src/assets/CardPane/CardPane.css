@@ -1,0 +1,25 @@
+.card-pane {
+  margin-top: 10px; /* Adjusted margin based on the height of #search-panel */
+  width: 1175px;
+  margin-left: auto; /* Center the grid horizontally */
+  margin-right: auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  z-index: 2;
+}
+
+@media (max-width: 1200px) {
+  .card-pane {
+    width: 940px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 965px) {
+  .card-pane {
+    width: 705px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

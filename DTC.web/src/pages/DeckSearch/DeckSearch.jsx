@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
-import deckJson from "../../test/deck.json";
-import DeckListing from "../../assets/DeckListing/DeckListing";
+import decks from "../../test/decks.json";
+import DeckPane from "../../assets/DeckPane/DeckPane";
 
 export default function DeckSearch() {
   //Set working variables
@@ -51,6 +51,9 @@ export default function DeckSearch() {
     //Check for login and set popup
     checkLogin();
 
+    //Go to top of page
+    window.scrollTo(0, 0);
+
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchDeck();
@@ -84,7 +87,7 @@ export default function DeckSearch() {
       <div id="num-decks">
         <text className="num-results">{numDecks}</text>
       </div>
-      <DeckListing deckJson={deckJson[0]}></DeckListing>
+      <DeckPane decks={decks}></DeckPane>
     </div>
   );
 }

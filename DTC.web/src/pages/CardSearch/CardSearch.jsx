@@ -6,6 +6,7 @@ import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import CardModal from "../../assets/CardModal/CardModal";
 import Modal from "react-modal";
+import CardPane from "../../assets/CardPane/CardPane";
 
 Modal.setAppElement("#root");
 
@@ -57,11 +58,6 @@ export default function CardSearch() {
     }
   }
 
-  useEffect(() => {
-    //Check for login and set popup
-    checkLogin();
-  }, []);
-
   //Check search toggle and handle accordingly
   function checkSearchToggle() {
     if (cardName != "" && cardName.length <= maxSearchLength) {
@@ -75,6 +71,9 @@ export default function CardSearch() {
   }
 
   useEffect(() => {
+    //Check for login and set popup
+    checkLogin();
+    
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchCard();
@@ -174,22 +173,6 @@ export default function CardSearch() {
     setCardName("");
   }
 
-  //Create image components based on imageList
-  const ImageList = () => {
-    return (
-      <div id="image-list">
-        {imageList.map((url, index) => (
-          <img
-            className="card-image"
-            key={index}
-            src={url}
-            onClick={() => showCardDetails(index)}
-          />
-        ))}
-      </div>
-    );
-  };
-
   //Set selected card and show modal
   function showCardDetails(index) {
     setSelectedCard(data[index]);
@@ -219,7 +202,10 @@ export default function CardSearch() {
       <div id="num-decks">
         <text className="num-results">{numCards}</text>
       </div>
-      <ImageList value={imageList}></ImageList>
+      <CardPane
+        imageList={imageList}
+        showCardDetails={showCardDetails}
+      ></CardPane>
     </div>
   );
 }

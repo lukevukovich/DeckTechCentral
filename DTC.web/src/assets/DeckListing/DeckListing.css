@@ -6,7 +6,6 @@
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  margin-left: 20px;
 }
 
 .deck-listing:hover {
@@ -18,7 +17,7 @@
 }
 
 .cover-image {
-  width: 130%;
+  width: 132%;
   height: 250px;
   object-fit: cover;
   object-position: -6cap -8cap;
@@ -48,7 +47,7 @@
   top: 40px;
   left: 15px;
   font-size: 16px;
-  color: rgb(172, 172, 172);
+  color: rgb(180, 180, 180);
   font-style: italic;
   letter-spacing: 0.02cap;
 }

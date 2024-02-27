@@ -1,0 +1,17 @@
+.deck-pane {
+  width: 1260px;
+  margin-left: auto; /* Center the grid horizontally */
+  margin-right: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  z-index: 2;
+}
+
+@media (max-width: 1295px) {
+  .deck-pane {
+    width: 840px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
