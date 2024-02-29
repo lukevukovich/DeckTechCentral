@@ -1,4 +1,5 @@
-namespace DTC.Model {
+namespace DTC.Model
+{
     public class CardDeckResponse
     {
         public int CopiesOfCard { get; set; }
