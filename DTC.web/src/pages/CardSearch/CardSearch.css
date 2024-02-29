@@ -12,6 +12,12 @@
   z-index: 1;
 }
 
+@media (max-width: 650px) {
+  #header-cs {
+    flex-direction: column;
+  }
+}
+
 .user-popup {
   top: 128px;
 }

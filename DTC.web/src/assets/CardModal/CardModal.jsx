@@ -14,19 +14,8 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
       id={`card-modal-${id}`}
       isOpen={modal}
       onRequestClose={() => closeCardDetails()}
-      style={{
-        overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-        },
-        content: {
-          width: "750px",
-          height: "500px",
-          margin: "auto",
-          borderRadius: "10px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-          backgroundColor: "rgb(255, 251, 234)",
-        },
-      }}
+      className="card-modal-content"
+      overlayClassName="card-modal-overlay"
     >
       <div id={`modal-header-${id}`} className="modal-header">
         <div id={`modal-heading-${id}`} className="modal-heading">

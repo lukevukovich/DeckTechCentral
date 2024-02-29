@@ -102,9 +102,20 @@ button:active {
 }
 
 @media (max-width: 650px) {
+  .heading {
+    margin-right: 20px;
+  }
   .profile-panel {
     position: static;
     margin-left: -40px;
+  }
+  .search-panel {
+    margin-left: -40px;
+    margin-top: 20px;
+  }
+  input {
+    width: 100px;
+    font-size: 9px;
   }
 }
 

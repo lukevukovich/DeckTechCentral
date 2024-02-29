@@ -11,6 +11,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 650px) {
+    #header-db {
+      flex-direction: column;
+    }
+  }
+
 #welcome-db {
     margin: 0;
     display: flex;
