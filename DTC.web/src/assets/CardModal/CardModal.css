@@ -11,6 +11,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: rgb(255, 251, 234);
+  outline: none;
 }
 
 .card-modal-overlay {
@@ -97,7 +98,7 @@
     height: 250px;
   }
   .modal-header {
-    width: 415px;
+    width: 416px;
   }
   .modal-heading {
     font-size: 9px;

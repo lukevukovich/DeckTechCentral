@@ -16,6 +16,7 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
       onRequestClose={() => closeCardDetails()}
       className="card-modal-content"
       overlayClassName="card-modal-overlay"
+      tabindex="-1"
     >
       <div id={`modal-header-${id}`} className="modal-header">
         <div id={`modal-heading-${id}`} className="modal-heading">
