@@ -95,7 +95,7 @@
 @media (max-width: 1200px) {
   .card-modal-content {
     width: 375px;
-    height: 250px;
+    height: 275px;
   }
   .modal-header {
     width: 416px;
@@ -127,5 +127,18 @@
   }
   .modal-stats {
     margin-top: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card-modal-content {
+    height: 120px;
+    width: 187.5px;
+  }
+  .modal-header {
+    width: 229px;
+  }
+  .modal-stats text {
+    font-size: 6px;
   }
 }

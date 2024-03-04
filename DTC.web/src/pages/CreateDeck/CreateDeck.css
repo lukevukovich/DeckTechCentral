@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 650px) {
-    #header-cd {
-      flex-direction: column;
-    }
+  #header-cd {
+    height: 50px;
   }
+}

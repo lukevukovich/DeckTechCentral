@@ -12,14 +12,20 @@
   z-index: 1;
 }
 
-@media (max-width: 650px) {
-  #header-cs {
-    flex-direction: column;
-  }
-}
-
 .user-popup {
   top: 128px;
+}
+
+@media (max-width: 650px) {
+  #header-cs {
+    height: 50px;
+  }
+  .user-popup {
+    top: 75px;
+  }
+  .num-results {
+    margin-top: -40px;
+  }
 }
 
 .card-image {

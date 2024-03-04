@@ -11,16 +11,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 650px) {
-    #header-pf {
-      flex-direction: column;
-    }
-  }
-
 .oauth {
     margin-top: 130px;
     margin-left: 10px;
     position: fixed;
+}
+
+@media (max-width: 650px) {
+    #header-pf {
+        height: 50px;
+    }
+    .oauth {
+        margin-top: 80px;
+    }
 }
 
 .oauth button {
