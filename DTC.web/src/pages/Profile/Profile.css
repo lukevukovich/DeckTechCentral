@@ -17,6 +17,15 @@
     position: fixed;
 }
 
+@media (max-width: 650px) {
+    #header-pf {
+        height: 50px;
+    }
+    .oauth {
+        margin-top: 80px;
+    }
+}
+
 .oauth button {
     width: 125px;
     height: 40px;

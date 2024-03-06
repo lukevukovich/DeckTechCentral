@@ -23,3 +23,18 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+@media (max-width: 730px) {
+  .card-pane {
+    width: 470px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 495px) {
+  .card-pane {
+    width: 235px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+

@@ -11,3 +11,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
+
+@media (max-width: 650px) {
+  #header-ds {
+    height: 50px;
+  }
+}

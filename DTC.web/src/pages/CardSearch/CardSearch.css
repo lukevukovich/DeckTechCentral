@@ -16,6 +16,18 @@
   top: 128px;
 }
 
+@media (max-width: 650px) {
+  #header-cs {
+    height: 50px;
+  }
+  .user-popup {
+    top: 75px;
+  }
+  .num-results {
+    margin-top: -40px;
+  }
+}
+
 .card-image {
   width: 225px;
   border-radius: 15px;

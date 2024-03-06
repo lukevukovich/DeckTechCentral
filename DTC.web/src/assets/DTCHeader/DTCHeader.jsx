@@ -4,6 +4,7 @@ import {
   faMultiply,
   faUser,
   faScrewdriverWrench,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -90,7 +91,8 @@ export default function DTCHeader({
       <div id={`header-${id}`}>
         <Link to="/" style={{ textDecoration: "none" }}>
           <text id={`heading-${id}`} className="heading">
-            DeckTechCentral
+            <span className="heading-txt">DeckTechCentral</span>
+            <span className="heading-logo"><FontAwesomeIcon icon={faHome} /></span>
           </text>
         </Link>
         <div id={`search-panel-${id}`} className="search-panel">
