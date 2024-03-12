@@ -99,13 +99,20 @@
   }
   .modal-header {
     width: 416px;
+    height: 60px;
   }
   .modal-heading {
-    font-size: 9px;
+    font-size: 10px;
+    padding: 8px;
   }
   .modal-card {
     width: 145px;
     height: 170px;
+    border-radius: 8px;
+    margin-top: 50px;
+  }
+  .modal-stats {
+    margin-top: 50px;
   }
   .modal-stats text {
     font-size: 12px;
