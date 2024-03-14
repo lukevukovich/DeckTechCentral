@@ -22,3 +22,9 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+@media (max-width: 650px) {
+  .deck-pane {
+    margin-top: -30px;
+  }
+}

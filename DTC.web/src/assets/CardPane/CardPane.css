@@ -38,3 +38,8 @@
   }
 }
 
+@media (max-width: 650px) {
+  .card-pane {
+    margin-top: -20px;
+  }
+}

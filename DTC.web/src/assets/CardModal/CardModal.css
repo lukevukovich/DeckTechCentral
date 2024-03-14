@@ -92,13 +92,13 @@
   color: black;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 850px) {
   .card-modal-content {
     width: 375px;
     height: 275px;
   }
   .modal-header {
-    width: 416px;
+    width: 417px;
     height: 60px;
   }
   .modal-heading {
@@ -107,45 +107,22 @@
   }
   .modal-card {
     width: 145px;
-    height: 170px;
+    height: 202px;
     border-radius: 8px;
     margin-top: 50px;
+    margin-left: -5px;
   }
   .modal-stats {
     margin-top: 50px;
+    margin-left: 12px;
   }
   .modal-stats text {
     font-size: 12px;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 470px) {
   .card-modal-content {
-    height: 200px;
-  }
-  .modal-header {
-    height: 50px;
-  }
-  .modal-heading {
-    padding: 5px;
-  }
-  .modal-card {
-    display: none;
-  }
-  .modal-stats {
-    margin-top: 40px;
-  }
-}
-
-@media (max-width: 500px) {
-  .card-modal-content {
-    height: 120px;
-    width: 187.5px;
-  }
-  .modal-header {
-    width: 229px;
-  }
-  .modal-stats text {
-    font-size: 6px;
+    margin-left: -20px;
   }
 }
