@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
+import decks from "../../test/decks.json";
+import DeckListing from "../../assets/DeckListing/DeckListing";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -61,7 +63,10 @@ export default function Dashboard() {
         clearSearch={clearSearch}
         navigate={navigate}
       ></DTCHeader>
-      <text id="welcome-db">Welcome to DeckTechCentral.</text>
+      <div className="landing-decks">
+        <DeckListing deck={decks[0]}></DeckListing>
+        <DeckListing deck={decks[1]}></DeckListing>
+      </div>
     </div>
   );
 }
