@@ -1,27 +1,102 @@
 #header-db {
-    font-family: "Arial";
-    width: 100%;
-    height: 100px;
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    align-items: center;
-    background-color: rgb(27, 0, 78);
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    transition: 0.5s;
+  font-family: "Arial";
+  width: 100%;
+  position: fixed;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(27, 0, 78);
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition: 0.5s;
 }
 
 @media (max-width: 650px) {
-    #header-db {
-      height: 50px;
-    }
+  #header-db {
+    height: 50px;
+  }
+}
+
+.landing {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  position: absolute; /* Changed from relative to absolute */
+  top: 90px; /* New */
+  left: 0; /* New */
+  right: 0; /* New */
+  bottom: 0; /* New */
+  justify-content: center; /* New */
+  align-items: center; /* New */
+  width: 100vw; /* Ensure full viewport width */
+  z-index: -100;
+  column-gap: 75px;
+}
+
+@media (max-width: 950px) {
+  .landing {
+    justify-content: start;
+    align-items: start;
+  }
+  .landing-text {
+    margin-top: 94px;
   }
 
-.landing-decks {
-  display: grid;
+  .landing-decks {
+    margin-top: 33px;
+  }
+}
+
+.landing-text {
+  width: 720px;
+  font-family: "Arial";
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 250px;
   gap: 20px;
-  position: fixed;
-  top: 150px;
-  right: 40px;
+  align-items: center;
+}
+
+.landing-heading {
+  font-weight: bold;
+  font-size: 50px;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to left, rgb(90, 53, 163), rgb(225, 101, 250));
+  -webkit-background-clip: text; /* For WebKit browsers */
+  display: inline-block; /* or 'block' depending on your layout needs */
+}
+
+.landing-paragraph {
+  background-color: rgb(90, 53, 163); /* Adjusted for a more professional shade */
+  color: #e6e6e6; /* Soft, but with good contrast */
+  font-size: 20px;
+  padding: 20px; /* Increased for a bit more space */
+  border-radius: 10px; /* Less pronounced corners */
+  width: 90%;
+  max-width: 600px; /* Prevents the paragraph from being too wide on large screens */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Softer shadow */
+  line-height: 1.5; /* Adjusted to be relative, which is more adaptable */
+  font-style: normal; /* For better readability over long texts */
+  margin: auto; /* Centers the paragraph if width is less than 100% */
+}
+
+
+.landing-feature {
+  color: rgb(146, 142, 129);
+  font-family: Arial;
+  align-self: center;
+  font-weight: bold;
+  font-size: 20px;
+  word-spacing: 2px;
+}
+
+.landing-decks {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

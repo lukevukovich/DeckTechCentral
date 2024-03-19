@@ -63,9 +63,18 @@ export default function Dashboard() {
         clearSearch={clearSearch}
         navigate={navigate}
       ></DTCHeader>
-      <div className="landing-decks">
-        <DeckListing deck={decks[0]}></DeckListing>
-        <DeckListing deck={decks[1]}></DeckListing>
+      <div className="landing">
+        <div className="landing-text">
+          <text className="landing-heading">Welcome to DeckTechCentral.</text>
+          <text className="landing-paragraph">
+            DeckTechCentral is a web based deck management tool for Magic: The Gathering.
+          </text>
+        </div>
+        <div className="landing-decks">
+          <text className="landing-feature">★ Featured Decks</text>
+          <DeckListing deck={decks[0]}></DeckListing>
+          <DeckListing deck={decks[1]}></DeckListing>
+        </div>
       </div>
     </div>
   );
