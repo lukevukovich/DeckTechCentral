@@ -65,9 +65,10 @@ export default function Dashboard() {
       ></DTCHeader>
       <div className="landing">
         <div className="landing-text">
-          <text className="landing-heading">Welcome to DeckTechCentral.</text>
+          <text className="landing-heading">Welcome to DeckTechCentral</text>
           <text className="landing-paragraph">
-            DeckTechCentral is a web based deck management tool for Magic: The Gathering.
+            DeckTechCentral is a web based deck management tool for Magic: The Gathering. 
+            Explore our collection of user-made decks or create your own ultimate decks!
           </text>
         </div>
         <div className="landing-decks">

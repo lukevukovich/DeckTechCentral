@@ -35,20 +35,6 @@
   column-gap: 75px;
 }
 
-@media (max-width: 950px) {
-  .landing {
-    justify-content: start;
-    align-items: start;
-  }
-  .landing-text {
-    margin-top: 94px;
-  }
-
-  .landing-decks {
-    margin-top: 33px;
-  }
-}
-
 .landing-text {
   width: 720px;
   font-family: "Arial";
@@ -58,6 +44,7 @@
   margin-bottom: 250px;
   gap: 20px;
   align-items: center;
+  transition: 0.5s;
 }
 
 .landing-heading {
@@ -68,6 +55,7 @@
   background-image: linear-gradient(to left, rgb(90, 53, 163), rgb(225, 101, 250));
   -webkit-background-clip: text; /* For WebKit browsers */
   display: inline-block; /* or 'block' depending on your layout needs */
+  transition: 0.5s;
 }
 
 .landing-paragraph {
@@ -82,8 +70,8 @@
   line-height: 1.5; /* Adjusted to be relative, which is more adaptable */
   font-style: normal; /* For better readability over long texts */
   margin: auto; /* Centers the paragraph if width is less than 100% */
+  transition: 0.5s;
 }
-
 
 .landing-feature {
   color: rgb(146, 142, 129);
@@ -99,4 +87,35 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: 0.5s;
+}
+
+@media (max-width: 1300px) {
+  .landing {
+    justify-content: start;
+    flex-direction: column;
+  }
+  .landing-text {
+    padding-top: 60px;
+    transition: 0.5s;
+  }
+  .landing-decks {
+    margin-top: -200px;
+    transition: 0.5s;
+  }
+}
+
+@media (max-width: 650px) {
+  .landing-heading {
+    font-size: 25px;
+  }
+  .landing-text {
+    padding-top: 30px;
+    transition: 0.5s;
+  }
+  .landing-paragraph {
+    max-width: 200px;
+    font-size: 10px;
+    transition: 0.5s;
+  }
 }
