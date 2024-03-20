@@ -1,3 +1,18 @@
+img.backdrop {
+  position: fixed; /* Make the image fixed to the viewport */
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  filter: grayscale(100%); /* Desaturate the image */
+  opacity: 0.07; /* Correct opacity to a value between 0 (fully transparent) and 1 (fully opaque) */
+  margin-top: -10px;
+  z-index: -1; /* Ensure the image stays behind other content */
+}
+
 .heading {
   font-weight: bold;
   font-size: 30px;

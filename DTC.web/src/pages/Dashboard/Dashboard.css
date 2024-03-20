@@ -31,22 +31,8 @@
   justify-content: center; /* New */
   align-items: center; /* New */
   width: 100vw; /* Ensure full viewport width */
-  z-index: -100;
+  z-index: 0;
   column-gap: 75px;
-}
-
-@media (max-width: 950px) {
-  .landing {
-    justify-content: start;
-    align-items: start;
-  }
-  .landing-text {
-    margin-top: 94px;
-  }
-
-  .landing-decks {
-    margin-top: 33px;
-  }
 }
 
 .landing-text {
@@ -55,8 +41,8 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-bottom: 250px;
-  gap: 20px;
+  margin-bottom: 240px;
+  gap: 30px;
   align-items: center;
 }
 
@@ -65,18 +51,26 @@
   font-size: 50px;
   background-clip: text;
   color: transparent;
-  background-image: linear-gradient(to left, rgb(90, 53, 163), rgb(225, 101, 250));
+  background-image: linear-gradient(
+    to left,
+    rgb(90, 53, 163),
+    rgb(225, 101, 250)
+  );
   -webkit-background-clip: text; /* For WebKit browsers */
   display: inline-block; /* or 'block' depending on your layout needs */
 }
 
 .landing-paragraph {
-  background-color: rgb(90, 53, 163); /* Adjusted for a more professional shade */
+  background-color: rgb(
+    90,
+    53,
+    163
+  ); /* Adjusted for a more professional shade */
   color: #e6e6e6; /* Soft, but with good contrast */
   font-size: 20px;
   padding: 20px; /* Increased for a bit more space */
   border-radius: 10px; /* Less pronounced corners */
-  width: 90%;
+  width: 80%;
   max-width: 600px; /* Prevents the paragraph from being too wide on large screens */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Softer shadow */
   line-height: 1.5; /* Adjusted to be relative, which is more adaptable */
@@ -84,9 +78,8 @@
   margin: auto; /* Centers the paragraph if width is less than 100% */
 }
 
-
 .landing-feature {
-  color: rgb(146, 142, 129);
+  color: rgb(139, 104, 209);
   font-family: Arial;
   align-self: center;
   font-weight: bold;
@@ -99,4 +92,35 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+@media (max-width: 1250px) {
+  .landing {
+    justify-content: start;
+    flex-direction: column;
+  }
+  .landing-text {
+    padding-top: 60px;
+    transition: 0.5s;
+  }
+  .landing-decks {
+    margin-top: -200px;
+    transition: 0.5s;
+  }
+}
+
+@media (max-width: 730px) {
+  .landing-heading {
+    font-size: 26px;
+  }
+  .landing-text {
+    padding-top: 30px;
+    transition: 0.5s;
+    gap: 20px;
+  }
+  .landing-paragraph {
+    max-width: 250px;
+    font-size: 12px;
+    transition: 0.5s;
+  }
 }

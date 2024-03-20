@@ -92,7 +92,9 @@ export default function DTCHeader({
         <Link to="/" style={{ textDecoration: "none" }}>
           <text id={`heading-${id}`} className="heading">
             <span className="heading-txt">DeckTechCentral</span>
-            <span className="heading-logo"><FontAwesomeIcon icon={faHome} /></span>
+            <span className="heading-logo">
+              <FontAwesomeIcon icon={faHome} />
+            </span>
           </text>
         </Link>
         <div id={`search-panel-${id}`} className="search-panel">
@@ -182,6 +184,7 @@ export default function DTCHeader({
         </div>
       </div>
       <label id={`tooltip-${id}`} className="tooltip"></label>
+      <img src="/landing-backdrop.webp" className="backdrop"></img>
     </div>
   );
 }
