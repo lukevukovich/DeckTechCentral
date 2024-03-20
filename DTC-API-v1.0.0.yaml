@@ -51,32 +51,6 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/User'
-  /user/createWithList:
-    post:
-      tags:
-        - user
-      summary: Creates list of users with given input array
-      description: Creates list of users with given input array
-      operationId: createUsersWithListInput
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'          
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-        default:
-          description: successful operation
   /user/login:
     get:
       tags:
@@ -308,11 +282,17 @@ paths:
         required: false
         schema:
           type: string
-      - name: commander
+      - name: commander_1
         in: query
         description: the commander of a deck list
         required: false
         schema:
+          type: string
+      - name: commander_2
+        in: query
+        description: second commander of the deck
+        required: false
+        schema: 
           type: string
       - name: sortBy
         in: query
@@ -376,8 +356,7 @@ paths:
               schema:
                 type: boolean
         '404':
-          description: either deck does not exist
-        
+          description: either deck does not exist       
   /card/{cardId}:
     parameters:
       - name: cardId
@@ -440,6 +419,13 @@ paths:
         schema:
           type: number
           minimum: 0
+      - name: pageSize
+        in: query
+        description: the maximum number of cards to display per page
+        required: false
+        schema:
+          type: number
+          minimum: 1
     get:
       tags:
        - card
@@ -508,6 +494,8 @@ components:
        - dislikes
        - views
        - editors
+       - created_date
+       - modified_date
       properties:
         id:
           type: string
@@ -537,6 +525,10 @@ components:
           items:
             type: string
             example: '1103efb6-b3db-409b-951f-896efa60f59e'
+        created_date:
+          type: date-time
+        modified_date:
+          type: date-time
     Deck:
       type: object
       required:
@@ -550,6 +542,8 @@ components:
        - views
        - cover_image
        - editors
+       - created_date
+       - modified_date
       properties:
         id:
           type: string
@@ -594,6 +588,70 @@ components:
           type: string
           format: url
           example: 'https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553'
+        commander_1:
+          type: string
+        commander_2:
+          type: string
+        created_date:
+          type: date-time
+        modified_date:
+          type: date-time
+    DeckCreationRequest:
+      type: object
+      required:
+       - id
+       - name
+       - mainbaord
+       - sideboard
+       - considering
+       - likes
+       - dislikes
+       - views
+       - cover_image
+       - editors
+      properties:
+        id:
+          type: string
+          format: guid
+          example: '1103efb6-b3db-409b-951f-896efa60f59e'
+        editors:
+          type: array
+          items:
+            type: string
+            example: '1103efb6-b3db-409b-951f-896efa60f59e'
+        name:
+          type: string
+          example: 'My Deck!'
+        format:
+          type: string
+          example: 'standard'
+        mainboard:
+          type: array
+          items:
+            schema:
+              type: string
+              format: guid
+        sideboard:
+          items:
+            schema:
+              type: string
+              format: guid
+        considering:
+          items:
+            schema:
+              type: string
+              format: guid
+        description:
+          type: string
+          maxLength: 100000
+        cover_image:
+          type: string
+          format: url
+          example: 'https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553'
+        commander_1:
+          type: string
+        commander_2:
+          type: string
     CardDeckResponse:
       type: object
       required:
