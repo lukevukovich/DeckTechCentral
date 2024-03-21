@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTC.Model", "DTC.Model\DTC.Model.csproj", "{EE370298-3F6F-4BE0-918C-B9A5C91A2F1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTC.DataAccess", "DTC.DataAccess\DTC.DataAccess.csproj", "{2C694491-F237-4A01-AAE9-66158F824CC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE370298-3F6F-4BE0-918C-B9A5C91A2F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE370298-3F6F-4BE0-918C-B9A5C91A2F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE370298-3F6F-4BE0-918C-B9A5C91A2F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE370298-3F6F-4BE0-918C-B9A5C91A2F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C694491-F237-4A01-AAE9-66158F824CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C694491-F237-4A01-AAE9-66158F824CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C694491-F237-4A01-AAE9-66158F824CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C694491-F237-4A01-AAE9-66158F824CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAEBADE0-18B9-43B2-8C62-876913E0594C}
+	EndGlobalSection
+EndGlobal
