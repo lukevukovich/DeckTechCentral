@@ -80,6 +80,10 @@ input {
   transition: 0.5s;
 }
 
+input::placeholder {
+  color: rgb(179, 143, 143);
+}
+
 @media (max-width: 965px) {
   input {
     transition: 0.5s;
@@ -129,7 +133,7 @@ button:active {
 }
 
 .profile-button:hover + .user-popup {
-  color: rgb(223, 179, 179);
+  color: rgb(231, 195, 195);
   background-color: rgb(121, 27, 27);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
@@ -166,6 +170,7 @@ button:active {
     background-color: rgb(67, 5, 5);
     border-radius: 30px;
     padding: 13px;
+    transition: 0s
   }
   .heading:hover {
     background-color: rgb(121, 27, 27);

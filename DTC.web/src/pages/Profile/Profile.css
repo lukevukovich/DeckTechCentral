@@ -30,16 +30,16 @@
 .oauth button {
     width: 125px;
     height: 40px;
-    background-color: rgb(27, 0, 78);
+    background-color: rgb(78, 0, 0);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .oauth button:hover {
-    background-color: rgb(78, 48, 139);
+    background-color: rgb(139, 48, 48);
 }
 
 .oauth button:active {
-    background-color: rgb(113, 77, 185);
+    background-color: rgb(185, 77, 77);
 }
 
 #user-info {
@@ -49,9 +49,8 @@
     font-family: "Arial";
     display: flex;
     flex-direction: column;
-    background-color: yellow;
     border-radius: 25px;
-    background-color: rgb(61, 28, 126);
+    background-color: rgb(126, 28, 28);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     color: rgb(245, 245, 245);
 }

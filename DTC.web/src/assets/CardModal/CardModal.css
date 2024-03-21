@@ -32,7 +32,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(27, 0, 78);
+  background-color: rgb(67, 5, 5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   width: 792px;
   margin-left: -21px;
@@ -44,7 +44,7 @@
 .modal-heading {
   font-size: 18px;
   padding: 15px;
-  background-color: rgb(59, 27, 121);
+  background-color: rgb(121, 27, 27);
   border-radius: 25px;
   text-wrap: nowrap;
   position: static;
@@ -53,7 +53,7 @@
 
 .modal-heading-mana {
   margin-left: 8px;
-  color: rgb(164, 134, 167);
+  color: rgb(167, 134, 134);
 }
 
 .modal-button {

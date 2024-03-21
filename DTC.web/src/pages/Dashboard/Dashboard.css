@@ -53,19 +53,15 @@
   color: transparent;
   background-image: linear-gradient(
     to left,
-    rgb(90, 53, 163),
-    rgb(225, 101, 250)
+    rgb(129, 29, 29),
+    rgb(250, 136, 101)
   );
   -webkit-background-clip: text; /* For WebKit browsers */
   display: inline-block; /* or 'block' depending on your layout needs */
 }
 
 .landing-paragraph {
-  background-color: rgb(
-    90,
-    53,
-    163
-  ); /* Adjusted for a more professional shade */
+  background-color: rgb(126, 28, 28); /* Adjusted for a more professional shade */
   color: #e6e6e6; /* Soft, but with good contrast */
   font-size: 20px;
   padding: 20px; /* Increased for a bit more space */
@@ -79,7 +75,7 @@
 }
 
 .landing-feature {
-  color: rgb(139, 104, 209);
+  color: rgb(209, 104, 104);
   font-family: Arial;
   align-self: center;
   font-weight: bold;
