@@ -17,7 +17,7 @@ img.backdrop {
   font-weight: bold;
   font-size: 30px;
   padding: 15px;
-  background-color: rgb(59, 27, 121);
+  background-color: rgb(121, 27, 27);
   border-radius: 20px;
   position: static;
   margin-left: 8px;
@@ -69,7 +69,7 @@ img.backdrop {
 input {
   color: white;
   font-size: 18px;
-  background-color: rgb(59, 27, 121);
+  background-color: rgb(121, 27, 27);
   border-radius: 50px;
   border: none;
   outline: none;
@@ -103,11 +103,11 @@ button {
 }
 
 button:hover {
-  background-color: rgb(78, 48, 139);
+  background-color: rgb(121, 27, 27);
 }
 
 button:active {
-  background-color: rgb(113, 77, 185);
+  background-color: rgb(146, 50, 50);
 }
 
 .button-clear {
@@ -129,8 +129,8 @@ button:active {
 }
 
 .profile-button:hover + .user-popup {
-  color: rgb(219, 179, 223);
-  background-color: rgb(48, 22, 99);
+  color: rgb(223, 179, 179);
+  background-color: rgb(121, 27, 27);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -163,12 +163,15 @@ button:active {
 
 @media (max-width: 650px) {
   .heading {
-    background-color: rgb(27, 0, 78);
+    background-color: rgb(67, 5, 5);
     border-radius: 30px;
     padding: 13px;
   }
   .heading:hover {
-    background-color: rgb(78, 48, 139);
+    background-color: rgb(121, 27, 27);
+  }
+  .heading:active {
+    background-color: rgb(146, 50, 50);
   }
   .heading-txt {
     display: none;
@@ -217,8 +220,8 @@ button:active {
   height: 22px;
   background-image: linear-gradient(
     to right,
-    rgb(163, 53, 157),
-    rgb(107, 64, 194)
+    rgb(255, 140, 0),
+    rgb(157, 34, 34)
   );
   border-radius: 50px;
   cursor: pointer;
