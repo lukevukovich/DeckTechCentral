@@ -94,7 +94,8 @@
   gap: 20px;
 }
 
-@media (max-width: 1250px) {
+@media only screen and (max-width: 1250px),
+  only screen and (max-height: 705px) {
   .landing {
     justify-content: start;
     flex-direction: column;
