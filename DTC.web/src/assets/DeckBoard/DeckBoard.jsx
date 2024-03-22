@@ -25,8 +25,6 @@ export default function DeckBoard({ boardJson }) {
       cards: sectionsUnsorted[typeLine],
     }));
 
-  console.log(sections);
-
   return (
     <div className="deck-board">
       {sections.map((section, index) => (

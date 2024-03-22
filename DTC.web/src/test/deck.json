@@ -3,13 +3,31 @@
   "editors": [
     {
       "id": "string",
-      "username": "theUser",
+      "username": "lukevuke",
+      "email": "john@email.com",
+      "userStatus": "moderator"
+    },
+    {
+      "id": "string",
+      "username": "chremmer",
+      "email": "john@email.com",
+      "userStatus": "moderator"
+    },
+    {
+      "id": "string",
+      "username": "pshriner",
+      "email": "john@email.com",
+      "userStatus": "moderator"
+    },
+    {
+      "id": "string",
+      "username": "turgemannn",
       "email": "john@email.com",
       "userStatus": "moderator"
     }
   ],
-  "name": "My Deck!",
-  "format": "standard",
+  "name": "Luke's Crazy Deck",
+  "format": "Commander",
   "mainboard": [
     {
       "number": 1,
@@ -394,11 +412,31 @@
           }
         ]
       }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "string",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Creature",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
     }
   ],
   "likes": 0,
   "dislikes": 0,
   "views": 0,
   "description": "string",
-  "cover_image": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+  "cover_image": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
 }
