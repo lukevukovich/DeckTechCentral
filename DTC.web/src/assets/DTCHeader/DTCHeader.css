@@ -226,7 +226,7 @@ button:active {
   background-image: linear-gradient(
     to right,
     rgb(255, 140, 0),
-    rgb(157, 34, 34)
+    rgb(201, 39, 39)
   );
   border-radius: 50px;
   cursor: pointer;

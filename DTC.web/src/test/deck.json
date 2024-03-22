@@ -1,0 +1,404 @@
+{
+  "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+  "editors": [
+    {
+      "id": "string",
+      "username": "theUser",
+      "email": "john@email.com",
+      "userStatus": "moderator"
+    }
+  ],
+  "name": "My Deck!",
+  "format": "standard",
+  "mainboard": [
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Harald Unites the Elves",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Brute Stength",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Test",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Contested Cliffs",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Commander",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Contested Game Ball",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Contested War Zone",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Contest of Claws",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Creatures",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Deputized Protester",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Creatures",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 2,
+      "CardInfo": {
+        "name": "Desperate Stand",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Feral Contest",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    },
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "Goblin Test Pilot",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    }
+  ],
+  "sideboard": [
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "string",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    }
+  ],
+  "considering": [
+    {
+      "number": 1,
+      "CardInfo": {
+        "name": "string",
+        "id": "1103efb6-b3db-409b-951f-896efa60f59e",
+        "mana_cost": "{4}{W}{W}",
+        "cmc": 0,
+        "type_line": "Sorcery",
+        "image_uris": [
+          {
+            "small": "https://cards.scryfall.io/small/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "normal": "https://cards.scryfall.io/normal/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "large": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "png": "https://cards.scryfall.io/png/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.png?1706240553",
+            "art_crop": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553",
+            "border_crop": "https://cards.scryfall.io/border_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+          }
+        ]
+      }
+    }
+  ],
+  "likes": 0,
+  "dislikes": 0,
+  "views": 0,
+  "description": "string",
+  "cover_image": "https://cards.scryfall.io/art_crop/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
+}

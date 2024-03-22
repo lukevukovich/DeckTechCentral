@@ -147,6 +147,7 @@ export default function CardSearch() {
         )}`
       );
       const jsonData = await response.json();
+      console.log(jsonData)
 
       const { images, processedData } = processData(jsonData);
       const cards = processedData.length;

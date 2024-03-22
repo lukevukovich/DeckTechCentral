@@ -54,7 +54,7 @@
   background-image: linear-gradient(
     to left,
     rgb(129, 29, 29),
-    rgb(250, 136, 101)
+    rgb(255, 106, 61)
   );
   -webkit-background-clip: text; /* For WebKit browsers */
   display: inline-block; /* or 'block' depending on your layout needs */
