@@ -8,7 +8,7 @@ img.backdrop {
   height: auto;
   object-fit: cover;
   filter: grayscale(100%); /* Desaturate the image */
-  opacity: 0.07; /* Correct opacity to a value between 0 (fully transparent) and 1 (fully opaque) */
+  opacity: 0.05; /* Correct opacity to a value between 0 (fully transparent) and 1 (fully opaque) */
   margin-top: -10px;
   z-index: -1; /* Ensure the image stays behind other content */
 }
@@ -170,7 +170,7 @@ button:active {
     background-color: rgb(67, 5, 5);
     border-radius: 30px;
     padding: 13px;
-    transition: 0s
+    transition: 0s;
   }
   .heading:hover {
     background-color: rgb(121, 27, 27);
@@ -225,7 +225,7 @@ button:active {
   height: 22px;
   background-image: linear-gradient(
     to right,
-    rgb(255, 140, 0),
+    rgb(255, 123, 0),
     rgb(201, 39, 39)
   );
   border-radius: 50px;

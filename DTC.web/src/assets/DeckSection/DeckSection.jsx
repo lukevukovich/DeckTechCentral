@@ -35,7 +35,7 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
         >
           -
         </button>
-        <text className="section-name">
+        <text className="section-name" onClick={minMaxCard}>
           {deckSectionName + " (" + deckSectionJson.length + ")"}
         </text>
       </div>

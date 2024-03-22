@@ -21,7 +21,7 @@
   height: 16px;
   width: 16px;
   outline: 1px solid #5f5f5f;
-  background-color: rgba(184, 184, 184, 0.0);
+  background-color: rgba(184, 184, 184, 0);
   display: flex; /* Use flexbox */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
@@ -44,6 +44,7 @@
   display: flex;
   margin-top: -18px;
   margin-left: 30px;
+  cursor: pointer;
 }
 
 .card-section {
@@ -65,7 +66,7 @@
 }
 
 .card-listing {
-  box-shadow: 0 4px 8px rgba(109, 109, 109, 0.20);;
+  box-shadow: 0 4px 8px rgba(109, 109, 109, 0.2);
   background-color: rgba(112, 112, 112, 0.5);
   padding: 8px;
   border-radius: 10px;
