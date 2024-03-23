@@ -129,17 +129,15 @@ export default function DeckView() {
             <div className="deck-view-format">
               <text>{deck.format}</text>
             </div>
-            <div className="deck-view-editors">
-              <FontAwesomeIcon
-                icon={faUser}
-                className="deck-view-author-icon"
-              />
-              <text className="deck-view-author">
-                {deck.editors[0].username}
-              </text>
-              <text className="deck-view-others">{getEditors()}</text>
+            <div className="deck-view-desc">
+              <text>{deck.description}</text>
             </div>
           </div>
+        </div>
+        <div className="deck-view-editors">
+          <FontAwesomeIcon icon={faUser} className="deck-view-author-icon" />
+          <text className="deck-view-author">{deck.editors[0].username}</text>
+          <text className="deck-view-others">{getEditors()}</text>
         </div>
         <div className="deck-view-tabs">
           <button
