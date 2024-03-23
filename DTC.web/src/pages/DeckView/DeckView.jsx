@@ -123,7 +123,9 @@ export default function DeckView() {
       ></DTCHeader>
       <div className="deck-view">
         <div className="deck-view-panel">
-          <img className="deck-view-cover" src={deck.cover_image}></img>
+          <div className="deck-view-cover">
+            <img src={deck.cover_image}></img>
+          </div>
           <div className="deck-view-info">
             <text className="deck-view-name">{deck.name}</text>
             <div className="deck-view-format">

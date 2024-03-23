@@ -9,7 +9,6 @@ img.backdrop {
   object-fit: cover;
   filter: grayscale(100%); /* Desaturate the image */
   opacity: 0.044; /* Correct opacity to a value between 0 (fully transparent) and 1 (fully opaque) */
-  margin-top: -10px;
   z-index: -1; /* Ensure the image stays behind other content */
 }
 
