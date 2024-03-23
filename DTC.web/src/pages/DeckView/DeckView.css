@@ -169,4 +169,12 @@
     height: 270px;
     object-position: -2.5cap -3cap;
   }
+
+  .deck-view-tablinks {
+    font-size: 14px;
+  }
+
+  .deck-view-editors text {
+    font-size: 14px;
+  }
 }
