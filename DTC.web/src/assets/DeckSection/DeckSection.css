@@ -74,6 +74,6 @@
 .card-listing:hover {
   cursor: pointer;
   outline-width: 2px;
-  outline-color: rgb(202, 20, 20);
+  outline-color: rgb(205, 41, 27);
   outline-style: solid;
 }
