@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import "./CreateDeck.css";
+import "./DeckCreate.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 
-export default function CreateDeck() {
+export default function DeckCreate() {
   const navigate = useNavigate();
 
   //Use state for input

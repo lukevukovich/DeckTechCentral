@@ -52,7 +52,7 @@ export default function DTCHeader({
   async function handleCreateDeckButton() {
     const status = await awaitLoginStatus();
     if (status) {
-      navigate("/createdeck");
+      navigate("/deckcreate");
     } else {
       navigate("/profile");
     }
