@@ -1,8 +1,23 @@
 import "./DeckSection.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CardModal from "../CardModal/CardModal";
 
 export default function DeckSection({ deckSectionJson, deckSectionName }) {
+  //Minimize/maximize the card section
   const [minimized, setMinimized] = useState(false);
+
+  //Use state for modal pop up
+  const [modal, setModal] = useState(false);
+
+  //Use state for selected card
+  const [selectedCard, setSelectedCard] = useState({
+    name: "",
+    image_uris: { large: "" },
+    type_line: "",
+    oracle_text: "",
+    mana_cost: "",
+    flavor_text: "",
+  });
 
   function minMaxCard() {
     const button = document.getElementById(
@@ -25,8 +40,42 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
     }
   }
 
+  //Show card modal based on selected card
+  function showCardDetails(card) {
+    const data = {
+      name: card.name,
+      image_uris: { large: card.image_uris.large },
+      type_line: card.type_line,
+      oracle_text: card.oracle_text,
+      mana_cost: card.mana_cost,
+      flavor_text: card.flavor_text,
+    };
+
+    setSelectedCard(data);
+    setModal(true);
+  }
+
+  //Set default to maximized
+  useEffect(() => {
+    const button = document.getElementById(
+      "section-min-max-" + deckSectionName
+    );
+    const cards = document.getElementById("card-section-" + deckSectionName);
+    setMinimized(false);
+    cards.style.borderBottom = "2px solid #000";
+    cards.style.transform = "scaleY(1.0)";
+    button.textContent = "-";
+    cards.style.height = "auto";
+  }, [deckSectionJson]);
+
   return (
     <div className="deck-section">
+      <CardModal
+        id="deck-section"
+        modal={modal}
+        setModal={setModal}
+        selectedCard={selectedCard}
+      ></CardModal>
       <div id="section-panel" className="section-panel">
         <button
           id={`section-min-max-${deckSectionName}`}
@@ -41,7 +90,11 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
       </div>
       <div id={`card-section-${deckSectionName}`} className="card-section">
         {deckSectionJson.map((card, index) => (
-          <text key={index} className="card-listing">
+          <text
+            key={index}
+            className="card-listing"
+            onClick={() => showCardDetails(card.CardInfo)}
+          >
             {card.number + " " + card.CardInfo.name}
           </text>
         ))}

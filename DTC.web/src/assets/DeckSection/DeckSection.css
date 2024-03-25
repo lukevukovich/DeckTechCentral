@@ -77,3 +77,13 @@
   outline-color: rgb(205, 41, 27);
   outline-style: solid;
 }
+
+@media (max-width: 650px) {
+  .section-name {
+    font-size: 15px;
+  }
+
+  .card-section text {
+    font-size: 11px;
+  }
+}
