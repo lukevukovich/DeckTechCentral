@@ -142,6 +142,7 @@ button:active {
   height: 45px;
   width: 48px;
   border-radius: 30px;
+  padding-left: 10px;
 }
 
 .heading-logo {

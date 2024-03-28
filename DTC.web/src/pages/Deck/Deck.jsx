@@ -19,6 +19,8 @@ export default function Deck() {
     "deck-view-desc",
   ];
 
+  const removableElements = ["deck-view-add-card"];
+
   //Edit state
   const [edit, setEdit] = useState(false);
 
@@ -123,9 +125,11 @@ export default function Deck() {
     if (edit) {
       var buttonText = "Save";
       var editable = true;
+      var display = "block";
     } else {
       var buttonText = "Edit";
       var editable = false;
+      var display = "none";
     }
 
     document.getElementById("edit-button").textContent = buttonText;
@@ -134,6 +138,13 @@ export default function Deck() {
       for (let i = 0; 0 < editableElements.length; i++) {
         var element = document.getElementById(editableElements[i]);
         element.contentEditable = editable;
+      }
+    } catch {}
+
+    try {
+      for (let i = 0; 0 < removableElements.length; i++) {
+        var element = document.getElementById(removableElements[i]);
+        element.style.display = display;
       }
     } catch {}
   }, [edit]);
@@ -203,6 +214,9 @@ export default function Deck() {
             Considering
           </button>
         </div>
+        <button id="deck-view-add-card" className="deck-view-add-card">
+          Add Card
+        </button>
         <DeckBoard boardJson={board}></DeckBoard>
       </div>
     </div>
