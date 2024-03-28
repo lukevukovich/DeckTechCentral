@@ -11,8 +11,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Profile from "./pages/Profile/Profile";
 import CardSearch from "./pages/CardSearch/CardSearch";
 import DeckSearch from "./pages/DeckSearch/DeckSearch";
-import DeckCreate from "./pages/DeckCreate/DeckCreate";
-import DeckView from "./pages/DeckView/DeckView";
+import Deck from "./pages/Deck/Deck";
 import "./App.css";
 
 // router and routes
@@ -23,8 +22,7 @@ const router = createBrowserRouter(
       <Route path="cardsearch" element={<CardSearch />} />
       <Route path="decksearch" element={<DeckSearch />} />
       <Route path="profile" element={<Profile />} />
-      <Route path="deckcreate" element={<DeckCreate />} />
-      <Route path="deckview" element={<DeckView />} />
+      <Route path="deck" element={<Deck />} />
     </Route>
   )
 );

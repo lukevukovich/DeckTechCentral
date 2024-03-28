@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./DeckView.css";
+import "./Deck.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
@@ -9,8 +9,18 @@ import DeckBoard from "../../assets/DeckBoard/DeckBoard";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function DeckView() {
+export default function Deck() {
   const navigate = useNavigate();
+
+  //Get list of elements that become editable
+  const editableElements = [
+    "deck-view-name",
+    "deck-view-format",
+    "deck-view-desc",
+  ];
+
+  //Edit state
+  const [edit, setEdit] = useState(false);
 
   //Use state for input
   const [input, setInput] = useState("");
@@ -108,6 +118,26 @@ export default function DeckView() {
     setInitialTabs();
   }, []);
 
+  //IMPORTANT: When edit state it changed *********************
+  useEffect(() => {
+    if (edit) {
+      var buttonText = "Save";
+      var editable = true;
+    } else {
+      var buttonText = "Edit";
+      var editable = false;
+    }
+
+    document.getElementById("edit-button").textContent = buttonText;
+
+    try {
+      for (let i = 0; 0 < editableElements.length; i++) {
+        var element = document.getElementById(editableElements[i]);
+        element.contentEditable = editable;
+      }
+    } catch {}
+  }, [edit]);
+
   return (
     <div id="dv-all">
       <DTCHeader
@@ -127,13 +157,22 @@ export default function DeckView() {
             <img src={deck.cover_image}></img>
           </div>
           <div className="deck-view-info">
-            <text className="deck-view-name">{deck.name}</text>
+            <text id="deck-view-name" className="deck-view-name">
+              {deck.name}
+            </text>
             <div className="deck-view-format">
-              <text>{deck.format}</text>
+              <text id="deck-view-format">{deck.format}</text>
             </div>
-            <div className="deck-view-desc">
+            <div id="deck-view-desc" className="deck-view-desc">
               <text>{deck.description}</text>
             </div>
+            <button
+              id="edit-button"
+              className="edit-button"
+              onClick={() => setEdit(!edit)}
+            >
+              Edit
+            </button>
           </div>
         </div>
         <div className="deck-view-editors">
