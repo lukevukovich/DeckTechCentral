@@ -3,7 +3,7 @@ import {
   faSearch,
   faMultiply,
   faUser,
-  faScrewdriverWrench,
+  faFileEdit,
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -52,7 +52,7 @@ export default function DTCHeader({
   async function handleCreateDeckButton() {
     const status = await awaitLoginStatus();
     if (status) {
-      navigate("/deckcreate");
+      navigate("/deck");
     } else {
       navigate("/profile");
     }
@@ -165,7 +165,7 @@ export default function DTCHeader({
               }
               onMouseLeave={hideTooltip}
             >
-              <FontAwesomeIcon icon={faScrewdriverWrench} />
+              <FontAwesomeIcon icon={faFileEdit} />
             </button>
             <button
               id={`profile-${id}`}
