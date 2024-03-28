@@ -35,8 +35,11 @@
 }
 
 .deck-view-info {
-  padding-left: 15px;
-  padding-top: 8px;
+  margin-left: 15px;
+}
+
+.deck-view-name-edit {
+  display: flex;
 }
 
 .deck-view-name {
@@ -52,7 +55,8 @@
   height: 28px;
   margin-top: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  margin-right: none;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .edit-button:hover {

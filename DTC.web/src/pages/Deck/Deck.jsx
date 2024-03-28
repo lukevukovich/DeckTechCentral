@@ -168,22 +168,24 @@ export default function Deck() {
             <img src={deck.cover_image}></img>
           </div>
           <div className="deck-view-info">
-            <text id="deck-view-name" className="deck-view-name">
-              {deck.name}
-            </text>
+            <div className="deck-view-name-edit">
+              <text id="deck-view-name" className="deck-view-name">
+                {deck.name}
+              </text>
+              <button
+                id="edit-button"
+                className="edit-button"
+                onClick={() => setEdit(!edit)}
+              >
+                Edit
+              </button>
+            </div>
             <div className="deck-view-format">
               <text id="deck-view-format">{deck.format}</text>
             </div>
             <div id="deck-view-desc" className="deck-view-desc">
               <text>{deck.description}</text>
             </div>
-            <button
-              id="edit-button"
-              className="edit-button"
-              onClick={() => setEdit(!edit)}
-            >
-              Edit
-            </button>
           </div>
         </div>
         <div className="deck-view-editors">
