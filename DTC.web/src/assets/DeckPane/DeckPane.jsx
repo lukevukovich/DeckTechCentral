@@ -1,11 +1,11 @@
 import DeckListing from "../DeckListing/DeckListing";
 import "./DeckPane.css";
 
-export default function DeckPane({ decks }) {
+export default function DeckPane({ id, decks }) {
   return (
-    <div class="deck-pane">
+    <div className="deck-pane">
       {decks.map((deck, index) => (
-        <DeckListing key={index} deck={deck} />
+        <DeckListing id={id} key={index} deck={deck} />
       ))}
     </div>
   );

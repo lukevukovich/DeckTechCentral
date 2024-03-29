@@ -10,6 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { awaitLoginStatus } from "../../oauth/User";
 import { useEffect } from "react";
+import {
+  showTooltip,
+  hideTooltip,
+  loadToolTip,
+  clearTooltipTimeout,
+} from "../Tooltip";
 
 //Max length of search
 export const maxSearchLength = 40;
@@ -26,9 +32,6 @@ export default function DTCHeader({
   clearSearch,
   navigate,
 }) {
-  //Manage timeout for tooltip
-  let timeoutId;
-
   //Set toggle and search setting
   function toggleSearch() {
     setIsToggled(!isToggled);
@@ -58,32 +61,9 @@ export default function DTCHeader({
     }
   }
 
-  //Show tool tip after mouse enter. Allows for dynamic text and tooltips
-  function showTooltip(e, tooltip_text) {
-    const x = e.clientX - tooltip_text.length * 3;
-    const y = e.clientY + 10;
-    const tooltip = document.getElementById(`tooltip-${id}`);
-
-    timeoutId = setTimeout(() => {
-      tooltip.style.left = x + "px";
-      tooltip.style.top = y + "px";
-      tooltip.textContent = tooltip_text;
-      tooltip.style.visibility = "visible";
-    }, 600);
-  }
-
-  //Hide tooltip after mouse exit
-  function hideTooltip() {
-    clearTimeout(timeoutId);
-    const tooltip = document.getElementById(`tooltip-${id}`);
-    tooltip.style.visibility = "hidden";
-  }
-
   //Hide tooltip after page load
   useEffect(() => {
-    timeoutId = setTimeout(() => {
-      hideTooltip();
-    }, 600);
+    loadToolTip(id);
   }, []);
 
   return (
@@ -101,11 +81,11 @@ export default function DTCHeader({
           <button
             id={`go-${id}`}
             onClick={() => {
-              clearTimeout(timeoutId);
+              clearTooltipTimeout();
               search();
             }}
-            onMouseEnter={(e) => showTooltip(e, "Search")}
-            onMouseLeave={hideTooltip}
+            onMouseEnter={(e) => showTooltip(id, e, "Search")}
+            onMouseLeave={() => hideTooltip(id)}
           >
             <FontAwesomeIcon icon={faSearch} />
           </button>
@@ -132,23 +112,23 @@ export default function DTCHeader({
             className="checkbox-toggle"
             onChange={toggleSearch}
             onClick={() => {
-              clearTimeout(timeoutId);
+              clearTooltipTimeout();
               toggleSearch();
             }}
             onMouseEnter={(e) =>
-              showTooltip(e, "Toggle search mode by deck (D) or card (C)")
+              showTooltip(id, e, "Toggle search mode by deck (D) or card (C)")
             }
-            onMouseLeave={hideTooltip}
+            onMouseLeave={() => hideTooltip(id)}
           ></label>
           <button
             id={`clear-${id}`}
             className="button-clear"
             onClick={() => {
-              clearTimeout(timeoutId);
+              clearTooltipTimeout();
               clearSearch();
             }}
-            onMouseEnter={(e) => showTooltip(e, "Clear search")}
-            onMouseLeave={hideTooltip}
+            onMouseEnter={(e) => showTooltip(id, e, "Clear search")}
+            onMouseLeave={() => hideTooltip(id)}
           >
             <FontAwesomeIcon icon={faMultiply} />
           </button>
@@ -157,13 +137,13 @@ export default function DTCHeader({
               id={`create-deck-${id}`}
               className="create-deck-button"
               onClick={() => {
-                clearTimeout(timeoutId);
+                clearTooltipTimeout();
                 handleCreateDeckButton();
               }}
               onMouseEnter={(e) =>
-                showTooltip(e, "Create a deck (login required)")
+                showTooltip(id, e, "Create a deck (login required)")
               }
-              onMouseLeave={hideTooltip}
+              onMouseLeave={() => hideTooltip(id)}
             >
               <FontAwesomeIcon icon={faFileEdit} />
             </button>
@@ -171,11 +151,11 @@ export default function DTCHeader({
               id={`profile-${id}`}
               className="profile-button"
               onClick={() => {
-                clearTimeout(timeoutId);
+                clearTooltipTimeout();
                 navigate("/profile");
               }}
-              onMouseEnter={(e) => showTooltip(e, "Profile")}
-              onMouseLeave={hideTooltip}
+              onMouseEnter={(e) => showTooltip(id, e, "Profile")}
+              onMouseLeave={() => hideTooltip(id)}
             >
               <FontAwesomeIcon icon={faUser} />
             </button>

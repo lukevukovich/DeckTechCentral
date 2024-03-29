@@ -67,15 +67,15 @@ export default function Dashboard() {
         <div className="landing-text">
           <text className="landing-heading">Welcome to DeckTechCentral.</text>
           <text className="landing-paragraph">
-            DeckTechCentral is a web based deck list management tool for Magic: The
-            Gathering. Explore our collection of user-made decks or create your
-            own ultimate decks!
+            DeckTechCentral is a web based deck list management tool for Magic:
+            The Gathering. Explore our collection of user-made decks or create
+            your own ultimate decks!
           </text>
         </div>
         <div className="landing-decks">
           <text className="landing-feature">★ Featured Decks</text>
-          <DeckListing deck={decks[0]}></DeckListing>
-          <DeckListing deck={decks[1]}></DeckListing>
+          <DeckListing id="db" deck={decks[0]}></DeckListing>
+          <DeckListing id="db" deck={decks[1]}></DeckListing>
         </div>
       </div>
     </div>

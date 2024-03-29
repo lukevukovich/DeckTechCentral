@@ -87,7 +87,7 @@ export default function DeckSearch() {
       <div id="num-decks">
         <text className="num-results">{numDecks}</text>
       </div>
-      <DeckPane decks={decks}></DeckPane>
+      <DeckPane id="ds" decks={decks}></DeckPane>
     </div>
   );
 }

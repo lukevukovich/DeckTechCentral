@@ -1,6 +1,7 @@
 import "./DeckSection.css";
 import { useEffect, useState } from "react";
 import CardModal from "../CardModal/CardModal";
+import { clearTooltipTimeout, showTooltip, hideTooltip } from "../Tooltip";
 
 export default function DeckSection({ deckSectionJson, deckSectionName }) {
   //Minimize/maximize the card section
@@ -93,7 +94,12 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
           <text
             key={index}
             className="card-listing"
-            onClick={() => showCardDetails(card.CardInfo)}
+            onClick={() => {
+              clearTooltipTimeout();
+              showCardDetails(card.CardInfo);
+            }}
+            onMouseEnter={(e) => showTooltip("dv", e, "Show card details")}
+            onMouseLeave={() => hideTooltip("dv")}
           >
             {card.number + " " + card.CardInfo.name}
           </text>

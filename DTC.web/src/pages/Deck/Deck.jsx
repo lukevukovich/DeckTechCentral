@@ -6,8 +6,20 @@ import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import deck from "../../test/deck.json";
 import DeckBoard from "../../assets/DeckBoard/DeckBoard";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faThumbsUp,
+  faEye,
+  faPenToSquare,
+  faFloppyDisk,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatNumber } from "../../assets/FormatNumber";
+import {
+  showTooltip,
+  hideTooltip,
+  clearTooltipTimeout,
+} from "../../assets/Tooltip";
 
 export default function Deck() {
   const navigate = useNavigate();
@@ -19,10 +31,16 @@ export default function Deck() {
     "deck-view-desc",
   ];
 
+  //Get list of elements that are removable
   const removableElements = ["deck-view-add-card"];
 
   //Edit state
   const [edit, setEdit] = useState(false);
+
+  //Edit icon state
+  const [editIcon, setEditIcon] = useState(faPenToSquare);
+
+  const [editTooltip, setEditTooltip] = useState("Edit deck");
 
   //Use state for input
   const [input, setInput] = useState("");
@@ -113,26 +131,24 @@ export default function Deck() {
       .classList.add("button-effect-hover");
   }
 
-  useEffect(() => {
-    //Check for login and set popup
-    checkLogin();
-
-    setInitialTabs();
-  }, []);
-
-  //IMPORTANT: When edit state it changed *********************
-  useEffect(() => {
+  function setEditStates() {
     if (edit) {
-      var buttonText = "Save";
+      var buttonIcon = faFloppyDisk;
+      var tooltip = "Save deck";
+      var padding = "1px";
       var editable = true;
       var display = "block";
     } else {
-      var buttonText = "Edit";
+      var buttonIcon = faPenToSquare;
+      var tooltip = "Edit deck";
+      var padding = "2px";
       var editable = false;
       var display = "none";
     }
 
-    document.getElementById("edit-button").textContent = buttonText;
+    setEditIcon(buttonIcon);
+    setEditTooltip(tooltip);
+    document.getElementById("edit-button").style.paddingLeft = padding;
 
     try {
       for (let i = 0; 0 < editableElements.length; i++) {
@@ -147,7 +163,19 @@ export default function Deck() {
         element.style.display = display;
       }
     } catch {}
+  }
+
+  //IMPORTANT: When edit state it changed *********************
+  useEffect(() => {
+    setEditStates();
   }, [edit]);
+
+  useEffect(() => {
+    //Check for login and set popup
+    checkLogin();
+
+    setInitialTabs();
+  }, []);
 
   return (
     <div id="dv-all">
@@ -175,9 +203,14 @@ export default function Deck() {
               <button
                 id="edit-button"
                 className="edit-button"
-                onClick={() => setEdit(!edit)}
+                onClick={() => {
+                  clearTooltipTimeout();
+                  setEdit(!edit);
+                }}
+                onMouseEnter={(e) => showTooltip("dv", e, editTooltip)}
+                onMouseLeave={() => hideTooltip("dv")}
               >
-                Edit
+                <FontAwesomeIcon icon={editIcon} />
               </button>
             </div>
             <div className="deck-view-format">
@@ -188,10 +221,20 @@ export default function Deck() {
             </div>
           </div>
         </div>
-        <div className="deck-view-editors">
-          <FontAwesomeIcon icon={faUser} className="deck-view-author-icon" />
-          <text className="deck-view-author">{deck.editors[0].username}</text>
+        <div className="deck-view-stats">
+          <text className="deck-view-text">
+            <FontAwesomeIcon icon={faUser} className="deck-view-icon" />
+            {deck.editors[0].username}
+          </text>
           <text className="deck-view-others">{getEditors()}</text>
+          <text className="deck-view-text deck-view-text-left deck-view-text-reg">
+            <FontAwesomeIcon icon={faThumbsUp} className="deck-view-icon" />
+            {formatNumber(deck.likes)}
+          </text>
+          <text className="deck-view-text deck-view-text-reg">
+            <FontAwesomeIcon icon={faEye} className="deck-view-icon" />
+            {formatNumber(deck.views)}
+          </text>
         </div>
         <div className="deck-view-tabs">
           <button

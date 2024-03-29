@@ -206,6 +206,7 @@ export default function CardSearch() {
         <text className="num-results">{numCards}</text>
       </div>
       <CardPane
+        id={"cs"}
         imageList={imageList}
         showCardDetails={showCardDetails}
       ></CardPane>
