@@ -13,6 +13,7 @@ import {
   faPenToSquare,
   faFloppyDisk,
 } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatNumber } from "../../assets/FormatNumber";
 import {
@@ -40,7 +41,13 @@ export default function Deck() {
   //Edit icon state
   const [editIcon, setEditIcon] = useState(faPenToSquare);
 
+  //Edit tooltip text
   const [editTooltip, setEditTooltip] = useState("Edit deck");
+
+  //Like state
+  const [like, setLike] = useState(false);
+
+  const [likeIcon, setLikeIcon] = useState(faThumbsUpRegular);
 
   //Use state for input
   const [input, setInput] = useState("");
@@ -165,6 +172,15 @@ export default function Deck() {
     } catch {}
   }
 
+  //Set like icon based on like state
+  useEffect(() => {
+    if (like) {
+      setLikeIcon(faThumbsUp);
+    } else {
+      setLikeIcon(faThumbsUpRegular);
+    }
+  }, [like]);
+
   //IMPORTANT: When edit state it changed *********************
   useEffect(() => {
     setEditStates();
@@ -200,6 +216,17 @@ export default function Deck() {
               <text id="deck-view-name" className="deck-view-name">
                 {deck.name}
               </text>
+              <FontAwesomeIcon
+                icon={likeIcon}
+                id="like-button"
+                className="like-button"
+                onClick={() => {
+                  clearTooltipTimeout();
+                  setLike(!like);
+                }}
+                onMouseEnter={(e) => showTooltip("dv", e, "Like deck")}
+                onMouseLeave={() => hideTooltip("dv")}
+              ></FontAwesomeIcon>
               <button
                 id="edit-button"
                 className="edit-button"

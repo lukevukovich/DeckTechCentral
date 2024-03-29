@@ -48,19 +48,27 @@
   color: rgb(216, 75, 33);
 }
 
+.like-button {
+  font-size: 30px;
+  color: rgb(68, 122, 204);
+  margin-top: 6px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
 .edit-button {
   font-size: 20px;
   border-radius: 5px;
   background-color: black;
-  width: 35px;
+  width: 60px;
   height: 35px;
-  max-width: 35px;
+  max-width: 60px;
   max-height: 35px;
-  min-width: 35px;
+  min-width: 60px;
   min-height: 35px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  margin-left: 15px;
-  margin-top: 5px;
+  margin-left: 50px;
+  margin-top: 4px;
   padding-right: 0px;
   padding-left: 2px;
 }
@@ -245,12 +253,18 @@
 
   .edit-button {
     margin-top: 1px;
+    margin-left: 40px;
     font-size: 16px;
-    width: 30px;
+    width: 42px;
     height: 28px;
-    max-width: 30px;
+    max-width: 42px;
     max-height: 28px;
-    min-width: 30px;
+    min-width: 42px;
     min-height: 28px;
+  }
+
+  .like-button {
+    font-size: 25px;
+    margin-top: 2px;
   }
 }
