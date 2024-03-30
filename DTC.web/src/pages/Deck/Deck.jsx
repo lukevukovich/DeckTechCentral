@@ -10,10 +10,12 @@ import {
   faUser,
   faThumbsUp,
   faEye,
-  faPenToSquare,
   faFloppyDisk,
 } from "@fortawesome/free-solid-svg-icons";
-import { faThumbsUp as faThumbsUpRegular } from "@fortawesome/free-regular-svg-icons";
+import {
+  faThumbsUp as faThumbsUpRegular,
+  faPenToSquare,
+} from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatNumber } from "../../assets/FormatNumber";
 import {
@@ -32,8 +34,11 @@ export default function Deck() {
     "deck-view-desc",
   ];
 
-  //Get list of elements that are removable
-  const removableElements = ["deck-view-add-card"];
+  //Get list of elements that are shown during edit
+  const showOnEdit = ["deck-view-add-card"];
+
+  //Get list of elements that are hidden during edit
+  const hideOnEdit = ["like-button"];
 
   //Edit state
   const [edit, setEdit] = useState(false);
@@ -144,13 +149,17 @@ export default function Deck() {
       var tooltip = "Save deck";
       var padding = "1px";
       var editable = true;
-      var display = "block";
+      var showDisplay = "block";
+      var hideDisplay = "none";
+      var outline = true;
     } else {
       var buttonIcon = faPenToSquare;
       var tooltip = "Edit deck";
       var padding = "2px";
       var editable = false;
-      var display = "none";
+      var showDisplay = "none";
+      var hideDisplay = "block";
+      var outline = false;
     }
 
     setEditIcon(buttonIcon);
@@ -161,13 +170,25 @@ export default function Deck() {
       for (let i = 0; 0 < editableElements.length; i++) {
         var element = document.getElementById(editableElements[i]);
         element.contentEditable = editable;
+        if (outline) {
+          element.classList.add("deck-view-edit");
+        } else {
+          element.classList.remove("deck-view-edit");
+        }
       }
     } catch {}
 
     try {
-      for (let i = 0; 0 < removableElements.length; i++) {
-        var element = document.getElementById(removableElements[i]);
-        element.style.display = display;
+      for (let i = 0; 0 < showOnEdit.length; i++) {
+        var element = document.getElementById(showOnEdit[i]);
+        element.style.display = showDisplay;
+      }
+    } catch {}
+
+    try {
+      for (let i = 0; 0 < hideOnEdit.length; i++) {
+        var element = document.getElementById(hideOnEdit[i]);
+        element.style.display = hideDisplay;
       }
     } catch {}
   }
@@ -267,21 +288,36 @@ export default function Deck() {
           <button
             id="tablink-mainboard"
             className="deck-view-tablinks"
-            onClick={() => tabSelect(deck.mainboard, "mainboard")}
+            onClick={() => {
+              clearTooltipTimeout();
+              tabSelect(deck.mainboard, "mainboard");
+            }}
+            onMouseEnter={(e) => showTooltip("dv", e, "View mainboard")}
+            onMouseLeave={() => hideTooltip("dv")}
           >
             Mainboard
           </button>
           <button
             id="tablink-sideboard"
             className="deck-view-tablinks"
-            onClick={() => tabSelect(deck.sideboard, "sideboard")}
+            onClick={() => {
+              clearTooltipTimeout();
+              tabSelect(deck.sideboard, "sideboard");
+            }}
+            onMouseEnter={(e) => showTooltip("dv", e, "View sideboard")}
+            onMouseLeave={() => hideTooltip("dv")}
           >
             Sideboard
           </button>
           <button
             id="tablink-considering"
             className="deck-view-tablinks"
-            onClick={() => tabSelect(deck.considering, "considering")}
+            onClick={() => {
+              clearTooltipTimeout();
+              tabSelect(deck.considering, "considering");
+            }}
+            onMouseEnter={(e) => showTooltip("dv", e, "View considering")}
+            onMouseLeave={() => hideTooltip("dv")}
           >
             Considering
           </button>

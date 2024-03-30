@@ -22,10 +22,17 @@
   margin-right: auto;
   align-content: center;
   z-index: 2;
+  /* background-color: rgba(255, 0, 0, 0.1); */
+  /* box-shadow: 0 0px 80px 50px rgba(255, 0, 0, 0.12); */
 }
 
 .deck-view text {
   font-family: Arial;
+}
+
+.deck-view-edit {
+  outline: 1px solid #000;
+  border-radius: 5px;
 }
 
 .deck-view-panel {
@@ -49,25 +56,26 @@
 }
 
 .like-button {
+  display: block;
   font-size: 30px;
   color: rgb(68, 122, 204);
   margin-top: 6px;
-  margin-left: 15px;
+  margin-left: 18px;
   cursor: pointer;
 }
 
 .edit-button {
   font-size: 20px;
   border-radius: 5px;
-  background-color: black;
-  width: 60px;
+  background-color: rgb(51, 51, 51);
+  width: 35px;
   height: 35px;
-  max-width: 60px;
+  max-width: 35px;
   max-height: 35px;
-  min-width: 60px;
+  min-width: 35px;
   min-height: 35px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  margin-left: 50px;
+  margin-left: 18px;
   margin-top: 4px;
   padding-right: 0px;
   padding-left: 2px;
@@ -82,8 +90,8 @@
 }
 
 .deck-view-format {
-  padding-top: 2px;
-  padding-left: 3px;
+  margin-top: 4px;
+  margin-left: 2px;
   width: fit-content;
 }
 
@@ -95,7 +103,7 @@
 
 .deck-view-desc {
   margin-top: 25px;
-  margin-left: 5px;
+  margin-left: 3px;
 }
 
 .deck-view-desc text {
@@ -190,7 +198,7 @@
 }
 
 .button-effect-hover:hover {
-  background-color: rgba(243, 189, 189, 0.6) !important;
+  background-color: rgba(230, 171, 171, 0.6) !important;
 }
 
 .deck-view-board {
@@ -253,18 +261,19 @@
 
   .edit-button {
     margin-top: 1px;
-    margin-left: 40px;
+    margin-left: 15px;
     font-size: 16px;
-    width: 42px;
+    width: 28px;
     height: 28px;
-    max-width: 42px;
+    max-width: 28px;
     max-height: 28px;
-    min-width: 42px;
+    min-width: 28px;
     min-height: 28px;
   }
 
   .like-button {
     font-size: 25px;
     margin-top: 2px;
+    margin-left: 15px;
   }
 }

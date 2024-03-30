@@ -69,7 +69,13 @@ export default function DTCHeader({
   return (
     <div id={id}>
       <div id={`header-${id}`}>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link
+          to="/"
+          style={{ textDecoration: "none" }}
+          onClick={() => clearTooltipTimeout()}
+          onMouseEnter={(e) => showTooltip(id, e, "Home page")}
+          onMouseLeave={() => hideTooltip(id)}
+        >
           <text id={`heading-${id}`} className="heading">
             <span className="heading-txt">DeckTechCentral</span>
             <span className="heading-logo">
