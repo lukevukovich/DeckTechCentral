@@ -1,12 +1,8 @@
-using System.Collections.Specialized;
-using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace DTC.Model {
-    public class Deck
+    public class DeckResponse
     {
-        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
         [BsonElement("id")]
         public Guid Id { get; set; }
 
@@ -38,13 +34,13 @@ namespace DTC.Model {
         public Uri CoverImage { get; set; }
 
         [BsonElement("mainboard")]
-        public List<Guid> Mainboard { get; set; }
+        public List<Card> Mainboard { get; set; }
 
         [BsonElement("sideboard")]
-        public List<Guid> Sideboard { get; set; }
+        public List<Card> Sideboard { get; set; }
 
         [BsonElement("considering")]
-        public List<Guid> Considering { get; set; }
+        public List<Card> Considering { get; set; }
 
         [BsonElement("created_date")]
         public DateTime CreatedDate { get; set; }

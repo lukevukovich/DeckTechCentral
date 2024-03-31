@@ -596,6 +596,9 @@ components:
           type: date-time
         modified_date:
           type: date-time
+        privacy:
+          type: string
+          example: 'public'
     DeckCreationRequest:
       type: object
       required:

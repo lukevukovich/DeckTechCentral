@@ -7,8 +7,6 @@ namespace DTC.DataAccess {
 
         public Task<List<Card>> GetCardBulk(List<Guid> guids);
 
-        public Task<List<Card>> SearchCard(string q, int page, int pageSzie);
-
         public Task CreateCard(Card card);
     }
 }

@@ -4,9 +4,7 @@ using MongoDB.Driver;
 namespace DTC.DataAccess {
     public class UserAccess : BaseAccess, IUserAccess
     {
-        UserAccess() {
-            //TODO figure out config shit
-        }
+
 
         public async Task<User> GetUserByEmail(string email) {
             var collection = Connect<User>("User");

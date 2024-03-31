@@ -4,9 +4,6 @@ using MongoDB.Driver;
 namespace DTC.DataAccess {
     public class CardAccess : BaseAccess, ICardAccess
     {
-        CardAccess() {
-
-        }
 
         public async Task<Card> GetCardById(Guid id) 
         {
@@ -22,17 +19,6 @@ namespace DTC.DataAccess {
             var filter = Builders<Card>.Filter.In(f => f.Id, guids);
 
             var results = await collection.FindAsync(filter);
-
-            return results.ToList();
-        }
-
-        public async Task<List<Card>> SearchCard(string q, int page, int pageSize) 
-        {
-            //handle q
-
-            var collection = Connect<Card>("Card");
-
-            var results = await collection.FindAsync(f => f.Name == q);
 
             return results.ToList();
         }

@@ -9,10 +9,6 @@ namespace DTC.DataAccess {
     public class DeckAccess : BaseAccess, IDeckAccess
     {
 
-        DeckAccess() {
-
-        }
-
         public async Task<List<Deck>> SearchDeck(string? name, string? format, string? commander1, string? commander2, string? sortBy) 
         {
             var collection = Connect<Deck>("Deck");
@@ -43,6 +39,12 @@ namespace DTC.DataAccess {
             var results = await collection.FindAsync(f => f.Editors.Contains(user));
 
             return results.ToList();
+        }
+
+        public async Task DeleteDeck(Guid deckId) {
+            var collection = Connect<Deck>("Deck");
+
+            var results =  await collection.DeleteOneAsync(f => f.Id == deckId);
         }
 
         private List<CardDeckResponse> GenerateCardDeckResponse(List<string> cards) {
