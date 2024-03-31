@@ -179,6 +179,7 @@ export default function CardSearch() {
   //Set selected card and show modal
   function showCardDetails(index) {
     setSelectedCard(data[index]);
+    document.body.style.overflow = 'hidden';
     setModal(true);
   }
 

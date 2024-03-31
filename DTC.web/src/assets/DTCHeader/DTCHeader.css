@@ -131,24 +131,6 @@ button:active {
   border-radius: 30px;
 }
 
-.profile-button:hover + .user-popup {
-  color: rgb(231, 195, 195);
-  background-color: rgb(121, 27, 27);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.create-deck-button {
-  font-size: 23px;
-  height: 45px;
-  width: 48px;
-  border-radius: 30px;
-  padding-left: 10px;
-}
-
-.heading-logo {
-  visibility: hidden;
-}
-
 .user-popup {
   color: transparent;
   background-color: transparent;
@@ -163,6 +145,26 @@ button:active {
   padding-right: 10px;
   font-weight: bold;
   right: 8px;
+  visibility: hidden;
+}
+
+.profile-button:hover + .user-popup {
+  color: rgb(231, 195, 195);
+  background-color: rgb(121, 27, 27);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  visibility: visible;
+}
+
+.create-deck-button {
+  font-size: 23px;
+  height: 45px;
+  width: 48px;
+  border-radius: 30px;
+  padding-left: 10px;
+}
+
+.heading-logo {
+  visibility: hidden;
 }
 
 @media (max-width: 650px) {

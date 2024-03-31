@@ -6,6 +6,8 @@ import "./CardModal.css";
 export default function CardModal({ id, modal, setModal, selectedCard }) {
   //Close card modal
   function closeCardDetails() {
+    // Thanks to https://stackoverflow.com/questions/54989513/react-prevent-scroll-when-modal-is-open for overflow tip
+    document.body.style.overflow = 'unset';
     setModal(false);
   }
 

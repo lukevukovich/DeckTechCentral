@@ -255,6 +255,15 @@
     width: 98%;
   }
 
+  .deck-view-text-left {
+    display: block;
+    margin-left: 0 !important;
+  }
+
+  .deck-view-text-reg {
+    margin-left: 0;
+  }
+
   .deck-view-editors text {
     font-size: 14px;
   }
