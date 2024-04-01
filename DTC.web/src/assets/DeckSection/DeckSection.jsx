@@ -74,7 +74,7 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
   return (
     <div className="deck-section">
       <CardModal
-        id="deck-section"
+        id="dv"
         modal={modal}
         setModal={setModal}
         selectedCard={selectedCard}

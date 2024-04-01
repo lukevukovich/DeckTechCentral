@@ -234,7 +234,12 @@ export default function Deck() {
           </div>
           <div className="deck-view-info">
             <div className="deck-view-name-edit">
-              <text id="deck-view-name" className="deck-view-name">
+              <text
+                id="deck-view-name"
+                className="deck-view-name"
+                onMouseEnter={(e) => showTooltip("dv", e, "Deck name")}
+                onMouseLeave={() => hideTooltip("dv")}
+              >
                 {deck.name}
               </text>
               <FontAwesomeIcon
@@ -262,9 +267,20 @@ export default function Deck() {
               </button>
             </div>
             <div className="deck-view-format">
-              <text id="deck-view-format">{deck.format}</text>
+              <text
+                id="deck-view-format"
+                onMouseEnter={(e) => showTooltip("dv", e, "Deck format")}
+                onMouseLeave={() => hideTooltip("dv")}
+              >
+                {deck.format}
+              </text>
             </div>
-            <div id="deck-view-desc" className="deck-view-desc">
+            <div
+              id="deck-view-desc"
+              className="deck-view-desc"
+              onMouseEnter={(e) => showTooltip("dv", e, "Deck description")}
+              onMouseLeave={() => hideTooltip("dv")}
+            >
               <text>{deck.description}</text>
             </div>
           </div>

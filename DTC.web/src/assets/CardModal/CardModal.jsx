@@ -2,12 +2,13 @@ import Modal from "react-modal";
 import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CardModal.css";
+import { showTooltip, hideTooltip, clearTooltipTimeout } from "../Tooltip";
 
 export default function CardModal({ id, modal, setModal, selectedCard }) {
   //Close card modal
   function closeCardDetails() {
     // Thanks to https://stackoverflow.com/questions/54989513/react-prevent-scroll-when-modal-is-open for overflow tip
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
     setModal(false);
   }
 
@@ -34,7 +35,12 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
         <button
           id={`modal-button-${id}`}
           className="modal-button"
-          onClick={() => closeCardDetails()}
+          onClick={() => {
+            clearTooltipTimeout();
+            closeCardDetails();
+          }}
+          onMouseEnter={(e) => showTooltip(id, e, "Close card details")}
+          onMouseLeave={() => hideTooltip(id)}
         >
           <FontAwesomeIcon icon={faMultiply} />
         </button>
