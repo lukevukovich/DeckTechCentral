@@ -10,7 +10,7 @@ namespace DTC.Service
 
         public DeckResponse GetDeck(Guid deckId);
 
-        public List<DeckSearchResponse> GetDecksForUserId(string UserId);
+        public List<DeckSearchResponse> GetDecksForUserId(Guid UserId);
 
         public void DeleteDeck(Guid DeckId, User user);
 
@@ -19,7 +19,5 @@ namespace DTC.Service
         public List<Card> GetCardBulk(List<Guid> guids);
 
         public List<Card> SearchCard(string q, int page, int pageSize);
-
-        public void CreateCard(Card card);
     }
 }

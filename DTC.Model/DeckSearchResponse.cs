@@ -9,6 +9,9 @@ namespace DTC.Model {
 
         [BsonElement("editors")]
         public List<User> Editors { get; set; }
+        
+        [BsonElement("privacy")]
+        public string Privacy { get; set; }
 
         [BsonElement("name")]
         public String Name { get; set; }

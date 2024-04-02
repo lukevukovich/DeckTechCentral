@@ -9,6 +9,6 @@ namespace DTC.DataAccess {
 
         public Task<Deck> GetDeck(Guid deckId);
 
-        public Task<List<Deck>> GetDecksForUser(User user);
+        public Task<List<Deck>> GetDecksForUser(Guid userId);
     }
 }

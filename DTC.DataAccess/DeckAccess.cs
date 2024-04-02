@@ -4,6 +4,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace DTC.DataAccess {
     public class DeckAccess : BaseAccess, IDeckAccess
@@ -33,10 +34,10 @@ namespace DTC.DataAccess {
             return await collection.Find(x => x.Id == deckId).Limit(1).FirstAsync();
         }
 
-        public async Task<List<Deck>> GetDecksForUser(User user) {
+        public async Task<List<Deck>> GetDecksForUser(Guid userId) {
             var collection = Connect<Deck>("Deck");
 
-            var results = await collection.FindAsync(f => f.Editors.Contains(user));
+            var results = await collection.FindAsync(f => f.Editors.Where(u => u.Id == userId).Count() > 0);
 
             return results.ToList();
         }

@@ -1,8 +1,6 @@
 using DTC.Model;
 using DTC.DataAccess;
-using MongoDB.Driver.Core.Connections;
-using System.Data.Common;
-using MongoDB.Bson.Serialization.Serializers;
+using RestSharp;
 
 namespace DTC.Service {
     public class DeckService : IDeckService
@@ -18,25 +16,7 @@ namespace DTC.Service {
 
             var search = deckRepo.SearchDeck(name, format, commander1, commander2, sortBy);
 
-            List<DeckSearchResponse> result = new List<DeckSearchResponse>();
-            foreach(var d in search.Result) {
-                if(d.Privacy.Equals("public")) {
-                    result.Append(new DeckSearchResponse {
-                        Id = d.Id,
-                        Editors = d.Editors,
-                        Name = d.Name,
-                        Format = d.Format,
-                        Likes = d.Likes,
-                        Dislikes = d.Dislikes,
-                        Views = d.Views,
-                        CoverImage = d.CoverImage,
-                        CreatedDate = d.CreatedDate,
-                        ModifiedDate = d.ModifiedDate
-                    });
-                }
-            }
-
-            return result;
+            return ConvertDeckToDeckSearch(search.Result);
         }
 
         public void CreateDeck(DeckCreationRequest deck, User user) {
@@ -62,37 +42,17 @@ namespace DTC.Service {
         public DeckResponse GetDeck(Guid deckId) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
 
-            var mb = GetCardBulk(tempDeck.Mainboard);
-            var sb = GetCardBulk(tempDeck.Sideboard);
-            var cons = GetCardBulk(tempDeck.Considering);
+            List<Deck> decks= new List<Deck>();
 
-            var deck = new DeckResponse {
-                Id = tempDeck.Id,
-                Editors = tempDeck.Editors,
-                Privacy = tempDeck.Privacy,
-                Name = tempDeck.Name,
-                Format = tempDeck.Format,
-                Likes = tempDeck.Likes,
-                Dislikes = tempDeck.Dislikes,
-                Views = tempDeck.Views,
-                Description = tempDeck.Description,
-                CoverImage = tempDeck.CoverImage,
-                Mainboard = mb,
-                Sideboard = sb,
-                Considering = cons,
-                CreatedDate = tempDeck.CreatedDate,
-                ModifiedDate = tempDeck.ModifiedDate,
-                Commander1 = tempDeck.Commander1,
-                Commander2 = tempDeck.Commander2,
-            };
 
-            return deck;
+            return ConvertDeckToDeckResponse(decks).First();
         }
 
-        public List<DeckSearchResponse> GetDecksForUserId(string userId) {
-            //get user
+        public List<DeckSearchResponse> GetDecksForUserId(Guid userId) {
 
-            return deckRepo.GetDecksForUser(user);
+            var results = deckRepo.GetDecksForUser(userId).Result;
+
+            return ConvertDeckToDeckSearch(results);
         }
 
         public async void DeleteDeck(Guid DeckId, User user) {
@@ -114,19 +74,73 @@ namespace DTC.Service {
             foreach(var card in cards) {
                 if(card.Name == null) {
                     notInDB.Append(card.Id);
+                    cards.Remove(card);
                 }
             }
 
-            //make a scryfall call for the missing cards
-            //insert the missing cards into the db
+            var newCards = CardSearching.GetCards(notInDB);
+            cardRepo.CreateCardBulk(newCards);
+
+            foreach(var card in newCards) {
+                newCards.Add(card);
+            }
+
+            return cards;
         }
 
         public List<Card> SearchCard(string q, int page, int pageSize) {
-            //set up rest sharp client stuff
+            return CardSearching.SearchCard(q, page, pageSize);
         }
 
-        public void CreateCard(Card card) {
-            cardRepo.CreateCard(card);
+        private List<DeckSearchResponse> ConvertDeckToDeckSearch(List<Deck> decks) {
+            List<DeckSearchResponse> response = new List<DeckSearchResponse>();
+            foreach(var deck in decks) {
+                response.Add( new DeckSearchResponse {
+                    Id = deck.Id,
+                    Editors = deck.Editors,
+                    Name = deck.Name,
+                    Privacy = deck.Privacy,
+                    Format = deck.Format,
+                    Likes = deck.Likes,
+                    Dislikes = deck.Dislikes,
+                    Views = deck.Views,
+                    CoverImage = deck.CoverImage,
+                    CreatedDate = deck.CreatedDate,
+                    ModifiedDate = deck.ModifiedDate,
+                });
+            }
+
+            return response;
+        }
+
+        private List<DeckResponse> ConvertDeckToDeckResponse(List<Deck> decks) {
+            List<DeckResponse> responses = new List<DeckResponse>();
+            foreach(var deck in decks) {
+                var mb = GetCardBulk(deck.Mainboard);
+                var sb = GetCardBulk(deck.Sideboard);
+                var cons = GetCardBulk(deck.Considering);
+
+                responses.Add(new DeckResponse {
+                    Id = deck.Id,
+                    Editors = deck.Editors,
+                    Name = deck.Name,
+                    Privacy = deck.Privacy,
+                    Format = deck.Format,
+                    Likes = deck.Likes,
+                    Dislikes = deck.Dislikes,
+                    Views = deck.Views,
+                    Mainboard = mb,
+                    Sideboard = sb,
+                    Considering = cons,
+                    CoverImage = deck.CoverImage,
+                    CreatedDate = deck.CreatedDate,
+                    ModifiedDate = deck.ModifiedDate,
+                    Commander1 = deck.Commander1,
+                    Commander2 = deck.Commander2
+                });
+            }
+
+            return responses;
         }
     }
 }

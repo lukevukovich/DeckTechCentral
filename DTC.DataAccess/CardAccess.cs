@@ -29,5 +29,11 @@ namespace DTC.DataAccess {
 
             return collection.InsertOneAsync(card);
         }
+
+        public Task CreateCardBulk(List<Card> cards) {
+            var collection = Connect<Card>("Card");
+
+            return collection.InsertManyAsync(cards);
+        }
     }
 }
