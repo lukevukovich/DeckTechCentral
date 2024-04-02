@@ -54,7 +54,7 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
 
     setSelectedCard(data);
     // Thanks to https://stackoverflow.com/questions/54989513/react-prevent-scroll-when-modal-is-open for overflow tip
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     setModal(true);
   }
 
@@ -78,6 +78,7 @@ export default function DeckSection({ deckSectionJson, deckSectionName }) {
         modal={modal}
         setModal={setModal}
         selectedCard={selectedCard}
+        deckId={null}
       ></CardModal>
       <div id="section-panel" className="section-panel">
         <button

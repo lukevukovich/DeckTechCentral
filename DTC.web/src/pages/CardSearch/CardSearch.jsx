@@ -12,7 +12,6 @@ import useQuery from "../../assets/useQuery";
 Modal.setAppElement("#root");
 
 export default function CardSearch() {
-
   //Set working variables
   const navigate = useNavigate();
   const query = useQuery();
@@ -143,7 +142,7 @@ export default function CardSearch() {
   const searchCard = async () => {
     let navigateString = `/cardsearch?card=${cardName}`;
     if (deckId != null) {
-      navigateString += `&deck=${deckId}`
+      navigateString += `&deck=${deckId}`;
     }
     navigate(navigateString);
 
@@ -163,8 +162,6 @@ export default function CardSearch() {
 
       //Set data
       setData(processedData);
-
-      console.log(processedData);
 
       //Set image list
       setImageList(images);
@@ -203,6 +200,7 @@ export default function CardSearch() {
         modal={modal}
         setModal={setModal}
         selectedCard={selectedCard}
+        deckId={deckId}
       ></CardModal>
       <DTCHeader
         id="cs"

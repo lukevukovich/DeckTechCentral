@@ -92,6 +92,26 @@
   color: black;
 }
 
+.modal-add-card {
+  position: absolute;
+  width: 290px;
+  height: 403px;
+  margin-top: 92px;
+  margin-left: -290px;
+  border-radius: 15px;
+  color: transparent;
+  font-size: 28px;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.modal-add-card:hover {
+  background-color: rgba(0, 0, 0, 0.82);
+  color: white;
+  outline-offset: -2px;
+  outline: 3px solid rgb(205, 41, 27);
+}
+
 @media (max-width: 850px) {
   .card-modal-content {
     width: 375px;
@@ -118,6 +138,15 @@
   }
   .modal-stats text {
     font-size: 11px;
+  }
+
+  .modal-add-card {
+    width: 145px;
+    height: 202px;
+    margin-left: -145px;
+    margin-top: 50px;
+    border-radius: 8px;
+    font-size: 15px;
   }
 }
 
