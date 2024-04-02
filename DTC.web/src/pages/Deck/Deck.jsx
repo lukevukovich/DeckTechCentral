@@ -29,6 +29,9 @@ export default function Deck() {
   const navigate = useNavigate();
   const query = useQuery();
 
+  //Deck Id to load
+  const deckId = query.get("id");
+
   //Get list of elements that become editable
   const editableElements = [
     "deck-view-name",

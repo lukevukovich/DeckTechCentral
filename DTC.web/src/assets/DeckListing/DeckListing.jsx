@@ -13,7 +13,7 @@ export default function DeckListing({ id, deck }) {
       className="deck-listing"
       onClick={() => {
         clearTooltipTimeout();
-        navigate("/deck");
+        navigate(`/deck?id=${deck.id}`);
       }}
       onMouseEnter={(e) => {
         showTooltip(id, e, "View deck");
