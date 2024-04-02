@@ -6,18 +6,18 @@ import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import decks from "../../test/decks.json";
 import DeckPane from "../../assets/DeckPane/DeckPane";
+import useQuery from "../../assets/useQuery";
 
 export default function DeckSearch() {
   //Set working variables
   const navigate = useNavigate();
-  const url = new URL(window.location.href);
-  const searchParams = new URLSearchParams(url.search);
+  const query = useQuery();
 
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(false);
 
   //Set initial search text based on dashboard
-  const [searchText, setSearchText] = useState(searchParams.get("q"));
+  const [searchText, setSearchText] = useState(query.get("deck"));
 
   //Use state for deck name search value
   const [deckName, setDeckName] = useState(searchText);
@@ -40,7 +40,7 @@ export default function DeckSearch() {
     if (deckName != "" && deckName.length <= maxSearchLength) {
       setNumDecks("");
       if (isToggled) {
-        navigate(`/cardsearch?q=${deckName}`);
+        navigate(`/cardsearch?card=${deckName}`);
       } else {
         searchDeck();
       }
@@ -61,7 +61,7 @@ export default function DeckSearch() {
   }, [searchText]);
 
   const searchDeck = async () => {
-    navigate(`/decksearch?q=${deckName}`);
+    navigate(`/decksearch?deck=${deckName}`);
     setNumDecks("Deck search for '" + deckName.toLowerCase() + "'");
   };
 

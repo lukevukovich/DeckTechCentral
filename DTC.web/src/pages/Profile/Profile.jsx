@@ -77,10 +77,10 @@ export default function Profile() {
   function search() {
     if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
-        navigate(`/decksearch?q=${input}`);
+        navigate(`/decksearch?deck=${input}`);
         setInput("");
       } else {
-        navigate(`/cardsearch?q=${input}`);
+        navigate(`/cardsearch?card=${input}`);
         setInput("");
       }
     }

@@ -7,20 +7,24 @@ import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import CardModal from "../../assets/CardModal/CardModal";
 import Modal from "react-modal";
 import CardPane from "../../assets/CardPane/CardPane";
+import useQuery from "../../assets/useQuery";
 
 Modal.setAppElement("#root");
 
 export default function CardSearch() {
+
   //Set working variables
   const navigate = useNavigate();
-  const url = new URL(window.location.href);
-  const searchParams = new URLSearchParams(url.search);
+  const query = useQuery();
 
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(true);
 
   //Set initial search text based on dashboard
-  const [searchText, setSearchText] = useState(searchParams.get("q"));
+  const [searchText, setSearchText] = useState(query.get("card"));
+
+  //Deck ID for adding card to deck
+  const deckId = query.get("deck");
 
   //Use state for card name search value
   const [cardName, setCardName] = useState(searchText);
@@ -63,7 +67,7 @@ export default function CardSearch() {
     if (cardName != "" && cardName.length <= maxSearchLength) {
       setNumCards("");
       if (!isToggled) {
-        navigate(`/decksearch?q=${cardName}`);
+        navigate(`/decksearch?deck=${cardName}`);
       } else {
         searchCard();
       }
@@ -76,7 +80,9 @@ export default function CardSearch() {
 
     //Go to top of page
     window.scrollTo(0, 0);
+  }, []);
 
+  useEffect(() => {
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchCard();
@@ -135,7 +141,11 @@ export default function CardSearch() {
 
   //Handle card seach to Scryfall API
   const searchCard = async () => {
-    navigate(`/cardsearch?q=${cardName}`);
+    let navigateString = `/cardsearch?card=${cardName}`;
+    if (deckId != null) {
+      navigateString += `&deck=${deckId}`
+    }
+    navigate(navigateString);
 
     setData([]);
     setImageList([]);
@@ -153,6 +163,8 @@ export default function CardSearch() {
 
       //Set data
       setData(processedData);
+
+      console.log(processedData);
 
       //Set image list
       setImageList(images);
@@ -179,7 +191,7 @@ export default function CardSearch() {
   //Set selected card and show modal
   function showCardDetails(index) {
     setSelectedCard(data[index]);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     setModal(true);
   }
 

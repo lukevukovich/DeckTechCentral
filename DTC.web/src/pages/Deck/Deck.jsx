@@ -23,9 +23,11 @@ import {
   hideTooltip,
   clearTooltipTimeout,
 } from "../../assets/Tooltip";
+import useQuery from "../../assets/useQuery";
 
 export default function Deck() {
   const navigate = useNavigate();
+  const query = useQuery();
 
   //Get list of elements that become editable
   const editableElements = [
@@ -76,10 +78,10 @@ export default function Deck() {
   function search() {
     if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
-        navigate(`/decksearch?q=${input}`);
+        navigate(`/decksearch?deck=${input}`);
         setInput("");
       } else {
-        navigate(`/cardsearch?q=${input}`);
+        navigate(`/cardsearch?card=${input}`);
         setInput("");
       }
     }
@@ -214,6 +216,10 @@ export default function Deck() {
     setInitialTabs();
   }, []);
 
+  function handleAddCard() {
+    navigate(`/cardsearch?deck=${deck.id}`);
+  }
+
   return (
     <div id="dv-all">
       <DTCHeader
@@ -338,7 +344,11 @@ export default function Deck() {
             Considering
           </button>
         </div>
-        <button id="deck-view-add-card" className="deck-view-add-card">
+        <button
+          id="deck-view-add-card"
+          className="deck-view-add-card"
+          onClick={() => navigate(`/cardsearch?deck=${deck.id}`)}
+        >
           Add Card
         </button>
         <DeckBoard boardJson={board}></DeckBoard>
