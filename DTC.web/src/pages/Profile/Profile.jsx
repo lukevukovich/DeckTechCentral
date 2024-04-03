@@ -71,6 +71,8 @@ export default function Profile() {
   useEffect(() => {
     //Check login, set user info
     checkLogin();
+
+    sessionStorage.removeItem("deck");
   }, []);
 
   //Search deck/card based on toggle

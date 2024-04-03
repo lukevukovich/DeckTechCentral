@@ -32,6 +32,8 @@ export default function Deck() {
   //Deck Id to load
   const deckId = query.get("id");
 
+  const loadEdit = query.get("edit");
+
   //Get list of elements that become editable
   const editableElements = [
     "deck-view-name",
@@ -212,16 +214,65 @@ export default function Deck() {
     setEditStates();
   }, [edit]);
 
+  //Check if edit tag is preloaded
+  function loadEditState() {
+    if (loadEdit != null) {
+      if (loadEdit == "true") {
+        setEdit(true);
+      }
+    }
+  }
+
+  function handleAddCardClick() {
+    sessionStorage.setItem("deck", deck.id);
+    navigate("/cardsearch");
+  }
+
+  //Check if card was sent to page, if so add card
+  function checkForCardAdd() {
+    const card = JSON.parse(sessionStorage.getItem("card"));
+
+    if (card != null) {
+      const board = card.board;
+      const number = card.number;
+
+      if (card.type_line.includes("—")) {
+        card.type_line = card.type_line.split("—")[0].slice(0, -1);
+      }
+
+      const newCard = {
+        number: number,
+        CardInfo: {
+          name: card.name,
+          id: card.id,
+          mana_cost: card.mana_cost,
+          cmc: card.cmc,
+          type_line: card.type_line,
+          oracle_text: card.oracle_text,
+          flavor_text: card.flavor_text,
+          image_uris: { large: card.image_uris.large },
+        },
+      };
+
+      //Add card to board
+      deck[board].push(newCard);
+
+      sessionStorage.clear();
+    }
+  }
+
   useEffect(() => {
     //Check for login and set popup
     checkLogin();
 
+    sessionStorage.removeItem("deck");
+
+    loadEditState();
+
+    checkForCardAdd();
+
     setInitialTabs();
   }, []);
-
-  function handleAddCard() {
-    navigate(`/cardsearch?deck=${deck.id}`);
-  }
 
   return (
     <div id="dv-all">
@@ -350,7 +401,7 @@ export default function Deck() {
         <button
           id="deck-view-add-card"
           className="deck-view-add-card"
-          onClick={() => navigate(`/cardsearch?deck=${deck.id}`)}
+          onClick={handleAddCardClick}
         >
           Add Card
         </button>

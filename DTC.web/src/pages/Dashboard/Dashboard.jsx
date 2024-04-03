@@ -30,6 +30,8 @@ export default function Dashboard() {
   useEffect(() => {
     //Check for login and set popup
     checkLogin();
+
+    sessionStorage.removeItem("deck");
   }, []);
 
   function search() {

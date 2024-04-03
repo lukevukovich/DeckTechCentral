@@ -4,14 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CardModal.css";
 import { showTooltip, hideTooltip, clearTooltipTimeout } from "../Tooltip";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function CardModal({
-  id,
-  modal,
-  setModal,
-  selectedCard,
-  deckId,
-}) {
+export default function CardModal({ id, modal, setModal, selectedCard }) {
+  const navigate = useNavigate();
+
+  const deckId = sessionStorage.getItem("deck");
+
   //Close card modal
   function closeCardDetails() {
     document.body.style.overflow = "unset";
@@ -19,7 +18,18 @@ export default function CardModal({
   }
 
   function handleAddCard() {
-    console.log(deckId);
+    closeCardDetails();
+
+    //Show mini modal, ask for board, if commander, and number
+    const board = "mainboard";
+    const number = "1";
+
+    selectedCard.board = board;
+    selectedCard.number = number;
+
+    sessionStorage.clear();
+    sessionStorage.setItem("card", JSON.stringify(selectedCard));
+    navigate(`/deck?id=${deckId}&edit=true`);
   }
 
   function setAddCardState() {
@@ -82,13 +92,18 @@ export default function CardModal({
             <button
               id="modal-add-card"
               className="modal-add-card"
-              onClick={() => handleAddCard()}
+              onClick={() => {
+                clearTooltipTimeout();
+                handleAddCard();
+              }}
+              onMouseEnter={(e) => showTooltip(id, e, "Add card to deck")}
+              onMouseLeave={() => hideTooltip(id)}
             >
               Add to deck
             </button>
           </div>
           <div id={`modal-stats-${id}`} className="modal-stats">
-            <text>
+            <text className="modal-type-line">
               {selectedCard.type_line.replace(new RegExp("//", "g"), "||")}
             </text>
             <text>

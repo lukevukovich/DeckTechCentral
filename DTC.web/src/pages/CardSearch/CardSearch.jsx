@@ -22,9 +22,6 @@ export default function CardSearch() {
   //Set initial search text based on dashboard
   const [searchText, setSearchText] = useState(query.get("card"));
 
-  //Deck ID for adding card to deck
-  const deckId = query.get("deck");
-
   //Use state for card name search value
   const [cardName, setCardName] = useState(searchText);
 
@@ -141,9 +138,6 @@ export default function CardSearch() {
   //Handle card seach to Scryfall API
   const searchCard = async () => {
     let navigateString = `/cardsearch?card=${cardName}`;
-    if (deckId != null) {
-      navigateString += `&deck=${deckId}`;
-    }
     navigate(navigateString);
 
     setData([]);
@@ -200,7 +194,6 @@ export default function CardSearch() {
         modal={modal}
         setModal={setModal}
         selectedCard={selectedCard}
-        deckId={deckId}
       ></CardModal>
       <DTCHeader
         id="cs"
