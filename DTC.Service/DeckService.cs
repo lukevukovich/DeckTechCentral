@@ -92,10 +92,7 @@ namespace DTC.Service {
         }
 
         public Card GetCardById(Guid id) {
-            var result = cardRepo.GetCardById(id).Result;
-            if(result == null) return GetCardBulk(new List<Guid> {id}).First();
-
-            return result;
+            return GetCardBulk(new List<Guid> {id}).First();
         }
 
         public List<Card> GetCardBulk(List<Guid> ids) {
@@ -121,7 +118,7 @@ namespace DTC.Service {
                 cardRepo.CreateCardBulk(newCards);
 
                 foreach(var card in newCards) {
-                    newCards.Add(card);
+                    cards.Add(card);
                 }
             }
 
@@ -129,7 +126,11 @@ namespace DTC.Service {
         }
 
         public List<Card> SearchCard(string q, int? page, int? pageSize) {
-            return CardSearching.SearchCard(q, page, pageSize);
+            var response = CardSearching.SearchCard(q, page, pageSize);
+            if(response == null) return null;
+            else {
+                return response;
+            }
         }
 
         private List<DeckSearchResponse> ConvertDeckToDeckSearch(List<Deck> decks) {

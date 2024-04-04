@@ -59,10 +59,10 @@ namespace DTC.Model
         public string TypeLine { get; set; }
 
         [BsonElement("power")]
-        public int? Power { get; set; }
+        public string? Power { get; set; }
 
         [BsonElement("toughness")]
-        public int? Toughness { get; set; }
+        public string? Toughness { get; set; }
 
         [BsonElement("colors")]
         public string[] Colors { get; set; }
@@ -120,5 +120,8 @@ namespace DTC.Model
 
         [BsonElement("artist")]
         public string Artist { get; set; }
+
+        [BsonElement("card_faces")]
+        public CardFace[]? CardFaces { get; set; }
     }
 }
