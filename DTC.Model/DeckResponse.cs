@@ -34,13 +34,13 @@ namespace DTC.Model {
         public Uri CoverImage { get; set; }
 
         [BsonElement("mainboard")]
-        public List<Card> Mainboard { get; set; }
+        public List<(int, Card)> Mainboard { get; set; }
 
         [BsonElement("sideboard")]
-        public List<Card> Sideboard { get; set; }
+        public List<(int, Card)> Sideboard { get; set; }
 
         [BsonElement("considering")]
-        public List<Card> Considering { get; set; }
+        public List<(int, Card)> Considering { get; set; }
 
         [BsonElement("created_date")]
         public DateTime CreatedDate { get; set; }

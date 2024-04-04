@@ -157,9 +157,24 @@ namespace DTC.Service {
         private List<DeckResponse> ConvertDeckToDeckResponse(List<Deck> decks) {
             List<DeckResponse> responses = new List<DeckResponse>();
             foreach(var deck in decks) {
-                var mb = GetCardBulk(deck.Mainboard);
-                var sb = GetCardBulk(deck.Sideboard);
-                var cons = GetCardBulk(deck.Considering);
+                var mbids = GetCardBulk(deck.Mainboard.Select(t => t.Item2).ToList());
+                var mbNum = deck.Mainboard.Select(t => t.Item1).ToList();
+                var mb = mbids.Zip(mbNum, (x, y) => (y, x)).ToList();
+                mbids = null;
+                mbNum = null;
+
+                var sbids = GetCardBulk(deck.Sideboard.Select(t => t.Item2).ToList());
+                var sbNum = deck.Mainboard.Select(t => t.Item1).ToList();
+                var sb = sbids.Zip(sbNum, (x, y) => (y, x)).ToList();
+                sbids = null;
+                mbNum = null;
+
+                var cnids = GetCardBulk(deck.Considering.Select(t => t.Item2).ToList());
+                var cnNum = deck.Mainboard.Select(t => t.Item1).ToList();
+                var cons = cnids.Zip(cnNum, (x, y) => (y, x)).ToList();
+                cnids = null;
+                cnNum = null;
+                
 
                 responses.Add(new DeckResponse {
                     Id = deck.Id,

@@ -20,13 +20,13 @@ namespace DTC.Model {
         public Uri? CoverImage { get; set; }
 
         [BsonElement("mainboard")]
-        public List<Guid> Mainboard { get; set; }
+        public List<(int, Guid)> Mainboard { get; set; }
 
         [BsonElement("sideboard")]
-        public List<Guid> Sideboard { get; set; }
+        public List<(int, Guid)> Sideboard { get; set; }
 
         [BsonElement("considering")]
-        public List<Guid> Considering { get; set; }
+        public List<(int, Guid)> Considering { get; set; }
 
         [BsonElement("commander_1")]
         public string? Commander1 { get; set; }
