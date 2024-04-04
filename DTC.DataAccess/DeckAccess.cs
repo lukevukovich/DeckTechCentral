@@ -28,16 +28,23 @@ namespace DTC.DataAccess {
             return collection.InsertOneAsync(deck);
         }
 
+        public Deck UpdateDeck(Guid deckId, Deck deck) {
+            var collection = Connect<Deck>("Deck");
+
+            collection.ReplaceOne<Deck>(f => f.Id == deckId, deck);
+            return collection.Find(f=> f.Id.Equals(deckId)).Limit(1).First();
+        }
+
         public async Task<Deck> GetDeck(Guid deckId) {
             var collection = Connect<Deck>("Deck");
 
-            return await collection.Find(x => x.Id == deckId).Limit(1).FirstAsync();
+            return await collection.Find(x => x.Id.Equals(deckId)).Limit(1).FirstAsync();
         }
 
         public async Task<List<Deck>> GetDecksForUser(Guid userId) {
             var collection = Connect<Deck>("Deck");
 
-            var results = await collection.FindAsync(f => f.Editors.Where(u => u.Id == userId).Count() > 0);
+            var results = await collection.FindAsync(f => f.Editors.Where(u => u.Id.Equals(userId)).Count() > 0);
 
             return results.ToList();
         }
@@ -45,11 +52,7 @@ namespace DTC.DataAccess {
         public async Task DeleteDeck(Guid deckId) {
             var collection = Connect<Deck>("Deck");
 
-            var results =  await collection.DeleteOneAsync(f => f.Id == deckId);
-        }
-
-        private List<CardDeckResponse> GenerateCardDeckResponse(List<string> cards) {
-            return null; //TODO make this work
+            var results =  await collection.DeleteOneAsync(f => f.Id.Equals(deckId));
         }
     }
 }

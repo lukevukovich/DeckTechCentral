@@ -3,9 +3,9 @@ using MongoDB.Driver;
 namespace DTC.DataAccess {
     public class BaseAccess {
 
-        private string ConString { get; }
+        private string ConString { get; } = "mongodb://localhost:27017/";
 
-        private string DB { get; }
+        private string DB { get; } = "DTC";
 
         /// <summary>
         /// Connects to a given collection of type T

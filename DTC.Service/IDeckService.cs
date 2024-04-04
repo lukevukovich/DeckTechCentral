@@ -9,6 +9,9 @@ namespace DTC.Service
         public void CreateDeck (DeckCreationRequest deck, User user);
 
         public DeckResponse GetDeck(Guid deckId);
+        public DeckResponse GetDeck(Guid deckId, Guid userId);
+
+        public DeckResponse UpdateDeck(Guid deckId, Guid userId, DeckCreationRequest deck);
 
         public List<DeckSearchResponse> GetDecksForUserId(Guid UserId);
 
@@ -18,6 +21,6 @@ namespace DTC.Service
 
         public List<Card> GetCardBulk(List<Guid> guids);
 
-        public List<Card> SearchCard(string q, int page, int pageSize);
+        public List<Card> SearchCard(string q, int? page, int? pageSize);
     }
 }

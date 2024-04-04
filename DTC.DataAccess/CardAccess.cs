@@ -9,7 +9,10 @@ namespace DTC.DataAccess {
         {
             var collection = Connect<Card>("Card");
 
-            return await collection.Find(x => x.Id == id).Limit(1).FirstAsync();
+            var results = await collection.FindAsync(x => x.Id == id);
+            if(results.Current == null) return null;
+
+            return results.First();
         }
 
         public async Task<List<Card>> GetCardBulk(List<Guid> guids) 

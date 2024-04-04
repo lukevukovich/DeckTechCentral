@@ -7,11 +7,11 @@ using RestSharp;
 public class CardSearching
 {
     static string baseUrl = "https://api.scryfall.com";
-    public static List<Card> SearchCard(string q, int page, int pageSize) {
+    public static List<Card> SearchCard(string q, int? page, int? pageSize) {
         RestClient client = new RestClient();
         RestRequest request = new RestRequest($"{baseUrl}/cards/search", Method.Get);
         request.AddQueryParameter("q", q);
-        request.AddQueryParameter("page", page);
+        if(page != null) request.AddQueryParameter("page", page.Value);
 
         var response = client.Execute(request).Content;
 

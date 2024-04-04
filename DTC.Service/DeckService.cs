@@ -1,6 +1,10 @@
 using DTC.Model;
 using DTC.DataAccess;
 using RestSharp;
+using MongoDB.Driver.Linq;
+using Amazon.Runtime.Internal;
+using System.Net;
+using System.Data.Common;
 
 namespace DTC.Service {
     public class DeckService : IDeckService
@@ -39,13 +43,37 @@ namespace DTC.Service {
             });
         }
 
-        public DeckResponse GetDeck(Guid deckId) {
+        public DeckResponse? GetDeck(Guid deckId) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
-
+            if(tempDeck.Privacy.Equals("private")) return null;
             List<Deck> decks= new List<Deck>();
 
 
             return ConvertDeckToDeckResponse(decks).First();
+        }
+
+        public DeckResponse? GetDeck(Guid deckId, Guid userId) {
+            var tempDeck = deckRepo.GetDeck(deckId).Result;
+            if(tempDeck.Privacy.Equals("private")) return null;
+            return ConvertDeckToDeckResponse(new List<Deck>{tempDeck}).First();
+        }
+
+        public DeckResponse? UpdateDeck(Guid deckId, Guid userId, DeckCreationRequest deck) {
+            var temp = deckRepo.GetDeck(deckId).Result;
+            if(temp.Editors.Where(u => u.Id.Equals(userId)).Count() == 0) throw new UnauthorizedAccessException();
+
+            return ConvertDeckToDeckResponse(new List<Deck> {deckRepo.UpdateDeck(deckId, new Deck {
+                Name = deck.Name,
+                Privacy = deck.Privacy,
+                Format = deck.Format,
+                Description = deck.Description,
+                CoverImage = deck.CoverImage,
+                Mainboard = deck.Mainboard,
+                Sideboard = deck.Sideboard,
+                Considering = deck.Considering,
+                Commander1 = deck.Commander1,
+                Commander2 = deck.Commander2
+            })}).First();
         }
 
         public List<DeckSearchResponse> GetDecksForUserId(Guid userId) {
@@ -64,31 +92,43 @@ namespace DTC.Service {
         }
 
         public Card GetCardById(Guid id) {
-            return cardRepo.GetCardById(id).Result;
+            var result = cardRepo.GetCardById(id).Result;
+            if(result == null) return GetCardBulk(new List<Guid> {id}).First();
+
+            return result;
         }
 
         public List<Card> GetCardBulk(List<Guid> ids) {
             var cards = cardRepo.GetCardBulk(ids).Result;
 
             List<Guid> notInDB = new List<Guid>();
-            foreach(var card in cards) {
-                if(card.Name == null) {
-                    notInDB.Append(card.Id);
-                    cards.Remove(card);
+            // foreach(var card in cards) {
+            //     if(card.Name == null) {
+            //         notInDB.Append(card.Id);
+            //         cards.Remove(card);
+            //     }
+            // }
+
+            foreach(var id in ids) {
+                if(cards.Where(f => f.Id.Equals(id)).Count() == 0) {
+                    notInDB.Add(id);
                 }
             }
 
-            var newCards = CardSearching.GetCards(notInDB);
-            cardRepo.CreateCardBulk(newCards);
 
-            foreach(var card in newCards) {
-                newCards.Add(card);
+            if(notInDB.Count() > 0) {
+                var newCards = CardSearching.GetCards(notInDB);
+                cardRepo.CreateCardBulk(newCards);
+
+                foreach(var card in newCards) {
+                    newCards.Add(card);
+                }
             }
 
             return cards;
         }
 
-        public List<Card> SearchCard(string q, int page, int pageSize) {
+        public List<Card> SearchCard(string q, int? page, int? pageSize) {
             return CardSearching.SearchCard(q, page, pageSize);
         }
 
