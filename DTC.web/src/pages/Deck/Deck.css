@@ -43,6 +43,7 @@
 
 .deck-view-info {
   margin-left: 15px;
+  margin-top: 2px;
 }
 
 .deck-view-name-edit {
@@ -53,6 +54,7 @@
   font-weight: bold;
   font-size: 40px;
   color: rgb(216, 75, 33);
+  min-width: 50px;
 }
 
 .like-button {
@@ -92,18 +94,22 @@
 .deck-view-format {
   margin-top: 4px;
   margin-left: 2px;
+  min-width: 50px;
+  font-size: 20px;
   width: fit-content;
+  font-style: italic;
 }
 
 .deck-view-format text {
-  font-size: 20px;
-  font-style: italic;
+
   color: rgb(90, 90, 90);
 }
 
 .deck-view-desc {
   margin-top: 25px;
-  margin-left: 3px;
+  margin-left: 2px;
+  width: fit-content;
+  min-width: 50px;
 }
 
 .deck-view-desc text {

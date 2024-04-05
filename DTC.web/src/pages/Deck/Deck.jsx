@@ -1,10 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Deck.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import deckJson from "../../test/deck.json";
+import { loadDeck as load } from "../../assets/LoadDeck";
 import DeckBoard from "../../assets/DeckBoard/DeckBoard";
 import {
   faUser,
@@ -32,7 +33,9 @@ export default function Deck() {
   //Deck Id to load
   const deckId = query.get("id");
 
-  const [deck, setDeck] = useState(null);
+  const [deck, setDeck] = useState(load);
+
+  const hasRunOnceRef = useRef(false);
 
   //Get list of elements that become editable
   const editableElements = [
@@ -68,6 +71,12 @@ export default function Deck() {
   const [isToggled, setIsToggled] = useState(false);
 
   const [board, setBoard] = useState(deck.mainboard);
+
+  const [name, setName] = useState(deck.name);
+
+  const [format, setFormat] = useState(deck.format);
+
+  const [description, setDescription] = useState(deck.description);
 
   //Check for Google login, set popup
   async function checkLogin() {
@@ -216,7 +225,7 @@ export default function Deck() {
 
   function handleAddCardClick() {
     sessionStorage.clear();
-    sessionStorage.setItem("deck", deck.id);
+    sessionStorage.setItem("deck", JSON.stringify(deck));
     navigate("/cardsearch");
   }
 
@@ -224,9 +233,9 @@ export default function Deck() {
   function checkForCardAdd() {
     const card = JSON.parse(sessionStorage.getItem("card"));
 
-    let newDeck = { ...deck };
-
     if (card != null) {
+      let newDeck = JSON.parse(sessionStorage.getItem("deck"));
+
       const board = card.board;
       const number = card.number;
 
@@ -250,25 +259,73 @@ export default function Deck() {
 
       //Add card to board
       newDeck[board].push(newCard);
-      setDeck(newDeck);
 
       sessionStorage.clear();
 
       setEdit(true);
+
+      return newDeck;
+    } else {
+      return null;
     }
   }
+
+  //Load board during deck change
+  useEffect(() => {
+    const tablinks = [
+      document.getElementById("tablink-mainboard"),
+      document.getElementById("tablink-sideboard"),
+      document.getElementById("tablink-considering"),
+    ];
+
+    for (let i = 0; i < tablinks.length; i++) {
+      const tablinkText = tablinks[i].id.slice(8);
+      if (tablinks[i].style.backgroundColor == "rgb(158, 55, 55)") {
+        setBoard(deck[tablinkText]);
+        break;
+      }
+    }
+
+    setName(deck.name);
+    setFormat(deck.format);
+    setDescription(deck.description);
+  }, [deck]);
+
+  useEffect(() => {
+    const newDeck = { ...deck };
+    newDeck.name = name;
+    newDeck.format = format;
+    newDeck.description = description;
+
+    setDeck(newDeck);
+  }, [name, format, description]);
 
   useEffect(() => {
     //Check for login and set popup
     checkLogin();
 
-    checkForCardAdd();
+    //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
+    if (hasRunOnceRef.current) {
+      const loadDeck = checkForCardAdd();
+
+      if (loadDeck == null) {
+        if (deckId == null) {
+          setEdit(true);
+        }
+        //Make call for deck
+        //setDeck(deckJson);
+      } else {
+        setDeck(loadDeck);
+      }
+    } else {
+      hasRunOnceRef.current = true;
+    }
 
     setInitialTabs();
   }, []);
 
   return (
-    <div id="dv-all" ref={deckRef}>
+    <div id="dv-all">
       <DTCHeader
         id="dv"
         inputText="Search deck list..."
@@ -292,8 +349,11 @@ export default function Deck() {
                 className="deck-view-name"
                 onMouseEnter={(e) => showTooltip("dv", e, "Deck name")}
                 onMouseLeave={() => hideTooltip("dv")}
+                onBlur={(e) => {
+                  setName(e.currentTarget.innerText);
+                }}
               >
-                {deck.name}
+                {name}
               </text>
               <FontAwesomeIcon
                 icon={likeIcon}
@@ -319,22 +379,27 @@ export default function Deck() {
                 <FontAwesomeIcon icon={editIcon} />
               </button>
             </div>
-            <div className="deck-view-format">
-              <text
-                id="deck-view-format"
-                onMouseEnter={(e) => showTooltip("dv", e, "Deck format")}
-                onMouseLeave={() => hideTooltip("dv")}
-              >
-                {deck.format}
-              </text>
+            <div
+              className="deck-view-format"
+              id="deck-view-format"
+              onMouseEnter={(e) => showTooltip("dv", e, "Deck format")}
+              onMouseLeave={() => hideTooltip("dv")}
+              onBlur={(e) => {
+                setFormat(e.currentTarget.innerText);
+              }}
+            >
+              <text> {format}</text>
             </div>
             <div
               id="deck-view-desc"
               className="deck-view-desc"
               onMouseEnter={(e) => showTooltip("dv", e, "Deck description")}
               onMouseLeave={() => hideTooltip("dv")}
+              onBlur={(e) => {
+                setDescription(e.currentTarget.innerText);
+              }}
             >
-              <text>{deck.description}</text>
+              <text>{description}</text>
             </div>
           </div>
         </div>

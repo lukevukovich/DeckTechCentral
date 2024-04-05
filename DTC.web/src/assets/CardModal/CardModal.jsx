@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function CardModal({ id, modal, setModal, selectedCard }) {
   const navigate = useNavigate();
 
-  const deckId = sessionStorage.getItem("deck");
+  const deck = JSON.parse(sessionStorage.getItem("deck"));
 
   //Close card modal
   function closeCardDetails() {
@@ -29,11 +29,12 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
 
     sessionStorage.clear();
     sessionStorage.setItem("card", JSON.stringify(selectedCard));
-    navigate(`/deck?id=${deckId}`);
+    sessionStorage.setItem("deck", JSON.stringify(deck));
+    navigate(`/deck?id=${deck.id}`);
   }
 
   function setAddCardState() {
-    if (deckId == null) {
+    if (deck == null) {
       document.getElementById("modal-add-card").style.display = "none";
     }
   }

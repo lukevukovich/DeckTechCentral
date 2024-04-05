@@ -183,8 +183,6 @@ export default function DeckSection({
       }
     }
 
-    console.log(deck);
-
     sessionStorage.clear();
   }
 
