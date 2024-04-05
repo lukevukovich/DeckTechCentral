@@ -13,6 +13,9 @@ namespace DTC.Model {
         [BsonElement("editors")]
         public List<User> Editors { get; set; }
 
+        [BsonElement("privacy")]
+        public string Privacy { get; set; }
+
         [BsonElement("name")]
         public string? Name { get; set; }
 
@@ -35,13 +38,13 @@ namespace DTC.Model {
         public Uri CoverImage { get; set; }
 
         [BsonElement("mainboard")]
-        public List<CardDeckResponse> Mainboard { get; set; }
+        public List<(int, Guid)> Mainboard { get; set; }
 
         [BsonElement("sideboard")]
-        public List<CardDeckResponse> Sideboard { get; set; }
+        public List<(int, Guid)> Sideboard { get; set; }
 
         [BsonElement("considering")]
-        public List<CardDeckResponse> Considering { get; set; }
+        public List<(int, Guid)> Considering { get; set; }
 
         [BsonElement("created_date")]
         public DateTime CreatedDate { get; set; }

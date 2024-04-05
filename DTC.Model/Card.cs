@@ -14,13 +14,13 @@ namespace DTC.Model
         public Guid OracleId { get; set; }
 
         [BsonElement("multiverse_ids")]
-        public Guid[] MultiverseIds { get; set; }
+        public int[] MultiverseIds { get; set; }
 
         [BsonElement("tcgplayer_id")]
-        public int TCGPlayerId { get; set; }
+        public int? TCGPlayerId { get; set; }
 
         [BsonElement("cardmarket_id")]
-        public int CardMarketId { get; set; }
+        public int? CardMarketId { get; set; }
 
         [BsonElement("name")]
         public string Name { get; set; }
@@ -47,7 +47,7 @@ namespace DTC.Model
         public string ImageStatus { get; set; }
 
         [BsonElement("image_uris")]
-        public String[] ImageUris { get; set; }
+        public Uri[] ImageUris { get; set; }
 
         [BsonElement("cmc")]
         public int CMC { get; set; }
@@ -59,16 +59,16 @@ namespace DTC.Model
         public string TypeLine { get; set; }
 
         [BsonElement("power")]
-        public int Power { get; set; }
+        public string? Power { get; set; }
 
         [BsonElement("toughness")]
-        public int Toughness { get; set; }
+        public string? Toughness { get; set; }
 
         [BsonElement("colors")]
-        public char[] Colors { get; set; }
+        public string[] Colors { get; set; }
 
         [BsonElement("color_identity")]
-        public char[] ColorIdentity { get; set; }
+        public string[] ColorIdentity { get; set; }
 
         [BsonElement("keywords")]
         public string[] Keywords { get; set; }
@@ -120,5 +120,8 @@ namespace DTC.Model
 
         [BsonElement("artist")]
         public string Artist { get; set; }
+
+        [BsonElement("card_faces")]
+        public CardFace[]? CardFaces { get; set; }
     }
 }
