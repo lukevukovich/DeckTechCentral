@@ -7,6 +7,12 @@ export const loadDeck = {
       email: "",
       userStatus: "",
     },
+    {
+      id: "",
+      username: "lukevuke",
+      email: "",
+      userStatus: "",
+    },
   ],
   name: "New Deck",
   format: "Format",

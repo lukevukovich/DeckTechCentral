@@ -404,7 +404,7 @@ export default function Deck() {
           </div>
         </div>
         <div className="deck-view-stats">
-          <text className="deck-view-text">
+          <text className="deck-view-text deck-view-author">
             <FontAwesomeIcon icon={faUser} className="deck-view-icon" />
             {deck.editors[0].username}
           </text>
