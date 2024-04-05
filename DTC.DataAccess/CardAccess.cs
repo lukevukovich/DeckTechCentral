@@ -4,15 +4,15 @@ using MongoDB.Driver;
 namespace DTC.DataAccess {
     public class CardAccess : BaseAccess, ICardAccess
     {
-        CardAccess() {
-
-        }
 
         public async Task<Card> GetCardById(Guid id) 
         {
             var collection = Connect<Card>("Card");
 
-            return await collection.Find(x => x.Id == id).Limit(1).FirstAsync();
+            var results = await collection.FindAsync(x => x.Id == id);
+            if(results.Current == null) return null;
+
+            return results.First();
         }
 
         public async Task<List<Card>> GetCardBulk(List<Guid> guids) 
@@ -26,22 +26,17 @@ namespace DTC.DataAccess {
             return results.ToList();
         }
 
-        public async Task<List<Card>> SearchCard(string q, int page, int pageSize) 
-        {
-            //handle q
-
-            var collection = Connect<Card>("Card");
-
-            var results = await collection.FindAsync(f => f.Name == q);
-
-            return results.ToList();
-        }
-
         public Task CreateCard(Card card) 
         {
             var collection = Connect<Card>("Card");
 
             return collection.InsertOneAsync(card);
+        }
+
+        public Task CreateCardBulk(List<Card> cards) {
+            var collection = Connect<Card>("Card");
+
+            return collection.InsertManyAsync(cards);
         }
     }
 }

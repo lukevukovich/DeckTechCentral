@@ -10,7 +10,7 @@ externalDocs:
   description: Development Progress of DeckTechCentral
   url: https://paulshriner.github.io/
 servers:
-  - url: TODO
+  - url: http://localhost/5272
 tags:
   - name: deck
     description: Information of decks
@@ -180,38 +180,28 @@ paths:
         '404':
           description: User not found
   /deck:
-    parameters:
-      - name: name
-        in: query
-        description: name of deck
-        required: false
-        schema:
-          type: string
-      - name: cards
-        in: query
-        description: cards to include
-        schema:
-          type: array
-          items:
-            type: string
-      - name: format
-        in: query
-        description: format of the deck
-        required: false
-        schema:
-          type: string
-      - name: commander
-        in: query
-        description: commander of a deck
-        required: false
-        schema:
-          type: string
+    tags:
+      - deck
+    post:
+      parameters:
+        - name: deck
+          in: requestBody
+          description: the deck creation request for the created deck
+          required: true
+          schemas:
+            $ref: '#/components/schemas/DeckCreationRequest'
+      responses:
+        '200': 
+          description: deck was created
+      security:
+        - deckmanagement_auth:
   /deck/{deckId}:
     parameters:
        - name: deckId
          in: path
          description: a guid of the deck that is wanted
          required: true
+          - write:dekcs
          schema:
           type: string
     get:
@@ -247,11 +237,24 @@ paths:
           description: deck successfully updated
         '401':
           description: Unauthorized
-  /decks/{userName}:
+    delete:
+      tags:
+       - deck
+      summary: Get the specified deck
+      responses:
+        '200':
+          description: deck was deleted
+        '400':
+          description: Invalid deckId supplied
+        '401':
+          description: Aunauthorized
+        '404':
+          description: Deck not found
+  /deck/users/{userName}:
     parameters:
-      - name: userName
+      - name: userId
         in: path
-        description: the username of the user to see the decks
+        description: the id of the user to see the decks
         required: true
         schema:
           type: string
@@ -383,14 +386,14 @@ paths:
   /card/bulk:
     parameters:
       - name: cardArray
-        in: header
+        in: requestBody
         description: an array of guids for cards that are wanted
         required: true
         schema:
           type: array
           items:
             type: string
-    get:
+    post:
       tags: 
         - card
       summary: Get a list of cards
@@ -439,30 +442,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Card'
-  /deck/cards/{deckId}:
-    parameters:
-      - name: deckId
-        in: path
-        description: Get all cards information for cards listed in specified deck
-        required: true
-        schema:
-          type: string
-    get:
-      tags:
-        - deck
-      summary: Get the list of cards from specified deck
-      responses:
-        '200':
-          description: cards were found
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Card'
-      security:
-        - deckmanagement_auth:
-          - read:decks
 components:
   schemas:
     User:
@@ -596,6 +575,9 @@ components:
           type: date-time
         modified_date:
           type: date-time
+        privacy:
+          type: string
+          example: 'public'
     DeckCreationRequest:
       type: object
       required:
@@ -610,10 +592,6 @@ components:
        - cover_image
        - editors
       properties:
-        id:
-          type: string
-          format: guid
-          example: '1103efb6-b3db-409b-951f-896efa60f59e'
         editors:
           type: array
           items:
@@ -632,11 +610,13 @@ components:
               type: string
               format: guid
         sideboard:
+          type: array
           items:
             schema:
               type: string
               format: guid
         considering:
+          type: array
           items:
             schema:
               type: string

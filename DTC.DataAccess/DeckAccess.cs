@@ -4,14 +4,11 @@ using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace DTC.DataAccess {
     public class DeckAccess : BaseAccess, IDeckAccess
     {
-
-        DeckAccess() {
-
-        }
 
         public async Task<List<Deck>> SearchDeck(string? name, string? format, string? commander1, string? commander2, string? sortBy) 
         {
@@ -31,22 +28,31 @@ namespace DTC.DataAccess {
             return collection.InsertOneAsync(deck);
         }
 
+        public Deck UpdateDeck(Guid deckId, Deck deck) {
+            var collection = Connect<Deck>("Deck");
+
+            collection.ReplaceOne<Deck>(f => f.Id == deckId, deck);
+            return collection.Find(f=> f.Id.Equals(deckId)).Limit(1).First();
+        }
+
         public async Task<Deck> GetDeck(Guid deckId) {
             var collection = Connect<Deck>("Deck");
 
-            return await collection.Find(x => x.Id == deckId).Limit(1).FirstAsync();
+            return await collection.Find(x => x.Id.Equals(deckId)).Limit(1).FirstAsync();
         }
 
-        public async Task<List<Deck>> GetDecksForUser(User user) {
+        public async Task<List<Deck>> GetDecksForUser(Guid userId) {
             var collection = Connect<Deck>("Deck");
 
-            var results = await collection.FindAsync(f => f.Editors.Contains(user));
+            var results = await collection.FindAsync(f => f.Editors.Where(u => u.Id.Equals(userId)).Count() > 0);
 
             return results.ToList();
         }
 
-        private List<CardDeckResponse> GenerateCardDeckResponse(List<string> cards) {
-            return null; //TODO make this work
+        public async Task DeleteDeck(Guid deckId) {
+            var collection = Connect<Deck>("Deck");
+
+            var results =  await collection.DeleteOneAsync(f => f.Id.Equals(deckId));
         }
     }
 }
