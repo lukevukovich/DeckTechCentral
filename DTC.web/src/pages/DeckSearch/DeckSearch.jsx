@@ -51,7 +51,7 @@ export default function DeckSearch() {
     //Check for login and set popup
     checkLogin();
 
-    sessionStorage.removeItem("deck");
+    sessionStorage.clear();
 
     //Go to top of page
     window.scrollTo(0, 0);

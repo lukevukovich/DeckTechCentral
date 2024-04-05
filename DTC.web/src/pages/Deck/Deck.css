@@ -155,7 +155,8 @@
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  outline: 1px solid #000;
+  outline: 2px solid #000;
+  outline-offset: -1px;
 }
 
 .deck-view-cover img {

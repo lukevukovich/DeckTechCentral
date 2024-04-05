@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./Deck.css";
 import { useNavigate } from "react-router-dom";
 import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
-import deck from "../../test/deck.json";
+import deckJson from "../../test/deck.json";
 import DeckBoard from "../../assets/DeckBoard/DeckBoard";
 import {
   faUser,
@@ -32,7 +32,7 @@ export default function Deck() {
   //Deck Id to load
   const deckId = query.get("id");
 
-  const loadEdit = query.get("edit");
+  const [deck, setDeck] = useState(null);
 
   //Get list of elements that become editable
   const editableElements = [
@@ -214,16 +214,8 @@ export default function Deck() {
     setEditStates();
   }, [edit]);
 
-  //Check if edit tag is preloaded
-  function loadEditState() {
-    if (loadEdit != null) {
-      if (loadEdit == "true") {
-        setEdit(true);
-      }
-    }
-  }
-
   function handleAddCardClick() {
+    sessionStorage.clear();
     sessionStorage.setItem("deck", deck.id);
     navigate("/cardsearch");
   }
@@ -231,6 +223,8 @@ export default function Deck() {
   //Check if card was sent to page, if so add card
   function checkForCardAdd() {
     const card = JSON.parse(sessionStorage.getItem("card"));
+
+    let newDeck = { ...deck };
 
     if (card != null) {
       const board = card.board;
@@ -255,9 +249,12 @@ export default function Deck() {
       };
 
       //Add card to board
-      deck[board].push(newCard);
+      newDeck[board].push(newCard);
+      setDeck(newDeck);
 
       sessionStorage.clear();
+
+      setEdit(true);
     }
   }
 
@@ -265,17 +262,13 @@ export default function Deck() {
     //Check for login and set popup
     checkLogin();
 
-    sessionStorage.removeItem("deck");
-
-    loadEditState();
-
     checkForCardAdd();
 
     setInitialTabs();
   }, []);
 
   return (
-    <div id="dv-all">
+    <div id="dv-all" ref={deckRef}>
       <DTCHeader
         id="dv"
         inputText="Search deck list..."
@@ -405,7 +398,13 @@ export default function Deck() {
         >
           Add Card
         </button>
-        <DeckBoard boardJson={board}></DeckBoard>
+        <DeckBoard
+          board={board}
+          setBoard={setBoard}
+          edit={edit}
+          deck={deck}
+          setDeck={setDeck}
+        ></DeckBoard>
       </div>
     </div>
   );

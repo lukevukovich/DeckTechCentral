@@ -31,7 +31,7 @@ export default function Dashboard() {
     //Check for login and set popup
     checkLogin();
 
-    sessionStorage.removeItem("deck");
+    sessionStorage.clear();
   }, []);
 
   function search() {

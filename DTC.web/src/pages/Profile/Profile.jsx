@@ -72,7 +72,7 @@ export default function Profile() {
     //Check login, set user info
     checkLogin();
 
-    sessionStorage.removeItem("deck");
+    sessionStorage.clear();
   }, []);
 
   //Search deck/card based on toggle

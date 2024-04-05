@@ -22,14 +22,14 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
 
     //Show mini modal, ask for board, if commander, and number
     const board = "mainboard";
-    const number = "1";
+    const number = 1;
 
     selectedCard.board = board;
     selectedCard.number = number;
 
     sessionStorage.clear();
     sessionStorage.setItem("card", JSON.stringify(selectedCard));
-    navigate(`/deck?id=${deckId}&edit=true`);
+    navigate(`/deck?id=${deckId}`);
   }
 
   function setAddCardState() {

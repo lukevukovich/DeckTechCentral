@@ -36,6 +36,7 @@
 }
 
 .section-name {
+  width: fit-content;
   font-size: 18px;
   font-family: Arial;
   margin-left: 13px;
@@ -78,6 +79,38 @@
   outline-style: solid;
 }
 
+.right-click-panel {
+  visibility: hidden;
+  background-color: rgb(39, 39, 39);
+  position: fixed;
+  border-radius: 3px;
+  outline: 2px solid rgb(10, 10, 10);
+  outline-offset: -1px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.right-click-panel-button {
+  font-size: 14px;
+  width: 135px;
+  margin-left: 4px;
+  margin-top: 5px;
+  border-radius: 5px;
+  height: 30px;
+  background-color: rgb(54, 54, 54);
+}
+
+.right-click-panel-button:hover {
+  background-color: rgb(80, 80, 80);
+}
+
+.right-click-panel-button:active {
+  background-color: rgb(100, 100, 100);
+}
+
 @media (max-width: 650px) {
   .section-name {
     font-size: 15px;
@@ -85,5 +118,11 @@
 
   .card-section text {
     font-size: 11px;
+  }
+
+  .right-click-panel-button {
+    font-size: 12px;
+    width: 115px;
+    height: 25px;
   }
 }
