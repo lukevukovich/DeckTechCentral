@@ -239,6 +239,8 @@ export default function Deck() {
       const board = card.board;
       const number = card.number;
 
+      const original_type_line = card.type_line;
+
       if (card.type_line.includes("—")) {
         card.type_line = card.type_line.split("—")[0].slice(0, -1);
       }
@@ -251,6 +253,7 @@ export default function Deck() {
           mana_cost: card.mana_cost,
           cmc: card.cmc,
           type_line: card.type_line,
+          original_type_line: original_type_line,
           oracle_text: card.oracle_text,
           flavor_text: card.flavor_text,
           image_uris: { large: card.image_uris.large },
@@ -267,6 +270,27 @@ export default function Deck() {
       return newDeck;
     } else {
       return null;
+    }
+  }
+
+  //Load deck on page load
+  function loadDeck() {
+    //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
+    if (hasRunOnceRef.current) {
+      const loadDeck = checkForCardAdd();
+
+      if (loadDeck == null) {
+        if (deckId == null) {
+          setEdit(true);
+        } else {
+          //Make call for deck
+          //If error, send to error page
+        }
+      } else {
+        setDeck(loadDeck);
+      }
+    } else {
+      hasRunOnceRef.current = true;
     }
   }
 
@@ -304,22 +328,7 @@ export default function Deck() {
     //Check for login and set popup
     checkLogin();
 
-    //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
-    if (hasRunOnceRef.current) {
-      const loadDeck = checkForCardAdd();
-
-      if (loadDeck == null) {
-        if (deckId == null) {
-          setEdit(true);
-        }
-        //Make call for deck
-        //setDeck(deckJson);
-      } else {
-        setDeck(loadDeck);
-      }
-    } else {
-      hasRunOnceRef.current = true;
-    }
+    loadDeck();
 
     setInitialTabs();
   }, []);

@@ -23,6 +23,7 @@ export default function DeckSection({
     name: "",
     image_uris: { large: "" },
     type_line: "",
+    original_type_line: "",
     oracle_text: "",
     mana_cost: "",
     flavor_text: "",
@@ -57,6 +58,7 @@ export default function DeckSection({
       name: card.name,
       image_uris: { large: card.image_uris.large },
       type_line: card.type_line,
+      original_type_line: card.original_type_line,
       oracle_text: card.oracle_text,
       mana_cost: card.mana_cost,
       flavor_text: card.flavor_text,
@@ -241,7 +243,9 @@ export default function DeckSection({
               sessionStorage.setItem("card", JSON.stringify(card));
             }}
           >
-            {card.number + " " + card.CardInfo.name}
+            {card.number +
+              " " +
+              card.CardInfo.name.replace(new RegExp("//", "g"), "|")}
           </text>
         ))}
       </div>

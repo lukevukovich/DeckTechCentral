@@ -60,14 +60,14 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
           <div id={`modal-heading-${id}`} className="modal-heading">
             <text id={`modal-heading-name-${id}`}>
               {selectedCard.name
-                .replace(new RegExp("//", "g"), "||")
+                .replace(new RegExp("//", "g"), "|")
                 .substring(0, 66)}
             </text>
             <text
               id={`modal-heading-mana-${id}`}
               className="modal-heading-mana"
             >
-              {selectedCard.mana_cost.replace(new RegExp("//", "g"), "||")}
+              {selectedCard.mana_cost.replace(new RegExp("//", "g"), "|")}
             </text>
           </div>
           <button
@@ -105,7 +105,9 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
           </div>
           <div id={`modal-stats-${id}`} className="modal-stats">
             <text className="modal-type-line">
-              {selectedCard.type_line.replace(new RegExp("//", "g"), "||")}
+              {(
+                selectedCard.original_type_line || selectedCard.type_line
+              ).replace(new RegExp("//", "g"), "|")}
             </text>
             <text>
               {selectedCard.oracle_text.replace(new RegExp("\n", "g"), "\n\n")}
