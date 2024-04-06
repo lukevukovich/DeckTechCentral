@@ -339,7 +339,11 @@ export default function Deck() {
       ></DTCHeader>
       <div className="deck-view">
         <div className="deck-view-panel">
-          <div className="deck-view-cover">
+          <div
+            className="deck-view-cover"
+            onMouseEnter={(e) => showTooltip("dv", e, "Cover image")}
+            onMouseLeave={() => hideTooltip("dv")}
+          >
             <img src={deck.cover_image}></img>
           </div>
           <div className="deck-view-info">
