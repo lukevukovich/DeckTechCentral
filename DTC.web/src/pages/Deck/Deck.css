@@ -173,7 +173,7 @@
 .deck-view-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .deck-view-tablinks {

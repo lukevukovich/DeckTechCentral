@@ -202,7 +202,7 @@ button:active {
   input {
     transition: 0.5s;
     width: 100px;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .user-popup {

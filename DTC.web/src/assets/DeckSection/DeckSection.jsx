@@ -2,6 +2,7 @@ import "./DeckSection.css";
 import { useEffect, useState } from "react";
 import CardModal from "../CardModal/CardModal";
 import { clearTooltipTimeout, showTooltip, hideTooltip } from "../Tooltip";
+import EditCardModal from "../EditCardModal/EditCardModal";
 
 export default function DeckSection({
   deckSectionJson,
@@ -17,6 +18,9 @@ export default function DeckSection({
 
   //Use state for modal pop up
   const [modal, setModal] = useState(false);
+
+  //Use state for edit modal pop up
+  const [editModal, setEditModal] = useState(false);
 
   //Use state for selected card
   const [selectedCard, setSelectedCard] = useState({
@@ -104,7 +108,7 @@ export default function DeckSection({
     if (edit) {
       const panel = document.getElementById("right-click-panel");
       const x = e.clientX + 5;
-      const y = e.clientY + 5;
+      const y = e.clientY - 110;
 
       panel.style.left = x + "px";
       panel.style.top = y + "px";
@@ -145,6 +149,11 @@ export default function DeckSection({
     setDeck(newDeck);
 
     sessionStorage.clear();
+  }
+
+  function handleEditCard() {
+    document.body.style.overflow = "hidden";
+    setEditModal(true);
   }
 
   function handleRemoveCard() {
@@ -190,6 +199,14 @@ export default function DeckSection({
 
   return (
     <div className="deck-section">
+      <EditCardModal
+        modal={editModal}
+        setModal={setEditModal}
+        board={board}
+        deck={deck}
+        setBoard={setBoard}
+        setDeck={setDeck}
+      ></EditCardModal>
       <CardModal
         id="dv"
         modal={modal}
@@ -205,6 +222,12 @@ export default function DeckSection({
           }}
         >
           Make cover image
+        </button>
+        <button
+          className="right-click-panel-button"
+          onClick={() => handleEditCard()}
+        >
+          Edit
         </button>
         <button
           className="right-click-panel-button"

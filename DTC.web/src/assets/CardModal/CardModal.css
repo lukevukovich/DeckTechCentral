@@ -143,6 +143,13 @@
     font-size: 11px;
   }
 
+  .modal-button {
+    font-size: 12px;
+    margin-right: 12px;
+    height: 30px;
+    width: 32px;
+  }
+
   .modal-add-card {
     width: 145px;
     height: 202px;

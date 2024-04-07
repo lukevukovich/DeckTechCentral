@@ -61,7 +61,7 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
             <text id={`modal-heading-name-${id}`}>
               {selectedCard.name
                 .replace(new RegExp("//", "g"), "|")
-                .substring(0, 66)}
+                .substring(0, 60)}
             </text>
             <text
               id={`modal-heading-mana-${id}`}
