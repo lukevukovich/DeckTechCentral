@@ -104,11 +104,18 @@ export default function DeckSection({
   }
 
   //Display the right click panel on a card
-  function showCardRightClickPanel(e, card) {
+  function showCardRightClickPanel(e) {
     if (edit) {
       const panel = document.getElementById("right-click-panel");
       const x = e.clientX + 5;
-      const y = e.clientY - 110;
+
+      let minus;
+      if (window.innerWidth > 650) {
+        minus = 105;
+      } else {
+        minus = 90;
+      }
+      const y = e.clientY - minus;
 
       panel.style.left = x + "px";
       panel.style.top = y + "px";
@@ -131,6 +138,17 @@ export default function DeckSection({
 
   //Check for page resize, hide panel
   window.addEventListener("resize", function (e) {
+    try {
+      const panel = document.getElementById("right-click-panel");
+      if (isShowing && edit) {
+        panel.style.visibility = "hidden";
+        setIsShowing(false);
+      }
+    } catch {}
+  });
+
+  //Check for page resize, hide panel
+  window.addEventListener("scroll", function (e) {
     try {
       const panel = document.getElementById("right-click-panel");
       if (isShowing && edit) {
@@ -257,11 +275,13 @@ export default function DeckSection({
               clearTooltipTimeout();
               showCardDetails(card.CardInfo);
             }}
-            onMouseEnter={(e) => showTooltip("dv", e, "Show card details")}
+            onMouseEnter={(e) =>
+              showTooltip("dv", e, "(L) Card details, (R) Card options")
+            }
             onMouseLeave={() => hideTooltip("dv")}
             onAuxClick={(e) => {
               preventDefaultRightClick(e.currentTarget);
-              showCardRightClickPanel(e, card.CardInfo);
+              showCardRightClickPanel(e);
               sessionStorage.clear();
               sessionStorage.setItem("card", JSON.stringify(card));
             }}

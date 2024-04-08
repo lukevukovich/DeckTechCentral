@@ -67,7 +67,7 @@
 
 .modal-card {
   width: 290px;
-  margin-top: 92px;
+  margin-top: 95px;
   margin-left: 5px;
 }
 
@@ -81,7 +81,7 @@
   flex-direction: column;
   margin-left: 20px;
   width: 435px;
-  margin-top: 95px;
+  margin-top: 96px;
   gap: 22px;
   white-space: pre-line;
 }

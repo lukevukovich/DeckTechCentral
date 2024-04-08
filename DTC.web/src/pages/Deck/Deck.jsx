@@ -472,7 +472,12 @@ export default function Deck() {
         <button
           id="deck-view-add-card"
           className="deck-view-add-card"
-          onClick={handleAddCardClick}
+          onClick={() => {
+            clearTooltipTimeout();
+            handleAddCardClick();
+          }}
+          onMouseEnter={(e) => showTooltip("dv", e, "Add card to deck")}
+          onMouseLeave={() => hideTooltip("dv")}
         >
           Add Card
         </button>
