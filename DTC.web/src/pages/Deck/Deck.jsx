@@ -274,14 +274,19 @@ export default function Deck() {
   }
 
   //Load deck on page load
-  function loadDeck() {
+  async function loadDeck() {
     //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
     if (hasRunOnceRef.current) {
       const loadDeck = checkForCardAdd();
 
       if (loadDeck == null) {
         if (deckId == null) {
-          setEdit(true);
+          const s = await awaitLoginStatus();
+          if (s) {
+            setEdit(true);
+          } else {
+            navigate("/profile");
+          }
         } else {
           //Make call for deck
           //If error, send to error page
