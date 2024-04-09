@@ -126,23 +126,14 @@
   color: black;
 }
 
-.deck-view-text {
-  font-weight: bold;
-}
-
 .deck-view-text-left {
-  margin-left: 30px !important;
+  margin-left: 20px !important;
 }
 
 .deck-view-text-reg {
   font-weight: normal;
   text-wrap: nowrap;
   margin-left: 8px;
-}
-
-.deck-view-others {
-  color: gray !important;
-  margin-left: 3px;
 }
 
 .deck-view-icon {

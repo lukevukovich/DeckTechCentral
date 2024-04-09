@@ -3,13 +3,6 @@ export const loadDeck = {
   editors: [
     {
       id: "",
-      username: "lukevuke",
-      email: "",
-      userStatus: "",
-    },
-    {
-      id: "",
-      username: "lukevuke",
       email: "",
       userStatus: "",
     },

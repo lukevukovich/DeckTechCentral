@@ -106,19 +106,6 @@ export default function Deck() {
     setInput("");
   }
 
-  function getEditors() {
-    let editors = "";
-    for (let i = 1; i < deck.editors.length; i++) {
-      editors += deck.editors[i].username;
-
-      if (i + 1 != deck.editors.length) {
-        editors += ", ";
-      }
-    }
-
-    return editors;
-  }
-
   function tabSelect(newBoard, boardName) {
     if (board != newBoard) {
       const buttons = [
@@ -283,6 +270,12 @@ export default function Deck() {
         if (deckId == null) {
           const s = await awaitLoginStatus();
           if (s) {
+            const user = getUserInfo();
+            const basicProfile = user.getBasicProfile();
+            const email = basicProfile.getEmail();
+            const newDeck = { ...deck };
+            newDeck.editors[0].email = email;
+            setDeck(newDeck);
             setEdit(true);
           } else {
             navigate("/profile");
@@ -424,9 +417,8 @@ export default function Deck() {
         <div className="deck-view-stats">
           <text className="deck-view-text deck-view-author">
             <FontAwesomeIcon icon={faUser} className="deck-view-icon" />
-            {deck.editors[0].username}
+            {deck.editors[0].email}
           </text>
-          <text className="deck-view-others">{getEditors()}</text>
           <text className="deck-view-text deck-view-text-left deck-view-text-reg">
             <FontAwesomeIcon icon={faThumbsUp} className="deck-view-icon" />
             {formatNumber(deck.likes)}

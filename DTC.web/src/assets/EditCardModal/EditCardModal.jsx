@@ -147,8 +147,6 @@ export default function EditCardModal({
     newDeck[boardSelect.toLowerCase()].push(card);
 
     removeOldCard();
-
-    console.log("Card saved");
   }
 
   return (
@@ -188,7 +186,9 @@ export default function EditCardModal({
         </div>
         <div className="add-modal-body">
           <div className="add-modal-number-box">
-            <text className="add-modal-number-text add-modal-resize-text">Card Number</text>
+            <text className="add-modal-number-text add-modal-resize-text">
+              Card Number
+            </text>
             <input
               type="number"
               className="add-modal-number"
@@ -204,7 +204,9 @@ export default function EditCardModal({
             ></input>
           </div>
           <div className="add-modal-commander-box">
-            <text className="add-modal-commander-text add-modal-resize-text">Commander</text>
+            <text className="add-modal-commander-text add-modal-resize-text">
+              Commander
+            </text>
             <input
               type="checkbox"
               className="add-modal-commander"
@@ -214,7 +216,9 @@ export default function EditCardModal({
             ></input>
           </div>
           <div className="add-modal-board-box">
-            <text className="add-modal-board-text add-modal-resize-text">Board</text>
+            <text className="add-modal-board-text add-modal-resize-text">
+              Board
+            </text>
             <select
               id="add-modal-board"
               className="add-modal-board"
