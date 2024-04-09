@@ -122,6 +122,7 @@ button:active {
   flex-direction: column;
   position: fixed;
   right: 20px;
+  transition: 0.5s;
 }
 
 .profile-button {
@@ -212,8 +213,17 @@ button:active {
 
 @media (max-width: 400px) {
   .profile-panel {
+    display: flex;
+    flex-direction: column;
+    margin-right: -10px;
+    transition: 0.5s;
+  }
+}
+
+@media (max-width: 350px) {
+  .profile-panel {
     position: static;
-    margin-left: -50px;
+    margin-right: -40px;
   }
 }
 
