@@ -58,7 +58,7 @@
 }
 
 .like-button {
-  display: block;
+  display: none;
   font-size: 30px;
   color: rgb(68, 122, 204);
   margin-top: 6px;
@@ -67,6 +67,7 @@
 }
 
 .edit-button {
+  display: none;
   font-size: 20px;
   border-radius: 5px;
   background-color: rgb(51, 51, 51);
@@ -101,7 +102,6 @@
 }
 
 .deck-view-format text {
-
   color: rgb(90, 90, 90);
 }
 

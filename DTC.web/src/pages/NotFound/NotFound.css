@@ -1,0 +1,60 @@
+#header-nf {
+  font-family: "Arial";
+  width: 100%;
+  position: fixed;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(67, 5, 5);
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition: 0.5s;
+}
+
+@media (max-width: 650px) {
+  #header-nf {
+    height: 50px;
+  }
+}
+
+.nf-text {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.nf-icon {
+  font-size: 64px;
+  margin-right: 20px;
+  color: rgb(255, 106, 61);
+}
+
+.nf-text text {
+  text-wrap: nowrap;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 76px;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to left,
+    rgb(129, 29, 29),
+    rgb(255, 106, 61)
+  );
+  -webkit-background-clip: text; /* For WebKit browsers */
+}
+
+@media (max-width: 670px) {
+  .nf-text text {
+    font-size: 50px;
+  }
+
+  .nf-icon {
+    font-size: 44px;
+    margin-right: 12px;
+  }
+}

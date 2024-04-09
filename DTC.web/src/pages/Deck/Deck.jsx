@@ -51,7 +51,7 @@ export default function Deck() {
   const hideOnEdit = ["like-button"];
 
   //Edit state
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(null);
 
   //Edit icon state
   const [editIcon, setEditIcon] = useState(faPenToSquare);
@@ -207,7 +207,9 @@ export default function Deck() {
 
   //IMPORTANT: When edit state it changed *********************
   useEffect(() => {
-    setEditStates();
+    if (edit != null) {
+      setEditStates();
+    }
   }, [edit]);
 
   function handleAddCardClick() {
@@ -265,26 +267,35 @@ export default function Deck() {
     //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
     if (hasRunOnceRef.current) {
       const loadDeck = checkForCardAdd();
+      const loginStatus = await awaitLoginStatus();
 
       if (loadDeck == null) {
         if (deckId == null) {
-          const s = await awaitLoginStatus();
-          if (s) {
+          if (loginStatus) {
             const user = getUserInfo();
             const basicProfile = user.getBasicProfile();
             const email = basicProfile.getEmail();
             const newDeck = { ...deck };
             newDeck.editors[0].email = email;
             setDeck(newDeck);
+            document.getElementById("edit-button").style.display = "block";
             setEdit(true);
           } else {
             navigate("/profile");
           }
         } else {
+          if (deckId == "") {
+            navigate("/*");
+          }
+          if (loginStatus) {
+            document.getElementById("like-button").style.display = "block";
+          }
           //Make call for deck
-          //If error, send to error page
+          //If error, send to page not found
+          //If author is user, display edit button
         }
       } else {
+        document.getElementById("edit-button").style.display = "block";
         setDeck(loadDeck);
       }
     } else {
