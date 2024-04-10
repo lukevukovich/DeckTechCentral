@@ -16,7 +16,6 @@ namespace DTC.Service {
             cardRepo = new CardAccess();
         }
         public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? commander1, string commander2, string? sortBy) {
-            if(name == null && format == null && commander1 == null && commander2 == null) throw new Exception("empty search");
 
             var search = deckRepo.SearchDeck(name, format, commander1, commander2, sortBy);
 
@@ -157,24 +156,29 @@ namespace DTC.Service {
         private List<DeckResponse> ConvertDeckToDeckResponse(List<Deck> decks) {
             List<DeckResponse> responses = new List<DeckResponse>();
             foreach(var deck in decks) {
-                var mbids = GetCardBulk(deck.Mainboard.Select(t => t.Item2).ToList());
-                var mbNum = deck.Mainboard.Select(t => t.Item1).ToList();
-                var mb = mbids.Zip(mbNum, (x, y) => (y, x)).ToList();
-                mbids = null;
-                mbNum = null;
+                var mb = new List<CardAmmount>();
+                foreach(var card in deck.Mainboard) {
+                    mb.Add(new CardAmmount() {
+                        Amount = card.Amount,
+                        Card = GetCardById(card.CardId)
+                    });
+                }
 
-                var sbids = GetCardBulk(deck.Sideboard.Select(t => t.Item2).ToList());
-                var sbNum = deck.Mainboard.Select(t => t.Item1).ToList();
-                var sb = sbids.Zip(sbNum, (x, y) => (y, x)).ToList();
-                sbids = null;
-                mbNum = null;
+                var sb = new List<CardAmmount>();
+                foreach(var card in deck.Mainboard) {
+                    sb.Add(new CardAmmount() {
+                        Amount = card.Amount,
+                        Card = GetCardById(card.CardId)
+                    });
+                }
 
-                var cnids = GetCardBulk(deck.Considering.Select(t => t.Item2).ToList());
-                var cnNum = deck.Mainboard.Select(t => t.Item1).ToList();
-                var cons = cnids.Zip(cnNum, (x, y) => (y, x)).ToList();
-                cnids = null;
-                cnNum = null;
-                
+                var cons = new List<CardAmmount>();
+                foreach(var card in deck.Mainboard) {
+                    cons.Add(new CardAmmount() {
+                        Amount = card.Amount,
+                        Card = GetCardById(card.CardId)
+                    });
+                }
 
                 responses.Add(new DeckResponse {
                     Id = deck.Id,

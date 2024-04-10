@@ -1,11 +1,12 @@
 using DTC.Model;
 using DTC.DataAccess;
+using System.Net;
 
 namespace DTC.Service {
     public class UserService : IUserService
     {
 
-        IUserAccess access;
+        UserAccess access;
         public UserService() {
             access = new UserAccess();
         }
@@ -21,11 +22,14 @@ namespace DTC.Service {
             return access.GetUserById(id);
         }
 
-        public Task CreateUser(User user) {
-            if(user.Username == null || user.Email == null) throw new Exception("Invalid user");
-            if(user.UserStatus == null) user.UserStatus = "default";
-
-            return access.CreateUser(user); 
+        public void CreateUser(CreateNewUser user) {
+            if(user.Username == null || user.Email == null) throw new Exception("invalid user");
+            
+            access.CreateUser(new User() {
+                Username = user.Username,
+                Email = user.Email,
+                UserStatus = "standard"
+            });
         }
     }
 }

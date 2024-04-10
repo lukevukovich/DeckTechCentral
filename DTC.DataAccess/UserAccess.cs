@@ -21,6 +21,7 @@ namespace DTC.DataAccess {
         public Task CreateUser(User user) {
             var collection = Connect<User>("User");
 
+
             return collection.InsertOneAsync(user);
         }
     }
