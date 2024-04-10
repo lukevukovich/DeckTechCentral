@@ -28,6 +28,14 @@ namespace DTC.Model
         [JsonPropertyName("cardmarket_id")]
         public int? CardMarketId { get; set; }
 
+        [BsonElement("oracle_text")]
+        [JsonPropertyName("oracle_text")]
+        public string OracleText { get; set; }
+
+        [BsonElement("flavor_text")]
+        [JsonPropertyName("flavor_text")]
+        public string FlavorText { get; set; }
+
         [BsonElement("name")]
         [JsonPropertyName("name")]
         public string Name { get; set; }
