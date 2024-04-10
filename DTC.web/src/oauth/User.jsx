@@ -69,7 +69,7 @@ export function setUserPopup(user, id) {
   if (user != null) {
     const basicProfile = user.getBasicProfile();
     const email = basicProfile.getEmail();
-    popup.textContent = "User | " + email;
+    popup.textContent = "User | " + email.split("@")[0];
   } else {
     popup.textContent = "Guest | Login required";
   }

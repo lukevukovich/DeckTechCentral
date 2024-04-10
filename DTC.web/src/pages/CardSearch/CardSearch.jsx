@@ -145,7 +145,7 @@ export default function CardSearch() {
     try {
       //Make request
       const response = await fetch(
-        `https://api.scryfall.com/cards/search?q=name:${encodeURIComponent(
+        `http://localhost:5272/card/search?q=${encodeURIComponent(
           cardName
         )}`
       );

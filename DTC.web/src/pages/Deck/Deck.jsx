@@ -428,7 +428,7 @@ export default function Deck() {
         <div className="deck-view-stats">
           <text className="deck-view-text deck-view-author">
             <FontAwesomeIcon icon={faUser} className="deck-view-icon" />
-            {deck.editors[0].email}
+            {deck.editors[0].email.split("@")[0]}
           </text>
           <text className="deck-view-text deck-view-text-left deck-view-text-reg">
             <FontAwesomeIcon icon={faThumbsUp} className="deck-view-icon" />
