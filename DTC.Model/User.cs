@@ -1,19 +1,26 @@
+using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace DTC.Model {
     public class User
     {
         [BsonId]
+        [BsonRequired]
         [BsonElement("id")]
+        [JsonPropertyName("id")]
         public Guid Id { get; set; }
 
         [BsonElement("username")]
-        public String Username { get; set; }
+        [JsonPropertyName("username")]
+        public string Username { get; set; }
 
         [BsonElement("email")]
-        public String Email { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
 
-        [BsonElement("userStatus")]
-        public String UserStatus { get; set; }
+        [BsonElement("user_status")]
+        [JsonPropertyName("user_status")]
+        public string UserStatus { get; set; }
     }
 }

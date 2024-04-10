@@ -1,3 +1,5 @@
+using System.Data.Common;
+using Amazon.Util.Internal;
 using DTC.Model;
 using Microsoft.VisualBasic;
 using MongoDB.Bson;
@@ -5,6 +7,7 @@ using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using ZstdSharp.Unsafe;
 
 namespace DTC.DataAccess {
     public class DeckAccess : BaseAccess, IDeckAccess
@@ -15,7 +18,11 @@ namespace DTC.DataAccess {
             var collection = Connect<Deck>("Deck");
             
             var builder = Builders<Deck>.Filter;
-            var filter = builder.Eq(f => f.Commander1, commander1) & builder.Eq(f => f.Name, name) & builder.Eq(f => f.Commander2, commander2) & builder.Eq(f => f.Format, format);
+            //var filter = builder.Regex(f => f.Name, ".*" + name == null ? name : "" + ".*");
+            var filter = name != null ? builder.Regex(f => f.Name, $".*{name}.*") : builder.Regex(f => f.Name, ".*");
+            filter &= format != null ? builder.Regex(f => f.Format, format) : builder.Regex(f => f.Format, ".*");
+            filter &= commander1 != null ? builder.Regex(f => f.Commander1, commander1) : builder.Regex(f => f.Commander1, ".*") | builder.Eq(f => f.Commander1, null);
+            filter &= commander2 != null ? builder.Regex(f => f.Commander2, commander2) : builder.Regex(f => f.Commander2, ".*") | builder.Eq(f => f.Commander2, null);
 
             var results = await collection.FindAsync(filter);
 

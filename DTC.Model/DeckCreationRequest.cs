@@ -1,37 +1,51 @@
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DTC.Model {
     public class DeckCreationRequest
     {
 
         [BsonElement("name")]
+        [JsonPropertyName("name")]
         public string? Name { get; set; }
 
         [BsonElement("privacy")]
-        public string Privacy { get; set; }
+        [JsonPropertyName("privacy")]
+        public string? Privacy { get; set; }
+
 
         [BsonElement("format")]
+        [JsonPropertyName("format")]
         public string? Format { get; set; }
 
         [BsonElement("description")]
+        [JsonPropertyName("description")]
         public string? Description { get; set; }
 
         [BsonElement("cover_image")]
+        [JsonPropertyName("cover_image")]
         public Uri? CoverImage { get; set; }
 
         [BsonElement("mainboard")]
-        public List<(int, Guid)> Mainboard { get; set; }
+        [JsonPropertyName("mainboard")]
+        public List<CreationCardAmmount> Mainboard { get; set; }
 
         [BsonElement("sideboard")]
-        public List<(int, Guid)> Sideboard { get; set; }
+        [JsonPropertyName("sideboard")]
+        public List<CreationCardAmmount>? Sideboard { get; set; }
 
         [BsonElement("considering")]
-        public List<(int, Guid)> Considering { get; set; }
+        [JsonPropertyName("considering")]
+        public List<CreationCardAmmount>? Considering { get; set; }
 
         [BsonElement("commander_1")]
+        [JsonPropertyName("commander_1")]
         public string? Commander1 { get; set; }
 
         [BsonElement("commander_2")]
+        [JsonPropertyName("commander_2")]
         public string? Commander2 { get; set; }
     }
 }

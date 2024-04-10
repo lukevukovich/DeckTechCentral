@@ -1,16 +1,25 @@
 using DTC.Model;
 using DTC.Service;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace DTC.App.Controller {
     [ApiController]
     public class DeckListController : ControllerBase
     {
         private static IDeckService deckService;
+        private static IUserService userService;
 
         public DeckListController() {
             deckService = new DeckService();
+            userService = new UserService();
         }
+        [HttpPost]
+        [Route("deck")]
+        public async void CreateDeck([FromBody] DeckCreationRequest deck, [FromHeader] Guid user_id) {
+            deckService.CreateDeck(deck, userService.GetUserById(user_id).Result);
+        }
+
         [HttpGet]
         [Route("deck/{deckId}")]
         public DeckResponse GetDeck([FromRoute] Guid deckId, [FromHeader] Guid? userId) {

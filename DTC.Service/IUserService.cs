@@ -7,6 +7,6 @@ namespace DTC.Service {
 
         public Task<User> GetUserById(Guid user);
 
-        public Task CreateUser(User user);
+        public void CreateUser(CreateNewUser user);
     }
 }

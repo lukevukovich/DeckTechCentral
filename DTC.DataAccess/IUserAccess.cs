@@ -1,4 +1,6 @@
-namespace DTC.Model {
+using DTC.Model;
+
+namespace DTC.DataAccess {
     public interface IUserAccess {
 
         public Task<User> GetUserByEmail(string email);
