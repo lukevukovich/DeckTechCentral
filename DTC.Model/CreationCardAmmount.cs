@@ -11,5 +11,9 @@ namespace DTC.Model {
         [BsonElement("card_id")]
         [JsonPropertyName("card_id")]
         public Guid CardId { get; set; }
+
+        [BsonElement("is_commander")]
+        [JsonPropertyName("is_commander")]
+        public bool IsCommander { get; set; }
     }
 }

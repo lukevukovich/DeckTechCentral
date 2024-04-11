@@ -37,8 +37,6 @@ namespace DTC.Service {
                 Mainboard = deck.Mainboard,
                 Sideboard = deck.Sideboard,
                 Considering = deck.Considering,
-                Commander1 = deck.Commander1,
-                Commander2 = deck.Commander2
             });
         }
 
@@ -70,8 +68,6 @@ namespace DTC.Service {
                 Mainboard = deck.Mainboard,
                 Sideboard = deck.Sideboard,
                 Considering = deck.Considering,
-                Commander1 = deck.Commander1,
-                Commander2 = deck.Commander2
             })}).First();
         }
 
@@ -160,7 +156,8 @@ namespace DTC.Service {
                 foreach(var card in deck.Mainboard) {
                     mb.Add(new CardAmmount() {
                         Amount = card.Amount,
-                        Card = GetCardById(card.CardId)
+                        Card = GetCardById(card.CardId),
+                        IsCommander = card.IsCommander
                     });
                 }
 
@@ -168,7 +165,8 @@ namespace DTC.Service {
                 foreach(var card in deck.Mainboard) {
                     sb.Add(new CardAmmount() {
                         Amount = card.Amount,
-                        Card = GetCardById(card.CardId)
+                        Card = GetCardById(card.CardId),
+                        IsCommander = card.IsCommander
                     });
                 }
 
@@ -176,7 +174,8 @@ namespace DTC.Service {
                 foreach(var card in deck.Mainboard) {
                     cons.Add(new CardAmmount() {
                         Amount = card.Amount,
-                        Card = GetCardById(card.CardId)
+                        Card = GetCardById(card.CardId),
+                        IsCommander = card.IsCommander
                     });
                 }
 
@@ -195,8 +194,6 @@ namespace DTC.Service {
                     CoverImage = deck.CoverImage,
                     CreatedDate = deck.CreatedDate,
                     ModifiedDate = deck.ModifiedDate,
-                    Commander1 = deck.Commander1,
-                    Commander2 = deck.Commander2
                 });
             }
 
