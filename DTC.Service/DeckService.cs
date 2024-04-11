@@ -42,10 +42,8 @@ namespace DTC.Service {
         public DeckResponse? GetDeck(Guid deckId) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
             if(tempDeck.Privacy.Equals("private")) return null;
-            List<Deck> decks= new List<Deck>();
 
-
-            return ConvertDeckToDeckResponse(decks).First();
+            return ConvertDeckToDeckResponse(new List<Deck>() {tempDeck}).First();
         }
 
         public DeckResponse? GetDeck(Guid deckId, Guid userId) {
