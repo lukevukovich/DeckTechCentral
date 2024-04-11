@@ -93,10 +93,10 @@ export default function CardSearch() {
     for (let i = 0; i < jsonData.data.length; i++) {
       try {
         // Check if card_faces is present
-        if (jsonData.data[i].hasOwnProperty("card_faces")) {
+        if (jsonData.data[i].card_faces != null) {
           // If present, check if two images or one image
           const faces = jsonData.data[i].card_faces;
-          if (faces[0].hasOwnProperty("image_uris")) {
+          if (faces[0].image_uris != null) {
             // Two images
             jsonData.data.splice(i, 1);
             jsonData.data.splice(i, 0, faces[1]);
@@ -115,10 +115,13 @@ export default function CardSearch() {
         }
 
         // Test is flavor_text is present
-        if (!jsonData.data[i].hasOwnProperty("flavor_text")) {
+        if (jsonData.data[i].flavor_text == null) {
           jsonData.data[i].flavor_text = "";
         }
-        images.push(jsonData.data[i].image_uris.large);
+        images.push(jsonData.data[i].image_uris[2]);
+        jsonData.data[i].image_uris = {
+          large: jsonData.data[i].image_uris[2],
+        };
       } catch (error) {
         removeCards.push(i);
       }
@@ -145,11 +148,12 @@ export default function CardSearch() {
     try {
       //Make request
       const response = await fetch(
-        `http://localhost:5272/card/search?q=${encodeURIComponent(
-          cardName
-        )}`
+        `http://localhost:5272/card/search?q=${encodeURIComponent(cardName)}`
       );
-      const jsonData = await response.json();
+      const rawData = await response.json();
+      const jsonData = {
+        data: rawData,
+      };
 
       const { images, processedData } = processData(jsonData);
       const cards = processedData.length;

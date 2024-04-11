@@ -5,6 +5,8 @@ import "./EditCardModal.css";
 import { showTooltip, hideTooltip, clearTooltipTimeout } from "../Tooltip";
 import { useState, useEffect } from "react";
 
+Modal.setAppElement("#root");
+
 export default function EditCardModal({
   modal,
   setModal,
