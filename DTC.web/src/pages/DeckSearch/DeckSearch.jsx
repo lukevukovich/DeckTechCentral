@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
-import decks from "../../test/decks.json";
 import DeckPane from "../../assets/DeckPane/DeckPane";
 import useQuery from "../../assets/useQuery";
 
@@ -21,6 +20,8 @@ export default function DeckSearch() {
 
   //Use state for deck name search value
   const [deckName, setDeckName] = useState(searchText);
+
+  const [decks, setDecks] = useState([]);
 
   const [numDecks, setNumDecks] = useState("");
 
@@ -50,11 +51,13 @@ export default function DeckSearch() {
     //Check for login and set popup
     checkLogin();
 
-    sessionStorage.clear();
-
     //Go to top of page
     window.scrollTo(0, 0);
 
+    sessionStorage.clear();
+  }, []);
+
+  useEffect(() => {
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchDeck();
@@ -63,7 +66,29 @@ export default function DeckSearch() {
 
   const searchDeck = async () => {
     navigate(`/decksearch?deck=${deckName}`);
-    setNumDecks("Deck search for '" + deckName.toLowerCase() + "'");
+
+    try {
+      //Make request
+      const response = await fetch(
+        `http://localhost:5272/deck/search?name=${encodeURIComponent(deckName)}`
+      );
+      const rawData = await response.json();
+      const decks = rawData.length;
+
+      setDecks(rawData);
+
+      //Set num cards
+      if (decks == 1) {
+        setNumDecks(decks + " deck found for '" + deckName.toLowerCase() + "'");
+      } else {
+        setNumDecks(
+          decks + " decks found for '" + deckName.toLowerCase() + "'"
+        );
+      }
+    } catch (error) {
+      //Set num decks to none
+      setNumDecks("No decks found for '" + deckName.toLowerCase() + "'");
+    }
   };
 
   //Clear search and image list
