@@ -39,13 +39,5 @@ namespace DTC.Model {
         [BsonElement("considering")]
         [JsonPropertyName("considering")]
         public List<CreationCardAmmount>? Considering { get; set; }
-
-        [BsonElement("commander_1")]
-        [JsonPropertyName("commander_1")]
-        public string? Commander1 { get; set; }
-
-        [BsonElement("commander_2")]
-        [JsonPropertyName("commander_2")]
-        public string? Commander2 { get; set; }
     }
 }
