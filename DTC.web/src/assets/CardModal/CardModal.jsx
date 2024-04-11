@@ -25,12 +25,16 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
     const number = 1;
 
     selectedCard.board = board;
-    selectedCard.number = number;
+    selectedCard.amount = number;
 
     sessionStorage.clear();
     sessionStorage.setItem("card", JSON.stringify(selectedCard));
     sessionStorage.setItem("deck", JSON.stringify(deck));
-    navigate(`/deck?id=${deck.id}`);
+    if (deck.id == undefined) {
+      navigate(`/deck`);
+    } else {
+      navigate(`/deck?id=${deck.id}`);
+    }
   }
 
   function setAddCardState() {

@@ -1,19 +1,13 @@
 export const loadDeck = {
-  id: "",
-  editors: [
-    {
-      id: "",
-      email: "",
-      userStatus: "",
-    },
-  ],
   name: "New Deck",
+  editors: [""],
+  privacy: "",
   format: "Format",
+  description: "Description",
+  cover_image: "/deck_placeholder.jpg",
   mainboard: [],
   sideboard: [],
   considering: [],
   likes: 0,
   views: 0,
-  description: "Description",
-  cover_image: "/deck_placeholder.jpg",
 };

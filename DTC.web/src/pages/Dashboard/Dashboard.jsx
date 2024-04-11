@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import decks from "../../test/decks.json";
@@ -17,13 +17,12 @@ export default function Dashboard() {
   const [isToggled, setIsToggled] = useState(false);
 
   //Check for Google login, set popup
-  async function checkLogin() {
-    const s = await awaitLoginStatus();
+  function checkLogin() {
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserPopup(u, "db");
+      setUserPopup("db");
     } else {
-      setUserPopup(null, "db");
+      setUserPopup("db");
     }
   }
 

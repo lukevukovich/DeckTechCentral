@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import "./Deck.css";
 import { useNavigate } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
-import deckJson from "../../test/deck.json";
 import { loadDeck as load } from "../../assets/LoadDeck";
 import DeckBoard from "../../assets/DeckBoard/DeckBoard";
 import {
@@ -79,13 +78,12 @@ export default function Deck() {
   const [description, setDescription] = useState(deck.description);
 
   //Check for Google login, set popup
-  async function checkLogin() {
-    const s = await awaitLoginStatus();
+  function checkLogin() {
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserPopup(u, "dv");
+      setUserPopup("dv");
     } else {
-      setUserPopup(null, "dv");
+      setUserPopup("dv");
     }
   }
 
@@ -226,7 +224,7 @@ export default function Deck() {
       let newDeck = JSON.parse(sessionStorage.getItem("deck"));
 
       const board = card.board;
-      const number = card.number;
+      const number = card.amount;
 
       const original_type_line = card.type_line;
 
@@ -235,7 +233,7 @@ export default function Deck() {
       }
 
       const newCard = {
-        number: number,
+        amount: number,
         CardInfo: {
           name: card.name,
           id: card.id,
@@ -263,20 +261,18 @@ export default function Deck() {
   }
 
   //Load deck on page load
-  async function loadDeck() {
+  function loadDeck() {
     //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
     if (hasRunOnceRef.current) {
       const loadDeck = checkForCardAdd();
-      const loginStatus = await awaitLoginStatus();
+      const loginStatus = getLoginStatus();
 
       if (loadDeck == null) {
         if (deckId == null) {
           if (loginStatus) {
-            const user = getUserInfo();
-            const basicProfile = user.getBasicProfile();
-            const email = basicProfile.getEmail();
+            const username = "test";
             const newDeck = { ...deck };
-            newDeck.editors[0].email = email;
+            newDeck.editors[0] = username;
             setDeck(newDeck);
             document.getElementById("edit-button").style.display = "block";
             setEdit(true);
@@ -342,6 +338,51 @@ export default function Deck() {
     setInitialTabs();
   }, []);
 
+  function saveNewDeck() {
+    const { likes, views, editors, ...saveDeck } = deck;
+
+    const boardList = ["mainboard", "sideboard", "considering"];
+
+    for (let i = 0; i < boardList.length; i++) {
+      saveDeck[boardList[i]] = [];
+      for (let j = 0; j < deck[boardList[i]].length; j++) {
+        const amount = deck[boardList[i]][j].amount;
+        const id = deck[boardList[i]][j].CardInfo.id;
+
+        let isCommander;
+        if (deck[boardList[i]][j].CardInfo.type_line == "Commander") {
+          isCommander = true;
+        } else {
+          isCommander = false;
+        }
+
+        const saveCard = {
+          amount: amount,
+          id: id,
+          is_commander: isCommander,
+        };
+
+        saveDeck[boardList[i]].push(saveCard);
+      }
+    }
+
+    console.log(saveDeck);
+
+    fetch("http://localhost:5272/deck", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        user_d: "test",
+      },
+      body: saveDeck,
+    })
+      .then((response) => response.json()) // Parse the JSON response body
+      .then((data) => console.log("Success:", data)) // Handle the response data
+      .catch((error) => console.error("Error:", error)); // Handle any errors
+  }
+
+  function saveDeck() {}
+
   return (
     <div id="dv-all">
       <DTCHeader
@@ -393,6 +434,13 @@ export default function Deck() {
                 className="edit-button"
                 onClick={() => {
                   clearTooltipTimeout();
+                  if (edit) {
+                    if (deckId == null) {
+                      saveNewDeck();
+                    } else {
+                      saveDeck();
+                    }
+                  }
                   setEdit(!edit);
                 }}
                 onMouseEnter={(e) => showTooltip("dv", e, editTooltip)}
@@ -428,7 +476,7 @@ export default function Deck() {
         <div className="deck-view-stats">
           <text className="deck-view-text deck-view-author">
             <FontAwesomeIcon icon={faUser} className="deck-view-icon" />
-            {deck.editors[0].email.split("@")[0]}
+            {deck.editors[0]}
           </text>
           <text className="deck-view-text deck-view-text-left deck-view-text-reg">
             <FontAwesomeIcon icon={faThumbsUp} className="deck-view-icon" />

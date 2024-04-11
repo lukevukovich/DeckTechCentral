@@ -17,7 +17,7 @@ export default function EditCardModal({
 }) {
   //Use state for selected card
   const [selectedCard, setSelectedCard] = useState({
-    number: "",
+    amount: "",
     CardInfo: {
       name: "",
       image_uris: { large: "" },
@@ -37,7 +37,7 @@ export default function EditCardModal({
     const card = JSON.parse(sessionStorage.getItem("card"));
 
     setSelectedCard(card);
-    setNumber(card.number);
+    setNumber(card.amount);
 
     if (card.CardInfo.type_line == "Commander") {
       setCommander(true);
@@ -94,12 +94,12 @@ export default function EditCardModal({
 
     for (let i = 0; i < newBoard.length; i++) {
       const id = newBoard[i].CardInfo.id;
-      const number = newBoard[i].number;
+      const number = newBoard[i].amount;
       const type_line = newBoard[i].CardInfo.type_line;
 
       if (
         id == selectedCard.CardInfo.id &&
-        number == selectedCard.number &&
+        number == selectedCard.amount &&
         type_line == selectedCard.CardInfo.type_line
       ) {
         newBoard.splice(i, 1);
@@ -129,7 +129,7 @@ export default function EditCardModal({
   function saveCard() {
     let card = JSON.parse(JSON.stringify(selectedCard));
 
-    card.number = parseInt(number);
+    card.amount = parseInt(number);
 
     if (commander) {
       card.CardInfo.type_line = "Commander";
@@ -164,7 +164,7 @@ export default function EditCardModal({
         <div id={`add-modal-header`} className="add-modal-header">
           <div id={`add-modal-heading`} className="add-modal-heading">
             <text id={`add-modal-heading-name`}>
-              {selectedCard.number +
+              {selectedCard.amount +
                 " " +
                 selectedCard.CardInfo.name
                   .replace(new RegExp("//", "g"), "|")

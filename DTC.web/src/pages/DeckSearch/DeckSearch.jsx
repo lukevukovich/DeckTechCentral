@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./DeckSearch.css";
 import { useNavigate } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import decks from "../../test/decks.json";
@@ -25,13 +25,12 @@ export default function DeckSearch() {
   const [numDecks, setNumDecks] = useState("");
 
   //Check for Google login, set popup
-  async function checkLogin() {
-    const s = await awaitLoginStatus();
+  function checkLogin() {
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserPopup(u, "ds");
+      setUserPopup("ds");
     } else {
-      setUserPopup(null, "ds");
+      setUserPopup("ds");
     }
   }
 

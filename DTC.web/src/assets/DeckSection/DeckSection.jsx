@@ -92,7 +92,7 @@ export default function DeckSection({
   function getCardCount() {
     let count = 0;
     for (let i = 0; i < deckSectionJson.length; i++) {
-      count += deckSectionJson[i].number;
+      count += deckSectionJson[i].amount;
     }
     return count;
   }
@@ -181,12 +181,12 @@ export default function DeckSection({
 
     for (let i = 0; i < newBoard.length; i++) {
       const id = newBoard[i].CardInfo.id;
-      const number = newBoard[i].number;
+      const number = newBoard[i].amount;
       const type_line = newBoard[i].CardInfo.type_line;
 
       if (
         id == card.CardInfo.id &&
-        number == card.number &&
+        number == card.amount &&
         type_line == card.CardInfo.type_line
       ) {
         newBoard.splice(i, 1);
@@ -286,7 +286,7 @@ export default function DeckSection({
               sessionStorage.setItem("card", JSON.stringify(card));
             }}
           >
-            {card.number +
+            {card.amount +
               " " +
               card.CardInfo.name.replace(new RegExp("//", "g"), "|")}
           </text>

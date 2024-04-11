@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { awaitLoginStatus } from "../../oauth/User";
 import { useEffect } from "react";
 import {
   showTooltip,
@@ -16,6 +15,7 @@ import {
   loadToolTip,
   clearTooltipTimeout,
 } from "../Tooltip";
+import { getLoginStatus } from "../../oauth/User";
 
 //Max length of search
 export const maxSearchLength = 40;
@@ -53,7 +53,7 @@ export default function DTCHeader({
 
   //Check for Google login, determine if user can create deck
   async function handleCreateDeckButton() {
-    const status = await awaitLoginStatus();
+    const status = getLoginStatus();
     if (status) {
       navigate("/deck");
     } else {
