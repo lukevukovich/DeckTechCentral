@@ -26,6 +26,12 @@ namespace DTC.App.Controller {
             return userId != null ? deckService.GetDeck(deckId, userId.Value) : deckService.GetDeck(deckId);
         }
 
+        [HttpDelete]
+        [Route("deck/{deckId}")]
+        public void DeleteDeck([FromRoute] Guid deckId, [FromHeader] Guid userId) {
+            deckService.DeleteDeck(deckId, userService.GetUserById(userId).Result);
+        }
+
         [HttpPut]
         [Route("deck/{deckId}")]
         public DeckResponse UpdateDeck([FromRoute] Guid deckId, [FromHeader] Guid userId, [FromBody] DeckCreationRequest deck) {
