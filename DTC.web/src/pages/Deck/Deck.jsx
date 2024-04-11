@@ -261,7 +261,7 @@ export default function Deck() {
   }
 
   //Load deck on page load
-  function loadDeck() {
+  async function loadDeck() {
     //Must remove this block of code when deployed!!!!!!!!!!!!!!!!!!!!!
     if (hasRunOnceRef.current) {
       const loadDeck = checkForCardAdd();
@@ -286,9 +286,12 @@ export default function Deck() {
           if (loginStatus) {
             document.getElementById("like-button").style.display = "block";
           }
-          //Make call for deck
-          //If error, send to page not found
-          //If author is user, display edit button
+          console.log(deckId);
+          const response = await fetch(
+            `http://localhost:5272/deck/${encodeURIComponent(deckId)}`
+          );
+          const rawData = await response.json();
+          console.log(rawData);
         }
       } else {
         document.getElementById("edit-button").style.display = "block";
@@ -358,7 +361,7 @@ export default function Deck() {
 
         const saveCard = {
           amount: amount,
-          id: id,
+          card_id: id,
           is_commander: isCommander,
         };
 
@@ -366,19 +369,14 @@ export default function Deck() {
       }
     }
 
-    console.log(saveDeck);
-
     fetch("http://localhost:5272/deck", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        user_d: "test",
+        user_id: "b6a10624-9210-4f4b-b350-982bbdf5fae3",
       },
-      body: saveDeck,
-    })
-      .then((response) => response.json()) // Parse the JSON response body
-      .then((data) => console.log("Success:", data)) // Handle the response data
-      .catch((error) => console.error("Error:", error)); // Handle any errors
+      body: JSON.stringify(saveDeck),
+    });
   }
 
   function saveDeck() {}
