@@ -21,8 +21,6 @@ namespace DTC.DataAccess {
             //var filter = builder.Regex(f => f.Name, ".*" + name == null ? name : "" + ".*");
             var filter = name != null ? builder.Regex(f => f.Name, $".*{name}.*") : builder.Regex(f => f.Name, ".*");
             filter &= format != null ? builder.Regex(f => f.Format, format) : builder.Regex(f => f.Format, ".*");
-            filter &= commander1 != null ? builder.Regex(f => f.Commander1, commander1) : builder.Regex(f => f.Commander1, ".*") | builder.Eq(f => f.Commander1, null);
-            filter &= commander2 != null ? builder.Regex(f => f.Commander2, commander2) : builder.Regex(f => f.Commander2, ".*") | builder.Eq(f => f.Commander2, null);
 
             var results = await collection.FindAsync(filter);
 

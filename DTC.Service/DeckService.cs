@@ -26,7 +26,6 @@ namespace DTC.Service {
             
             if(deck.Privacy == null) deck.Privacy = "public";
             if(deck.Name == null) deck.Name = "New Deck";
-            if(deck.CoverImage == null) deck.CoverImage = new Uri("https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
 
             deckRepo.CreateDeck(new Deck {
                 Name = deck.Name,
