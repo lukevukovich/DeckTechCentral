@@ -15,11 +15,15 @@ namespace DTC.Service {
             deckRepo = new DeckAccess();
             cardRepo = new CardAccess();
         }
-        public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? commander1, string commander2, string? sortBy) {
+        public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? sortBy, User? user) {
 
-            var search = deckRepo.SearchDeck(name, format, commander1, commander2, sortBy);
+            var search = deckRepo.SearchDeck(name, format, sortBy).Result;
+            foreach(var deck in search) {
+                if(deck.Privacy == "private" && (user == null || !deck.Editors.Contains(user.Username)))
+                    search.Remove(deck);
+            }
 
-            return ConvertDeckToDeckSearch(search.Result);
+            return ConvertDeckToDeckSearch(search);
         }
 
         public void CreateDeck(DeckCreationRequest deck, User user) {
@@ -37,29 +41,19 @@ namespace DTC.Service {
                 Mainboard = deck.Mainboard,
                 Sideboard = deck.Sideboard,
                 Considering = deck.Considering,
-                Commander1 = deck.Commander1,
-                Commander2 = deck.Commander2
             });
         }
 
-        public DeckResponse? GetDeck(Guid deckId) {
+        public DeckResponse? GetDeck(Guid deckId, User? user) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
-            if(tempDeck.Privacy.Equals("private")) return null;
-            List<Deck> decks= new List<Deck>();
-
-
-            return ConvertDeckToDeckResponse(decks).First();
-        }
-
-        public DeckResponse? GetDeck(Guid deckId, Guid userId) {
-            var tempDeck = deckRepo.GetDeck(deckId).Result;
-            if(tempDeck.Privacy.Equals("private")) return null;
+            if(tempDeck.Privacy.Equals("private") && (user == null || tempDeck.Editors.Contains(user.Username))) return null;
+            deckRepo.AddView(deckId);
             return ConvertDeckToDeckResponse(new List<Deck>{tempDeck}).First();
         }
 
-        public DeckResponse? UpdateDeck(Guid deckId, Guid userId, DeckCreationRequest deck) {
+        public DeckResponse? UpdateDeck(Guid deckId, User user, DeckCreationRequest deck) {
             var temp = deckRepo.GetDeck(deckId).Result;
-            if(temp.Editors.Where(u => u.Id.Equals(userId)).Count() == 0) throw new UnauthorizedAccessException();
+            if(temp.Editors.Where(u => u.Equals(user.Username)).Count() == 0) throw new UnauthorizedAccessException();
 
             return ConvertDeckToDeckResponse(new List<Deck> {deckRepo.UpdateDeck(deckId, new Deck {
                 Name = deck.Name,
@@ -70,20 +64,17 @@ namespace DTC.Service {
                 Mainboard = deck.Mainboard,
                 Sideboard = deck.Sideboard,
                 Considering = deck.Considering,
-                Commander1 = deck.Commander1,
-                Commander2 = deck.Commander2
             })}).First();
         }
 
-        public List<DeckSearchResponse> GetDecksForUserId(Guid userId) {
+        public List<DeckSearchResponse> GetDecksForUser(User user) {
 
-            var results = deckRepo.GetDecksForUser(userId).Result;
-
+            var results = deckRepo.GetDecksForUser(user.Username).Result;
             return ConvertDeckToDeckSearch(results);
         }
 
         public async void DeleteDeck(Guid DeckId, User user) {
-            if(!deckRepo.GetDeck(DeckId).Result.Editors.Contains(user)) {
+            if(!deckRepo.GetDeck(DeckId).Result.Editors.Contains(user.Username)) {
                 throw new UnauthorizedAccessException();
             } 
 
@@ -160,7 +151,8 @@ namespace DTC.Service {
                 foreach(var card in deck.Mainboard) {
                     mb.Add(new CardAmmount() {
                         Amount = card.Amount,
-                        Card = GetCardById(card.CardId)
+                        Card = GetCardById(card.CardId),
+                        IsCommander = card.IsCommander
                     });
                 }
 
@@ -168,7 +160,8 @@ namespace DTC.Service {
                 foreach(var card in deck.Mainboard) {
                     sb.Add(new CardAmmount() {
                         Amount = card.Amount,
-                        Card = GetCardById(card.CardId)
+                        Card = GetCardById(card.CardId),
+                        IsCommander = card.IsCommander
                     });
                 }
 
@@ -176,7 +169,8 @@ namespace DTC.Service {
                 foreach(var card in deck.Mainboard) {
                     cons.Add(new CardAmmount() {
                         Amount = card.Amount,
-                        Card = GetCardById(card.CardId)
+                        Card = GetCardById(card.CardId),
+                        IsCommander = card.IsCommander
                     });
                 }
 
@@ -195,8 +189,6 @@ namespace DTC.Service {
                     CoverImage = deck.CoverImage,
                     CreatedDate = deck.CreatedDate,
                     ModifiedDate = deck.ModifiedDate,
-                    Commander1 = deck.Commander1,
-                    Commander2 = deck.Commander2
                 });
             }
 

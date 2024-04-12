@@ -13,7 +13,7 @@ namespace DTC.Model {
 
         [BsonElement("editors")]
         [JsonPropertyName("editors")]
-        public List<User> Editors { get; set; }
+        public List<string> Editors { get; set; }
         
         [BsonElement("privacy")]
         [JsonPropertyName("privacy")]

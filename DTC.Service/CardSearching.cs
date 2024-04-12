@@ -101,7 +101,8 @@ public class CardSearching
                     Set = card.GetProperty("set").ToString(),
                     Rarity = card.GetProperty("rarity").ToString(),
                     Artist = card.GetProperty("artist").ToString(),
-
+                    FlavorText = card.TryGetProperty("flavor_text", out JsonElement flavor) ? card.GetProperty("flavor_test").ToString() : null,
+                    OracleText = card.TryGetProperty("oracle_text", out JsonElement oracle) ? card.GetProperty("oracle_text").ToString() : null
                 });
             } else {
                 List<CardFace> cardFaces = new List<CardFace>();
@@ -120,7 +121,9 @@ public class CardSearching
                         TypeLine = face.GetProperty("type_line").ToString(),
                         Power = face.TryGetProperty("power", out JsonElement element) ? face.GetProperty("power").ToString() : null,
                         Toughness = face.TryGetProperty("toughness", out JsonElement element1) ? face.GetProperty("toughness").ToString() : null,
-                        Colors = face.TryGetProperty("colors", out JsonElement colors) ? face.GetProperty("colors").Deserialize<string[]>() : Array.Empty<string>()
+                        Colors = face.TryGetProperty("colors", out JsonElement colors) ? face.GetProperty("colors").Deserialize<string[]>() : Array.Empty<string>(),
+                        FlavorText = face.TryGetProperty("flavor_text", out JsonElement flavor) ? face.GetProperty("flavor_text").ToString() : null,
+                        OracleText = face.TryGetProperty("oracle_text", out JsonElement oracle) ? face.GetProperty("oracle_text").ToString() : null
                     });
                 }
                 

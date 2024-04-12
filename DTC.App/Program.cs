@@ -1,8 +1,28 @@
+using DTC.App.Helper;
+using DTC.Model;
+using DTC.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+var configuration = builder.Configuration;
+
+var services = builder.Services;
+{
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
+
+    services.Configure<SecretKey>(configuration.GetSection("AppSettings"));
+
+    services.AddScoped<IUserService, UserService>()
+            .AddScoped<IDeckService, DeckService>();
+}
+
+// services.AddAuthentication().AddGoogle(googleOptions =>
+//     {
+//         googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+//         googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+//     });
 
 var app = builder.Build();
 
@@ -13,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 

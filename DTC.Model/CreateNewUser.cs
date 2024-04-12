@@ -12,5 +12,8 @@ namespace DTC.Model {
         [BsonElement("email")]
         [JsonPropertyName("email")]
         public String? Email { get; set; }
+
+        [JsonPropertyName("password")]
+        public String? password { get; set; }
     }
 }

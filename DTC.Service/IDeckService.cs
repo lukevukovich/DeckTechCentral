@@ -4,16 +4,15 @@ namespace DTC.Service
 {
     public interface IDeckService 
     {
-        public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? commander1, string? commander2, string? sortBy);
+        public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? sortBy, User? user);
 
         public void CreateDeck (DeckCreationRequest deck, User user);
 
-        public DeckResponse GetDeck(Guid deckId);
-        public DeckResponse GetDeck(Guid deckId, Guid userId);
+        public DeckResponse GetDeck(Guid deckId, User? userId);
 
-        public DeckResponse UpdateDeck(Guid deckId, Guid userId, DeckCreationRequest deck);
+        public DeckResponse UpdateDeck(Guid deckId, User user, DeckCreationRequest deck);
 
-        public List<DeckSearchResponse> GetDecksForUserId(Guid UserId);
+        public List<DeckSearchResponse> GetDecksForUser(User user);
 
         public void DeleteDeck(Guid DeckId, User user);
 

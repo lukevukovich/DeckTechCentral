@@ -13,7 +13,7 @@ namespace DTC.DataAccess {
     public class DeckAccess : BaseAccess, IDeckAccess
     {
 
-        public async Task<List<Deck>> SearchDeck(string? name, string? format, string? commander1, string? commander2, string? sortBy) 
+        public async Task<List<Deck>> SearchDeck(string? name, string? format, string? sortBy) 
         {
             var collection = Connect<Deck>("Deck");
             
@@ -21,12 +21,18 @@ namespace DTC.DataAccess {
             //var filter = builder.Regex(f => f.Name, ".*" + name == null ? name : "" + ".*");
             var filter = name != null ? builder.Regex(f => f.Name, $".*{name}.*") : builder.Regex(f => f.Name, ".*");
             filter &= format != null ? builder.Regex(f => f.Format, format) : builder.Regex(f => f.Format, ".*");
-            filter &= commander1 != null ? builder.Regex(f => f.Commander1, commander1) : builder.Regex(f => f.Commander1, ".*") | builder.Eq(f => f.Commander1, null);
-            filter &= commander2 != null ? builder.Regex(f => f.Commander2, commander2) : builder.Regex(f => f.Commander2, ".*") | builder.Eq(f => f.Commander2, null);
 
             var results = await collection.FindAsync(filter);
 
             return results.ToList();
+        }
+
+        public void AddView(Guid deckId) {
+            var collection = Connect<Deck>("Deck");
+            var filter = Builders<Deck>.Filter.Eq(f => f.Id, deckId);
+            var update = Builders<Deck>.Update.Inc(f => f.Views, 1);
+
+            collection.UpdateOne(filter, update);
         }
 
         public Task CreateDeck(Deck deck) {
@@ -48,10 +54,10 @@ namespace DTC.DataAccess {
             return await collection.Find(x => x.Id.Equals(deckId)).Limit(1).FirstAsync();
         }
 
-        public async Task<List<Deck>> GetDecksForUser(Guid userId) {
+        public async Task<List<Deck>> GetDecksForUser(string Username) {
             var collection = Connect<Deck>("Deck");
 
-            var results = await collection.FindAsync(f => f.Editors.Where(u => u.Id.Equals(userId)).Count() > 0);
+            var results = await collection.FindAsync(f => f.Editors.Contains(Username));
 
             return results.ToList();
         }
