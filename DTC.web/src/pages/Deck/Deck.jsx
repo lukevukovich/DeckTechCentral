@@ -286,12 +286,17 @@ export default function Deck() {
           if (loginStatus) {
             document.getElementById("like-button").style.display = "block";
           }
-          console.log(deckId);
-          const response = await fetch(
-            `http://localhost:5272/deck/${encodeURIComponent(deckId)}`
-          );
-          const rawData = await response.json();
-          console.log(rawData);
+
+          try {
+            const response = await fetch(
+              `http://localhost:5272/deck/${encodeURIComponent(deckId)}`
+            );
+            const deck = await response.json();
+
+            //setDeck(rawData);
+          } catch {
+            navigate("/*");
+          }
         }
       } else {
         document.getElementById("edit-button").style.display = "block";
