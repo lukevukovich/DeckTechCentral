@@ -31,19 +31,22 @@ namespace DTC.Service {
             return access.GetUserById(id);
         }
 
-        public void CreateUser(CreateNewUser user) {
+        public bool CreateUser(CreateNewUser user) {
             if(user.Username == null || user.Email == null || user.password == null) throw new Exception("invalid user");
             
             var salt = GenerateSalt(256);
             var SaltedPassHash = Convert.ToBase64String(Hash(user.password, salt));
+            if(access.GetUserByUsername(user.Username) != null) { return false; }
 
-            access.CreateUser(new User() {
+            var result = access.CreateUser(new User() {
                 Username = user.Username,
                 Email = user.Email,
                 UserStatus = "standard",
                 Salt = salt,
                 SaltedPassHash = SaltedPassHash
             });
+
+            return true;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest request) {

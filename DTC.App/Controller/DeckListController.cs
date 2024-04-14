@@ -18,8 +18,8 @@ namespace DTC.App.Controller {
         [HttpPost]
         [Authorize]
         [Route("deck")]
-        public async void CreateDeck([FromBody] DeckCreationRequest deck) {
-            deckService.CreateDeck(deck, (User)ControllerContext.HttpContext.Items["User"]);
+        public DeckResponse CreateDeck([FromBody] DeckCreationRequest deck) {
+            return deckService.CreateDeck(deck, (User)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpGet]

@@ -27,13 +27,13 @@ namespace DTC.Service {
             return ConvertDeckToDeckSearch(search);
         }
 
-        public void CreateDeck(DeckCreationRequest deck, User user) {
+        public DeckResponse CreateDeck(DeckCreationRequest deck, User user) {
             
             if(deck.Privacy == null) deck.Privacy = "public";
             if(deck.Name == null) deck.Name = "New Deck";
             if(deck.CoverImage == null) deck.CoverImage = new Uri("https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
 
-            deckRepo.CreateDeck(new Deck {
+            var result = deckRepo.CreateDeck(new Deck {
                 Name = deck.Name,
                 Privacy = deck.Privacy,
                 Format = deck.Format,
@@ -42,7 +42,14 @@ namespace DTC.Service {
                 Mainboard = deck.Mainboard,
                 Sideboard = deck.Sideboard,
                 Considering = deck.Considering,
+                LikedUsernames = new List<string>(),
+                Likes = 0,
+                Editors = new List<string> { user.Username },
+                CreatedDate = DateTime.Today,
+                ModifiedDate = DateTime.Today,
             });
+
+            return ConvertDeckToDeckResponse(result, user);
         }
 
         public DeckResponse? GetDeck(Guid deckId, User? user) {

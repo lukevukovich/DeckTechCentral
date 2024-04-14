@@ -14,7 +14,6 @@ namespace DTC.Model {
         public Guid Id { get; set; }
 
         [BsonElement("username")]
-        
         [JsonPropertyName("username")]
         public string Username { get; set; }
 

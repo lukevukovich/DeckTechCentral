@@ -35,10 +35,15 @@ namespace DTC.DataAccess {
             collection.UpdateOne(filter, update);
         }
 
-        public Task CreateDeck(Deck deck) {
+        public Deck CreateDeck(Deck deck) {
             var collection = Connect<Deck>("Deck");
 
-            return collection.InsertOneAsync(deck);
+            var result = collection.InsertOneAsync(deck);
+
+            var builder = Builders<Deck>.Filter;
+
+            var filter = builder.Eq(f => f.Name, deck.Name) & builder.Eq(f => f.Description, deck.Description) & builder.Eq(f => f.CreatedDate, deck.CreatedDate);
+            return collection.Find(filter).FirstOrDefault();
         }
 
         public Deck UpdateDeck(Guid deckId, DeckCreationRequest deck) {

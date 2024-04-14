@@ -5,7 +5,7 @@ namespace DTC.DataAccess {
     {
         public Task<List<Deck>> SearchDeck(string? name, string? format, string? sortBy);
 
-        public Task CreateDeck(Deck deck);
+        public Deck CreateDeck(Deck deck);
         
         public Deck UpdateDeck(Guid deckId, DeckCreationRequest deck);
 

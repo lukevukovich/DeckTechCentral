@@ -8,5 +8,7 @@ namespace DTC.DataAccess {
         public Task<User> GetUserById(Guid userId);
 
         public Task CreateUser(User user);
+
+        public User? GetUserByUsername(string username);
     }
 }

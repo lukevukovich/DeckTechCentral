@@ -6,7 +6,7 @@ namespace DTC.Service
     {
         public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? sortBy, User? user);
 
-        public void CreateDeck (DeckCreationRequest deck, User user);
+        public DeckResponse CreateDeck (DeckCreationRequest deck, User user);
 
         public DeckResponse GetDeck(Guid deckId, User? userId);
 

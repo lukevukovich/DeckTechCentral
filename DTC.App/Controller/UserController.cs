@@ -15,9 +15,9 @@ namespace DTC.App.Controller {
 
         [Route("user")]
         [HttpPost]
-        public void CreateUser([FromBody] CreateNewUser newUser) {
-            userService.CreateUser(newUser);
-            
+        public IActionResult CreateUser([FromBody] CreateNewUser newUser) {
+            if(userService.CreateUser(newUser)) return Ok();
+            return BadRequest(new {message = "Username is in use"});
         }
 
         [Route("user/login")]
