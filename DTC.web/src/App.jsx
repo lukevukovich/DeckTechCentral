@@ -12,6 +12,7 @@ import Profile from "./pages/Profile/Profile";
 import CardSearch from "./pages/CardSearch/CardSearch";
 import DeckSearch from "./pages/DeckSearch/DeckSearch";
 import Deck from "./pages/Deck/Deck";
+import NotFound from "./pages/NotFound/NotFound";
 import "./App.css";
 
 // router and routes
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="decksearch" element={<DeckSearch />} />
       <Route path="profile" element={<Profile />} />
       <Route path="deck" element={<Deck />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

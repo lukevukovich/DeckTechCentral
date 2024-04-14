@@ -1,8 +1,8 @@
 import DeckSection from "../DeckSection/DeckSection";
 import "./DeckBoard.css";
 
-export default function DeckBoard({ boardJson }) {
-  const sectionsUnsorted = boardJson.reduce((accumulator, currentCard) => {
+export default function DeckBoard({ board, setBoard, edit, deck, setDeck }) {
+  const sectionsUnsorted = board.reduce((accumulator, currentCard) => {
     const typeLine = currentCard.CardInfo.type_line;
 
     if (!accumulator[typeLine]) {
@@ -32,6 +32,11 @@ export default function DeckBoard({ boardJson }) {
           key={index}
           deckSectionJson={section.cards}
           deckSectionName={section.typeLine}
+          edit={edit}
+          deck={deck}
+          setDeck={setDeck}
+          board={board}
+          setBoard={setBoard}
         ></DeckSection>
       ))}
     </div>

@@ -122,6 +122,7 @@ button:active {
   flex-direction: column;
   position: fixed;
   right: 20px;
+  transition: 0.5s;
 }
 
 .profile-button {
@@ -129,23 +130,6 @@ button:active {
   height: 45px;
   width: 48px;
   border-radius: 30px;
-}
-
-.profile-button:hover + .user-popup {
-  color: rgb(231, 195, 195);
-  background-color: rgb(121, 27, 27);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.create-deck-button {
-  font-size: 23px;
-  height: 45px;
-  width: 48px;
-  border-radius: 30px;
-}
-
-.heading-logo {
-  visibility: hidden;
 }
 
 .user-popup {
@@ -162,6 +146,26 @@ button:active {
   padding-right: 10px;
   font-weight: bold;
   right: 8px;
+  visibility: hidden;
+}
+
+.profile-button:hover + .user-popup {
+  color: rgb(231, 195, 195);
+  background-color: rgb(121, 27, 27);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  visibility: visible;
+}
+
+.create-deck-button {
+  font-size: 23px;
+  height: 45px;
+  width: 48px;
+  border-radius: 30px;
+  padding-left: 10px;
+}
+
+.heading-logo {
+  visibility: hidden;
 }
 
 @media (max-width: 650px) {
@@ -199,7 +203,7 @@ button:active {
   input {
     transition: 0.5s;
     width: 100px;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .user-popup {
@@ -209,8 +213,17 @@ button:active {
 
 @media (max-width: 400px) {
   .profile-panel {
+    display: flex;
+    flex-direction: column;
+    margin-right: -10px;
+    transition: 0.5s;
+  }
+}
+
+@media (max-width: 350px) {
+  .profile-panel {
     position: static;
-    margin-left: -50px;
+    margin-right: -40px;
   }
 }
 
@@ -265,5 +278,5 @@ button:active {
   padding: 4px;
   font-size: 11px;
   outline: 1px solid rgb(194, 194, 194);
-  z-index: 999;
+  z-index: 9999;
 }

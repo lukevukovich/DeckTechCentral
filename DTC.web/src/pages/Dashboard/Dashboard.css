@@ -44,6 +44,7 @@
   margin-bottom: 240px;
   gap: 30px;
   align-items: center;
+  transition: 0.5s;
 }
 
 .landing-heading {
@@ -89,6 +90,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: 0.5s;
 }
 
 @media only screen and (max-width: 1250px),
@@ -96,6 +98,7 @@
   .landing {
     justify-content: start;
     flex-direction: column;
+    width: 99%;
   }
   .landing-text {
     padding-top: 60px;

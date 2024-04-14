@@ -41,7 +41,7 @@ namespace DTC.Model {
 
         [BsonElement("cover_image")]
         [JsonPropertyName("cover_image")]
-        public Uri CoverImage { get; set; }
+        public string CoverImage { get; set; }
 
         [BsonElement("created_date")]
         [JsonPropertyName("created_date")]

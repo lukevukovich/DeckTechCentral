@@ -3,7 +3,7 @@ using DTC.Model;
 using DTC.Service;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var configuration = builder.Configuration;
 
 var services = builder.Services;
@@ -16,13 +16,18 @@ var services = builder.Services;
 
     services.AddScoped<IUserService, UserService>()
             .AddScoped<IDeckService, DeckService>();
+  
+    service.AddCors(options =>
+    {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+                          policy  =>
+                          {
+                              policy.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                          });
+    });
 }
-
-// services.AddAuthentication().AddGoogle(googleOptions =>
-//     {
-//         googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-//         googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-//     });
 
 var app = builder.Build();
 
@@ -31,6 +36,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
 

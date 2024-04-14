@@ -22,37 +22,66 @@
   margin-right: auto;
   align-content: center;
   z-index: 2;
+  /* background-color: rgba(255, 0, 0, 0.1); */
+  /* box-shadow: 0 0px 80px 50px rgba(255, 0, 0, 0.12); */
 }
 
 .deck-view text {
   font-family: Arial;
 }
 
+.deck-view-edit {
+  outline: 1px solid #000;
+  border-radius: 5px;
+}
+
 .deck-view-panel {
   display: flex;
   flex-direction: row;
-  margin-bottom: 32px;
+  margin-bottom: 18px;
 }
 
 .deck-view-info {
-  padding-left: 15px;
-  padding-top: 8px;
+  margin-left: 15px;
+  margin-top: 2px;
+}
+
+.deck-view-name-edit {
+  display: flex;
 }
 
 .deck-view-name {
   font-weight: bold;
   font-size: 40px;
   color: rgb(216, 75, 33);
+  min-width: 50px;
+}
+
+.like-button {
+  display: none;
+  font-size: 30px;
+  color: rgb(68, 122, 204);
+  margin-top: 6px;
+  margin-left: 18px;
+  cursor: pointer;
 }
 
 .edit-button {
+  display: none;
+  font-size: 20px;
   border-radius: 5px;
-  background-color: black;
-  width: 55px;
-  height: 28px;
-  margin-top: 15px;
+  background-color: rgb(51, 51, 51);
+  width: 35px;
+  height: 35px;
+  max-width: 35px;
+  max-height: 35px;
+  min-width: 35px;
+  min-height: 35px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  margin-right: none;
+  margin-left: 18px;
+  margin-top: 4px;
+  padding-right: 0px;
+  padding-left: 2px;
 }
 
 .edit-button:hover {
@@ -64,48 +93,52 @@
 }
 
 .deck-view-format {
-  padding-top: 2px;
-  padding-left: 3px;
+  margin-top: 4px;
+  margin-left: 2px;
+  min-width: 50px;
+  font-size: 20px;
   width: fit-content;
+  font-style: italic;
 }
 
 .deck-view-format text {
-  font-size: 20px;
-  font-style: italic;
   color: rgb(90, 90, 90);
 }
 
 .deck-view-desc {
   margin-top: 25px;
-  padding-left: 5px;
+  margin-left: 2px;
+  width: fit-content;
+  min-width: 50px;
 }
 
 .deck-view-desc text {
   color: rgb(66, 66, 66);
 }
 
-.deck-view-editors {
-  padding-left: 8px;
-  padding-bottom: 12px;
+.deck-view-stats {
+  margin-left: 8px;
+  margin-bottom: 32px;
 }
 
-.deck-view-editors text {
+.deck-view-stats text {
   margin-right: 5px;
-}
-
-.deck-view-author {
   color: black;
-  font-weight: bold;
-  margin-left: 5px;
 }
 
-.deck-view-author-icon {
-  font-size: 15px;
+.deck-view-text-left {
+  margin-left: 20px !important;
 }
 
-.deck-view-others {
-  color: gray;
-  margin-left: 5px;
+.deck-view-text-reg {
+  font-weight: normal;
+  text-wrap: nowrap;
+  margin-left: 8px;
+}
+
+.deck-view-icon {
+  margin-right: 5px;
+  font-size: 14px;
 }
 
 .deck-view-cover {
@@ -119,18 +152,19 @@
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  outline: 1px solid #000;
+  outline: 2px solid #1a1a1a;
+  outline-offset: -1px;
 }
 
 .deck-view-cover img {
   height: 475px;
-  object-position: -4.3cap -5.5cap;
+  object-position: -4.3cap -5.4cap;
 }
 
 .deck-view-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .deck-view-tablinks {
@@ -142,8 +176,27 @@
   border-radius: 6px;
 }
 
+.deck-view-add-card {
+  height: 40px;
+  background-color: rgb(158, 55, 55);
+  border-radius: 6px;
+  margin-top: -12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+  width: 99.1%;
+  display: none;
+}
+
+.deck-view-add-card:hover {
+  background-color: rgb(173, 75, 75);
+}
+
+.deck-view-add-card:active {
+  background-color: rgb(180, 95, 95);
+}
+
 .button-effect-hover:hover {
-  background-color: rgba(243, 189, 189, 0.6) !important;
+  background-color: rgba(230, 171, 171, 0.6) !important;
 }
 
 @media (max-width: 650px) {
@@ -182,17 +235,66 @@
     object-position: -2.5cap -3cap;
   }
 
+  .deck-view-text,
+  .deck-view-others {
+    font-size: 14px;
+  }
+
   .deck-view-tablinks {
     font-size: 14px;
+  }
+
+  .deck-view-add-card {
+    font-size: 14px;
+    width: 98%;
+  }
+
+  .deck-view-text-left {
+    display: block;
+    margin-left: 0 !important;
+  }
+
+  .deck-view-text-reg {
+    margin-left: 0;
+    margin-bottom: 5px;
+    margin-top: 5px;
   }
 
   .deck-view-editors text {
     font-size: 14px;
   }
 
+  .deck-view-stats {
+    margin-bottom: 20px;
+  }
+
   .edit-button {
-    font-size: 14px;
-    width: 45px;
-    height: 25px;
+    margin-top: 1px;
+    margin-left: 15px;
+    font-size: 16px;
+    width: 28px;
+    height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .like-button {
+    font-size: 25px;
+    margin-top: 2px;
+    margin-left: 15px;
+  }
+
+  .deck-view-tabs {
+    margin-bottom: 25px;
+  }
+
+  .deck-view-add-card {
+    margin-bottom: 25px;
+  }
+
+  .deck-view-board {
+    margin-top: 5px;
   }
 }

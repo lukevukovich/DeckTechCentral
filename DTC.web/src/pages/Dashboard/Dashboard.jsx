@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import decks from "../../test/decks.json";
@@ -17,28 +17,29 @@ export default function Dashboard() {
   const [isToggled, setIsToggled] = useState(false);
 
   //Check for Google login, set popup
-  async function checkLogin() {
-    const s = await awaitLoginStatus();
+  function checkLogin() {
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserPopup(u, "db");
+      setUserPopup("db");
     } else {
-      setUserPopup(null, "db");
+      setUserPopup("db");
     }
   }
 
   useEffect(() => {
     //Check for login and set popup
     checkLogin();
+
+    sessionStorage.clear();
   }, []);
 
   function search() {
     if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
-        navigate(`/decksearch?q=${input}`);
+        navigate(`/decksearch?deck=${input}`);
         setInput("");
       } else {
-        navigate(`/cardsearch?q=${input}`);
+        navigate(`/cardsearch?card=${input}`);
         setInput("");
       }
     }
@@ -67,15 +68,15 @@ export default function Dashboard() {
         <div className="landing-text">
           <text className="landing-heading">Welcome to DeckTechCentral.</text>
           <text className="landing-paragraph">
-            DeckTechCentral is a web based deck list management tool for Magic: The
-            Gathering. Explore our collection of user-made decks or create your
-            own ultimate decks!
+            DeckTechCentral is a web based deck list management tool for Magic:
+            The Gathering. Explore our collection of user-made decks or create
+            your own ultimate decks!
           </text>
         </div>
         <div className="landing-decks">
           <text className="landing-feature">★ Featured Decks</text>
-          <DeckListing deck={decks[0]}></DeckListing>
-          <DeckListing deck={decks[1]}></DeckListing>
+          <DeckListing id="db" deck={decks[0]}></DeckListing>
+          <DeckListing id="db" deck={decks[1]}></DeckListing>
         </div>
       </div>
     </div>

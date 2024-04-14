@@ -276,7 +276,7 @@
         "id": "1103efb6-b3db-409b-951f-896efa60f59e",
         "mana_cost": "{4}{W}{W}",
         "cmc": 0,
-        "type_line": "Creatures",
+        "type_line": "Creature",
         "oracle_text": "Test oracle_text placeholder",
         "flavor_text": "Test flavor_text placeholder",
         "image_uris": {
@@ -296,7 +296,7 @@
         "id": "1103efb6-b3db-409b-951f-896efa60f59e",
         "mana_cost": "{4}{W}{W}",
         "cmc": 0,
-        "type_line": "Creatures",
+        "type_line": "Creature",
         "oracle_text": "Test oracle_text placeholder",
         "flavor_text": "Test flavor_text placeholder",
         "image_uris": {
@@ -434,9 +434,8 @@
       }
     }
   ],
-  "likes": 0,
-  "dislikes": 0,
-  "views": 0,
-  "description": "This is a description of my deck. This deck follows the commander format and it will destroy anything that gets in its way. ",
+  "likes": 1123,
+  "views": 123332,
+  "description": "This is a description of my deck. This deck follows the commander format and it will destroy anything that gets in its way.",
   "cover_image": "https://cards.scryfall.io/large/front/a/3/a31ffc9e-d21b-4a8f-ac67-695e38e09e3b.jpg?1706240553"
 }

@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
-import {
-  awaitGoogleLogin,
-  awaitGoogleLogout,
-  awaitLoginStatus,
-  getUserInfo,
-  setUserPopup,
-} from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 
@@ -21,15 +15,15 @@ export default function Profile() {
   const [isToggled, setIsToggled] = useState(false);
 
   //Set label content to user info
-  function setUserInfo(user) {
+  function setUserInfo(loggedIn) {
     const user_id = document.getElementById("user-id");
     const user_email = document.getElementById("user-email");
     const user_name = document.getElementById("user-name");
-    if (user != null) {
-      const basicProfile = user.getBasicProfile();
-      const id = user.getId();
-      const name = basicProfile.getName();
-      const email = basicProfile.getEmail();
+
+    if (loggedIn) {
+      const id = "test";
+      const name = "test";
+      const email = "test";
 
       user_id.textContent = "User ID | " + id;
       user_email.textContent = "User Email | " + email;
@@ -43,44 +37,43 @@ export default function Profile() {
 
   //Check to see if user is logged in
   async function checkLogin() {
-    const s = await awaitLoginStatus();
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserInfo(u);
-      setUserPopup(u, "pf");
+      setUserInfo();
+      setUserPopup("pf");
     } else {
-      setUserInfo(null);
-      setUserPopup(null, "pf");
+      setUserInfo();
+      setUserPopup("pf");
     }
   }
 
-  //Google login
-  async function login() {
-    const u = await awaitGoogleLogin();
-    setUserInfo(u);
-    setUserPopup(u, "pf");
+  //login
+  function login() {
+    setUserInfo(true);
+    setUserPopup("pf");
   }
 
   //Logout from signed in user
-  async function logout() {
-    await awaitGoogleLogout();
-    setUserInfo(null);
-    setUserPopup(null, "pf");
+  function logout() {
+    setUserInfo(false);
+    setUserPopup("pf");
   }
 
   useEffect(() => {
     //Check login, set user info
     checkLogin();
+
+    sessionStorage.clear();
   }, []);
 
   //Search deck/card based on toggle
   function search() {
     if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
-        navigate(`/decksearch?q=${input}`);
+        navigate(`/decksearch?deck=${input}`);
         setInput("");
       } else {
-        navigate(`/cardsearch?q=${input}`);
+        navigate(`/cardsearch?card=${input}`);
         setInput("");
       }
     }

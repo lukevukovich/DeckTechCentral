@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import "./DeckCreate.css";
+import "./NotFound.css";
 import { useNavigate } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function DeckCreate() {
+export default function NotFound() {
   const navigate = useNavigate();
 
   //Use state for input
@@ -15,28 +17,29 @@ export default function DeckCreate() {
   const [isToggled, setIsToggled] = useState(false);
 
   //Check for Google login, set popup
-  async function checkLogin() {
-    const s = await awaitLoginStatus();
+  function checkLogin() {
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserPopup(u, "cd");
+      setUserPopup("nf");
     } else {
-      setUserPopup(null, "cd");
+      setUserPopup("nf");
     }
   }
 
   useEffect(() => {
     //Check for login and set popup
     checkLogin();
+
+    sessionStorage.clear();
   }, []);
 
   function search() {
     if (input != "" && input.length <= maxSearchLength) {
       if (!isToggled) {
-        navigate(`/decksearch?q=${input}`);
+        navigate(`/decksearch?deck=${input}`);
         setInput("");
       } else {
-        navigate(`/cardsearch?q=${input}`);
+        navigate(`/cardsearch?card=${input}`);
         setInput("");
       }
     }
@@ -49,9 +52,9 @@ export default function DeckCreate() {
 
   // Create all components
   return (
-    <div id="cd-all">
+    <div id="nf-all">
       <DTCHeader
-        id="cd"
+        id="nf"
         inputText="Search deck list..."
         inputValue={input}
         inputOnChange={setInput}
@@ -61,6 +64,10 @@ export default function DeckCreate() {
         clearSearch={clearSearch}
         navigate={navigate}
       ></DTCHeader>
+      <div className="nf-text">
+        <FontAwesomeIcon icon={faCircleExclamation} className="nf-icon" />
+        <text>Page not found.</text>
+      </div>
     </div>
   );
 }

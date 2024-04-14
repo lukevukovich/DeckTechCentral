@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 import "./CardSearch.css";
 import { useNavigate } from "react-router-dom";
-import { awaitLoginStatus, getUserInfo, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../oauth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import CardModal from "../../assets/CardModal/CardModal";
 import Modal from "react-modal";
 import CardPane from "../../assets/CardPane/CardPane";
+import useQuery from "../../assets/useQuery";
 
 Modal.setAppElement("#root");
 
 export default function CardSearch() {
   //Set working variables
   const navigate = useNavigate();
-  const url = new URL(window.location.href);
-  const searchParams = new URLSearchParams(url.search);
+  const query = useQuery();
 
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(true);
 
   //Set initial search text based on dashboard
-  const [searchText, setSearchText] = useState(searchParams.get("q"));
+  const [searchText, setSearchText] = useState(query.get("card"));
 
   //Use state for card name search value
   const [cardName, setCardName] = useState(searchText);
@@ -48,13 +48,12 @@ export default function CardSearch() {
   });
 
   //Check for Google login, set popup
-  async function checkLogin() {
-    const s = await awaitLoginStatus();
+  function checkLogin() {
+    const s = getLoginStatus();
     if (s) {
-      const u = getUserInfo();
-      setUserPopup(u, "cs");
+      setUserPopup("cs");
     } else {
-      setUserPopup(null, "cs");
+      setUserPopup("cs");
     }
   }
 
@@ -63,7 +62,7 @@ export default function CardSearch() {
     if (cardName != "" && cardName.length <= maxSearchLength) {
       setNumCards("");
       if (!isToggled) {
-        navigate(`/decksearch?q=${cardName}`);
+        navigate(`/decksearch?deck=${cardName}`);
       } else {
         searchCard();
       }
@@ -76,7 +75,9 @@ export default function CardSearch() {
 
     //Go to top of page
     window.scrollTo(0, 0);
+  }, []);
 
+  useEffect(() => {
     // Call searchCard when searchText changes
     if (searchText != null) {
       searchCard();
@@ -91,10 +92,10 @@ export default function CardSearch() {
     for (let i = 0; i < jsonData.data.length; i++) {
       try {
         // Check if card_faces is present
-        if (jsonData.data[i].hasOwnProperty("card_faces")) {
+        if (jsonData.data[i].card_faces != null) {
           // If present, check if two images or one image
           const faces = jsonData.data[i].card_faces;
-          if (faces[0].hasOwnProperty("image_uris")) {
+          if (faces[0].image_uris != null) {
             // Two images
             jsonData.data.splice(i, 1);
             jsonData.data.splice(i, 0, faces[1]);
@@ -113,10 +114,13 @@ export default function CardSearch() {
         }
 
         // Test is flavor_text is present
-        if (!jsonData.data[i].hasOwnProperty("flavor_text")) {
+        if (jsonData.data[i].flavor_text == null) {
           jsonData.data[i].flavor_text = "";
         }
-        images.push(jsonData.data[i].image_uris.large);
+        images.push(jsonData.data[i].image_uris[2]);
+        jsonData.data[i].image_uris = {
+          large: jsonData.data[i].image_uris[2],
+        };
       } catch (error) {
         removeCards.push(i);
       }
@@ -135,18 +139,20 @@ export default function CardSearch() {
 
   //Handle card seach to Scryfall API
   const searchCard = async () => {
-    navigate(`/cardsearch?q=${cardName}`);
+    let navigateString = `/cardsearch?card=${cardName}`;
+    navigate(navigateString);
 
     setData([]);
     setImageList([]);
     try {
       //Make request
       const response = await fetch(
-        `https://api.scryfall.com/cards/search?q=name:${encodeURIComponent(
-          cardName
-        )}`
+        `http://localhost:5272/card/search?q=${encodeURIComponent(cardName)}`
       );
-      const jsonData = await response.json();
+      const rawData = await response.json();
+      const jsonData = {
+        data: rawData,
+      };
 
       const { images, processedData } = processData(jsonData);
       const cards = processedData.length;
@@ -179,6 +185,7 @@ export default function CardSearch() {
   //Set selected card and show modal
   function showCardDetails(index) {
     setSelectedCard(data[index]);
+    document.body.style.overflow = "hidden";
     setModal(true);
   }
 
@@ -206,6 +213,7 @@ export default function CardSearch() {
         <text className="num-results">{numCards}</text>
       </div>
       <CardPane
+        id={"cs"}
         imageList={imageList}
         showCardDetails={showCardDetails}
       ></CardPane>
