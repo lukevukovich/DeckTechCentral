@@ -35,10 +35,10 @@ namespace DTC.Model
 
         [BsonElement("oracle_text")]
         [JsonPropertyName("oracle_text")]
-        public string OracleText { get; set; }
+        public string? OracleText { get; set; }
 
         [BsonElement("flavor_text")]
         [JsonPropertyName("flavor_text")]
-        public string FlavorText { get; set; }
+        public string? FlavorText { get; set; }
     }
 }

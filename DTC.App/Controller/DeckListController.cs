@@ -1,29 +1,31 @@
+using DTC.App.Helper;
 using DTC.Model;
 using DTC.Service;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 
 namespace DTC.App.Controller {
     [ApiController]
     public class DeckListController : ControllerBase
     {
-        private static IDeckService deckService;
-        private static IUserService userService;
+        private IDeckService deckService;
 
-        public DeckListController() {
-            deckService = new DeckService();
-            userService = new UserService();
+        public DeckListController(IDeckService deckService) {
+            this.deckService = deckService;
         }
         [HttpPost]
+        [Authorize]
         [Route("deck")]
-        public async void CreateDeck([FromBody] DeckCreationRequest deck, [FromHeader] Guid user_id) {
-            deckService.CreateDeck(deck, userService.GetUserById(user_id).Result);
+        public DeckResponse CreateDeck([FromBody] DeckCreationRequest deck) {
+            return deckService.CreateDeck(deck, (User)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpGet]
         [Route("deck/{deckId}")]
-        public DeckResponse GetDeck([FromRoute] Guid deckId, [FromHeader] Guid? userId) {
-            return userId != null ? deckService.GetDeck(deckId, userId.Value) : deckService.GetDeck(deckId);
+        public DeckResponse GetDeck([FromRoute] Guid deckId) {
+            return deckService.GetDeck(deckId, (User?)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpDelete]
@@ -33,21 +35,22 @@ namespace DTC.App.Controller {
         }
 
         [HttpPut]
+        [Authorize]
         [Route("deck/{deckId}")]
-        public DeckResponse UpdateDeck([FromRoute] Guid deckId, [FromHeader] Guid userId, [FromBody] DeckCreationRequest deck) {
-            return deckService.UpdateDeck(deckId, userId, deck);
+        public DeckResponse UpdateDeck([FromRoute] Guid deckId, [FromBody] DeckCreationRequest deck) {
+            return deckService.UpdateDeck(deckId, (User)ControllerContext.HttpContext.Items["User"], deck);
         }
 
         [HttpGet]
         [Route("deck/search")]
-        public List<DeckSearchResponse> SearchDecks([FromQuery] string? name, [FromQuery] string? format, [FromQuery] string? commander1, [FromQuery] string? commander2, [FromQuery] string? sortBy) {
-            return deckService.SearchDeck(name, format, commander1, commander2, sortBy);
+        public List<DeckSearchResponse> SearchDecks([FromQuery] string? name, [FromQuery] string? format, [FromQuery] string? sortBy) {          
+            return deckService.SearchDeck(name, format, sortBy, (User?)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpGet]
-        [Route("deck/users/{userId}")]
-        public List<DeckSearchResponse> GetUserDecks([FromRoute] Guid userId, [FromHeader] Guid requestingUser) {
-            return deckService.GetDecksForUserId(userId); //TODO add in userRequesting in the check.
+        [Route("deck/users/{UserName}")]
+        public List<DeckSearchResponse> GetUserDecks([FromHeader] string requestingUser) {
+            return deckService.GetDecksForUser(requestingUser, (User?)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpGet]
@@ -66,6 +69,17 @@ namespace DTC.App.Controller {
         [Route("card/search")]
         public List<Card> SearchCard([FromQuery] string q, [FromQuery] int? page, [FromQuery] int? pageSize) {
             return deckService.SearchCard(q, page, pageSize);
+        }
+
+        //Add in deck Liking
+
+        [HttpPatch]
+        [Authorize]
+        [Route("deck/{deckId}/like")]
+        public IActionResult LikeDeck([FromRoute] Guid deckId) {
+            var result = deckService.LikeDeck(deckId, (User)ControllerContext.HttpContext.Items["User"]);
+            if(result == null) return NotFound();
+            return Ok(result);
         }
     }
 }

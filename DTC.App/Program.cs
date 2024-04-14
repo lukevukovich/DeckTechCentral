@@ -1,23 +1,33 @@
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+using DTC.App.Helper;
+using DTC.Model;
+using DTC.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var configuration = builder.Configuration;
 
-var service = builder.Services;
-
-service.AddCors(options =>
+var services = builder.Services;
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy  =>
-                      {
-                          policy.AllowAnyOrigin()
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                      });
-});
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
 
-service.AddControllers();
-service.AddEndpointsApiExplorer();
-service.AddSwaggerGen();
+    services.Configure<SecretKey>(configuration.GetSection("AppSettings"));
+
+    services.AddScoped<IUserService, UserService>()
+            .AddScoped<IDeckService, DeckService>();
+  
+    service.AddCors(options =>
+    {
+        options.AddPolicy(name: MyAllowSpecificOrigins,
+                          policy  =>
+                          {
+                              policy.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                          });
+    });
+}
 
 var app = builder.Build();
 
@@ -30,6 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 

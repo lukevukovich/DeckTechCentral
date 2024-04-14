@@ -3,14 +3,16 @@ using DTC.Model;
 namespace DTC.DataAccess {
     public interface IDeckAccess 
     {
-        public Task<List<Deck>> SearchDeck(string? name, string? format, string? commander1, string? commander2, string? sortBy);
+        public Task<List<Deck>> SearchDeck(string? name, string? format, string? sortBy);
 
-        public Task CreateDeck(Deck deck);
+        public Deck CreateDeck(Deck deck);
         
-        public Deck UpdateDeck(Guid deckId, Deck deck);
+        public Deck UpdateDeck(Guid deckId, DeckCreationRequest deck);
 
         public Task<Deck> GetDeck(Guid deckId);
 
-        public Task<List<Deck>> GetDecksForUser(Guid userId);
+        public bool? LikeDeck(Guid deckId, string Username);
+
+        public Task<List<Deck>> GetDecksForUser(string Username);
     }
 }

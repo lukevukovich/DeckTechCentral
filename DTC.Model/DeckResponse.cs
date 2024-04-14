@@ -11,7 +11,7 @@ namespace DTC.Model {
 
         [BsonElement("editors")]
         [JsonPropertyName("editors")]
-        public List<User> Editors { get; set; }
+        public List<string> Editors { get; set; }
 
         [BsonElement("privacy")]
         [JsonPropertyName("privacy")]
@@ -65,12 +65,7 @@ namespace DTC.Model {
         [JsonPropertyName("modified_date")]
         public DateTime ModifiedDate { get; set; }
 
-        [BsonElement("commander_1")]
-        [JsonPropertyName("commander_1")]
-        public string? Commander1 { get; set; }
-
-        [BsonElement("commander_2")]
-        [JsonPropertyName("commander_2")]
-        public string? Commander2 { get; set; }
+        [JsonPropertyName("liked")]
+        public bool LikedDeck { get; set; }
     }
 }

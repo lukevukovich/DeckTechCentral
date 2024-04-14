@@ -4,16 +4,15 @@ namespace DTC.Service
 {
     public interface IDeckService 
     {
-        public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? commander1, string? commander2, string? sortBy);
+        public List<DeckSearchResponse> SearchDeck(string? name, string? format, string? sortBy, User? user);
 
-        public void CreateDeck (DeckCreationRequest deck, User user);
+        public DeckResponse CreateDeck (DeckCreationRequest deck, User user);
 
-        public DeckResponse GetDeck(Guid deckId);
-        public DeckResponse GetDeck(Guid deckId, Guid userId);
+        public DeckResponse GetDeck(Guid deckId, User? userId);
 
-        public DeckResponse UpdateDeck(Guid deckId, Guid userId, DeckCreationRequest deck);
+        public DeckResponse UpdateDeck(Guid deckId, User user, DeckCreationRequest deck);
 
-        public List<DeckSearchResponse> GetDecksForUserId(Guid UserId);
+        public List<DeckSearchResponse> GetDecksForUser(string Username, User? LoggedInUser);
 
         public void DeleteDeck(Guid DeckId, User user);
 
@@ -22,5 +21,7 @@ namespace DTC.Service
         public List<Card> GetCardBulk(List<Guid> guids);
 
         public List<Card> SearchCard(string q, int? page, int? pageSize);
+
+        public bool? LikeDeck(Guid deckId, User user);
     }
 }
