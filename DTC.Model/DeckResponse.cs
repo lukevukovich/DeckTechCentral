@@ -64,5 +64,8 @@ namespace DTC.Model {
         [BsonElement("modified_date")]
         [JsonPropertyName("modified_date")]
         public DateTime ModifiedDate { get; set; }
+
+        [JsonPropertyName("liked")]
+        public bool LikedDeck { get; set; }
     }
 }

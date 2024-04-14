@@ -12,7 +12,7 @@ namespace DTC.Service
 
         public DeckResponse UpdateDeck(Guid deckId, User user, DeckCreationRequest deck);
 
-        public List<DeckSearchResponse> GetDecksForUser(User user);
+        public List<DeckSearchResponse> GetDecksForUser(string Username, User? LoggedInUser);
 
         public void DeleteDeck(Guid DeckId, User user);
 
@@ -21,5 +21,7 @@ namespace DTC.Service
         public List<Card> GetCardBulk(List<Guid> guids);
 
         public List<Card> SearchCard(string q, int? page, int? pageSize);
+
+        public bool? LikeDeck(Guid deckId, User user);
     }
 }

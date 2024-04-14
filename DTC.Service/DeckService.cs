@@ -19,8 +19,9 @@ namespace DTC.Service {
 
             var search = deckRepo.SearchDeck(name, format, sortBy).Result;
             foreach(var deck in search) {
-                if(deck.Privacy == "private" && (user == null || !deck.Editors.Contains(user.Username)))
+                if((deck.Privacy == "private" || deck.Privacy == "unlisted") && (user == null || !deck.Editors.Contains(user.Username))) {
                     search.Remove(deck);
+                }
             }
 
             return ConvertDeckToDeckSearch(search);
@@ -46,30 +47,30 @@ namespace DTC.Service {
 
         public DeckResponse? GetDeck(Guid deckId, User? user) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
+            if(tempDeck == null) return null;
             if(tempDeck.Privacy.Equals("private") && (user == null || tempDeck.Editors.Contains(user.Username))) return null;
             deckRepo.AddView(deckId);
-            return ConvertDeckToDeckResponse(new List<Deck>{tempDeck}).First();
+            return ConvertDeckToDeckResponse(tempDeck, user);
         }
 
         public DeckResponse? UpdateDeck(Guid deckId, User user, DeckCreationRequest deck) {
             var temp = deckRepo.GetDeck(deckId).Result;
+            if(temp == null) return null;
             if(temp.Editors.Where(u => u.Equals(user.Username)).Count() == 0) throw new UnauthorizedAccessException();
 
-            return ConvertDeckToDeckResponse(new List<Deck> {deckRepo.UpdateDeck(deckId, new Deck {
-                Name = deck.Name,
-                Privacy = deck.Privacy,
-                Format = deck.Format,
-                Description = deck.Description,
-                CoverImage = deck.CoverImage,
-                Mainboard = deck.Mainboard,
-                Sideboard = deck.Sideboard,
-                Considering = deck.Considering,
-            })}).First();
+            return ConvertDeckToDeckResponse(deckRepo.UpdateDeck(deckId, deck), user);
         }
 
-        public List<DeckSearchResponse> GetDecksForUser(User user) {
+        public List<DeckSearchResponse> GetDecksForUser(string Username, User? LoggedInUser) {
 
-            var results = deckRepo.GetDecksForUser(user.Username).Result;
+            var results = deckRepo.GetDecksForUser(Username).Result;
+            if(LoggedInUser != null && LoggedInUser.Username.Equals(Username)) return ConvertDeckToDeckSearch(results);
+
+            foreach(var deck in results) {
+                if(deck.Privacy.Equals("private") || deck.Privacy.Equals("unlisted")) {
+                    results.Remove(deck);
+                }
+            }
             return ConvertDeckToDeckSearch(results);
         }
 
@@ -79,6 +80,10 @@ namespace DTC.Service {
             } 
 
             await deckRepo.DeleteDeck(DeckId);
+        }
+
+        public bool? LikeDeck(Guid deckId, User user) {
+            return deckRepo.LikeDeck(deckId, user.Username);
         }
 
         public Card GetCardById(Guid id) {
@@ -133,7 +138,6 @@ namespace DTC.Service {
                     Privacy = deck.Privacy,
                     Format = deck.Format,
                     Likes = deck.Likes,
-                    Dislikes = deck.Dislikes,
                     Views = deck.Views,
                     CoverImage = deck.CoverImage,
                     CreatedDate = deck.CreatedDate,
@@ -144,55 +148,56 @@ namespace DTC.Service {
             return response;
         }
 
-        private List<DeckResponse> ConvertDeckToDeckResponse(List<Deck> decks) {
-            List<DeckResponse> responses = new List<DeckResponse>();
-            foreach(var deck in decks) {
-                var mb = new List<CardAmmount>();
-                foreach(var card in deck.Mainboard) {
-                    mb.Add(new CardAmmount() {
-                        Amount = card.Amount,
-                        Card = GetCardById(card.CardId),
-                        IsCommander = card.IsCommander
-                    });
-                }
+        private DeckResponse ConvertDeckToDeckResponse(Deck deck, User? user) {
+            var mb = new List<CardAmmount>();
+            foreach(var card in deck.Mainboard) {
+                mb.Add(new CardAmmount() {
+                    Amount = card.Amount,
+                    Card = GetCardById(card.CardId),
+                    IsCommander = card.IsCommander
+                });
+            }
 
-                var sb = new List<CardAmmount>();
-                foreach(var card in deck.Mainboard) {
+            var sb = new List<CardAmmount>();
+            if(deck.Sideboard != null)
+            {
+                foreach(var card in deck.Sideboard) {
                     sb.Add(new CardAmmount() {
                         Amount = card.Amount,
                         Card = GetCardById(card.CardId),
                         IsCommander = card.IsCommander
                     });
                 }
+            }
 
-                var cons = new List<CardAmmount>();
-                foreach(var card in deck.Mainboard) {
-                    cons.Add(new CardAmmount() {
+            var cons = new List<CardAmmount>();
+            if(deck.Considering != null)
+            {
+                foreach(var card in deck.Considering) {
+                    sb.Add(new CardAmmount() {
                         Amount = card.Amount,
                         Card = GetCardById(card.CardId),
                         IsCommander = card.IsCommander
                     });
                 }
-
-                responses.Add(new DeckResponse {
-                    Id = deck.Id,
-                    Editors = deck.Editors,
-                    Name = deck.Name,
-                    Privacy = deck.Privacy,
-                    Format = deck.Format,
-                    Likes = deck.Likes,
-                    Dislikes = deck.Dislikes,
-                    Views = deck.Views,
-                    Mainboard = mb,
-                    Sideboard = sb,
-                    Considering = cons,
-                    CoverImage = deck.CoverImage,
-                    CreatedDate = deck.CreatedDate,
-                    ModifiedDate = deck.ModifiedDate,
-                });
             }
 
-            return responses;
+            return new DeckResponse {
+                Id = deck.Id,
+                Editors = deck.Editors,
+                Name = deck.Name,
+                Privacy = deck.Privacy,
+                Format = deck.Format,
+                Likes = deck.Likes,
+                Views = deck.Views,
+                Mainboard = mb,
+                Sideboard = sb,
+                Considering = cons,
+                CoverImage = deck.CoverImage,
+                CreatedDate = deck.CreatedDate,
+                ModifiedDate = deck.ModifiedDate,
+                LikedDeck = user != null ? deck.LikedUsernames.Contains(user.Username) : false
+            };
         }
     }
 }

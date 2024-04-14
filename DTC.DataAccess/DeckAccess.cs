@@ -41,17 +41,27 @@ namespace DTC.DataAccess {
             return collection.InsertOneAsync(deck);
         }
 
-        public Deck UpdateDeck(Guid deckId, Deck deck) {
+        public Deck UpdateDeck(Guid deckId, DeckCreationRequest deck) {
             var collection = Connect<Deck>("Deck");
 
-            collection.ReplaceOne<Deck>(f => f.Id == deckId, deck);
-            return collection.Find(f=> f.Id.Equals(deckId)).Limit(1).First();
+            var update = Builders<Deck>.Update.Set(f => f.Name, deck.Name)
+                                              .Set(f => f.Privacy, deck.Privacy)
+                                              .Set(f => f.Format, deck.Format)
+                                              .Set(f => f.Description, deck.Description)
+                                              .Set(f => f.CoverImage, deck.CoverImage)
+                                              .Set(f => f.Mainboard, deck.Mainboard)
+                                              .Set(f => f.Sideboard, deck.Sideboard)
+                                              .Set(f => f.Considering, deck.Considering)
+                                              .Set(f => f.ModifiedDate, DateTime.Today);
+
+            collection.UpdateOne<Deck>(f => f.Id == deckId, update);
+            return collection.Find(f=> f.Id.Equals(deckId)).Limit(1).FirstOrDefault();
         }
 
         public async Task<Deck> GetDeck(Guid deckId) {
             var collection = Connect<Deck>("Deck");
 
-            return await collection.Find(x => x.Id.Equals(deckId)).Limit(1).FirstAsync();
+            return await collection.Find(x => x.Id.Equals(deckId)).Limit(1).FirstOrDefaultAsync();
         }
 
         public async Task<List<Deck>> GetDecksForUser(string Username) {
@@ -66,6 +76,28 @@ namespace DTC.DataAccess {
             var collection = Connect<Deck>("Deck");
 
             var results =  await collection.DeleteOneAsync(f => f.Id.Equals(deckId));
+        }
+
+        public bool? LikeDeck(Guid deckId, string Username) { //This should nnot have this should not have this much logic
+            var collection = Connect<Deck>("Deck");
+            var filter = Builders<Deck>.Filter.Eq(f => f.Id, deckId);
+            
+            var result = collection.Find(filter).Limit(1).FirstOrDefault();
+            if(result == null) return null;
+
+            var liked = result.LikedUsernames.Contains(Username);
+            if(liked) {
+                result.LikedUsernames.Remove(Username);
+                var update = Builders<Deck>.Update.Inc(f=> f.Likes, -1);
+                collection.UpdateOne(filter, update);
+            }
+            else {
+                result.LikedUsernames.Add(Username);
+                var update = Builders<Deck>.Update.Inc(f => f.Likes, 1);
+                collection.UpdateOne(filter, update);
+            }
+
+            return !liked;
         }
     }
 }

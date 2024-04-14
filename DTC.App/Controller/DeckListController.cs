@@ -11,10 +11,8 @@ namespace DTC.App.Controller {
     public class DeckListController : ControllerBase
     {
         private IDeckService deckService;
-        private IUserService userService;
 
-        public DeckListController(IUserService userService, IDeckService deckService) {
-            this.userService = userService;
+        public DeckListController(IDeckService deckService) {
             this.deckService = deckService;
         }
         [HttpPost]
@@ -33,20 +31,20 @@ namespace DTC.App.Controller {
         [HttpPut]
         [Authorize]
         [Route("deck/{deckId}")]
-        public DeckResponse UpdateDeck([FromRoute] Guid deckId, [FromBody] DeckCreationRequest deck, HttpContext context) {
-            return deckService.UpdateDeck(deckId, (User)context.Items["User"], deck);
+        public DeckResponse UpdateDeck([FromRoute] Guid deckId, [FromBody] DeckCreationRequest deck) {
+            return deckService.UpdateDeck(deckId, (User)ControllerContext.HttpContext.Items["User"], deck);
         }
 
         [HttpGet]
         [Route("deck/search")]
-        public List<DeckSearchResponse> SearchDecks([FromQuery] string? name, [FromQuery] string? format, [FromQuery] string? sortBy, HttpContext context) {          
-            return deckService.SearchDeck(name, format, sortBy, (User?)context.Items["User"]);
+        public List<DeckSearchResponse> SearchDecks([FromQuery] string? name, [FromQuery] string? format, [FromQuery] string? sortBy) {          
+            return deckService.SearchDeck(name, format, sortBy, (User?)ControllerContext.HttpContext.Items["User"]);
         }
 
-        [HttpGet] //NEED TO EDIT
-        [Route("deck/users/{userId}")]
-        public List<DeckSearchResponse> GetUserDecks([FromHeader] Guid requestingUser, HttpContext context) {
-            return deckService.GetDecksForUser((User)context.Items["User"]);
+        [HttpGet]
+        [Route("deck/users/{UserName}")]
+        public List<DeckSearchResponse> GetUserDecks([FromHeader] string requestingUser) {
+            return deckService.GetDecksForUser(requestingUser, (User?)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpGet]
@@ -65,6 +63,17 @@ namespace DTC.App.Controller {
         [Route("card/search")]
         public List<Card> SearchCard([FromQuery] string q, [FromQuery] int? page, [FromQuery] int? pageSize) {
             return deckService.SearchCard(q, page, pageSize);
+        }
+
+        //Add in deck Liking
+
+        [HttpPatch]
+        [Authorize]
+        [Route("deck/{deckId}/like")]
+        public IActionResult LikeDeck([FromRoute] Guid deckId) {
+            var result = deckService.LikeDeck(deckId, (User)ControllerContext.HttpContext.Items["User"]);
+            if(result == null) return NotFound();
+            return Ok(result);
         }
     }
 }

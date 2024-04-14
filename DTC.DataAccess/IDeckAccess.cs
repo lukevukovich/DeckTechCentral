@@ -7,9 +7,11 @@ namespace DTC.DataAccess {
 
         public Task CreateDeck(Deck deck);
         
-        public Deck UpdateDeck(Guid deckId, Deck deck);
+        public Deck UpdateDeck(Guid deckId, DeckCreationRequest deck);
 
         public Task<Deck> GetDeck(Guid deckId);
+
+        public bool? LikeDeck(Guid deckId, string Username);
 
         public Task<List<Deck>> GetDecksForUser(string Username);
     }

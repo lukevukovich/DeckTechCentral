@@ -33,10 +33,6 @@ namespace DTC.Model {
         [JsonPropertyName("likes")]
         public int Likes { get; set; }
 
-        [BsonElement("dislikes")]
-        [JsonPropertyName("dislikes")]
-        public int Dislikes { get; set; }
-
         [BsonElement("views")]
         [JsonPropertyName("views")]
         public int Views { get; set; }
@@ -68,5 +64,8 @@ namespace DTC.Model {
         [BsonElement("modified_date")]
         [JsonPropertyName("modified_date")]
         public DateTime ModifiedDate { get; set; }
+
+        [BsonElement("LikedUsers")]
+        public List<string> LikedUsernames { get; set; }
     }
 }

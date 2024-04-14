@@ -9,7 +9,7 @@ namespace DTC.Model {
         public int Amount { get; set; }
 
         [BsonElement("card")]
-        [JsonPropertyName("card")]
+        [JsonPropertyName("CardInfo")]
         public Card Card { get; set; }
 
         [BsonElement("is_commander")]
