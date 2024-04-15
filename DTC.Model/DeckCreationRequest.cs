@@ -1,31 +1,32 @@
+using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace DTC.Model {
     public class DeckCreationRequest
     {
 
-        [BsonElement("Privacy")]
+        [JsonPropertyName("Privacy")]
         public string? Privacy { get; set; }
 
-        [BsonElement("name")]
+        [JsonPropertyName("name")]
         public string? Name { get; set; }
 
-        [BsonElement("format")]
+        [JsonPropertyName("format")]
         public string? Format { get; set; }
 
-        [BsonElement("description")]
+        [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        [BsonElement("cover_image")]
+        [JsonPropertyName("cover_image")]
         public string? CoverImage { get; set; }
 
-        [BsonElement("mainboard")]
+        [JsonPropertyName("mainboard")]
         public List<CreationCardAmmount> Mainboard { get; set; }
 
-        [BsonElement("sideboard")]
+        [JsonPropertyName("sideboard")]
         public List<CreationCardAmmount>? Sideboard { get; set; }
 
-        [BsonElement("considering")]
+        [JsonPropertyName("considering")]
         public List<CreationCardAmmount>? Considering { get; set; }
     }
 }

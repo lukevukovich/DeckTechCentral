@@ -43,6 +43,7 @@ namespace DTC.Service {
                 Considering = deck.Considering,
                 LikedUsernames = new List<string>(),
                 Likes = 0,
+                Views = 0,
                 Editors = new List<string> { user.Username },
                 CreatedDate = DateTime.Today,
                 ModifiedDate = DateTime.Today,
@@ -202,7 +203,8 @@ namespace DTC.Service {
                 CoverImage = deck.CoverImage,
                 CreatedDate = deck.CreatedDate,
                 ModifiedDate = deck.ModifiedDate,
-                LikedDeck = user != null ? deck.LikedUsernames.Contains(user.Username) : false
+                LikedDeck = user != null ? deck.LikedUsernames.Contains(user.Username) : false,
+                Description = deck.Description,
             };
         }
     }
