@@ -171,13 +171,5 @@ namespace DTC.Model
         [BsonElement("card_faces")]
         [JsonPropertyName("card_faces")]
         public CardFace[]? CardFaces { get; set; }
-
-        [BsonElement("oracle_text")]
-        [JsonPropertyName("oracle_text")]
-        public string? OracleText { get; set; }
-
-        [BsonElement("flavor_text")]
-        [JsonPropertyName("flavor_text")]
-        public string? FlavorText { get; set; }
     }
 }

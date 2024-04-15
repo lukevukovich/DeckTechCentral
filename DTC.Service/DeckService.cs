@@ -53,8 +53,8 @@ namespace DTC.Service {
 
         public DeckResponse? GetDeck(Guid deckId, User? user) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
-            if(tempDeck == null) return null;
-            if(tempDeck.Privacy.Equals("private") && (user == null || tempDeck.Editors.Contains(user.Username))) return null;
+            if(tempDeck == null) return new DeckResponse{Name = null};
+            if(tempDeck.Privacy.Equals("private") && (user == null || !tempDeck.Editors.Contains(user.Username))) return null;
             deckRepo.AddView(deckId);
             return ConvertDeckToDeckResponse(tempDeck, user);
         }

@@ -17,7 +17,7 @@ var services = builder.Services;
     services.AddScoped<IUserService, UserService>()
             .AddScoped<IDeckService, DeckService>();
   
-    service.AddCors(options =>
+    services.AddCors(options =>
     {
         options.AddPolicy(name: MyAllowSpecificOrigins,
                           policy  =>

@@ -24,14 +24,17 @@ namespace DTC.App.Controller {
 
         [HttpGet]
         [Route("deck/{deckId}")]
-        public DeckResponse GetDeck([FromRoute] Guid deckId) {
-            return deckService.GetDeck(deckId, (User?)ControllerContext.HttpContext.Items["User"]);
+        public IActionResult GetDeck([FromRoute] Guid deckId) {
+            var result = deckService.GetDeck(deckId, (User?)ControllerContext.HttpContext.Items["User"]);
+            if(result == null) return Unauthorized();
+            else if(result.Name == null) return NotFound();
+            return Ok(result);
         }
 
         [HttpDelete]
         [Route("deck/{deckId}")]
         public void DeleteDeck([FromRoute] Guid deckId, [FromHeader] Guid userId) {
-            deckService.DeleteDeck(deckId, userService.GetUserById(userId).Result);
+            deckService.DeleteDeck(deckId, (User)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpPut]
