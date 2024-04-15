@@ -15,7 +15,7 @@ import {
   loadToolTip,
   clearTooltipTimeout,
 } from "../Tooltip";
-import { getLoginStatus } from "../../oauth/User";
+import { getLoginStatus } from "../../auth/User";
 
 //Max length of search
 export const maxSearchLength = 40;

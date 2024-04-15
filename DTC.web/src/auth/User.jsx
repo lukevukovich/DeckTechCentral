@@ -1,9 +1,3 @@
-// Function to await Sign-In
-export function awaitLogin() {}
-
-// Function to await Sign-Out
-export function awaitLogout() {}
-
 //Await sign it status as
 export function getLoginStatus() {
   return true;

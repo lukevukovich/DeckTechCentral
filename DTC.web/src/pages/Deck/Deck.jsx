@@ -293,7 +293,22 @@ export default function Deck() {
             );
             const deck = await response.json();
 
-            //setDeck(rawData);
+            const boardList = ["mainboard", "sideboard", "considering"];
+
+            for (let i = 0; i < deck.length; i++) {
+              for (let j = 0; j < deck[boardList[i]].length; j++) {
+                const card = deck[boardList[i]][j];
+                card.CardInfo.original_type_line = card.CardInfo.type_line;
+
+                const commander = card.is_commander;
+
+                if (commander) {
+                  card.CardInfo.type_line = "Commander";
+                }
+              }
+            }
+
+            setDeck(deck);
           } catch {
             navigate("/*");
           }

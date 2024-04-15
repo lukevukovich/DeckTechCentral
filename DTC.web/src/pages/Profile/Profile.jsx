@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
-import { getLoginStatus, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 
@@ -11,51 +11,33 @@ export default function Profile() {
   //Use state for input
   const [input, setInput] = useState("");
 
+  //Auth input fields
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(false);
-
-  //Set label content to user info
-  function setUserInfo(loggedIn) {
-    const user_id = document.getElementById("user-id");
-    const user_email = document.getElementById("user-email");
-    const user_name = document.getElementById("user-name");
-
-    if (loggedIn) {
-      const id = "test";
-      const name = "test";
-      const email = "test";
-
-      user_id.textContent = "User ID | " + id;
-      user_email.textContent = "User Email | " + email;
-      user_name.textContent = "User Name | " + name;
-    } else {
-      user_id.textContent = "No user logged in.";
-      user_email.textContent = "";
-      user_name.textContent = "";
-    }
-  }
 
   //Check to see if user is logged in
   async function checkLogin() {
     const s = getLoginStatus();
     if (s) {
-      setUserInfo();
       setUserPopup("pf");
     } else {
-      setUserInfo();
       setUserPopup("pf");
     }
   }
 
   //login
   function login() {
-    setUserInfo(true);
     setUserPopup("pf");
   }
 
   //Logout from signed in user
   function logout() {
-    setUserInfo(false);
     setUserPopup("pf");
   }
 
@@ -98,17 +80,28 @@ export default function Profile() {
         clearSearch={clearSearch}
         navigate={navigate}
       ></DTCHeader>
-      <div className="oauth">
-        <button id="login-button" onClick={login}>
-          Login
-        </button>
-        <button id="logout-button" onClick={logout}>
-          Logout
-        </button>
-        <div id="user-info">
-          <text id="user-id">User ID:</text>
-          <text id="user-email">User Email:</text>
-          <text id="user-name">User Name:</text>
+      <div className="auth">
+        <div className="auth-bkg">
+          <div className="auth-input">
+            <input
+              className="username"
+              value={username}
+              placeholder="Username"
+            ></input>
+            <input className="email" value={email} placeholder="Email"></input>
+            <input
+              className="password"
+              value={password}
+              placeholder="Password"
+            ></input>
+          </div>
+          <div className="auth-buttons">
+            <button className="login">Login</button>
+            <button className="signup">Sign-Up</button>
+          </div>
+          <div className="auth-button">
+            <button className="logout">Logout</button>
+          </div>
         </div>
       </div>
     </div>
