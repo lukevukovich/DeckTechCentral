@@ -101,7 +101,7 @@ public class CardSearching
                     Set = card.GetProperty("set").ToString(),
                     Rarity = card.GetProperty("rarity").ToString(),
                     Artist = card.GetProperty("artist").ToString(),
-                    FlavorText = card.TryGetProperty("flavor_text", out JsonElement flavor) ? card.GetProperty("flavor_test").ToString() : null,
+                    FlavorText = card.TryGetProperty("flavor_text", out JsonElement flavor) ? card.GetProperty("flavor_text").ToString() : null,
                     OracleText = card.TryGetProperty("oracle_text", out JsonElement oracle) ? card.GetProperty("oracle_text").ToString() : null
                 });
             } else {
