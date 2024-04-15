@@ -396,6 +396,8 @@ export default function Deck() {
         user_id: "b6a10624-9210-4f4b-b350-982bbdf5fae3",
       },
       body: JSON.stringify(saveDeck),
+    }).then((data) => {
+      navigate(`/deck?id=${data.id}`);
     });
   }
 
