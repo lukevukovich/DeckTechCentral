@@ -57,10 +57,13 @@ export default function Profile() {
     if (
       username.length <= maxUser &&
       username.length >= minUser &&
+      !username.includes(" ") &&
       email.length <= maxEmailPassword &&
       email.length >= minEmailPassword &&
+      !email.includes(" ") &&
       password.length <= maxEmailPassword &&
-      password.length >= minEmailPassword
+      password.length >= minEmailPassword &&
+      !password.includes(" ")
     ) {
       const user = {
         username: username,
@@ -107,8 +110,10 @@ export default function Profile() {
     if (
       email.length <= maxEmailPassword &&
       email.length >= minEmailPassword &&
+      !email.includes(" ") &&
       password.length <= maxEmailPassword &&
-      password.length >= minEmailPassword
+      password.length >= minEmailPassword &&
+      !password.includes(" ")
     ) {
       const user = {
         email: email,
