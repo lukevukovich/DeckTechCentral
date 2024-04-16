@@ -181,7 +181,7 @@ namespace DTC.Service {
             if(deck.Considering != null)
             {
                 foreach(var card in deck.Considering) {
-                    sb.Add(new CardAmmount() {
+                    cons.Add(new CardAmmount() {
                         Amount = card.Amount,
                         Card = GetCardById(card.CardId),
                         IsCommander = card.IsCommander
