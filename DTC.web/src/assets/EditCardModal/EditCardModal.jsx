@@ -189,7 +189,7 @@ export default function EditCardModal({
         <div className="add-modal-body">
           <div className="add-modal-number-box">
             <text className="add-modal-number-text add-modal-resize-text">
-              Card Number
+              Card Amount
             </text>
             <input
               type="number"

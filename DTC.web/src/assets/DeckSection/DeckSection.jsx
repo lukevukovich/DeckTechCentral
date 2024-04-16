@@ -58,9 +58,15 @@ export default function DeckSection({
 
   //Show card modal based on selected card
   function showCardDetails(card) {
+    let image;
+    if ("large" in card.image_uris) {
+      image = card.image_uris.large;
+    } else {
+      image = card.image_uris[2];
+    }
     const data = {
       name: card.name,
-      image_uris: { large: card.image_uris.large },
+      image_uris: { large: image },
       type_line: card.type_line,
       original_type_line: card.original_type_line,
       oracle_text: card.oracle_text,
