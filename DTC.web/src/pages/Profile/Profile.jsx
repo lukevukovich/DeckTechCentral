@@ -20,8 +20,10 @@ import DeckPane from "../../assets/DeckPane/DeckPane";
 export default function Profile() {
   const navigate = useNavigate();
 
-  const maxInputLength = 50;
-  const minInputLength = 6;
+  const maxUser = 20;
+  const minUser = 3;
+  const maxEmailPassword = 50;
+  const minEmailPassword = 6;
 
   //Use state for input
   const [input, setInput] = useState("");
@@ -53,15 +55,12 @@ export default function Profile() {
   //Sign up
   async function signup() {
     if (
-      username != "" &&
-      username.length <= maxInputLength &&
-      username.length >= minInputLength &&
-      email != "" &&
-      email.length <= maxInputLength &&
-      email.length >= minInputLength &&
-      password != "" &&
-      password.length <= maxInputLength &&
-      password.length >= minInputLength
+      username.length <= maxUser &&
+      username.length >= minUser &&
+      email.length <= maxEmailPassword &&
+      email.length >= minEmailPassword &&
+      password.length <= maxEmailPassword &&
+      password.length >= minEmailPassword
     ) {
       const user = {
         username: username,
@@ -86,10 +85,15 @@ export default function Profile() {
       }
     } else {
       alert(
-        "Username and password:\nminumum: " +
-          minInputLength +
+        "Username:\nminumum: " +
+          minUser +
           "\nmaximum: " +
-          maxInputLength
+          maxUser +
+          "\n\nEmail & Password:\nminimum: " +
+          minEmailPassword +
+          "\nmaximum: " +
+          maxEmailPassword +
+          "\n\nNo spaces"
       );
     }
 
@@ -101,12 +105,10 @@ export default function Profile() {
   //login
   async function login() {
     if (
-      email != "" &&
-      email.length <= maxInputLength &&
-      email.length >= minInputLength &&
-      password != "" &&
-      password.length <= maxInputLength &&
-      password.length >= minInputLength
+      email.length <= maxEmailPassword &&
+      email.length >= minEmailPassword &&
+      password.length <= maxEmailPassword &&
+      password.length >= minEmailPassword
     ) {
       const user = {
         email: email,
@@ -137,10 +139,15 @@ export default function Profile() {
       }
     } else {
       alert(
-        "Username and password:\nminumum: " +
-          minInputLength +
+        "Username:\nminumum: " +
+          minUser +
           "\nmaximum: " +
-          maxInputLength
+          maxUser +
+          "\n\nEmail & Password:\nminimum: " +
+          minEmailPassword +
+          "\nmaximum: " +
+          maxEmailPassword +
+          "\n\nNo spaces"
       );
     }
 
