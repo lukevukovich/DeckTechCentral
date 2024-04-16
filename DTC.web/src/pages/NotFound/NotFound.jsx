@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./NotFound.css";
 import { useNavigate } from "react-router-dom";
-import { getLoginStatus, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";

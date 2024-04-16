@@ -58,6 +58,7 @@ export default function DTCHeader({
       navigate("/deck");
     } else {
       navigate("/profile");
+      alert("Must be logged in to create a deck.");
     }
   }
 

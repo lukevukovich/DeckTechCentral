@@ -7,13 +7,7 @@
     "dislikes": 33,
     "views": 74354,
     "format": "standard",
-    "editors": [
-      {
-        "username": "magicmax",
-        "email": "max@magic.com",
-        "userStatus": "user"
-      }
-    ]
+    "editors": ["test"]
   },
   {
     "id": "ebb88ffa-7862-4018-b56c-effb9c32d825",
@@ -23,13 +17,7 @@
     "dislikes": 19,
     "views": 124301,
     "format": "commander",
-    "editors": [
-      {
-        "username": "magicmax",
-        "email": "max@magic.com",
-        "userStatus": "user"
-      }
-    ]
+    "editors": ["test"]
   },
   {
     "id": "5e001419-377e-4ae4-9a66-5c8c2fa58f20",

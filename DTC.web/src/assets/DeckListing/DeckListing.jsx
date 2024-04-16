@@ -27,7 +27,7 @@ export default function DeckListing({ id, deck }) {
       <div className="creator-likes-views">
         <text className="creator">
           <FontAwesomeIcon icon={faUser} className="icon" />
-          {"test"}
+          {deck.editors[0]}
         </text>
         <text className="likes">
           <FontAwesomeIcon icon={faThumbsUp} className="icon" />

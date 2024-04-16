@@ -160,7 +160,13 @@ export default function DeckSection({
 
   function handleCoverImage() {
     const card = JSON.parse(sessionStorage.getItem("card"));
-    const cover_image = card.CardInfo.image_uris.large;
+
+    let cover_image;
+    if ("large" in card.CardInfo.image_uris) {
+      cover_image = card.CardInfo.image_uris.large;
+    } else {
+      cover_image = card.CardInfo.image_uris[2];
+    }
 
     let newDeck = { ...deck };
     newDeck.cover_image = cover_image;

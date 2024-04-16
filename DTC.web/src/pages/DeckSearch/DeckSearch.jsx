@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./DeckSearch.css";
 import { useNavigate } from "react-router-dom";
-import { getLoginStatus, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import DeckPane from "../../assets/DeckPane/DeckPane";
@@ -80,6 +80,8 @@ export default function DeckSearch() {
       //Set num cards
       if (decks == 1) {
         setNumDecks(decks + " deck found for '" + deckName.toLowerCase() + "'");
+      } else if (decks == 0) {
+        setNumDecks("No decks found for '" + deckName.toLowerCase() + "'");
       } else {
         setNumDecks(
           decks + " decks found for '" + deckName.toLowerCase() + "'"

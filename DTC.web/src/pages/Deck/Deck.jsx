@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import "./Deck.css";
 import { useNavigate } from "react-router-dom";
-import { getLoginStatus, setUserPopup } from "../../oauth/User";
+import {
+  getLoginStatus,
+  getUserInfoFromToken,
+  setUserPopup,
+} from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import { loadDeck as load } from "../../assets/LoadDeck";
@@ -266,11 +270,13 @@ export default function Deck() {
     if (hasRunOnceRef.current) {
       const loadDeck = checkForCardAdd();
       const loginStatus = getLoginStatus();
+      const userInfo = getUserInfoFromToken();
 
       if (loadDeck == null) {
         if (deckId == null) {
           if (loginStatus) {
-            const username = "test";
+            const u = userInfo.username;
+            const username = u;
             const newDeck = { ...deck };
             newDeck.editors[0] = username;
             setDeck(newDeck);
@@ -278,6 +284,7 @@ export default function Deck() {
             setEdit(true);
           } else {
             navigate("/profile");
+            alert("Must be logged in to create a deck.");
           }
         } else {
           if (deckId == "") {
@@ -293,22 +300,41 @@ export default function Deck() {
             );
             const deck = await response.json();
 
-            const boardList = ["mainboard", "sideboard", "considering"];
+            if ("status" in deck) {
+              navigate("/*");
+            } else {
+              const boardList = ["mainboard", "sideboard", "considering"];
 
-            for (let i = 0; i < deck.length; i++) {
-              for (let j = 0; j < deck[boardList[i]].length; j++) {
-                const card = deck[boardList[i]][j];
-                card.CardInfo.original_type_line = card.CardInfo.type_line;
+              for (let i = 0; i < boardList.length; i++) {
+                for (let j = 0; j < deck[boardList[i]].length; j++) {
+                  const card = deck[boardList[i]][j];
+                  card.CardInfo.original_type_line = card.CardInfo.type_line;
 
-                const commander = card.is_commander;
+                  const commander = card.is_commander;
 
-                if (commander) {
-                  card.CardInfo.type_line = "Commander";
+                  if (commander) {
+                    card.CardInfo.type_line = "Commander";
+                  } else if (card.CardInfo.type_line.includes("—")) {
+                    card.CardInfo.type_line = card.CardInfo.type_line
+                      .split("—")[0]
+                      .slice(0, -1);
+                  }
+
+                  if (card.CardInfo.flavor_text == null) {
+                    card.CardInfo.flavor_text = "";
+                  }
+
+                  card.CardInfo.image_uris.large = card.CardInfo.image_uris[2];
                 }
               }
+              if (loginStatus) {
+                if (userInfo.username == deck.editors[0]) {
+                  document.getElementById("edit-button").style.display =
+                    "block";
+                }
+              }
+              setDeck(deck);
             }
-
-            setDeck(deck);
           } catch {
             navigate("/*");
           }
@@ -361,7 +387,7 @@ export default function Deck() {
     setInitialTabs();
   }, []);
 
-  function saveNewDeck() {
+  async function saveNewDeck() {
     const { likes, views, editors, ...saveDeck } = deck;
 
     const boardList = ["mainboard", "sideboard", "considering"];
@@ -389,16 +415,22 @@ export default function Deck() {
       }
     }
 
-    fetch("http://localhost:5272/deck", {
+    const cookie = getUserInfoFromToken();
+    const userId = cookie.id;
+    const token = cookie.token;
+
+    const response = await fetch("http://localhost:5272/deck", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        user_id: "b6a10624-9210-4f4b-b350-982bbdf5fae3",
+        user_id: userId,
+        Authorization: token,
       },
       body: JSON.stringify(saveDeck),
-    }).then((data) => {
-      navigate(`/deck?id=${data.id}`);
     });
+
+    const d = await response.json();
+    navigate(`/deck?id=${d.id}`);
   }
 
   function saveDeck() {}

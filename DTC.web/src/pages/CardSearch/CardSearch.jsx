@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./CardSearch.css";
 import { useNavigate } from "react-router-dom";
-import { getLoginStatus, setUserPopup } from "../../oauth/User";
+import { getLoginStatus, setUserPopup } from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import CardModal from "../../assets/CardModal/CardModal";
@@ -92,35 +92,16 @@ export default function CardSearch() {
     for (let i = 0; i < jsonData.data.length; i++) {
       try {
         // Check if card_faces is present
-        if (jsonData.data[i].card_faces != null) {
-          // If present, check if two images or one image
-          const faces = jsonData.data[i].card_faces;
-          if (faces[0].image_uris != null) {
-            // Two images
-            jsonData.data.splice(i, 1);
-            jsonData.data.splice(i, 0, faces[1]);
-            jsonData.data.splice(i, 0, faces[0]);
-          } else {
-            // One image
-            const numFaces = jsonData.data[i].card_faces.length;
-            jsonData.data[i].oracle_text = "";
-            for (let j = 0; j < numFaces; j++) {
-              let face_text = jsonData.data[i].card_faces[j].oracle_text;
-              jsonData.data[i].oracle_text += " | " + face_text;
-            }
-            jsonData.data[i].oracle_text =
-              jsonData.data[i].oracle_text.substring(3);
+        if (jsonData.data[i].card_faces == null) {
+          // Test is flavor_text is present
+          if (jsonData.data[i].flavor_text == null) {
+            jsonData.data[i].flavor_text = "";
           }
+          images.push(jsonData.data[i].image_uris[2]);
+          jsonData.data[i].image_uris = {
+            large: jsonData.data[i].image_uris[2],
+          };
         }
-
-        // Test is flavor_text is present
-        if (jsonData.data[i].flavor_text == null) {
-          jsonData.data[i].flavor_text = "";
-        }
-        images.push(jsonData.data[i].image_uris[2]);
-        jsonData.data[i].image_uris = {
-          large: jsonData.data[i].image_uris[2],
-        };
       } catch (error) {
         removeCards.push(i);
       }
@@ -130,6 +111,8 @@ export default function CardSearch() {
     for (let i = 0; i < removeCards.length; i++) {
       jsonData.data.splice(removeCards[i], 1);
     }
+
+    console.log(jsonData.data);
 
     return {
       images,

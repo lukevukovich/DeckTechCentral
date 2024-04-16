@@ -1,12 +1,26 @@
 import { useState, useEffect } from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
-import { getLoginStatus, setUserPopup } from "../../auth/User";
+import {
+  getLoginStatus,
+  setUserPopup,
+  createTokenAndStoreInCookie,
+  deleteToken,
+  getUserInfoFromToken,
+} from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
+import {
+  clearTooltipTimeout,
+  hideTooltip,
+  showTooltip,
+} from "../../assets/Tooltip";
 
 export default function Profile() {
   const navigate = useNavigate();
+
+  const maxInputLength = 50;
+  const minInputLength = 6;
 
   //Use state for input
   const [input, setInput] = useState("");
@@ -25,19 +39,119 @@ export default function Profile() {
   async function checkLogin() {
     const s = getLoginStatus();
     if (s) {
+      setLoggedIn(true);
       setUserPopup("pf");
     } else {
       setUserPopup("pf");
     }
   }
 
+  //Sign up
+  async function signup() {
+    if (
+      username != "" &&
+      username.length <= maxInputLength &&
+      username.length >= minInputLength &&
+      email != "" &&
+      email.length <= maxInputLength &&
+      email.length >= minInputLength &&
+      password != "" &&
+      password.length <= maxInputLength &&
+      password.length >= minInputLength
+    ) {
+      const user = {
+        username: username,
+        email: email,
+        password: password,
+      };
+
+      const response = await fetch("http://localhost:5272/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      const data = await response.json();
+
+      if (!data.includes("message")) {
+        alert("User '" + username + "' created.");
+      } else {
+        alert("Username '" + username + "' already in use.");
+      }
+    } else {
+      alert(
+        "User input minumum: " +
+          minInputLength +
+          ", maximum: " +
+          maxInputLength +
+          "."
+      );
+    }
+
+    setUsername("");
+    setEmail("");
+    setPassword("");
+  }
+
   //login
-  function login() {
+  async function login() {
+    if (
+      email != "" &&
+      email.length <= maxInputLength &&
+      email.length >= minInputLength &&
+      password != "" &&
+      password.length <= maxInputLength &&
+      password.length >= minInputLength
+    ) {
+      const user = {
+        email: email,
+        password: password,
+      };
+
+      try {
+        const response = await fetch("http://localhost:5272/user/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+
+        //Create token
+        const token = await response.json();
+
+        if ("message" in token) {
+          alert("Login failed. Please try again.");
+        } else {
+          createTokenAndStoreInCookie(token);
+          setLoggedIn(true);
+          alert("Login successful.");
+        }
+      } catch {
+        alert("Login failed. Please try again.");
+      }
+    } else {
+      alert(
+        "User input minumum: " +
+          minInputLength +
+          ", maximum: " +
+          maxInputLength +
+          "."
+      );
+    }
+
+    setUsername("");
+    setEmail("");
+    setPassword("");
     setUserPopup("pf");
   }
 
   //Logout from signed in user
   function logout() {
+    deleteToken();
+    setLoggedIn(false);
     setUserPopup("pf");
   }
 
@@ -47,6 +161,46 @@ export default function Profile() {
 
     sessionStorage.clear();
   }, []);
+
+  useEffect(() => {
+    let hide;
+    let show;
+    if (loggedIn) {
+      const user = getUserInfoFromToken();
+
+      hide = ["email", "password", "login", "signup"];
+      show = ["logout"];
+
+      const username = document.getElementById("username");
+      const auth = document.getElementById("auth");
+
+      username.readOnly = true;
+      username.style.textAlign = "center";
+      username.style.marginBottom = "-20px";
+      auth.style.height = "140px";
+      setUsername(user.username);
+    } else {
+      hide = ["logout"];
+      show = ["email", "password", "login", "signup"];
+
+      const username = document.getElementById("username");
+      const auth = document.getElementById("auth");
+
+      username.readOnly = false;
+      username.style.textAlign = "start";
+      username.style.marginBottom = "0px";
+      auth.style.height = "235px";
+      setUsername("");
+    }
+
+    for (let i = 0; i < hide.length; i++) {
+      document.getElementById(hide[i]).style.display = "none";
+    }
+
+    for (let i = 0; i < show.length; i++) {
+      document.getElementById(show[i]).style.display = "block";
+    }
+  }, [loggedIn]);
 
   //Search deck/card based on toggle
   function search() {
@@ -80,27 +234,83 @@ export default function Profile() {
         clearSearch={clearSearch}
         navigate={navigate}
       ></DTCHeader>
-      <div className="auth">
+      <div className="auth" id="auth">
         <div className="auth-bkg">
           <div className="auth-input">
             <input
+              id="username"
               className="username"
               value={username}
               placeholder="Username"
+              autoComplete="off"
+              onChange={(e) => setUsername(e.target.value.toLowerCase())}
+              onKeyDown={(e) => setUsername(e.target.value.toLowerCase())}
             ></input>
-            <input className="email" value={email} placeholder="Email"></input>
             <input
+              id="email"
+              className="email"
+              value={email}
+              placeholder="Email"
+              autoComplete="new-password"
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
+              onKeyDown={(e) => setEmail(e.target.value.toLowerCase())}
+            ></input>
+            <input
+              id="password"
+              type="password"
               className="password"
               value={password}
               placeholder="Password"
+              autoComplete="new-password"
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => setPassword(e.target.value)}
             ></input>
           </div>
           <div className="auth-buttons">
-            <button className="login">Login</button>
-            <button className="signup">Sign-Up</button>
+            <button
+              id="login"
+              className="login"
+              onClick={() => {
+                clearTooltipTimeout();
+                login();
+              }}
+              onMouseEnter={(e) => {
+                showTooltip("pf", e, "Log in to DeckTechCentral");
+              }}
+              onMouseLeave={() => hideTooltip("pf")}
+            >
+              Login
+            </button>
+            <button
+              id="signup"
+              className="signup"
+              onClick={() => {
+                clearTooltipTimeout();
+                signup();
+              }}
+              onMouseEnter={(e) => {
+                showTooltip("pf", e, "Sign up for DeckTechCentral");
+              }}
+              onMouseLeave={() => hideTooltip("pf")}
+            >
+              Sign Up
+            </button>
           </div>
           <div className="auth-button">
-            <button className="logout">Logout</button>
+            <button
+              id="logout"
+              className="logout"
+              onClick={() => {
+                clearTooltipTimeout();
+                logout();
+              }}
+              onMouseEnter={(e) => {
+                showTooltip("pf", e, "Log out of DeckTechCentral");
+              }}
+              onMouseLeave={() => hideTooltip("pf")}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
