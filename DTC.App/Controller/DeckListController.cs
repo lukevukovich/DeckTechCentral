@@ -32,6 +32,7 @@ namespace DTC.App.Controller {
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("deck/{deckId}")]
         public void DeleteDeck([FromRoute] Guid deckId, [FromHeader] Guid userId) {
             deckService.DeleteDeck(deckId, (User)ControllerContext.HttpContext.Items["User"]);
