@@ -157,6 +157,7 @@ export default function CardSearch() {
     } catch (error) {
       //Set num cards to none
       setNumCards("No cards found for '" + cardName.toLowerCase() + "'");
+      setData([]);
     }
   };
 

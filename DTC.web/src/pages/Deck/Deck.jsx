@@ -416,14 +416,12 @@ export default function Deck() {
     }
 
     const cookie = getUserInfoFromToken();
-    const userId = cookie.id;
     const token = cookie.token;
 
     const response = await fetch("http://localhost:5272/deck", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        user_id: userId,
         Authorization: token,
       },
       body: JSON.stringify(saveDeck),
@@ -433,7 +431,49 @@ export default function Deck() {
     navigate(`/deck?id=${d.id}`);
   }
 
-  function saveDeck() {}
+  async function saveDeck() {
+    const { likes, views, editors, ...saveDeck } = deck;
+
+    const boardList = ["mainboard", "sideboard", "considering"];
+
+    for (let i = 0; i < boardList.length; i++) {
+      saveDeck[boardList[i]] = [];
+      for (let j = 0; j < deck[boardList[i]].length; j++) {
+        const amount = deck[boardList[i]][j].amount;
+        const id = deck[boardList[i]][j].CardInfo.id;
+
+        let isCommander;
+        if (deck[boardList[i]][j].CardInfo.type_line == "Commander") {
+          isCommander = true;
+        } else {
+          isCommander = false;
+        }
+
+        const saveCard = {
+          amount: amount,
+          card_id: id,
+          is_commander: isCommander,
+        };
+
+        saveDeck[boardList[i]].push(saveCard);
+      }
+    }
+
+    const cookie = getUserInfoFromToken();
+    const token = cookie.token;
+
+    await fetch(
+      `http://localhost:5272/deck/${encodeURIComponent(saveDeck.id)}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(saveDeck),
+      }
+    );
+  }
 
   return (
     <div id="dv-all">

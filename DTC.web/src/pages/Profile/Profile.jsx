@@ -15,6 +15,7 @@ import {
   hideTooltip,
   showTooltip,
 } from "../../assets/Tooltip";
+import DeckPane from "../../assets/DeckPane/DeckPane";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -34,6 +35,9 @@ export default function Profile() {
 
   //Use state for search toggle
   const [isToggled, setIsToggled] = useState(false);
+
+  //Use state for user decks
+  const [decks, setDecks] = useState([]);
 
   //Check to see if user is logged in
   async function checkLogin() {
@@ -73,7 +77,7 @@ export default function Profile() {
         body: JSON.stringify(user),
       });
 
-      const data = await response.json();
+      const data = await response.text();
 
       if (!data.includes("message")) {
         alert("User '" + username + "' created.");
@@ -82,11 +86,10 @@ export default function Profile() {
       }
     } else {
       alert(
-        "User input minumum: " +
+        "Username and password:\nminumum: " +
           minInputLength +
-          ", maximum: " +
-          maxInputLength +
-          "."
+          "\nmaximum: " +
+          maxInputLength
       );
     }
 
@@ -134,11 +137,10 @@ export default function Profile() {
       }
     } else {
       alert(
-        "User input minumum: " +
+        "Username and password:\nminumum: " +
           minInputLength +
-          ", maximum: " +
-          maxInputLength +
-          "."
+          "\nmaximum: " +
+          maxInputLength
       );
     }
 
@@ -162,11 +164,31 @@ export default function Profile() {
     sessionStorage.clear();
   }, []);
 
+  //Get list of user created decks
+  async function getUserDecks(username) {
+    //Make request
+    const response = await fetch(
+      `http://localhost:5272/deck/users/${encodeURIComponent(username)}`,
+      {
+        method: "GET", // or 'POST', 'PUT', etc.
+        headers: {
+          "Content-Type": "application/json",
+          requestingUser: username,
+        },
+      }
+    );
+    const rawData = await response.json();
+
+    setDecks(rawData);
+  }
+
   useEffect(() => {
     let hide;
     let show;
     if (loggedIn) {
       const user = getUserInfoFromToken();
+
+      getUserDecks(user.username);
 
       hide = ["email", "password", "login", "signup"];
       show = ["logout"];
@@ -180,6 +202,8 @@ export default function Profile() {
       auth.style.height = "140px";
       setUsername(user.username);
     } else {
+      setDecks([]);
+
       hide = ["logout"];
       show = ["email", "password", "login", "signup"];
 
@@ -243,8 +267,8 @@ export default function Profile() {
               value={username}
               placeholder="Username"
               autoComplete="off"
-              onChange={(e) => setUsername(e.target.value.toLowerCase())}
-              onKeyDown={(e) => setUsername(e.target.value.toLowerCase())}
+              onChange={(e) => setUsername(e.target.value)}
+              onKeyDown={(e) => setUsername(e.target.value0)}
             ></input>
             <input
               id="email"
@@ -314,6 +338,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      <DeckPane id="pf" decks={decks}></DeckPane>
     </div>
   );
 }

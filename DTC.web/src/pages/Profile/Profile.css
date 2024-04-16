@@ -10,14 +10,16 @@
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
+  margin-top: 0px;
+  z-index: 1;
 }
 
 .auth {
-  z-index: -1;
+  z-index: 0;
   display: flex;
-  position: fixed;
+  position: relative;
   top: 150px;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
 }
 
@@ -86,6 +88,12 @@
 
 .auth-button :active {
   background-color: rgb(163, 54, 54);
+}
+
+#deck-pane-pf {
+  position: relative;
+  margin-top: 160px;
+  z-index: 0;
 }
 
 @media (max-width: 650px) {
