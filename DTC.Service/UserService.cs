@@ -40,7 +40,7 @@ namespace DTC.Service {
             var salt = GenerateSalt(256);
             var SaltedPassHash = Convert.ToBase64String(Hash(user.password, salt));
             if(access.GetUserByUsername(user.Username) != null) throw new Exception("username already taken");
-            if(access.GetUserByEmail(user.Email) != null) throw new Exception("email already taken");
+            if(access.GetUserByEmail(user.Email).Result != null) throw new Exception("email already taken");
 
             var result = access.CreateUser(new User() {
                 Username = user.Username,
