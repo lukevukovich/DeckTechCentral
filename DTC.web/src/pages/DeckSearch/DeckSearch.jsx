@@ -25,6 +25,8 @@ export default function DeckSearch() {
 
   const [numDecks, setNumDecks] = useState("");
 
+  const [displayText, setDisplayText] = useState(true);
+
   //Check for Google login, set popup
   function checkLogin() {
     const s = getLoginStatus();
@@ -65,6 +67,8 @@ export default function DeckSearch() {
   }, [searchText]);
 
   const searchDeck = async () => {
+    setDisplayText(false);
+
     setDecks([]);
     navigate(`/decksearch?deck=${deckName}`);
 
@@ -95,6 +99,15 @@ export default function DeckSearch() {
     }
   };
 
+  useEffect(() => {
+    const text = document.getElementById("ds-text");
+    if (!displayText) {
+      text.style.display = "none";
+    } else {
+      text.style.display = "flex";
+    }
+  }, [displayText]);
+
   //Clear search and image list
   function clearSearch() {
     setDeckName("");
@@ -118,6 +131,9 @@ export default function DeckSearch() {
         <text className="num-results">{numDecks}</text>
       </div>
       <DeckPane id="ds" decks={decks}></DeckPane>
+      <div className="ds-text" id="ds-text">
+        <text>Search for a deck.</text>
+      </div>
     </div>
   );
 }

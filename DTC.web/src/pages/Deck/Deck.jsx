@@ -511,7 +511,7 @@ export default function Deck() {
     const token = getUserInfoFromToken().token;
 
     const response = await fetch(
-      `http://localhost:5272/deck/${encodeURIComponent(deck.id)}/like`,
+      `http://localhost:5272/deck/${encodeURIComponent(deckId)}/like`,
       {
         method: "PATCH",
         headers: {

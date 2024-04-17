@@ -105,6 +105,7 @@ export default function Profile() {
       });
 
       const data = await response.text();
+      console.log(data);
 
       if (!data.includes("message")) {
         alert("User '" + username + "' created. Welcome to DeckTechCentral!");

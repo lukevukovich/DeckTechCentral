@@ -37,6 +37,8 @@ export default function CardSearch() {
   //Use state for modal pop up
   const [modal, setModal] = useState(false);
 
+  const [displayText, setDisplayText] = useState(true);
+
   //Use state for selected card
   const [selectedCard, setSelectedCard] = useState({
     name: "",
@@ -101,6 +103,8 @@ export default function CardSearch() {
           jsonData.data[i].image_uris = {
             large: jsonData.data[i].image_uris[2],
           };
+        } else {
+          removeCards.push(i);
         }
       } catch (error) {
         removeCards.push(i);
@@ -120,9 +124,10 @@ export default function CardSearch() {
 
   //Handle card seach to Scryfall API
   const searchCard = async () => {
-    setData([0]);
+    setDisplayText(false);
     navigate(`/cardsearch?card=${cardName}`);
 
+    setData([]);
     setImageList([]);
     try {
       //Make request
@@ -153,19 +158,18 @@ export default function CardSearch() {
       }
     } catch (error) {
       //Set num cards to none
-      setData([0]);
       setNumCards("No cards found for '" + cardName.toLowerCase() + "'");
     }
   };
 
   useEffect(() => {
     const text = document.getElementById("cs-text");
-    if (data.length != 0) {
+    if (!displayText) {
       text.style.display = "none";
     } else {
       text.style.display = "flex";
     }
-  }, [data]);
+  }, [displayText]);
 
   //Clear search and image list
   function clearSearch() {

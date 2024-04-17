@@ -18,3 +18,33 @@
     height: 50px;
   }
 }
+
+.ds-text {
+  display: flex;
+  height: 98vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: -170px;
+}
+
+.ds-text text {
+  text-wrap: nowrap;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 76px;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to left,
+    rgb(129, 29, 29),
+    rgb(255, 106, 61)
+  );
+  -webkit-background-clip: text; /* For WebKit browsers */
+}
+
+@media (max-width: 670px) {
+  .ds-text text {
+    font-size: 50px;
+  }
+}

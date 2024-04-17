@@ -32,6 +32,10 @@ export default function DTCHeader({
   clearSearch,
   navigate,
 }) {
+  window.onerror = function () {
+    navigate("/*");
+  };
+
   //Set toggle and search setting
   function toggleSearch() {
     setIsToggled(!isToggled);
@@ -89,7 +93,7 @@ export default function DTCHeader({
             id={`go-${id}`}
             onClick={() => {
               clearTooltipTimeout();
-              
+
               search();
             }}
             onMouseEnter={(e) => showTooltip(id, e, "Search")}
