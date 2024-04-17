@@ -297,7 +297,14 @@ export default function Deck() {
 
           try {
             const response = await fetch(
-              `http://localhost:5272/deck/${encodeURIComponent(deckId)}`
+              `http://localhost:5272/deck/${encodeURIComponent(deckId)}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: userInfo.token,
+                },
+              }
             );
             const deck = await response.json();
 
@@ -514,10 +521,14 @@ export default function Deck() {
       }
     );
 
-    setLike(!like);
+    const justLiked = await response.json();
+    if (justLiked) {
+      deck.likes += 1;
+    } else {
+      deck.likes -= 1;
+    }
 
-    const liked = await response.json();
-    console.log(liked);
+    setLike(!like);
   }
 
   return (
