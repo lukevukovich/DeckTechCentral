@@ -89,6 +89,7 @@ export default function DTCHeader({
             id={`go-${id}`}
             onClick={() => {
               clearTooltipTimeout();
+              
               search();
             }}
             onMouseEnter={(e) => showTooltip(id, e, "Search")}

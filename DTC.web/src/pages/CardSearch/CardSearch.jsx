@@ -112,8 +112,6 @@ export default function CardSearch() {
       jsonData.data.splice(removeCards[i], 1);
     }
 
-    console.log(jsonData.data);
-
     return {
       images,
       processedData: jsonData.data,
@@ -122,10 +120,9 @@ export default function CardSearch() {
 
   //Handle card seach to Scryfall API
   const searchCard = async () => {
-    let navigateString = `/cardsearch?card=${cardName}`;
-    navigate(navigateString);
+    setData([0]);
+    navigate(`/cardsearch?card=${cardName}`);
 
-    setData([]);
     setImageList([]);
     try {
       //Make request
@@ -156,10 +153,19 @@ export default function CardSearch() {
       }
     } catch (error) {
       //Set num cards to none
+      setData([0]);
       setNumCards("No cards found for '" + cardName.toLowerCase() + "'");
-      setData([]);
     }
   };
+
+  useEffect(() => {
+    const text = document.getElementById("cs-text");
+    if (data.length != 0) {
+      text.style.display = "none";
+    } else {
+      text.style.display = "flex";
+    }
+  }, [data]);
 
   //Clear search and image list
   function clearSearch() {
@@ -201,6 +207,9 @@ export default function CardSearch() {
         imageList={imageList}
         showCardDetails={showCardDetails}
       ></CardPane>
+      <div className="cs-text" id="cs-text">
+        <text>Search for a card.</text>
+      </div>
     </div>
   );
 }

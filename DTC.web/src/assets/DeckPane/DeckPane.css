@@ -8,6 +8,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   z-index: 2;
+  transition: 0.3s;
 }
 
 @media (max-width: 1295px) {

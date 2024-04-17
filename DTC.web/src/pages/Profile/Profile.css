@@ -9,7 +9,7 @@
   background-color: rgb(67, 5, 5);
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transition: 0.5s;
+  transition: 0.3s;
   margin-top: 0px;
   z-index: 2;
 }
@@ -19,9 +19,10 @@
   display: flex;
   position: relative;
   top: 150px;
-  height: 400px;
+  height: 235px;
   width: 100%;
   justify-content: center;
+  transition: top 0.3s;
 }
 
 .auth-bkg {
@@ -110,6 +111,7 @@
   margin-top: 190px;
   margin-bottom: 15px;
   margin-left: 14px;
+  transition: 0.3s;
 }
 
 .your-decks-text text {
@@ -130,7 +132,7 @@
 #deck-pane-pf {
   position: relative;
   z-index: 0;
-  border-top:  5px solid rgb(56, 5, 5);
+  border-top: 5px solid rgb(56, 5, 5);
 }
 
 @media (max-width: 650px) {

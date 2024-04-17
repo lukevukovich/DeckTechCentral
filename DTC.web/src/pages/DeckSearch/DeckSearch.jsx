@@ -65,6 +65,7 @@ export default function DeckSearch() {
   }, [searchText]);
 
   const searchDeck = async () => {
+    setDecks([]);
     navigate(`/decksearch?deck=${deckName}`);
 
     try {
@@ -89,8 +90,8 @@ export default function DeckSearch() {
       }
     } catch (error) {
       //Set num decks to none
-      setNumDecks("No decks found for '" + deckName.toLowerCase() + "'");
       setDecks([]);
+      setNumDecks("No decks found for '" + deckName.toLowerCase() + "'");
     }
   };
 

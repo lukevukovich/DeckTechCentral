@@ -300,7 +300,6 @@ export default function Deck() {
               `http://localhost:5272/deck/${encodeURIComponent(deckId)}`
             );
             const deck = await response.json();
-            console.log(deck);
 
             if ("status" in deck) {
               navigate("/*");

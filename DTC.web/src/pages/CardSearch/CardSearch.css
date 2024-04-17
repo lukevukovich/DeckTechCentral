@@ -10,7 +10,7 @@
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 1;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .user-popup {
@@ -40,4 +40,34 @@
 .card-image:hover {
   outline: 3px solid rgb(205, 41, 27); /* Example outline color and width */
   outline-offset: -1px;
+}
+
+.cs-text {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: -170px;
+}
+
+.cs-text text {
+  text-wrap: nowrap;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 76px;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to left,
+    rgb(129, 29, 29),
+    rgb(255, 106, 61)
+  );
+  -webkit-background-clip: text; /* For WebKit browsers */
+}
+
+@media (max-width: 670px) {
+  .cs-text text {
+    font-size: 50px;
+  }
 }
