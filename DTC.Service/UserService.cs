@@ -33,10 +33,14 @@ namespace DTC.Service {
 
         public bool CreateUser(CreateNewUser user) {
             if(user.Username == null || user.Email == null || user.password == null) throw new Exception("invalid user");
+            if(user.Username.Length < 3 || user.Username.Length > 20) throw new Exception("invalid username");
+            if(user.Email.Length < 6 || user.Email.Length > 50) throw new Exception("invalid email");
+            if(user.password.Length < 6 || user.password.Length > 50) throw new Exception("invalid password");
             
             var salt = GenerateSalt(256);
             var SaltedPassHash = Convert.ToBase64String(Hash(user.password, salt));
-            if(access.GetUserByUsername(user.Username) != null) { return false; }
+            if(access.GetUserByUsername(user.Username) != null) throw new Exception("username already taken");
+            if(access.GetUserByEmail(user.Email) != null) throw new Exception("email already taken");
 
             var result = access.CreateUser(new User() {
                 Username = user.Username,

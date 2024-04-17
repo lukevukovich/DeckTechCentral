@@ -19,7 +19,7 @@ namespace DTC.DataAccess {
             
             var builder = Builders<Deck>.Filter;
             //var filter = builder.Regex(f => f.Name, ".*" + name == null ? name : "" + ".*");
-            var filter = name != null ? builder.Regex(f => f.Name, $".*{name}.*") : builder.Regex(f => f.Name, ".*");
+            var filter = name != null ? builder.Regex(f => f.Name, $".*(?i){name}(?-i).*") : builder.Regex(f => f.Name, ".*");
             filter &= format != null ? builder.Regex(f => f.Format, format) : builder.Regex(f => f.Format, ".*");
 
             var results = await collection.FindAsync(filter);
@@ -93,12 +93,14 @@ namespace DTC.DataAccess {
             var liked = result.LikedUsernames.Contains(Username);
             if(liked) {
                 result.LikedUsernames.Remove(Username);
-                var update = Builders<Deck>.Update.Inc(f=> f.Likes, -1);
+                var update = Builders<Deck>.Update.Inc(f=> f.Likes, -1)
+                                                  .Set(f => f.LikedUsernames, result.LikedUsernames);
                 collection.UpdateOne(filter, update);
             }
             else {
                 result.LikedUsernames.Add(Username);
-                var update = Builders<Deck>.Update.Inc(f => f.Likes, 1);
+                var update = Builders<Deck>.Update.Inc(f => f.Likes, 1)
+                                                  .AddToSet(f => f.LikedUsernames, Username);
                 collection.UpdateOne(filter, update);
             }
 

@@ -8,6 +8,7 @@ using MongoDB.Bson;
 
 namespace DTC.App.Controller {
     [ApiController]
+    
     public class DeckListController : ControllerBase
     {
         private IDeckService deckService;
@@ -34,7 +35,7 @@ namespace DTC.App.Controller {
         [HttpDelete]
         [Authorize]
         [Route("deck/{deckId}")]
-        public void DeleteDeck([FromRoute] Guid deckId, [FromHeader] Guid userId) {
+        public void DeleteDeck([FromRoute] Guid deckId) {
             deckService.DeleteDeck(deckId, (User)ControllerContext.HttpContext.Items["User"]);
         }
 
