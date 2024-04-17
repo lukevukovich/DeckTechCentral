@@ -11,14 +11,15 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
   margin-top: 0px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .auth {
-  z-index: 0;
+  z-index: 1;
   display: flex;
   position: relative;
   top: 150px;
+  height: 400px;
   width: 100%;
   justify-content: center;
 }
@@ -57,7 +58,6 @@
 }
 
 .auth-buttons button {
-  background-color: rgb(121, 27, 27);
   margin-left: 0px;
   margin-right: 0px;
   width: 177px;
@@ -90,10 +90,47 @@
   background-color: rgb(163, 54, 54);
 }
 
+.button-selected {
+  background-color: rgb(121, 27, 27);
+  outline: none;
+}
+
+.button-not-selected {
+  background-color: transparent;
+  outline: 2px solid rgb(148, 45, 45);
+  outline-offset: -2px;
+}
+
+.your-decks-text {
+  display: flex;
+  height: 40px;
+  width: 99%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 190px;
+  margin-bottom: 15px;
+  margin-left: 14px;
+}
+
+.your-decks-text text {
+  text-wrap: nowrap;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 50px;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to left,
+    rgb(129, 29, 29),
+    rgb(255, 106, 61)
+  );
+  -webkit-background-clip: text; /* For WebKit browsers */
+}
+
 #deck-pane-pf {
   position: relative;
-  margin-top: 160px;
   z-index: 0;
+  border-top:  5px solid rgb(56, 5, 5);
 }
 
 @media (max-width: 650px) {
@@ -102,10 +139,18 @@
   }
 
   .auth {
-    top: 100px;
+    top: 110px;
   }
 
   .auth-input input {
     font-size: inherit;
+  }
+
+  .your-decks-text {
+    margin-top: 160px;
+  }
+
+  #deck-pane-pf {
+    margin-top: 0px;
   }
 }

@@ -41,6 +41,8 @@ export default function Profile() {
   //Use state for user decks
   const [decks, setDecks] = useState([]);
 
+  const [loginTab, setLoginTab] = useState("login");
+
   //Check to see if user is logged in
   async function checkLogin() {
     const s = getLoginStatus();
@@ -51,6 +53,29 @@ export default function Profile() {
       setUserPopup("pf");
     }
   }
+
+  useEffect(() => {
+    const username = document.getElementById("username");
+
+    let button;
+    let notButton;
+
+    if (loginTab == "login") {
+      username.style.display = "none";
+      button = document.getElementById("login");
+      notButton = document.getElementById("signup");
+    } else {
+      username.style.display = "block";
+      button = document.getElementById("signup");
+      notButton = document.getElementById("login");
+    }
+
+    button.classList.remove("button-not-selected");
+    button.classList.add("button-selected");
+
+    notButton.classList.remove("button-selected");
+    notButton.classList.add("button-not-selected");
+  }, [loginTab]);
 
   //Sign up
   async function signup() {
@@ -82,22 +107,26 @@ export default function Profile() {
       const data = await response.text();
 
       if (!data.includes("message")) {
-        alert("User '" + username + "' created.");
+        alert("User '" + username + "' created. Welcome to DeckTechCentral!");
+        setLoginTab("login");
       } else {
-        alert("Username '" + username + "' already in use.");
+        alert("Username '" + username + "' already in use. Please try again.");
+        setLoginTab("signup");
       }
     } else {
       alert(
-        "Username:\nminumum: " +
+        "Username:\n    Minumum: " +
           minUser +
-          "\nmaximum: " +
+          "\n    Maximum: " +
           maxUser +
-          "\n\nEmail & Password:\nminimum: " +
+          "\n    No spaces" +
+          "\n\nEmail & Password:\n    Minimum: " +
           minEmailPassword +
-          "\nmaximum: " +
+          "\n    Maximum: " +
           maxEmailPassword +
-          "\n\nNo spaces"
+          "\n    No spaces"
       );
+      setLoginTab("signup");
     }
 
     setUsername("");
@@ -134,26 +163,25 @@ export default function Profile() {
 
         if ("message" in token) {
           alert("Login failed. Please try again.");
+          setLoginTab("login");
         } else {
           createTokenAndStoreInCookie(token);
           setLoggedIn(true);
-          alert("Login successful.");
+          alert("Login successful. Welcome back, " + token.username + "!");
         }
       } catch {
         alert("Login failed. Please try again.");
+        setLoginTab("login");
       }
     } else {
       alert(
-        "Username:\nminumum: " +
-          minUser +
-          "\nmaximum: " +
-          maxUser +
-          "\n\nEmail & Password:\nminimum: " +
+        "Email & Password:\n    Minimum: " +
           minEmailPassword +
-          "\nmaximum: " +
+          "\n    Maximum: " +
           maxEmailPassword +
-          "\n\nNo spaces"
+          "\n    No spaces"
       );
+      setLoginTab("login");
     }
 
     setUsername("");
@@ -197,35 +225,40 @@ export default function Profile() {
   useEffect(() => {
     let hide;
     let show;
-    if (loggedIn) {
-      const user = getUserInfoFromToken();
+    const username = document.getElementById("username");
+    const auth = document.getElementById("auth");
+    const deckText = document.getElementById("your-decks-text");
 
+    if (loggedIn) {
+      deckText.style.display = "flex";
+
+      const user = getUserInfoFromToken();
       getUserDecks(user.username);
 
       hide = ["email", "password", "login", "signup"];
-      show = ["logout"];
-
-      const username = document.getElementById("username");
-      const auth = document.getElementById("auth");
+      show = ["logout", "username"];
 
       username.readOnly = true;
       username.style.textAlign = "center";
       username.style.marginBottom = "-20px";
+      username.style.backgroundColor = "transparent";
       auth.style.height = "140px";
-      setUsername(user.username);
+      document.getElementById("deck-pane-pf").style.display = "grid";
+      setUsername("Hello, " + user.username);
     } else {
+      deckText.style.display = "none";
+
       setDecks([]);
 
-      hide = ["logout"];
+      hide = ["logout", "username"];
       show = ["email", "password", "login", "signup"];
-
-      const username = document.getElementById("username");
-      const auth = document.getElementById("auth");
 
       username.readOnly = false;
       username.style.textAlign = "start";
       username.style.marginBottom = "0px";
+      username.style.backgroundColor = "rgb(121, 27, 27)";
       auth.style.height = "235px";
+      document.getElementById("deck-pane-pf").style.display = "none";
       setUsername("");
     }
 
@@ -302,13 +335,17 @@ export default function Profile() {
               onKeyDown={(e) => setPassword(e.target.value)}
             ></input>
           </div>
-          <div className="auth-buttons">
+          <div className="auth-buttons" id="auth-buttons">
             <button
               id="login"
               className="login"
               onClick={() => {
                 clearTooltipTimeout();
-                login();
+                if (loginTab == "login") {
+                  login();
+                } else {
+                  setLoginTab("login");
+                }
               }}
               onMouseEnter={(e) => {
                 showTooltip("pf", e, "Log in to DeckTechCentral");
@@ -322,7 +359,11 @@ export default function Profile() {
               className="signup"
               onClick={() => {
                 clearTooltipTimeout();
-                signup();
+                if (loginTab == "signup") {
+                  signup();
+                } else {
+                  setLoginTab("signup");
+                }
               }}
               onMouseEnter={(e) => {
                 showTooltip("pf", e, "Sign up for DeckTechCentral");
@@ -349,6 +390,9 @@ export default function Profile() {
             </button>
           </div>
         </div>
+      </div>
+      <div className="your-decks-text" id="your-decks-text">
+        <text>Your Decks.</text>
       </div>
       <DeckPane id="pf" decks={decks}></DeckPane>
     </div>

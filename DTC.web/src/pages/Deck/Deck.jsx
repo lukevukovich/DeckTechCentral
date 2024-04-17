@@ -15,6 +15,7 @@ import {
   faThumbsUp,
   faEye,
   faFloppyDisk,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faThumbsUp as faThumbsUpRegular,
@@ -48,7 +49,7 @@ export default function Deck() {
   ];
 
   //Get list of elements that are shown during edit
-  const showOnEdit = ["deck-view-add-card"];
+  const showOnEdit = ["deck-view-add-card", "delete-button"];
 
   //Get list of elements that are hidden during edit
   const hideOnEdit = ["like-button"];
@@ -299,6 +300,7 @@ export default function Deck() {
               `http://localhost:5272/deck/${encodeURIComponent(deckId)}`
             );
             const deck = await response.json();
+            console.log(deck);
 
             if ("status" in deck) {
               navigate("/*");
@@ -333,6 +335,7 @@ export default function Deck() {
                     "block";
                 }
               }
+              setLike(deck.liked);
               setDeck(deck);
             }
           } catch {
@@ -475,6 +478,49 @@ export default function Deck() {
     );
   }
 
+  async function deleteDeck() {
+    if (query.get("id") == null) {
+      navigate("/");
+      alert("Deck scrapped.");
+    } else {
+      if (deck.id == null) {
+        deck.id = query.get("id");
+      }
+
+      const token = getUserInfoFromToken().token;
+
+      await fetch(`http://localhost:5272/deck/${encodeURIComponent(deck.id)}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+      navigate("/");
+      alert("Deck deleted.");
+    }
+  }
+
+  async function likeDeck() {
+    const token = getUserInfoFromToken().token;
+
+    const response = await fetch(
+      `http://localhost:5272/deck/${encodeURIComponent(deck.id)}/like`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+
+    setLike(!like);
+
+    const liked = await response.json();
+    console.log(liked);
+  }
+
   return (
     <div id="dv-all">
       <DTCHeader
@@ -516,7 +562,7 @@ export default function Deck() {
                 className="like-button"
                 onClick={() => {
                   clearTooltipTimeout();
-                  setLike(!like);
+                  likeDeck();
                 }}
                 onMouseEnter={(e) => showTooltip("dv", e, "Like deck")}
                 onMouseLeave={() => hideTooltip("dv")}
@@ -539,6 +585,18 @@ export default function Deck() {
                 onMouseLeave={() => hideTooltip("dv")}
               >
                 <FontAwesomeIcon icon={editIcon} />
+              </button>
+              <button
+                id="delete-button"
+                className="delete-button"
+                onClick={() => {
+                  clearTooltipTimeout();
+                  deleteDeck();
+                }}
+                onMouseEnter={(e) => showTooltip("dv", e, "Delete/Scrap deck")}
+                onMouseLeave={() => hideTooltip("dv")}
+              >
+                <FontAwesomeIcon icon={faTrashCan} />
               </button>
             </div>
             <div

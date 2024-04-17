@@ -78,7 +78,7 @@
   min-width: 35px;
   min-height: 35px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  margin-left: 18px;
+  margin-left: 16px;
   margin-top: 4px;
   padding-right: 0px;
   padding-left: 2px;
@@ -90,6 +90,32 @@
 
 .edit-button:active {
   background-color: #646464;
+}
+
+.delete-button {
+  display: none;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: rgb(190, 15, 15);
+  width: 35px;
+  height: 35px;
+  max-width: 35px;
+  max-height: 35px;
+  min-width: 35px;
+  min-height: 35px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  margin-left: 10px;
+  margin-top: 4px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.delete-button:hover {
+  background-color: rgb(214, 59, 59);
+}
+
+.delete-button:active {
+  background-color: rgb(230, 75, 75);
 }
 
 .deck-view-format {
@@ -270,7 +296,19 @@
 
   .edit-button {
     margin-top: 1px;
-    margin-left: 15px;
+    margin-left: 12px;
+    font-size: 16px;
+    width: 28px;
+    height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .delete-button {
+    margin-top: 1px;
+    margin-left: 6px;
     font-size: 16px;
     width: 28px;
     height: 28px;
