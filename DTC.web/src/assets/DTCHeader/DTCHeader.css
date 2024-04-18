@@ -58,6 +58,7 @@ img.backdrop {
 }
 
 .num-results {
+  font-family: Arial;
   color: rgb(29, 14, 41);
   font-size: 20px;
   text-wrap: nowrap;
