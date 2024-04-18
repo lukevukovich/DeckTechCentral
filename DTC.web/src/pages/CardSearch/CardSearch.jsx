@@ -8,6 +8,7 @@ import CardModal from "../../assets/CardModal/CardModal";
 import Modal from "react-modal";
 import CardPane from "../../assets/CardPane/CardPane";
 import useQuery from "../../assets/useQuery";
+import { baseUrl } from "../../App";
 
 Modal.setAppElement("#root");
 
@@ -92,22 +93,35 @@ export default function CardSearch() {
     const removeCards = [];
 
     for (let i = 0; i < jsonData.data.length; i++) {
-      try {
-        // Check if card_faces is present
-        if (jsonData.data[i].card_faces == null) {
-          // Test is flavor_text is present
-          if (jsonData.data[i].flavor_text == null) {
-            jsonData.data[i].flavor_text = "";
-          }
-          images.push(jsonData.data[i].image_uris[2]);
-          jsonData.data[i].image_uris = {
-            large: jsonData.data[i].image_uris[2],
-          };
-        } else {
-          removeCards.push(i);
+      // Check if card_faces is present
+      if (jsonData.data[i].card_faces == null) {
+        // Test is flavor_text is present
+        if (jsonData.data[i].flavor_text == null) {
+          jsonData.data[i].flavor_text = "";
         }
-      } catch (error) {
-        removeCards.push(i);
+        images.push(jsonData.data[i].image_uris[2]);
+        jsonData.data[i].image_uris = {
+          large: jsonData.data[i].image_uris[2],
+        };
+      } else {
+        jsonData.data[i].name = jsonData.data[i].card_faces[0].name;
+        jsonData.data[i].image_uris = {
+          large: jsonData.data[i].card_faces[0].image_uris[2],
+        };
+        jsonData.data[i].type_line = jsonData.data[i].card_faces[0].type_line;
+        jsonData.data[i].mana_cost = jsonData.data[i].card_faces[0].mana_cost;
+        jsonData.data[i].oracle_text =
+          jsonData.data[i].card_faces[0].oracle_text;
+        if (jsonData.data[i].card_faces[0].flavor_text == null) {
+          jsonData.data[i].flavor_text = "";
+        } else {
+          jsonData.data[i].flavor_text =
+            jsonData.data[i].card_faces[0].flavor_text;
+        }
+
+        images.push(jsonData.data[i].card_faces[0].image_uris[2]);
+
+        console.log(jsonData.data[i]);
       }
     }
 
@@ -132,7 +146,7 @@ export default function CardSearch() {
     try {
       //Make request
       const response = await fetch(
-        `http://localhost:5272/card/search?q=${encodeURIComponent(cardName)}`
+        baseUrl + `/card/search?q=${encodeURIComponent(cardName)}`
       );
       const rawData = await response.json();
       const jsonData = {

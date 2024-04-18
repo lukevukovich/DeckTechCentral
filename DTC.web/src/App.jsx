@@ -15,6 +15,8 @@ import Deck from "./pages/Deck/Deck";
 import NotFound from "./pages/NotFound/NotFound";
 import "./App.css";
 
+export const baseUrl = "http://localhost:5272";
+
 // router and routes
 const router = createBrowserRouter(
   createRoutesFromElements(

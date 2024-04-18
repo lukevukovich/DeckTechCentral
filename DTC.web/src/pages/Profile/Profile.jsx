@@ -5,7 +5,6 @@ import {
   getLoginStatus,
   setUserPopup,
   createTokenAndStoreInCookie,
-  deleteToken,
   getUserInfoFromToken,
 } from "../../auth/User";
 import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
@@ -16,6 +15,7 @@ import {
   showTooltip,
 } from "../../assets/Tooltip";
 import DeckPane from "../../assets/DeckPane/DeckPane";
+import { baseUrl } from "../../App";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ export default function Profile() {
         password: password,
       };
 
-      const response = await fetch("http://localhost:5272/user", {
+      const response = await fetch(baseUrl + "/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export default function Profile() {
       };
 
       try {
-        const response = await fetch("http://localhost:5272/user/login", {
+        const response = await fetch(baseUrl + "/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -191,6 +191,12 @@ export default function Profile() {
     setUserPopup("pf");
   }
 
+  //Manually delete token, useful for logout
+  function deleteToken() {
+    document.cookie =
+      "userToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+
   //Logout from signed in user
   function logout() {
     deleteToken();
@@ -209,7 +215,7 @@ export default function Profile() {
   async function getUserDecks(username) {
     //Make request
     const response = await fetch(
-      `http://localhost:5272/deck/users/${encodeURIComponent(username)}`,
+      baseUrl + `/deck/users/${encodeURIComponent(username)}`,
       {
         method: "GET", // or 'POST', 'PUT', etc.
         headers: {

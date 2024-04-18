@@ -6,6 +6,7 @@ import { maxSearchLength } from "../../assets/DTCHeader/DTCHeader";
 import DTCHeader from "../../assets/DTCHeader/DTCHeader";
 import DeckPane from "../../assets/DeckPane/DeckPane";
 import useQuery from "../../assets/useQuery";
+import { baseUrl } from "../../App";
 
 export default function DeckSearch() {
   //Set working variables
@@ -75,7 +76,7 @@ export default function DeckSearch() {
     try {
       //Make request
       const response = await fetch(
-        `http://localhost:5272/deck/search?name=${encodeURIComponent(deckName)}`
+        baseUrl + `/deck/search?name=${encodeURIComponent(deckName)}`
       );
       const rawData = await response.json();
       const decks = rawData.length;

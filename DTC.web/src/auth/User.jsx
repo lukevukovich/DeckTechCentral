@@ -23,11 +23,6 @@ export function createTokenAndStoreInCookie(userInfo) {
   document.cookie = `userToken=${encodedToken};expires=${expires.toUTCString()};path=/`;
 }
 
-//Manually delete token, useful for logout
-export function deleteToken() {
-  document.cookie = "userToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-
 //Determine if user is logged in or not based on token existence
 export function getLoginStatus() {
   const name = "userToken=";
