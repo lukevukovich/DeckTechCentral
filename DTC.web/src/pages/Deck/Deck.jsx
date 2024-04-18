@@ -29,6 +29,7 @@ import {
   clearTooltipTimeout,
 } from "../../assets/Tooltip";
 import useQuery from "../../assets/useQuery";
+import { baseUrl } from "../../App";
 
 export default function Deck() {
   const navigate = useNavigate();
@@ -304,12 +305,11 @@ export default function Deck() {
 
           try {
             const response = await fetch(
-              `http://localhost:5272/deck/${encodeURIComponent(deckId)}`,
+              baseUrl + `/deck/${encodeURIComponent(deckId)}`,
               {
                 method: "GET",
                 headers: {
                   "Content-Type": "application/json",
-                  Authorization: userInfo.token,
                 },
               }
             );
@@ -471,7 +471,7 @@ export default function Deck() {
       const cookie = getUserInfoFromToken();
       const token = cookie.token;
 
-      const response = await fetch("http://localhost:5272/deck", {
+      const response = await fetch(baseUrl + "/deck", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -521,17 +521,14 @@ export default function Deck() {
       const cookie = getUserInfoFromToken();
       const token = cookie.token;
 
-      await fetch(
-        `http://localhost:5272/deck/${encodeURIComponent(saveDeck.id)}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-          body: JSON.stringify(saveDeck),
-        }
-      );
+      await fetch(baseUrl + `/deck/${encodeURIComponent(saveDeck.id)}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(saveDeck),
+      });
 
       setEdit(!edit);
     } else {
@@ -550,7 +547,7 @@ export default function Deck() {
 
       const token = getUserInfoFromToken().token;
 
-      await fetch(`http://localhost:5272/deck/${encodeURIComponent(deck.id)}`, {
+      await fetch(baseUrl + `/deck/${encodeURIComponent(deck.id)}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -566,7 +563,7 @@ export default function Deck() {
     const token = getUserInfoFromToken().token;
 
     const response = await fetch(
-      `http://localhost:5272/deck/${encodeURIComponent(deckId)}/like`,
+      baseUrl + `/deck/${encodeURIComponent(deckId)}/like`,
       {
         method: "PATCH",
         headers: {
