@@ -3,7 +3,7 @@
   margin-left: auto; /* Center the grid horizontally */
   margin-right: auto;
   padding: 20px;
-  padding-right: 8px;
+  padding-right: 4px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;

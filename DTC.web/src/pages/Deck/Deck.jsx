@@ -82,6 +82,13 @@ export default function Deck() {
 
   const [description, setDescription] = useState(deck.description);
 
+  const nameMin = 1;
+  const nameMax = 24;
+  const formatMin = 1;
+  const formatMax = 20;
+  const descMin = 0;
+  const descMax = 200;
+
   //Check for Google login, set popup
   function checkLogin() {
     const s = getLoginStatus();
@@ -396,92 +403,140 @@ export default function Deck() {
     setInitialTabs();
   }, []);
 
-  async function saveNewDeck() {
-    const { likes, views, editors, ...saveDeck } = deck;
+  function validInfo() {
+    const nameText = document.getElementById("deck-view-name").textContent;
+    const formatText = document.getElementById("deck-view-format").textContent;
+    const descText = document.getElementById("deck-view-desc").textContent;
 
-    const boardList = ["mainboard", "sideboard", "considering"];
-
-    for (let i = 0; i < boardList.length; i++) {
-      saveDeck[boardList[i]] = [];
-      for (let j = 0; j < deck[boardList[i]].length; j++) {
-        const amount = deck[boardList[i]][j].amount;
-        const id = deck[boardList[i]][j].CardInfo.id;
-
-        let isCommander;
-        if (deck[boardList[i]][j].CardInfo.type_line == "Commander") {
-          isCommander = true;
-        } else {
-          isCommander = false;
-        }
-
-        const saveCard = {
-          amount: amount,
-          card_id: id,
-          is_commander: isCommander,
-        };
-
-        saveDeck[boardList[i]].push(saveCard);
-      }
+    if (
+      nameText.length <= nameMax &&
+      nameText.length >= nameMin &&
+      formatText.length <= formatMax &&
+      formatText.length >= formatMin &&
+      descText.length <= descMax &&
+      descText.length >= descMin
+    ) {
+      return true;
+    } else {
+      return false;
     }
-
-    const cookie = getUserInfoFromToken();
-    const token = cookie.token;
-
-    const response = await fetch("http://localhost:5272/deck", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(saveDeck),
-    });
-
-    const d = await response.json();
-    navigate(`/deck?id=${d.id}`);
   }
 
-  async function saveDeck() {
-    const { likes, views, editors, ...saveDeck } = deck;
+  function alertInvalidInfo() {
+    alert(
+      "Deck Name:\n    Minimum: " +
+        nameMin +
+        "\n    Maximum: " +
+        nameMax +
+        "\nFormat:\n    Minimum: " +
+        formatMin +
+        "\n    Maximum: " +
+        formatMax +
+        "\nDescription:\n    Minimum: " +
+        descMin +
+        "\n    Maximum: " +
+        descMax
+    );
+  }
 
-    const boardList = ["mainboard", "sideboard", "considering"];
+  async function saveNewDeck() {
+    if (validInfo()) {
+      const { likes, views, editors, ...saveDeck } = deck;
 
-    for (let i = 0; i < boardList.length; i++) {
-      saveDeck[boardList[i]] = [];
-      for (let j = 0; j < deck[boardList[i]].length; j++) {
-        const amount = deck[boardList[i]][j].amount;
-        const id = deck[boardList[i]][j].CardInfo.id;
+      const boardList = ["mainboard", "sideboard", "considering"];
 
-        let isCommander;
-        if (deck[boardList[i]][j].CardInfo.type_line == "Commander") {
-          isCommander = true;
-        } else {
-          isCommander = false;
+      for (let i = 0; i < boardList.length; i++) {
+        saveDeck[boardList[i]] = [];
+        for (let j = 0; j < deck[boardList[i]].length; j++) {
+          const amount = deck[boardList[i]][j].amount;
+          const id = deck[boardList[i]][j].CardInfo.id;
+
+          let isCommander;
+          if (deck[boardList[i]][j].CardInfo.type_line == "Commander") {
+            isCommander = true;
+          } else {
+            isCommander = false;
+          }
+
+          const saveCard = {
+            amount: amount,
+            card_id: id,
+            is_commander: isCommander,
+          };
+
+          saveDeck[boardList[i]].push(saveCard);
         }
-
-        const saveCard = {
-          amount: amount,
-          card_id: id,
-          is_commander: isCommander,
-        };
-
-        saveDeck[boardList[i]].push(saveCard);
       }
-    }
 
-    const cookie = getUserInfoFromToken();
-    const token = cookie.token;
+      const cookie = getUserInfoFromToken();
+      const token = cookie.token;
 
-    await fetch(
-      `http://localhost:5272/deck/${encodeURIComponent(saveDeck.id)}`,
-      {
-        method: "PUT",
+      const response = await fetch("http://localhost:5272/deck", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
         body: JSON.stringify(saveDeck),
+      });
+
+      const d = await response.json();
+      navigate(`/deck?id=${d.id}`);
+
+      setEdit(!edit);
+    } else {
+      alertInvalidInfo();
+    }
+  }
+
+  async function saveDeck() {
+    if (validInfo()) {
+      const { likes, views, editors, ...saveDeck } = deck;
+
+      const boardList = ["mainboard", "sideboard", "considering"];
+
+      for (let i = 0; i < boardList.length; i++) {
+        saveDeck[boardList[i]] = [];
+        for (let j = 0; j < deck[boardList[i]].length; j++) {
+          const amount = deck[boardList[i]][j].amount;
+          const id = deck[boardList[i]][j].CardInfo.id;
+
+          let isCommander;
+          if (deck[boardList[i]][j].CardInfo.type_line == "Commander") {
+            isCommander = true;
+          } else {
+            isCommander = false;
+          }
+
+          const saveCard = {
+            amount: amount,
+            card_id: id,
+            is_commander: isCommander,
+          };
+
+          saveDeck[boardList[i]].push(saveCard);
+        }
       }
-    );
+
+      const cookie = getUserInfoFromToken();
+      const token = cookie.token;
+
+      await fetch(
+        `http://localhost:5272/deck/${encodeURIComponent(saveDeck.id)}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify(saveDeck),
+        }
+      );
+
+      setEdit(!edit);
+    } else {
+      alertInvalidInfo();
+    }
   }
 
   async function deleteDeck() {
@@ -562,6 +617,7 @@ export default function Deck() {
                 onMouseLeave={() => hideTooltip("dv")}
                 onBlur={(e) => {
                   setName(e.currentTarget.innerText);
+                  e.currentTarget.style.fontFamily = "Arial";
                 }}
               >
                 {name}
@@ -588,8 +644,9 @@ export default function Deck() {
                     } else {
                       saveDeck();
                     }
+                  } else {
+                    setEdit(!edit);
                   }
-                  setEdit(!edit);
                 }}
                 onMouseEnter={(e) => showTooltip("dv", e, editTooltip)}
                 onMouseLeave={() => hideTooltip("dv")}
@@ -616,6 +673,8 @@ export default function Deck() {
               onMouseLeave={() => hideTooltip("dv")}
               onBlur={(e) => {
                 setFormat(e.currentTarget.innerText);
+                e.currentTarget.style.fontFamily = "Arial";
+                e.currentTarget.style.color = "rgb(90, 90, 90)";
               }}
             >
               <text> {format}</text>
@@ -627,6 +686,8 @@ export default function Deck() {
               onMouseLeave={() => hideTooltip("dv")}
               onBlur={(e) => {
                 setDescription(e.currentTarget.innerText);
+                e.currentTarget.style.fontFamily = "Arial";
+                e.currentTarget.style.color = "rgb(66, 66, 66)";
               }}
             >
               <text>{description}</text>

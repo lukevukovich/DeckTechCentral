@@ -7,7 +7,7 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import {
   showTooltip,
@@ -32,6 +32,8 @@ export default function DTCHeader({
   clearSearch,
   navigate,
 }) {
+  const location = useLocation();
+
   window.onerror = function () {
     navigate("/*");
   };
@@ -59,7 +61,11 @@ export default function DTCHeader({
   async function handleCreateDeckButton() {
     const status = getLoginStatus();
     if (status) {
+      const oldPath = location.pathname;
       navigate("/deck");
+      if (oldPath.includes("/deck")) {
+        window.location.reload();
+      }
     } else {
       navigate("/profile");
       alert("Must be logged in to create a deck.");
