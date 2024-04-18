@@ -116,7 +116,7 @@ export default function Profile() {
       }
     } else {
       alert(
-        "Username:\n    Minumum: " +
+        "Username:\n    Minimum: " +
           minUser +
           "\n    Maximum: " +
           maxUser +
@@ -314,7 +314,7 @@ export default function Profile() {
               placeholder="Username"
               autoComplete="off"
               onChange={(e) => setUsername(e.target.value)}
-              onKeyDown={(e) => setUsername(e.target.value0)}
+              onKeyDown={(e) => setUsername(e.target.value)}
             ></input>
             <input
               id="email"
