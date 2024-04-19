@@ -58,21 +58,38 @@ export default function DeckSection({
 
   //Show card modal based on selected card
   function showCardDetails(card) {
-    let image;
-    if ("large" in card.image_uris) {
-      image = card.image_uris.large;
+    let data;
+    if ("name_2" in card) {
+      data = {
+        name: card.name,
+        name_2: card.name_2,
+        image_uris: {
+          large: card.image_uris.large,
+          large_2: card.image_uris.large_2,
+        },
+        type_line: card.type_line,
+        type_line_2: card.type_line_2,
+        original_type_line: card.original_type_line,
+        oracle_text: card.oracle_text,
+        oracle_text_2: card.oracle_text_2,
+        mana_cost: card.mana_cost,
+        mana_cost_2: card.mana_cost_2,
+        flavor_text: card.flavor_text,
+        flavor_text_2: card.flavor_text_2,
+      };
     } else {
-      image = card.image_uris[2];
+      data = {
+        name: card.name,
+        image_uris: {
+          large: card.image_uris.large,
+        },
+        type_line: card.type_line,
+        original_type_line: card.original_type_line,
+        oracle_text: card.oracle_text,
+        mana_cost: card.mana_cost,
+        flavor_text: card.flavor_text,
+      };
     }
-    const data = {
-      name: card.name,
-      image_uris: { large: image },
-      type_line: card.type_line,
-      original_type_line: card.original_type_line,
-      oracle_text: card.oracle_text,
-      mana_cost: card.mana_cost,
-      flavor_text: card.flavor_text,
-    };
 
     setSelectedCard(data);
 

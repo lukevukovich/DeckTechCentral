@@ -245,20 +245,49 @@ export default function Deck() {
         card.type_line = card.type_line.split("—")[0].slice(0, -1);
       }
 
-      const newCard = {
-        amount: number,
-        CardInfo: {
-          name: card.name,
-          id: card.id,
-          mana_cost: card.mana_cost,
-          cmc: card.cmc,
-          type_line: card.type_line,
-          original_type_line: original_type_line,
-          oracle_text: card.oracle_text,
-          flavor_text: card.flavor_text,
-          image_uris: { large: card.image_uris.large },
-        },
-      };
+      let newCard;
+
+      console.log(card);
+
+      if (!"name_2" in card) {
+        newCard = {
+          amount: number,
+          CardInfo: {
+            name: card.name,
+            id: card.id,
+            mana_cost: card.mana_cost,
+            cmc: card.cmc,
+            type_line: card.type_line,
+            original_type_line: original_type_line,
+            oracle_text: card.oracle_text,
+            flavor_text: card.flavor_text,
+            image_uris: { large: card.image_uris.large },
+          },
+        };
+      } else {
+        newCard = {
+          amount: number,
+          CardInfo: {
+            name: card.name,
+            name_2: card.name_2,
+            id: card.id,
+            mana_cost: card.mana_cost,
+            mana_cost_2: card.mana_cost_2,
+            cmc: card.cmc,
+            type_line: card.type_line,
+            type_line_2: card.type_line_2,
+            original_type_line: original_type_line,
+            oracle_text: card.oracle_text,
+            oracle_text_2: card.oracle_text_2,
+            flavor_text: card.flavor_text,
+            flavor_text_2: card.flavor_text_2,
+            image_uris: {
+              large: card.image_uris.large,
+              large_2: card.image_uris.large_2,
+            },
+          },
+        };
+      }
 
       //Add card to board
       newDeck[board].push(newCard);
@@ -336,23 +365,65 @@ export default function Deck() {
               for (let i = 0; i < boardList.length; i++) {
                 for (let j = 0; j < deck[boardList[i]].length; j++) {
                   const card = deck[boardList[i]][j];
-                  card.CardInfo.original_type_line = card.CardInfo.type_line;
+                  card.CardInfo.faces = card.CardInfo.card_faces;
+                  card.CardInfo.card_faces = null;
 
                   const commander = card.is_commander;
+
+                  if (card.CardInfo.faces != null) {
+                    card.CardInfo.original_type_line =
+                      card.CardInfo.faces[0].type_line;
+
+                    //Face 1
+                    card.CardInfo.name = card.CardInfo.faces[0].name;
+                    card.CardInfo.image_uris = {
+                      large: card.CardInfo.faces[0].image_uris[2],
+                    };
+                    card.CardInfo.type_line = card.CardInfo.faces[0].type_line;
+                    card.CardInfo.mana_cost = card.CardInfo.faces[0].mana_cost;
+                    card.CardInfo.oracle_text =
+                      card.CardInfo.faces[0].oracle_text;
+                    if (card.CardInfo.faces[0].flavor_text == null) {
+                      card.CardInfo.flavor_text = "";
+                    } else {
+                      card.CardInfo.flavor_text =
+                        card.CardInfo.faces[0].flavor_text;
+                    }
+
+                    //Face 2
+                    card.CardInfo.name_2 = card.CardInfo.faces[1].name;
+                    (card.CardInfo.image_uris.large_2 =
+                      card.CardInfo.faces[1].image_uris[2]),
+                      (card.CardInfo.type_line_2 =
+                        card.CardInfo.faces[1].type_line);
+                    card.CardInfo.mana_cost_2 =
+                      card.CardInfo.faces[1].mana_cost;
+                    card.CardInfo.oracle_text_2 =
+                      card.CardInfo.faces[1].oracle_text;
+                    if (card.CardInfo.faces[1].flavor_text == null) {
+                      card.CardInfo.flavor_text_2 = "";
+                    } else {
+                      card.CardInfo.flavor_text_2 =
+                        card.CardInfo.faces[1].flavor_text;
+                    }
+                  } else {
+                    card.CardInfo.original_type_line = card.CardInfo.type_line;
+                    if (card.CardInfo.flavor_text == null) {
+                      card.CardInfo.flavor_text = "";
+                    }
+                    card.CardInfo.image_uris = {
+                      large: card.CardInfo.image_uris[2],
+                    };
+                  }
 
                   if (commander) {
                     card.CardInfo.type_line = "Commander";
                   } else if (card.CardInfo.type_line.includes("—")) {
                     card.CardInfo.type_line = card.CardInfo.type_line
                       .split("—")[0]
+                      .split(" // ")[0]
                       .slice(0, -1);
                   }
-
-                  if (card.CardInfo.flavor_text == null) {
-                    card.CardInfo.flavor_text = "";
-                  }
-
-                  card.CardInfo.image_uris.large = card.CardInfo.image_uris[2];
                 }
               }
               if (loginStatus) {

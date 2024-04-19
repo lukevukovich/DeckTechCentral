@@ -13,9 +13,10 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
 
   const [faceButton, setFaceButton] = useState(null);
 
+  const [initialFace, setInitialFace] = useState(true);
+
   useEffect(() => {
     if (modal) {
-      console.log(selectedCard);
       if ("name_2" in selectedCard) {
         setFaceButton(true);
       } else {
@@ -40,6 +41,7 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
   //Close card modal
   function closeCardDetails() {
     document.body.style.overflow = "unset";
+    setInitialFace(true);
     setModal(false);
   }
 
@@ -89,7 +91,7 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
         <div id={`modal-header-${id}`} className="modal-header">
           <div id={`modal-heading-${id}`} className="modal-heading">
             <text id={`modal-heading-name-${id}`}>
-              {selectedCard.name
+              {(initialFace ? selectedCard.name : selectedCard.name_2)
                 .replace(new RegExp("//", "g"), "|")
                 .substring(0, 60)}
             </text>
@@ -97,7 +99,10 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
               id={`modal-heading-mana-${id}`}
               className="modal-heading-mana"
             >
-              {selectedCard.mana_cost.replace(new RegExp("//", "g"), "|")}
+              {(initialFace
+                ? selectedCard.mana_cost
+                : selectedCard.mana_cost_2
+              ).replace(new RegExp("//", "g"), "|")}
             </text>
           </div>
           <div className="modal-buttons">
@@ -118,7 +123,7 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
               className="modal-button-flip"
               onClick={() => {
                 clearTooltipTimeout();
-                //closeCardDetails();
+                setInitialFace(!initialFace);
               }}
               onMouseEnter={(e) => showTooltip(id, e, "Flip card")}
               onMouseLeave={() => hideTooltip(id)}
@@ -132,7 +137,11 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
             <img
               id={`modal-card-${id}`}
               className="card-image modal-card"
-              src={selectedCard.image_uris.large}
+              src={
+                initialFace
+                  ? selectedCard.image_uris.large
+                  : selectedCard.image_uris.large_2
+              }
             />
             <button
               id="modal-add-card"
@@ -149,15 +158,22 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
           </div>
           <div id={`modal-stats-${id}`} className="modal-stats">
             <text className="modal-type-line">
-              {(
-                selectedCard.original_type_line || selectedCard.type_line
+              {(initialFace
+                ? selectedCard.original_type_line || selectedCard.type_line
+                : selectedCard.type_line_2
               ).replace(new RegExp("//", "g"), "|")}
             </text>
             <text>
-              {selectedCard.oracle_text.replace(new RegExp("\n", "g"), "\n\n")}
+              {(initialFace
+                ? selectedCard.oracle_text
+                : selectedCard.oracle_text_2
+              ).replace(new RegExp("\n", "g"), "\n\n")}
             </text>
             <text>
-              {selectedCard.flavor_text.replace(new RegExp("\n", "g"), "\n\n")}
+              {(initialFace
+                ? selectedCard.flavor_text
+                : selectedCard.flavor_text_2
+              ).replace(new RegExp("\n", "g"), "\n\n")}
             </text>
           </div>
         </div>
