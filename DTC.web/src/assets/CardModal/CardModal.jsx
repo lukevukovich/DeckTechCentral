@@ -1,15 +1,41 @@
 import Modal from "react-modal";
-import { faMultiply } from "@fortawesome/free-solid-svg-icons";
+import { faMultiply, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CardModal.css";
 import { showTooltip, hideTooltip, clearTooltipTimeout } from "../Tooltip";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CardModal({ id, modal, setModal, selectedCard }) {
   const navigate = useNavigate();
 
   const deck = JSON.parse(sessionStorage.getItem("deck"));
+
+  const [faceButton, setFaceButton] = useState(null);
+
+  useEffect(() => {
+    if (modal) {
+      console.log(selectedCard);
+      if ("name_2" in selectedCard) {
+        setFaceButton(true);
+      } else {
+        setFaceButton(false);
+      }
+    } else {
+      setFaceButton(null);
+    }
+  }, [modal]);
+
+  useEffect(() => {
+    if (faceButton != null) {
+      const button = document.getElementById("modal-button-flip-" + id);
+      if (faceButton) {
+        button.style.display = "block";
+      } else {
+        button.style.display = "none";
+      }
+    }
+  }, [faceButton]);
 
   //Close card modal
   function closeCardDetails() {
@@ -74,18 +100,32 @@ export default function CardModal({ id, modal, setModal, selectedCard }) {
               {selectedCard.mana_cost.replace(new RegExp("//", "g"), "|")}
             </text>
           </div>
-          <button
-            id={`modal-button-${id}`}
-            className="modal-button"
-            onClick={() => {
-              clearTooltipTimeout();
-              closeCardDetails();
-            }}
-            onMouseEnter={(e) => showTooltip(id, e, "Close card details")}
-            onMouseLeave={() => hideTooltip(id)}
-          >
-            <FontAwesomeIcon icon={faMultiply} />
-          </button>
+          <div className="modal-buttons">
+            <button
+              id={`modal-button-${id}`}
+              className="modal-button"
+              onClick={() => {
+                clearTooltipTimeout();
+                closeCardDetails();
+              }}
+              onMouseEnter={(e) => showTooltip(id, e, "Close card details")}
+              onMouseLeave={() => hideTooltip(id)}
+            >
+              <FontAwesomeIcon icon={faMultiply} />
+            </button>
+            <button
+              id={`modal-button-flip-${id}`}
+              className="modal-button-flip"
+              onClick={() => {
+                clearTooltipTimeout();
+                //closeCardDetails();
+              }}
+              onMouseEnter={(e) => showTooltip(id, e, "Flip card")}
+              onMouseLeave={() => hideTooltip(id)}
+            >
+              <FontAwesomeIcon icon={faRepeat} />
+            </button>
+          </div>
         </div>
         <div id={`modal-info-${id}`} className="modal-info">
           <div className="card-and-button">

@@ -104,24 +104,46 @@ export default function CardSearch() {
           large: jsonData.data[i].image_uris[2],
         };
       } else {
-        jsonData.data[i].name = jsonData.data[i].card_faces[0].name;
-        jsonData.data[i].image_uris = {
-          large: jsonData.data[i].card_faces[0].image_uris[2],
-        };
-        jsonData.data[i].type_line = jsonData.data[i].card_faces[0].type_line;
-        jsonData.data[i].mana_cost = jsonData.data[i].card_faces[0].mana_cost;
-        jsonData.data[i].oracle_text =
-          jsonData.data[i].card_faces[0].oracle_text;
-        if (jsonData.data[i].card_faces[0].flavor_text == null) {
-          jsonData.data[i].flavor_text = "";
+        if (
+          jsonData.data[i].card_faces[0].image_uris.length > 0 &&
+          jsonData.data[i].card_faces[1].image_uris.length > 0
+        ) {
+          //Face 1
+          jsonData.data[i].name = jsonData.data[i].card_faces[0].name;
+          jsonData.data[i].image_uris = {
+            large: jsonData.data[i].card_faces[0].image_uris[2],
+          };
+          jsonData.data[i].type_line = jsonData.data[i].card_faces[0].type_line;
+          jsonData.data[i].mana_cost = jsonData.data[i].card_faces[0].mana_cost;
+          jsonData.data[i].oracle_text =
+            jsonData.data[i].card_faces[0].oracle_text;
+          if (jsonData.data[i].card_faces[0].flavor_text == null) {
+            jsonData.data[i].flavor_text = "";
+          } else {
+            jsonData.data[i].flavor_text =
+              jsonData.data[i].card_faces[0].flavor_text;
+          }
+          images.push(jsonData.data[i].card_faces[0].image_uris[2]);
+
+          //Face 2
+          jsonData.data[i].name_2 = jsonData.data[i].card_faces[1].name;
+          (jsonData.data[i].image_uris.large_2 =
+            jsonData.data[i].card_faces[1].image_uris[2]),
+            (jsonData.data[i].type_line_2 =
+              jsonData.data[i].card_faces[1].type_line);
+          jsonData.data[i].mana_cost_2 =
+            jsonData.data[i].card_faces[1].mana_cost;
+          jsonData.data[i].oracle_text_2 =
+            jsonData.data[i].card_faces[1].oracle_text;
+          if (jsonData.data[i].card_faces[1].flavor_text == null) {
+            jsonData.data[i].flavor_text_2 = "";
+          } else {
+            jsonData.data[i].flavor_text_2 =
+              jsonData.data[i].card_faces[1].flavor_text;
+          }
         } else {
-          jsonData.data[i].flavor_text =
-            jsonData.data[i].card_faces[0].flavor_text;
+          removeCards.push(jsonData.data[i]);
         }
-
-        images.push(jsonData.data[i].card_faces[0].image_uris[2]);
-
-        console.log(jsonData.data[i]);
       }
     }
 

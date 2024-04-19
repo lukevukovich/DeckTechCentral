@@ -303,15 +303,28 @@ export default function Deck() {
             document.getElementById("like-button").style.display = "block";
           }
 
+          let deckFetch;
+          if (loginStatus) {
+            deckFetch = {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: userInfo.token,
+              },
+            };
+          } else {
+            deckFetch = {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            };
+          }
+
           try {
             const response = await fetch(
               baseUrl + `/deck/${encodeURIComponent(deckId)}`,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
+              deckFetch
             );
             const deck = await response.json();
 
@@ -348,7 +361,9 @@ export default function Deck() {
                     "block";
                 }
               }
-              setLike(deck.liked);
+              if (loginStatus) {
+                setLike(deck.liked);
+              }
               setDeck(deck);
             }
           } catch {
