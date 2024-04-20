@@ -78,7 +78,6 @@
 .modal-card {
   width: 290px;
   margin-top: 95px;
-  margin-left: 5px;
 }
 
 .modal-card:hover {
@@ -142,7 +141,7 @@
     height: 202px;
     border-radius: 8px;
     margin-top: 50px;
-    margin-left: -5px;
+    margin-left: -7px;
   }
   .modal-stats {
     margin-top: 53px;

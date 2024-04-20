@@ -128,6 +128,7 @@ export default function CardSearch() {
             jsonData.data[i].flavor_text =
               jsonData.data[i].card_faces[0].flavor_text;
           }
+
           images.push(jsonData.data[i].card_faces[0].image_uris[2]);
 
           //Face 2
@@ -201,6 +202,17 @@ export default function CardSearch() {
   };
 
   useEffect(() => {
+    if (imageList.length > 0) {
+      for (let i = 0; i < imageList.length; i++) {
+        const flipCardButton = document.getElementById("card-image-flip-" + i);
+        if (data[i].card_faces != null) {
+          flipCardButton.style.opacity = "100%";
+        }
+      }
+    }
+  }, [imageList]);
+
+  useEffect(() => {
     const text = document.getElementById("cs-text");
     if (!displayText) {
       text.style.display = "none";
@@ -247,6 +259,7 @@ export default function CardSearch() {
       <CardPane
         id={"cs"}
         imageList={imageList}
+        data={data}
         showCardDetails={showCardDetails}
       ></CardPane>
       <div className="cs-text" id="cs-text">
