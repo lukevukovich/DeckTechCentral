@@ -95,14 +95,20 @@ export default function CardSearch() {
     for (let i = 0; i < jsonData.data.length; i++) {
       // Check if card_faces is present
       if (jsonData.data[i].card_faces == null) {
-        // Test is flavor_text is present
-        if (jsonData.data[i].flavor_text == null) {
-          jsonData.data[i].flavor_text = "";
+        if (jsonData.data[i].image_uris.length > 0) {
+          // Test is flavor_text is present
+          if (jsonData.data[i].flavor_text == null) {
+            jsonData.data[i].flavor_text = "";
+          }
+          jsonData.data[i].image_uris = {
+            large: jsonData.data[i].image_uris[2],
+          };
+          images.push(jsonData.data[i].image_uris.large);
+        } else {
+          console.log(jsonData.data[i]);
+          jsonData.data.splice(i, 1);
+          i--;
         }
-        images.push(jsonData.data[i].image_uris[2]);
-        jsonData.data[i].image_uris = {
-          large: jsonData.data[i].image_uris[2],
-        };
       } else {
         if (
           jsonData.data[i].card_faces[0].image_uris.length > 0 &&
@@ -142,14 +148,11 @@ export default function CardSearch() {
               jsonData.data[i].card_faces[1].flavor_text;
           }
         } else {
-          removeCards.push(jsonData.data[i]);
+          console.log(jsonData.data[i]);
+          jsonData.data.splice(i, 1);
+          i--;
         }
       }
-    }
-
-    // Remove cards without an image
-    for (let i = 0; i < removeCards.length; i++) {
-      jsonData.data.splice(removeCards[i], 1);
     }
 
     return {
