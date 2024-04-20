@@ -90,7 +90,6 @@ export default function CardSearch() {
   //Process card JSON result
   const processData = (jsonData) => {
     const images = [];
-    const removeCards = [];
 
     for (let i = 0; i < jsonData.data.length; i++) {
       // Check if card_faces is present
