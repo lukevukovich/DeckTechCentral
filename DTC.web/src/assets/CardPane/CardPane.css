@@ -12,6 +12,38 @@
   transition: 0.3s;
 }
 
+.card-image-div {
+  margin-top: -37px;
+}
+
+.card-image-flip {
+ opacity: 0%;
+  font-size: 16px;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(180, 28, 28, 0.75);
+  border-radius: 10px;
+  top: 305px;
+  left: 8px;
+  width: 35px;
+  height: 35px;
+  outline: 2px solid rgb(0, 0, 0);
+  outline-offset: -1px;
+  margin: 0px;
+  padding: 0px;
+  color: rgb(255, 255, 255, 0.75);
+}
+
+.card-hover :hover {
+  background-color: rgba(180, 28, 28);
+  color: rgb(255, 255, 255, 1);
+}
+
+.card-hover :active {
+  background-color: rgb(194, 46, 46);
+  color: rgb(255, 255, 255, 1);
+}
+
 @media (max-width: 1200px) {
   .card-pane {
     width: 940px;

@@ -247,9 +247,7 @@ export default function Deck() {
 
       let newCard;
 
-      console.log(card);
-
-      if (!"name_2" in card) {
+      if (card.name_2 == undefined) {
         newCard = {
           amount: number,
           CardInfo: {

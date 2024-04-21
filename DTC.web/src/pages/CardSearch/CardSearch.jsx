@@ -90,19 +90,24 @@ export default function CardSearch() {
   //Process card JSON result
   const processData = (jsonData) => {
     const images = [];
-    const removeCards = [];
 
     for (let i = 0; i < jsonData.data.length; i++) {
       // Check if card_faces is present
       if (jsonData.data[i].card_faces == null) {
-        // Test is flavor_text is present
-        if (jsonData.data[i].flavor_text == null) {
-          jsonData.data[i].flavor_text = "";
+        if (jsonData.data[i].image_uris.length > 0) {
+          // Test is flavor_text is present
+          if (jsonData.data[i].flavor_text == null) {
+            jsonData.data[i].flavor_text = "";
+          }
+          jsonData.data[i].image_uris = {
+            large: jsonData.data[i].image_uris[2],
+          };
+          images.push(jsonData.data[i].image_uris.large);
+        } else {
+          console.log(jsonData.data[i]);
+          jsonData.data.splice(i, 1);
+          i--;
         }
-        images.push(jsonData.data[i].image_uris[2]);
-        jsonData.data[i].image_uris = {
-          large: jsonData.data[i].image_uris[2],
-        };
       } else {
         if (
           jsonData.data[i].card_faces[0].image_uris.length > 0 &&
@@ -123,6 +128,7 @@ export default function CardSearch() {
             jsonData.data[i].flavor_text =
               jsonData.data[i].card_faces[0].flavor_text;
           }
+
           images.push(jsonData.data[i].card_faces[0].image_uris[2]);
 
           //Face 2
@@ -142,14 +148,11 @@ export default function CardSearch() {
               jsonData.data[i].card_faces[1].flavor_text;
           }
         } else {
-          removeCards.push(jsonData.data[i]);
+          console.log(jsonData.data[i]);
+          jsonData.data.splice(i, 1);
+          i--;
         }
       }
-    }
-
-    // Remove cards without an image
-    for (let i = 0; i < removeCards.length; i++) {
-      jsonData.data.splice(removeCards[i], 1);
     }
 
     return {
@@ -199,6 +202,17 @@ export default function CardSearch() {
   };
 
   useEffect(() => {
+    if (imageList.length > 0) {
+      for (let i = 0; i < imageList.length; i++) {
+        const flipCardButton = document.getElementById("card-image-flip-" + i);
+        if (data[i].card_faces != null) {
+          flipCardButton.style.opacity = "100%";
+        }
+      }
+    }
+  }, [imageList]);
+
+  useEffect(() => {
     const text = document.getElementById("cs-text");
     if (!displayText) {
       text.style.display = "none";
@@ -245,6 +259,7 @@ export default function CardSearch() {
       <CardPane
         id={"cs"}
         imageList={imageList}
+        data={data}
         showCardDetails={showCardDetails}
       ></CardPane>
       <div className="cs-text" id="cs-text">

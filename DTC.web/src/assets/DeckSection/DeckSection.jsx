@@ -304,9 +304,13 @@ export default function DeckSection({
               clearTooltipTimeout();
               showCardDetails(card.CardInfo);
             }}
-            onMouseEnter={(e) =>
-              showTooltip("dv", e, "(L) Card details, (R) Card options")
-            }
+            onMouseEnter={(e) => {
+              if (edit) {
+                showTooltip("dv", e, "(L) Card details, (R) Card options");
+              } else {
+                showTooltip("dv", e, "Show card details");
+              }
+            }}
             onMouseLeave={() => hideTooltip("dv")}
             onAuxClick={(e) => {
               preventDefaultRightClick(e.currentTarget);
