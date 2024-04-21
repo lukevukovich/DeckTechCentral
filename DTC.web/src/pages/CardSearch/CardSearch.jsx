@@ -188,7 +188,11 @@ export default function CardSearch() {
       setImageList(images);
 
       //Set num cards
-      if (cards == 1) {
+      if (cards == undefined) {
+        //Set num cards to none
+        setNumCards("No cards found for '" + cardName.toLowerCase() + "'");
+      }
+      else if (cards == 1) {
         setNumCards(cards + " card found for '" + cardName.toLowerCase() + "'");
       } else {
         setNumCards(

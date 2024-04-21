@@ -55,8 +55,9 @@
   gap: 8px;
   z-index: 2;
   padding: 10px;
+  padding-top: 12px;
+  padding-bottom: 11px;
   border-bottom: 2px solid #000;
-  border-top: 2px solid #000;
   margin-top: -2px;
 }
 

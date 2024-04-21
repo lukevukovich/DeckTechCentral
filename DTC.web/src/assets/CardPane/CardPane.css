@@ -17,17 +17,17 @@
 }
 
 .card-image-flip {
- opacity: 0%;
+  opacity: 0%;
   font-size: 16px;
   position: relative;
   z-index: 2;
-  background-color: rgba(180, 28, 28, 0.75);
-  border-radius: 10px;
-  top: 305px;
-  left: 8px;
-  width: 35px;
-  height: 35px;
-  outline: 2px solid rgb(0, 0, 0);
+  background-color: rgba(180, 28, 28, 0.7);
+  border-radius: 12px;
+  top: 308px;
+  left: 6px;
+  width: 38px;
+  height: 38px;
+  outline: 2px solid rgb(43, 6, 6);
   outline-offset: -1px;
   margin: 0px;
   padding: 0px;

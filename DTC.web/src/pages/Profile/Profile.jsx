@@ -105,13 +105,18 @@ export default function Profile() {
       });
 
       const data = await response.text();
-      console.log(data);
 
       if (!data.includes("message")) {
         alert("User '" + username + "' created. Welcome to DeckTechCentral!");
         setLoginTab("login");
       } else {
-        alert("Username '" + username + "' already in use. Please try again.");
+        if (data.includes("username")) {
+          alert(
+            "Username '" + username + "' already in use. Please try again."
+          );
+        } else if (data.includes("email")) {
+          alert("Email '" + email + "' already in use. Please try again.");
+        }
         setLoginTab("signup");
       }
     } else {
@@ -168,7 +173,7 @@ export default function Profile() {
         } else {
           createTokenAndStoreInCookie(token);
           setLoggedIn(true);
-          alert("Login successful. Welcome back, " + token.username + "!");
+          alert("Login successful. Welcome, " + token.username + "!");
         }
       } catch {
         alert("Login failed. Please try again.");
