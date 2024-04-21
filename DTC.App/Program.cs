@@ -41,6 +41,7 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionFilterMiddleware>();
 app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();

@@ -6,7 +6,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using Amazon.Runtime.Internal;
 using Microsoft.Extensions.Options;
 
 namespace DTC.Service {
@@ -32,15 +31,15 @@ namespace DTC.Service {
         }
 
         public bool CreateUser(CreateNewUser user) {
-            if(user.Username == null || user.Email == null || user.password == null) throw new Exception("invalid user");
-            if(user.Username.Length < 3 || user.Username.Length > 20) throw new Exception("invalid username");
-            if(user.Email.Length < 6 || user.Email.Length > 50) throw new Exception("invalid email");
-            if(user.password.Length < 6 || user.password.Length > 50) throw new Exception("invalid password");
+            if(user.Username == null || user.Email == null || user.password == null) throw new ArgumentException("invalid user");
+            if(user.Username.Length < 3 || user.Username.Length > 20) throw new ArgumentException("invalid username");
+            if(user.Email.Length < 6 || user.Email.Length > 50) throw new ArgumentException("invalid email");
+            if(user.password.Length < 6 || user.password.Length > 50) throw new ArgumentException("invalid password");
             
             var salt = GenerateSalt(256);
             var SaltedPassHash = Convert.ToBase64String(Hash(user.password, salt));
-            if(access.GetUserByUsername(user.Username) != null) throw new Exception("username already taken");
-            if(access.GetUserByEmail(user.Email).Result != null) throw new Exception("email already taken");
+            if(access.GetUserByUsername(user.Username) != null) throw new ArgumentException("username already taken");
+            if(access.GetUserByEmail(user.Email).Result != null) throw new ArgumentException("email already taken");
 
             var result = access.CreateUser(new User() {
                 Username = user.Username,
@@ -58,7 +57,7 @@ namespace DTC.Service {
             var user = access.GetUserByEmail(request.Email).Result;
 
             var saltedHash = Convert.ToBase64String(Hash(request.Password, user.Salt));
-            if(!user.SaltedPassHash.Equals(saltedHash)) return null;
+            if(!user.SaltedPassHash.Equals(saltedHash)) throw new UnauthorizedAccessException("invalid username or password");
 
             var token = generateJwtToken(user);
 

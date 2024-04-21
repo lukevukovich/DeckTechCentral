@@ -22,12 +22,8 @@ namespace DTC.App.Controller {
 
         [Route("user/login")]
         [HttpPost]
-        public IActionResult LogIn([FromBody] AuthenticateRequest request) {
-            var response = userService.Authenticate(request);
-
-            if(response == null) return BadRequest(new {message = "Username or Password is incorrect"});
-
-            return Ok(response);
+        public AuthenticateResponse LogIn([FromBody] AuthenticateRequest request) {
+            return  userService.Authenticate(request);
         }
     }
 }

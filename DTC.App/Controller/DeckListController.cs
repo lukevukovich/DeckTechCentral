@@ -16,6 +16,7 @@ namespace DTC.App.Controller {
         public DeckListController(IDeckService deckService) {
             this.deckService = deckService;
         }
+        
         [HttpPost]
         [Authorize]
         [Route("deck")]
@@ -25,11 +26,8 @@ namespace DTC.App.Controller {
 
         [HttpGet]
         [Route("deck/{deckId}")]
-        public IActionResult GetDeck([FromRoute] Guid deckId) {
-            var result = deckService.GetDeck(deckId, (User?)ControllerContext.HttpContext.Items["User"]);
-            if(result == null) return Unauthorized();
-            else if(result.Name == null) return NotFound();
-            return Ok(result);
+        public DeckResponse GetDeck([FromRoute] Guid deckId) {
+            return deckService.GetDeck(deckId, (User?)ControllerContext.HttpContext.Items["User"]);
         }
 
         [HttpDelete]

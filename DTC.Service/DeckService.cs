@@ -54,16 +54,16 @@ namespace DTC.Service {
 
         public DeckResponse? GetDeck(Guid deckId, User? user) {
             var tempDeck = deckRepo.GetDeck(deckId).Result;
-            if(tempDeck == null) return new DeckResponse{Name = null};
-            if(tempDeck.Privacy.Equals("private") && (user == null || !tempDeck.Editors.Contains(user.Username))) return null;
+            if(tempDeck == null) throw new KeyNotFoundException("deck not found");
+            if(tempDeck.Privacy.Equals("private") && (user == null || !tempDeck.Editors.Contains(user.Username))) throw new UnauthorizedAccessException("forbidden");
             deckRepo.AddView(deckId);
             return ConvertDeckToDeckResponse(tempDeck, user);
         }
 
         public DeckResponse? UpdateDeck(Guid deckId, User user, DeckCreationRequest deck) {
             var temp = deckRepo.GetDeck(deckId).Result;
-            if(temp == null) return null;
-            if(temp.Editors.Where(u => u.Equals(user.Username)).Count() == 0) throw new UnauthorizedAccessException();
+            if(temp == null) throw new KeyNotFoundException("deck not found");
+            if(temp.Editors.Where(u => u.Equals(user.Username)).Count() == 0) throw new UnauthorizedAccessException("forbidden");
 
             return ConvertDeckToDeckResponse(deckRepo.UpdateDeck(deckId, deck), user);
         }
@@ -82,9 +82,7 @@ namespace DTC.Service {
         }
 
         public async void DeleteDeck(Guid DeckId, User user) {
-            if(!deckRepo.GetDeck(DeckId).Result.Editors.Contains(user.Username)) {
-                throw new UnauthorizedAccessException();
-            } 
+            if(!deckRepo.GetDeck(DeckId).Result.Editors.Contains(user.Username)) throw new UnauthorizedAccessException("forbidden");
 
             await deckRepo.DeleteDeck(DeckId);
         }
