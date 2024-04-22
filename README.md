@@ -13,4 +13,4 @@ Magic: The Gathering deck management service
 ## Running Web App
 - change directory to DTC.web
 - run 'npm install --force' (installed all needed packages)
-- run 'npm run dev' runs the web app
+- run 'npm run dev' runs the web appe
