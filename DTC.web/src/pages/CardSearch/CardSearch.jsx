@@ -104,7 +104,6 @@ export default function CardSearch() {
           };
           images.push(jsonData.data[i].image_uris.large);
         } else {
-          console.log(jsonData.data[i]);
           jsonData.data.splice(i, 1);
           i--;
         }
@@ -148,7 +147,6 @@ export default function CardSearch() {
               jsonData.data[i].card_faces[1].flavor_text;
           }
         } else {
-          console.log(jsonData.data[i]);
           jsonData.data.splice(i, 1);
           i--;
         }

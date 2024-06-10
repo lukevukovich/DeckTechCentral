@@ -615,6 +615,7 @@ export default function Deck() {
       });
 
       setEdit(!edit);
+      setLike(deck.liked)
     } else {
       alertInvalidInfo();
     }
